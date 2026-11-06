@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Minimal ZIP container: we write STORE entries (the payloads are already
 //! zstd-compressed) and read STORE or DEFLATE entries (so a bundle that was
 //! unzipped and re-zipped by another tool still loads). No ZIP64, no
@@ -475,7 +476,7 @@ mod tests {
     fn slice_deflate_matches_buffered_reader_and_preserves_checks() {
         use std::io::Write as _;
 
-        let content = b"PhotoCraft ZIP payload".repeat(5000);
+        let content = b"Most Image ZIP payload".repeat(5000);
         let mut encoder = flate2::write::DeflateEncoder::new(Vec::new(), flate2::Compression::none());
         encoder.write_all(&content).unwrap();
         let compressed = encoder.finish().unwrap();
@@ -532,7 +533,7 @@ mod tests {
     fn deflated_entry_with_unbounded_limit_round_trips() {
         use std::io::Write as _;
 
-        let content = b"DEFLATE-compressed PhotoCraft project content, with a valid CRC.";
+        let content = b"DEFLATE-compressed Most Image project content, with a valid CRC.";
         let mut encoder = flate2::write::DeflateEncoder::new(Vec::new(), flate2::Compression::default());
         encoder.write_all(content).unwrap();
         let compressed = encoder.finish().unwrap();

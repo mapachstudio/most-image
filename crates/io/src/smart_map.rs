@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Smart objects in PSD: the placed-layer blocks (`SoLd`, `PlLd`) and the smart filter stack
 //! (`filterFX` inside `SoLd`).
 //!
@@ -14,7 +15,7 @@
 //! ```
 //!
 //! The list is in application order (first = bottom, applied first), like
-//! [`SmartObject::smart_filters`](photocraft_doc::SmartObject). Filters PhotoCraft implements map
+//! [`SmartObject::smart_filters`](photocraft_doc::SmartObject). Filters Most Image implements map
 //! to their command id and dialog parameters; any other filter becomes a
 //! [`UNSUPPORTED_FILTER`] entry that keeps its descriptor verbatim (hex in `params.psd`), so it is
 //! listed, can be hidden, reordered or deleted, and is written back unchanged.
@@ -67,7 +68,7 @@ pub use placed::{PlacedSpec, plld_bytes, sold_bytes, stored_size};
 #[cfg(test)]
 use placed::{quad_moved, warp_desc};
 
-/// Command id of a Photoshop smart filter PhotoCraft does not implement. Its params hold the
+/// Command id of a Photoshop smart filter Most Image does not implement. Its params hold the
 /// filter's name, Photoshop filter id and descriptor (`psd`, hex); it renders as a pass-through.
 pub const UNSUPPORTED_FILTER: &str = "psd.unsupportedFilter";
 

@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Huge-document benchmark (issue #49): canvas refreshes of a 20000×20000 (or `--size`) 8-bit
 //! RGB document with eleven layers (full-canvas pixel layers, soft blobs, an adjustment, type
 //! layers with effects, a full-width band whose effect region is wider than the GPU texture
@@ -12,7 +13,7 @@
 //!   /usr/bin/time -l target/release/examples/huge_doc_bench --size 20000x20000 --op $op 2>&1 | grep -E 'ms|MB|maximum resident|peak memory'
 //! done
 //! # The CPU fallback, for comparison:
-//! PHOTOCRAFT_CPU_COMPOSE=1 /usr/bin/time -l target/release/examples/huge_doc_bench --op full
+//! MOST_IMAGE_CPU_COMPOSE=1 /usr/bin/time -l target/release/examples/huge_doc_bench --op full
 //! ```
 //!
 //! `full`: the first refresh (every page uploaded, every effect map built) and three repeats.
@@ -192,7 +193,7 @@ fn main() {
     println!("document {w}×{h} ({:.0} MP), {} layers, built in {:.0} ms", (w as f64 * h as f64) / 1e6, doc.walk().len(), ms(t));
 
     // The compositor budget the app would use: Memory Usage (default 8 GB, `--memory-mb`) less
-    // the document's pixels, within a quarter of RAM (`PHOTOCRAFT_RAM_MB` simulates a smaller
+    // the document's pixels, within a quarter of RAM (`MOST_IMAGE_RAM_MB` simulates a smaller
     // machine). The view is the first viewport (`view`) or the whole document (`full`).
     let allowance = arg(&args, "--memory-mb").and_then(|v| v.parse::<u64>().ok()).unwrap_or(8192) << 20;
     let pixels: u64 = doc

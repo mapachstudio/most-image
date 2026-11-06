@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::*;
 use photocraft_doc::{Knot, NamedPath, Path, Subpath};
 
@@ -621,7 +622,7 @@ fn print_without_sending_requires_output_unless_dry_run_and_forgets_send_overrid
 #[cfg(unix)]
 #[test]
 fn spool_transport_streams_pdf_and_propagates_refusal() {
-    const CHILD: &str = "PHOTOCRAFT_TEST_PRINT_TRANSPORT";
+    const CHILD: &str = "MOST_IMAGE_TEST_PRINT_TRANSPORT";
     if let Ok(dir) = std::env::var(CHILD) {
         let mut s = session("rgb", 8);
         let source = s.active().unwrap().doc.id;
@@ -675,7 +676,7 @@ fn spool_transport_streams_pdf_and_propagates_refusal() {
     let script = dir.path().join("lp");
     std::fs::write(
         &script,
-        b"#!/bin/sh\nif [ \"$2\" = Refuse ]; then echo 'queue refused' >&2; exit 1; fi\nprintf '%s\\n' \"$@\" > \"$PHOTOCRAFT_TEST_PRINT_TRANSPORT/args\"\n/bin/cat > \"$PHOTOCRAFT_TEST_PRINT_TRANSPORT/received.pdf\"\necho 'request id is Office-42 (0 file(s))'\n",
+        b"#!/bin/sh\nif [ \"$2\" = Refuse ]; then echo 'queue refused' >&2; exit 1; fi\nprintf '%s\\n' \"$@\" > \"$MOST_IMAGE_TEST_PRINT_TRANSPORT/args\"\n/bin/cat > \"$MOST_IMAGE_TEST_PRINT_TRANSPORT/received.pdf\"\necho 'request id is Office-42 (0 file(s))'\n",
     ).unwrap();
     std::fs::set_permissions(&script, std::fs::Permissions::from_mode(0o700)).unwrap();
     // `lp` takes a job only when CUPS lists a printer (`lp_route`), so the fake CUPS lists its queues.
@@ -691,8 +692,8 @@ fn spool_transport_streams_pdf_and_propagates_refusal() {
         .env(CHILD, dir.path())
         .env("PATH", dir.path())
         // The child spools into the fake `lp` above, so a shell that blocks real printing
-        // (`PHOTOCRAFT_NO_PRINT`, see `disabled_printing_never_spools`) must not stop it.
-        .env_remove("PHOTOCRAFT_NO_PRINT")
+        // (`MOST_IMAGE_NO_PRINT`, see `disabled_printing_never_spools`) must not stop it.
+        .env_remove("MOST_IMAGE_NO_PRINT")
         .output()
         .unwrap();
     assert!(result.status.success(), "{}\n{}", String::from_utf8_lossy(&result.stdout), String::from_utf8_lossy(&result.stderr));
@@ -903,15 +904,15 @@ fn uncached_listings_do_not_wait(cache_other: bool) {
 }
 
 /// Spooling tests run in a child process: `disable_printing` is process-wide and a test above
-/// sets it, and CI sets `PHOTOCRAFT_NO_PRINT` for the whole shell. True in the child, which runs
+/// sets it, and CI sets `MOST_IMAGE_NO_PRINT` for the whole shell. True in the child, which runs
 /// the test body; the parent starts the child and checks that it passed.
 fn in_child(test: &str, envs: &[(&str, &str)]) -> bool {
-    const CHILD: &str = "PHOTOCRAFT_TEST_PRINT_CHILD";
+    const CHILD: &str = "MOST_IMAGE_TEST_PRINT_CHILD";
     if std::env::var_os(CHILD).is_some() {
         return true;
     }
     let mut cmd = std::process::Command::new(std::env::current_exe().unwrap());
-    cmd.args(["--exact", test, "--nocapture"]).env(CHILD, "1").env_remove("PHOTOCRAFT_NO_PRINT");
+    cmd.args(["--exact", test, "--nocapture"]).env(CHILD, "1").env_remove("MOST_IMAGE_NO_PRINT");
     for (k, v) in envs {
         cmd.env(k, v);
     }
@@ -1201,7 +1202,7 @@ mod cups {
     /// Runs in a child process, since the path is process-wide.
     #[test]
     fn without_lp_the_job_goes_over_ipp_then_to_the_app_spooler() {
-        const CHILD: &str = "PHOTOCRAFT_TEST_PRINT_NO_LP";
+        const CHILD: &str = "MOST_IMAGE_TEST_PRINT_NO_LP";
         if std::env::var_os(CHILD).is_some() {
             let mut s = session("rgb", 8);
             let r = s.execute("file.print", json!({"copies": 2})).unwrap();
@@ -1225,7 +1226,7 @@ mod cups {
             .env(CHILD, "1")
             .env("PATH", no_lp.path())
             .env("CUPS_SERVER", &server)
-            .env_remove("PHOTOCRAFT_NO_PRINT")
+            .env_remove("MOST_IMAGE_NO_PRINT")
             .output()
             .unwrap();
         let (stdout, stderr) = (String::from_utf8_lossy(&out.stdout), String::from_utf8_lossy(&out.stderr));

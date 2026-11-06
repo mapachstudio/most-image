@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Type layers in the real-file corpus (`corpus/psd`, gitignored; feature `corpus`, fetched by
 //! `cargo xtask corpus --all`; a missing corpus fails).
 //!
@@ -270,7 +271,7 @@ fn corpus_photoshop_path_text_opens_on_its_path() {
     }
 }
 
-/// A text layer created in PhotoCraft (no PSD data) exports as an editable type layer and
+/// A text layer created in Most Image (no PSD data) exports as an editable type layer and
 /// imports back with the same model.
 #[test]
 fn created_text_layer_roundtrips_through_psd() {

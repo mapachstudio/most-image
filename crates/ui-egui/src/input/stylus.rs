@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Stylus input: real pen pressure (and tilt / barrel rotation where the platform reports them)
 //! for the painting tools. A mouse always paints at pressure 1 with no tilt.
 //!
@@ -20,7 +21,7 @@
 //! - **Linux Wayland**: compositors give a pen only to clients that bind `zwp_tablet_v2`, which
 //!   winit doesn't (it would have to share winit's connection), so with a pen attached the
 //!   desktop app opens its window through Xwayland, which reports tablet valuators to the X11
-//!   reader. `PHOTOCRAFT_NATIVE_WAYLAND=1` keeps native Wayland, where the pen has no input.
+//!   reader. `MOST_IMAGE_NATIVE_WAYLAND=1` keeps native Wayland, where the pen has no input.
 //!
 //! Preferences › Tools › Use Tablet Pressure off makes a pen paint like a mouse. Flipping the pen
 //! to its eraser end selects the Eraser tool and flipping back restores the previous tool, as in

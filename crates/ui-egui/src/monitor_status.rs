@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! The monitor profile in the shell (#569): reads the displays and their profiles through the
 //! platform (`Services::read_displays`) at launch and again whenever they may have changed,
 //! picks the display each window is on (its canvas is then shown in that display's profile),
@@ -11,7 +12,7 @@
 //! trigger inside that window is deferred, not dropped).
 //!
 //! There is deliberately no periodic re-read (#569 decision): a read costs about 0.2 s of CPU,
-//! and a profile reassigned while PhotoCraft stays in front with no window moving practically
+//! and a profile reassigned while Most Image stays in front with no window moving practically
 //! doesn't happen; it is picked up at the next return to the front or Color Settings.
 
 use std::sync::mpsc::Receiver;
@@ -44,7 +45,7 @@ pub struct State {
     now: bool,
     /// When the last reading started (egui time).
     started: Option<f64>,
-    /// Whether any PhotoCraft window had the focus last frame (macOS reports focus per window:
+    /// Whether any Most Image window had the focus last frame (macOS reports focus per window:
     /// the user can come back to a document window while the main window stays unfocused).
     focused: Option<bool>,
     /// A document window had the focus this frame ([`check_window`]); counted at the next
@@ -124,7 +125,7 @@ fn poll_with_output_name(app: &mut PhotocraftApp, ctx: &egui::Context, output_na
     }
 }
 
-/// A document window's part of [`poll`] (`ctx` draws it): its focus counts as PhotoCraft
+/// A document window's part of [`poll`] (`ctx` draws it): its focus counts as Most Image
 /// being in front, and a display it is on that the last reading didn't know (or whose size
 /// changed) asks for a new reading. Either wakes the main window, whose frame starts the read
 /// (r2: without that, nothing happens until other input arrives).
@@ -547,7 +548,7 @@ mod tests {
         app.session.color.set_displays(Ok(displays(p3())));
         let reads = reader(&mut app, displays(p3()));
         let count = || reads.load(std::sync::atomic::Ordering::SeqCst);
-        // Working in the document window: PhotoCraft is in front, no reading.
+        // Working in the document window: Most Image is in front, no reading.
         for _ in 0..3 {
             doc_window(&mut app, &doc, [100.0, 100.0], true);
         }
@@ -555,7 +556,7 @@ mod tests {
         doc_window(&mut app, &doc, [100.0, 100.0], true);
         frame(&mut app, &main, 101.0, [100.0, 100.0], [1728.0, 1117.0], false);
         assert_eq!(count(), 0);
-        // Another app in front: no PhotoCraft window has the focus.
+        // Another app in front: no Most Image window has the focus.
         doc_window(&mut app, &doc, [100.0, 100.0], false);
         frame(&mut app, &main, 102.0, [100.0, 100.0], [1728.0, 1117.0], false);
         frame(&mut app, &main, 150.0, [100.0, 100.0], [1728.0, 1117.0], false);

@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::doc_textures::mip_count;
 use super::wgpu;
 
@@ -82,17 +83,17 @@ pub fn canvas_texture_bytes(size: [u32; 2], tile: u32, bpp: u64) -> u64 {
 }
 
 /// Physical memory of this machine in bytes, if known (the engine's, shared with its own
-/// budgets). `PHOTOCRAFT_RAM_MB` overrides it (to simulate a smaller machine).
+/// budgets). `MOST_IMAGE_RAM_MB` overrides it (to simulate a smaller machine).
 pub use photocraft_engine::memory::physical_memory;
 
 /// The memory of `adapter` itself, in bytes, when it is a discrete GPU and the platform reports
 /// it: DXGI's dedicated video memory on Windows, amdgpu's VRAM size or `nvidia-smi`'s report on
 /// Linux. `None` for integrated and software adapters, whose textures live in system memory (the
-/// RAM-based budgets already cover them), and where nothing reports it. `PHOTOCRAFT_VRAM_MB`
+/// RAM-based budgets already cover them), and where nothing reports it. `MOST_IMAGE_VRAM_MB`
 /// overrides it for any adapter, simulating a discrete card of that size: on an integrated GPU the
 /// budget then stops charging the document's pixels too, as for a real card (a development switch).
 pub fn video_memory(adapter: &wgpu::AdapterInfo) -> Option<u64> {
-    if let Some(mb) = std::env::var("PHOTOCRAFT_VRAM_MB").ok().and_then(|v| v.trim().parse::<u64>().ok()) {
+    if let Some(mb) = std::env::var("MOST_IMAGE_VRAM_MB").ok().and_then(|v| v.trim().parse::<u64>().ok()) {
         return mb.checked_mul(1 << 20).filter(|b| *b > 0);
     }
     if adapter.device_type != wgpu::DeviceType::DiscreteGpu {
@@ -140,7 +141,7 @@ fn detect_video_memory(vendor: u32, device: u32) -> Option<u64> {
 pub(super) const NVIDIA_VENDOR: u32 = 0x10de;
 
 /// How long `nvidia-smi` gets to answer: it runs on the UI thread while the window opens, and a
-/// driver that hangs the query must not keep PhotoCraft from starting.
+/// driver that hangs the query must not keep Most Image from starting.
 #[cfg(target_os = "linux")]
 const NVIDIA_SMI_DEADLINE: std::time::Duration = std::time::Duration::from_secs(2);
 

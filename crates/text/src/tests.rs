@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use photocraft_color::{Color, PixelFormat, SampleType};
 use photocraft_doc::TextLayer;
 use photocraft_doc::text::{AntiAlias, Caps, CharStyle, FontFeature, Orientation, ParagraphRun, ParagraphStyle, TextAlign, TextDirection, TextRun, TextShape};
@@ -787,15 +788,15 @@ fn depth_is_respected() {
     assert!(r.surface.format().alpha);
 }
 
-/// Visual check: `PHOTOCRAFT_TEXT_DUMP=/tmp/t.ppm cargo test -p photocraft-text dump -- --ignored`.
+/// Visual check: `MOST_IMAGE_TEXT_DUMP=/tmp/t.ppm cargo test -p photocraft-text dump -- --ignored`.
 #[test]
 #[ignore]
 fn dump_sample() {
     use photocraft_doc::text::{Caps, TextAlign};
-    let Some(path) = std::env::var_os("PHOTOCRAFT_TEXT_DUMP") else {
+    let Some(path) = std::env::var_os("MOST_IMAGE_TEXT_DUMP") else {
         return;
     };
-    let mut e = if std::env::var_os("PHOTOCRAFT_TEXT_SYSTEM").is_some() { TextEngine::with_system_fonts() } else { TextEngine::new() };
+    let mut e = if std::env::var_os("MOST_IMAGE_TEXT_SYSTEM").is_some() { TextEngine::with_system_fonts() } else { TextEngine::new() };
     let s = CharStyle { size_pt: 28.0, ..Default::default() };
     let text =
         "Photocraft Type\nBold faux, italic faux, underline\nשלום عربي mixed ✓\nJustified paragraph text wraps inside the box nicely and evenly across lines.";
@@ -1106,7 +1107,7 @@ fn needs_txt2_for_optical_and_txt2_only_opentype() {
 }
 
 /// #10308: the fresh objects, minimal style runs, seeded font list and frame list are only for a
-/// PhotoCraft-native block. A file's own block — here the older Photoshop's, with an empty
+/// Most Image-native block. A file's own block — here the older Photoshop's, with an empty
 /// numbered `/0` or none at all — gets no `/0` key, frame list or font list it didn't have, and
 /// a layer without a template object gets the stub it always got.
 #[test]
@@ -1711,7 +1712,7 @@ fn psd_text_fill_is_enabled_in_runs_and_new_default_styles() {
 #[test]
 fn psd_text_fill_is_enabled_after_editing_a_legacy_export() {
     use crate::engine_data::Value as E;
-    // A legacy PhotoCraft export has a normal style and character runs without FillFlag.
+    // A legacy Most Image export has a normal style and character runs without FillFlag.
     let mut t = point("Before", 40.0);
     let mut legacy = crate::psd::parse_tysh(&crate::psd::build_tysh(&t, 72.0, None)).unwrap();
     fn remove_fill_flags(value: &mut E) {
@@ -1926,7 +1927,7 @@ fn legacy_origin_uses_the_rendering_engines_registered_face() {
     let mut style = CharStyle { font_family: "JetBrains Mono".into(), font_style: "Regular".into(), size_pt: 100.0, ..Default::default() };
     // This exact-face alias exists only in this engine, like a user-registered font.
     engine.fonts.select_named_face(&mut style);
-    assert!(style.font_family.starts_with(".PhotoCraft-face-"));
+    assert!(style.font_family.starts_with(".Most Image-face-"));
     let source = with_para(styled("Name", style), ParagraphStyle { align: TextAlign::Right, ..Default::default() });
     let raw = legacy_tysh(&source, Affine::translate(-8000.0, -8000.0), [8100.0, 8200.0], &mut engine);
     let mut imported = crate::psd::text_layer_from_tysh(&raw, 72.0).unwrap();
@@ -2551,7 +2552,7 @@ fn txt2_frame_moves_box_text_onto_its_bounds() {
     let TextShape::Box { x, y, .. } = l.shape else { panic!("not a box") };
     let o = l.transform.apply(photocraft_geom::Point::new(f64::from(x), f64::from(y)));
     assert!((o.x - 260.0).abs() < 1e-3 && (o.y - 0.0).abs() < 1e-3, "box top left at {o:?}");
-    // PhotoCraft's own `TySh` (bounds = the box, frame already folded in): unchanged.
+    // Most Image's own `TySh` (bounds = the box, frame already folded in): unchanged.
     let mut l = crate::psd::text_layer_from_tysh(&built, 72.0).unwrap();
     let before = l.transform;
     crate::psd::apply_txt2_frame(&mut l, &built, &txt2);

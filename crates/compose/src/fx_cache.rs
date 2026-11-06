@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::composite::texture_ctx;
 use super::ctx::{Ctx, PREPARE_DEPTH};
 use super::extents::{effect_shape, effect_source_bounds};
@@ -216,7 +217,7 @@ pub(crate) fn effect_maps(layer: &Layer, rect: Rect, cx: &Ctx) -> std::sync::Arc
         region = Rect::EMPTY;
     }
     static NO_CACHE: std::sync::OnceLock<bool> = std::sync::OnceLock::new();
-    if *NO_CACHE.get_or_init(|| std::env::var_os("PHOTOCRAFT_FX_NOCACHE").is_some()) {
+    if *NO_CACHE.get_or_init(|| std::env::var_os("MOST_IMAGE_FX_NOCACHE").is_some()) {
         let shape = if region.is_empty() { Vec::new() } else { effect_shape(layer, region, cx) };
         return std::sync::Arc::new(effects::build_maps_prepared(layer, shape, region, &cx.light, &texture_ctx(layer, region, cx), cx.patterns));
     }

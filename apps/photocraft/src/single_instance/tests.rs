@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::*;
 use std::path::PathBuf;
 use std::sync::mpsc::channel;
@@ -248,7 +249,7 @@ fn only_per_user_launches_without_process_options_take_part() {
         launch_options: &[],
     };
     assert_eq!(skip_reason(&base), None);
-    // A portable copy's folder or a PHOTOCRAFT_CONFIG_DIR may be shared between users.
+    // A portable copy's folder or a MOST_IMAGE_CONFIG_DIR may be shared between users.
     assert!(skip_reason(&LaunchContext { per_user_settings: false, ..base }).is_some());
     assert!(skip_reason(&LaunchContext { new_instance_flag: true, ..base }).is_some());
     assert!(skip_reason(&LaunchContext { new_instance_env: Some("1"), ..base }).is_some());
@@ -257,7 +258,7 @@ fn only_per_user_launches_without_process_options_take_part() {
     assert!(skip_reason(&LaunchContext { control: true, ..base }).is_some());
     assert!(skip_reason(&LaunchContext { unreadable_paths: true, ..base }).is_some());
     let reason = skip_reason(&LaunchContext { launch_options: &[PerProcess::SafeGpu, PerProcess::GpuAdapterEnv], ..base });
-    assert_eq!(reason.as_deref(), Some("--safe-gpu, PHOTOCRAFT_GPU_ADAPTER only applies to a new process"));
+    assert_eq!(reason.as_deref(), Some("--safe-gpu, MOST_IMAGE_GPU_ADAPTER only applies to a new process"));
 }
 
 /// #1540: inside a Flatpak sandbox the hand-off runs over a Unix socket in the app's runtime
@@ -327,8 +328,8 @@ fn a_crashed_primary_s_socket_file_does_not_block_the_next_one() {
 #[test]
 fn the_socket_transport_needs_a_flatpak_id_and_a_runtime_directory() {
     use std::ffi::OsStr;
-    let (id, run) = (OsStr::new("ai.storyteller.photocraft"), OsStr::new("/run/user/1000"));
-    assert_eq!(sandbox_socket(Some(id), Some(run)), Some(PathBuf::from("/run/user/1000/app/ai.storyteller.photocraft/instance.sock")));
+    let (id, run) = (OsStr::new("com.grupomostmexico.mostimage"), OsStr::new("/run/user/1000"));
+    assert_eq!(sandbox_socket(Some(id), Some(run)), Some(PathBuf::from("/run/user/1000/app/com.grupomostmexico.mostimage/instance.sock")));
     assert_eq!(sandbox_socket(None, Some(run)), None);
     assert_eq!(sandbox_socket(Some(id), None), None);
     assert_eq!(sandbox_socket(Some(OsStr::new("")), Some(run)), None);
@@ -341,19 +342,19 @@ fn the_socket_transport_needs_a_flatpak_id_and_a_runtime_directory() {
 #[test]
 fn an_environment_override_counts_as_a_process_option() {
     let with = |values: &[(&str, &str)]| env_launch_options_from(|n| values.iter().find(|(k, _)| *k == n).map(|(_, v)| (*v).into()));
-    assert_eq!(with(&[("PHOTOCRAFT_PRESENT_MODE", "novsync")]), vec![PerProcess::PresentMode]);
-    assert_eq!(with(&[("PHOTOCRAFT_STROKE_TRACE", "strokes.csv"), ("PHOTOCRAFT_FRAME_LATENCY", "2")]), vec![PerProcess::FrameLatency, PerProcess::StrokeTrace]);
+    assert_eq!(with(&[("MOST_IMAGE_PRESENT_MODE", "novsync")]), vec![PerProcess::PresentMode]);
+    assert_eq!(with(&[("MOST_IMAGE_STROKE_TRACE", "strokes.csv"), ("MOST_IMAGE_FRAME_LATENCY", "2")]), vec![PerProcess::FrameLatency, PerProcess::StrokeTrace]);
     // Nothing set, or a value that means off, is an ordinary launch. Each variable is off the way
     // it is read where it takes effect, not by one rule shared across all three.
     assert!(with(&[]).is_empty());
-    assert!(with(&[("PHOTOCRAFT_FRAME_LATENCY", "")]).is_empty());
+    assert!(with(&[("MOST_IMAGE_FRAME_LATENCY", "")]).is_empty());
     // The trace is off at `off` and `false` as well, and a value the presentation parser rejects
     // is ignored there, so neither keeps a process of its own here.
-    assert!(with(&[("PHOTOCRAFT_STROKE_TRACE", "off"), ("PHOTOCRAFT_PRESENT_MODE", "maybe"), ("PHOTOCRAFT_FRAME_LATENCY", "4")]).is_empty());
+    assert!(with(&[("MOST_IMAGE_STROKE_TRACE", "off"), ("MOST_IMAGE_PRESENT_MODE", "maybe"), ("MOST_IMAGE_FRAME_LATENCY", "4")]).is_empty());
     // The trace and the two presentation values are trimmed where they take effect.
-    assert_eq!(with(&[("PHOTOCRAFT_PRESENT_MODE", " novsync "), ("PHOTOCRAFT_STROKE_TRACE", " 1 ")]), vec![PerProcess::PresentMode, PerProcess::StrokeTrace]);
+    assert_eq!(with(&[("MOST_IMAGE_PRESENT_MODE", " novsync "), ("MOST_IMAGE_STROKE_TRACE", " 1 ")]), vec![PerProcess::PresentMode, PerProcess::StrokeTrace]);
     // The menus and the automation roots are flags' fallbacks: `launch_args::parse` counts them.
-    assert!(with(&[("PHOTOCRAFT_IN_WINDOW_MENUS", "1"), ("PHOTOCRAFT_AUTOMATION_WRITE_ROOT", "/tmp/out")]).is_empty());
+    assert!(with(&[("MOST_IMAGE_IN_WINDOW_MENUS", "1"), ("MOST_IMAGE_AUTOMATION_WRITE_ROOT", "/tmp/out")]).is_empty());
     let base = LaunchContext {
         per_user_settings: true,
         new_instance_flag: false,
@@ -362,6 +363,6 @@ fn an_environment_override_counts_as_a_process_option() {
         unreadable_paths: false,
         launch_options: &[],
     };
-    let reason = skip_reason(&LaunchContext { launch_options: &with(&[("PHOTOCRAFT_PRESENT_MODE", "novsync")]), ..base });
+    let reason = skip_reason(&LaunchContext { launch_options: &with(&[("MOST_IMAGE_PRESENT_MODE", "novsync")]), ..base });
     assert!(reason.as_deref().is_some_and(|r| r.contains("--present-mode")), "{reason:?}");
 }

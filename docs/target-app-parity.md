@@ -1,8 +1,9 @@
-# PhotoCraft vs Adobe Photoshop: target-app parity
+<!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
+# Most Image vs Adobe Photoshop: target-app parity
 
 > **Last reviewed:** 2026-10-12 · **Last updated:** 2026-11-02 · **Change:** minor (RGB and CMYK documents preview their spot inks as an overprint, FILE-215-17 narrows to PDF Separation, #10249; tile-sparse Select and Mask outputs and preview coverage, #8822; classical Select › Sky can seed substantial high-confidence components beneath an obstructed top band; learned segmentation remains open; Art History Brush Opacity on the options bar, #10263; no estimate changed; Automation Batch Esc Continue/Stop and read-only input previews now follow the measured cancellation flow; full live tabs remain partial, AUTO-219-5, #4579; Automation recording folds Move-tool nudge runs, records keyboard document switches by opening-order offset and scales point text placement; paragraph boxes remain open, #4514; Automation Batch output naming and UTF-16 logs now follow measured Photoshop behavior; progress and cancel prompt remain partial, AUTO-219-5, #4579; 11 of 183 preferences do nothing: startup reads Graphics Adapter through the typed Performance section, so the scorecard audit sees it; selected colour sets edit drawing, tone and supported filters; geometry remains open; Smooth and Feather command masks cropped to selection bounds plus blur reach; cropped selection morphology and command mask conversion performance evidence added; the Camera Raw row names per-camera colour for non-DNG cameras as missing, not the Calibration panel, which landed 2026-10-13; Content-Aware Scale measurements added, #5236; Help › Check for Updates and an opt-out check once per launch, DIST-220-1 partial, #5485; area type, TYPE-218-10 partial, Type scorecard 5 / 5 / 0; compound layer properties export as separate Photoshop Set events, #8304; JPEG Options dialog landed, FILE-215-19 partial; Print › Functions › Bleed through `file.print`; Content-Aware Move live preview for every selection size, TOOL-213-4 done, #6680; retouching evidence: Pattern Stamp and Background Eraser draw live, only the Mixer Brush is left of TOOL-213-7; fill and adjustment layers copy and paste whole, UI-217-23 partial, #2344; shape layers take Density and Feather, TOOL-214-12 done, #5846; on-canvas corner radius widgets, TOOL-214-12; `.atn` import maps 112 events; Free Transform H/V skew fields; stale rows corrected against `main` and the scorecard, estimates unchanged; Photoshop Actions `.atn` load and save; 2026-10-10: Tilt-Shift measurements added; earlier the same day: major, full re-measure against Photoshop 2026 27.11.0; merged `parity-estimate.md` and the roadmap's honest assessment; stale missing-tool rows corrected: Color Replacement and Red Eye are live toolbar tools, Frame landed; percentages unchanged; PSD spot plates in Photoshop's polarity, #7415 split; TIFF spot plates, FILE-215-17's TIFF part, #7415) · **Target:** Adobe Photoshop 2026
 
-The authoritative answer to "how close is PhotoCraft to Photoshop, and how much work is left". The
+The authoritative answer to "how close is Most Image to Photoshop, and how much work is left". The
 one-page summary is [`ROADMAP.md`](../ROADMAP.md); the ranked work list is [`gaps.md`](gaps.md);
 the measured checklists are [`scorecard.md`](scorecard.md) (`cargo xtask scorecard`) and
 [`parity-checklist.md`](parity-checklist.md) (`cargo xtask parity`). Detail by dimension:
@@ -10,7 +11,7 @@ the measured checklists are [`scorecard.md`](scorecard.md) (`cargo xtask scoreca
 [file formats](file-format-parity.md), [hardware](hardware-parity.md),
 [localization](localization-parity.md).
 
-## Headline (2026-10-10, PhotoCraft 0.6.0, `main` at 3e000bc1)
+## Headline (2026-10-10, Most Image 0.6.0, `main` at 3e000bc1)
 
 | Number | Value | Kind |
 |---|---|---|
@@ -50,7 +51,7 @@ architecture and the PSD writer are the serial parts.
   `Locales/` language packs, `Default Keyboard Shortcuts.kys` (67 toolbox tools, 107 menu commands
   with default shortcuts), `Required/` plug-ins (85 filter entries, 12 format plug-ins), presets,
   and strings in the main binary (81 "… Tool" titles; HDR/EDR, Metal, Touch Bar, pen features).
-- PhotoCraft's own Photoshop menu tree (`crates/ui-egui/src/menu_catalog.rs`, 628 items on 2026-10-10, 631 on 2026-10-12) was
+- Most Image's own Photoshop menu tree (`crates/ui-egui/src/menu_catalog.rs`, 628 items on 2026-10-10, 631 on 2026-10-12) was
   written from Photoshop's menus; it is the denominator of the menu number. Photoshop's binary
   `Default Menus.mnu` was not parsed, so items added in 27.x that the catalog lacks would not show
   (Generative and cloud items are the likely ones).
@@ -252,7 +253,7 @@ evidence that later numbers build on.
 
 ## Feature-parity estimate of 2026-10-03 (from the former `docs/parity-estimate.md`)
 
-How close PhotoCraft is to Adobe Photoshop 2026, and how much Opus 5.5 work remains. Generated by
+How close Most Image is to Adobe Photoshop 2026, and how much Opus 5.5 work remains. Generated by
 assessment, not a tool; revisit when a major arc lands. Menu coverage is from `cargo xtask parity`;
 fidelity is from the PSD oracle (`cargo xtask corpus` / `oracle_diff`).
 
@@ -329,7 +330,7 @@ in a handful of wall-clock hours using 8 parallel agents, so wall-clock ≈ agen
   caveat that pixel-for-pixel Firefly/Sensei parity is not achievable clean-room without trained
   models; we target functional equivalents.
 
-**Best single number:** PhotoCraft is **~82% of the way** to full Photoshop parity, and reaching a
+**Best single number:** Most Image is **~82% of the way** to full Photoshop parity, and reaching a
 **95%, ships-for-most-users** state is roughly **25–40 wall-clock hours** of parallel Opus 5.5 work.
 Closing the last 5% (video + AI) is the long, uncertain tail.
 
@@ -605,7 +606,7 @@ See [method, raw measurements and reproduction](five-algorithm-performance.md).
 | 2026-10-23 | minor | Select and Mask is Photoshop's workspace with its own tools (#7069, #8148); TOOL-214-1 stays partial (Refine Hair, Object Aware, Presets); percentages and estimates unchanged |
 | 2026-10-26 | minor | Selections: classical Select › Sky can seed substantial high-confidence components beneath an obstructed top band; learned segmentation remains open; percentages and estimates unchanged |
 | 2026-10-25 | minor | UI / UX and Workspace rows: 12 of 178 preferences do nothing, the scorecard's count. Camera Raw row: the Calibration panel landed on 2026-10-13 (#5128); what is missing is per-camera colour for non-DNG cameras ([gaps.md](gaps.md) G14). Percentages and estimates unchanged |
-| 2026-10-23 | minor | Colour management and modes: PSD spot plates are stored as Photoshop stores them (ink 0 = solid), and PSDs from earlier PhotoCraft versions keep their ink (#7415 split, part 4); estimates unchanged |
+| 2026-10-23 | minor | Colour management and modes: PSD spot plates are stored as Photoshop stores them (ink 0 = solid), and PSDs from earlier Most Image versions keep their ink (#7415 split, part 4); estimates unchanged |
 | 2026-10-23 | minor | Colour management and modes: spot plates now save and open in TIFF (#7415); estimates unchanged |
 | 2026-10-22 | minor | Platforms: Help › Check for Updates and an opt-out check once per launch (#5485), DIST-220-1 partial; percentages unchanged |
 | 2026-10-21 | minor | #8304: compound layer properties export as separate Set events, rename last; independent Photoshop replay pending; percentages and estimates unchanged |

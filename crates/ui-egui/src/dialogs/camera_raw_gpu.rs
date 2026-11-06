@@ -1,7 +1,8 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Camera Raw's preview develop on the GPU (#6916). When every stage the settings use reads
 //! only its own pixel, the proxy develops in one wgpu pass (`photocraft_gpu::CameraRawDevelop`)
 //! on the canvas's device and is read back for the histogram, scopes and display conversion.
-//! Spatial stages, Rendering Mode CPU, `PHOTOCRAFT_CPU_CAMERA_RAW`, no GPU canvas, a software
+//! Spatial stages, Rendering Mode CPU, `MOST_IMAGE_CPU_CAMERA_RAW`, no GPU canvas, a software
 //! adapter, a device fault or a failed develop all keep the CPU develop on the worker.
 //!
 //! The pipeline builds on a thread the first time a dialog opens (DX12's shader compiler takes
@@ -80,7 +81,7 @@ impl Pass {
 /// The dialog's GPU develop, if the app may use one.
 pub(crate) fn for_app(app: &PhotocraftApp) -> Option<CameraRawGpu> {
     let cpu = app.session.prefs().performance.effective_rendering_mode() == photocraft_engine::prefs::RenderingMode::Cpu;
-    if cpu || std::env::var_os("PHOTOCRAFT_CPU_CAMERA_RAW").is_some() {
+    if cpu || std::env::var_os("MOST_IMAGE_CPU_CAMERA_RAW").is_some() {
         return None;
     }
     app.gpu.as_ref()?.camera_raw()

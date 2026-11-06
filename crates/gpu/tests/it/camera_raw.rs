@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Camera Raw's GPU preview pass against the CPU develop (the oracle), stage by stage, at 8, 16
 //! and 32 bits. Skips, with a message, when there is no adapter or device or it can't render
 //! `Rgba32Float`; with `WGPU_BACKEND` set those fail instead, as in `parity.rs`. A pipeline that
@@ -24,9 +25,9 @@ struct Gpu {
 fn gpu() -> Option<Gpu> {
     let lock = crate::GPU_LOCK.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
     let required = std::env::var_os("WGPU_BACKEND").is_some();
-    // `WGPU_BACKEND` picks the backend; `PHOTOCRAFT_TEST_FALLBACK_ADAPTER=1` the software one (WARP).
+    // `WGPU_BACKEND` picks the backend; `MOST_IMAGE_TEST_FALLBACK_ADAPTER=1` the software one (WARP).
     let instance = wgpu::Instance::new(wgpu::InstanceDescriptor::new_without_display_handle_from_env());
-    let fallback = std::env::var_os("PHOTOCRAFT_TEST_FALLBACK_ADAPTER").is_some();
+    let fallback = std::env::var_os("MOST_IMAGE_TEST_FALLBACK_ADAPTER").is_some();
     let options = wgpu::RequestAdapterOptions { force_fallback_adapter: fallback, ..Default::default() };
     let adapter = match pollster::block_on(instance.request_adapter(&options)) {
         Ok(a) => a,

@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! File › New: Photoshop's New Document dialog. Category tabs with blank-document presets on the
 //! left, Preset Details on the right. Values live in the dialog fields (`width`/`height` in pixels,
 //! `resolution` in ppi, `mode`, `depth`, `background`, `name`), so `ui.dialog.set` drives it and
@@ -17,7 +18,7 @@ pub type Preset = (&'static str, u32, u32, f32);
 
 /// Photoshop's New Document categories and their blank-document presets.
 pub const CATEGORIES: &[(&str, &[Preset])] = &[
-    ("Recent", &[("Default PhotoCraft Size", 2100, 1500, 300.0), ("HDTV 1080p", 1920, 1080, 72.0)]),
+    ("Recent", &[("Default Most Image Size", 2100, 1500, 300.0), ("HDTV 1080p", 1920, 1080, 72.0)]),
     (
         "Photo",
         &[

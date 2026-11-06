@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Design system: themes, colour tokens, radii, typography.
 //!
 //! - **Studio**: near-black surfaces, rounded cards, Inter + JetBrains Mono, soft violet
@@ -1094,7 +1095,7 @@ pub fn apply(ctx: &egui::Context, kind: ThemeKind) {
         s.spacing.scroll = scroll;
         s.spacing.tooltip_width = 280.0;
     });
-    // egui selects its style branch using OS appearance, independently of PhotoCraft's fixed
+    // egui selects its style branch using OS appearance, independently of Most Image's fixed
     // Dark/Light mode or platform appearance service. Both branches need the selected palette.
     let style = ctx.global_style();
     ctx.set_style_of(egui::Theme::Light, Arc::clone(&style));
@@ -1117,7 +1118,7 @@ mod tests;
 
 /// Development feature: live design-token overrides.
 ///
-/// Set `PHOTOCRAFT_THEME_FILE=/path/tokens.json` in a debug build; the file is polled and applied
+/// Set `MOST_IMAGE_THEME_FILE=/path/tokens.json` in a debug build; the file is polled and applied
 /// on change, so colours, radii and sizes can be tuned without recompiling. Keys are `Tokens` field
 /// names; values are `"#rrggbb"`, `"#rrggbbaa"` or numbers. Compiled out of release builds.
 #[cfg(all(debug_assertions, not(target_arch = "wasm32")))]
@@ -1135,7 +1136,7 @@ pub mod live {
 
     impl LiveTokens {
         pub fn from_env() -> Self {
-            Self { path: std::env::var_os("PHOTOCRAFT_THEME_FILE").map(Into::into), ..Default::default() }
+            Self { path: std::env::var_os("MOST_IMAGE_THEME_FILE").map(Into::into), ..Default::default() }
         }
 
         /// Re-apply overrides if the file changed. Returns true when tokens were updated.

@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! GPU acceleration policy and options for photocraft-cli.
 
 use photocraft_automation::Headless;
@@ -9,7 +10,7 @@ pub(crate) struct GpuArgs {
     /// Prefer GPU rendering, falling back to CPU when unavailable or unsupported
     #[arg(long, conflicts_with = "no_gpu")]
     pub(crate) gpu: bool,
-    /// Use CPU rendering, overriding PHOTOCRAFT_GPU
+    /// Use CPU rendering, overriding MOST_IMAGE_GPU
     #[arg(long, conflicts_with = "gpu")]
     pub(crate) no_gpu: bool,
 }
@@ -26,7 +27,7 @@ impl GpuPolicy {
     /// Precedence:
     /// - Explicit `--gpu` enables GPU.
     /// - Explicit `--no-gpu` disables GPU.
-    /// - Neither flag: `PHOTOCRAFT_GPU` env var (1 = enabled, 0 or empty/unset = disabled).
+    /// - Neither flag: `MOST_IMAGE_GPU` env var (1 = enabled, 0 or empty/unset = disabled).
     ///   Any other nonempty value is rejected.
     pub(crate) fn from_args(args: &GpuArgs) -> Result<Self, String> {
         if args.gpu {
@@ -35,7 +36,7 @@ impl GpuPolicy {
         if args.no_gpu {
             return Ok(Self { enabled: false });
         }
-        match std::env::var_os("PHOTOCRAFT_GPU") {
+        match std::env::var_os("MOST_IMAGE_GPU") {
             Some(val) => {
                 let val = val.to_string_lossy();
                 let trimmed = val.trim();
@@ -44,7 +45,7 @@ impl GpuPolicy {
                 } else if trimmed == "1" {
                     Ok(Self { enabled: true })
                 } else {
-                    Err(format!("invalid value '{trimmed}' for 'PHOTOCRAFT_GPU': expected '1' or '0'"))
+                    Err(format!("invalid value '{trimmed}' for 'MOST_IMAGE_GPU': expected '1' or '0'"))
                 }
             }
             None => Ok(Self { enabled: false }),

@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::panel::surface;
 use super::{Rect, Response, Sense, Stroke, StrokeKind, Tokens, Ui, Vec2, theme, vec2};
 
@@ -42,7 +43,7 @@ pub const TEXT_FIELD_H: f32 = 24.0;
 /// Inner padding of a [`text_field`]'s box: 6 pt either side, 2 pt above and below.
 const TEXT_FIELD_PAD: Vec2 = vec2(6.0, 2.0);
 
-/// A single-line text field in PhotoCraft's shared field style (#3789): the same box as a
+/// A single-line text field in Most Image's shared field style (#3789): the same box as a
 /// [`value_field`] -- the theme's field fill and `field_border`, rounded by `radius_sm` -- with a
 /// consistent inner padding and no focus outline. egui's default white focus ring (its
 /// `selection.stroke`) is what made the Preferences search field look different from the Color

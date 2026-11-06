@@ -1,6 +1,7 @@
+# Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 [package]
 name = "photocraft-web"
-description = "PhotoCraft in the browser (eframe web runner, WebGPU with WebGL2 fallback)"
+description = "Most Image in the browser (eframe web runner, WebGPU with WebGL2 fallback)"
 version.workspace = true
 edition.workspace = true
 license.workspace = true

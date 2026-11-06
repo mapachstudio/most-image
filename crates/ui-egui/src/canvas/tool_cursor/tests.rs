@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::*;
 #[cfg(not(target_arch = "wasm32"))]
 use egui::{Event, Modifiers, PointerButton, pos2};
@@ -653,7 +654,7 @@ fn round_cursor_shows_brush_projection_6350() {
 
 #[cfg(not(target_arch = "wasm32"))]
 fn save_pen_cursor_image(name: &str, cursor: &egui::CustomCursorImage) {
-    let Some(dir) = std::env::var_os("PHOTOCRAFT_CURSOR_OUTPUT") else { return };
+    let Some(dir) = std::env::var_os("MOST_IMAGE_CURSOR_OUTPUT") else { return };
     let dir = std::path::PathBuf::from(dir);
     std::fs::create_dir_all(&dir).unwrap();
     let image =

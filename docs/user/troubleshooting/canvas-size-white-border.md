@@ -1,3 +1,4 @@
+<!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 ---
 title: Canvas Size added a white border around my photo
 description: Why Image > Canvas Size fills the new canvas with white around a photo, and how to extend the canvas with transparency instead.
@@ -23,7 +24,7 @@ The new area is now empty. If you also want to change the photo's size, use **Im
 
 ## Why this happens
 
-An opened JPEG or another fully opaque image becomes a locked **Background** layer, as in Photoshop. A Background layer cannot contain transparent pixels, so when the canvas grows, PhotoCraft fills the new area with the canvas extension color. **Background** is the default, so the border takes your background color — white until you change it. Layers that are not the Background are only moved and keep transparency.
+An opened JPEG or another fully opaque image becomes a locked **Background** layer, as in Photoshop. A Background layer cannot contain transparent pixels, so when the canvas grows, Most Image fills the new area with the canvas extension color. **Background** is the default, so the border takes your background color — white until you change it. Layers that are not the Background are only moved and keep transparency.
 
 Canvas Size never scales layer pixels: it moves them by the **Anchor:** you choose. Scaling is **Image** ▸ **Image Size…**'s job.
 

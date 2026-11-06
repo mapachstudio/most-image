@@ -1,6 +1,7 @@
+<!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # Summary
 
-[PhotoCraft Documentation](README.md)
+[Most Image Documentation](README.md)
 
 # Getting started
 

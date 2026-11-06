@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! #1353: Export As must scale the height even when the rounded width stays unchanged.
 //! Drive the real Scale field and Export button, then decode the PNG the writer received.
 
@@ -61,7 +62,7 @@ fn harness() -> Option<(Harness, Writes)> {
 }
 
 fn evidence(h: &mut Harness, depth: u8, stage: &str) {
-    if let Some(dir) = std::env::var_os("PHOTOCRAFT_EXPORT_EVIDENCE_DIR") {
+    if let Some(dir) = std::env::var_os("MOST_IMAGE_EXPORT_EVIDENCE_DIR") {
         std::fs::create_dir_all(&dir).expect("evidence directory");
         h.render().expect("render UI").save(std::path::Path::new(&dir).join(format!("{stage}-{depth}bit.png"))).expect("save UI evidence");
     }
@@ -110,7 +111,7 @@ fn export_as_scales_a_narrow_image_without_editing_the_source() {
         assert_eq!(written.len(), 1, "{depth}-bit: Export writes one file");
         let (path, bytes) = &written[0];
         assert!(path.ends_with(".png"), "PNG export path: {path}");
-        if let Some(dir) = std::env::var_os("PHOTOCRAFT_EXPORT_EVIDENCE_DIR") {
+        if let Some(dir) = std::env::var_os("MOST_IMAGE_EXPORT_EVIDENCE_DIR") {
             std::fs::write(std::path::Path::new(&dir).join(format!("exported-{depth}bit.png")), bytes).expect("save exported PNG evidence");
         }
         let png = photocraft_codecs::decode_as(photocraft_codecs::Format::Png, bytes).expect("decode the written PNG");

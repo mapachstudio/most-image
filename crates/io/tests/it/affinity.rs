@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Affinity documents: native import (layers, artboards, shapes, paints, text, masks) and the
 //! embedded preview only as a warned fallback that keeps its pixels and alpha; never written back.
 #![allow(clippy::unwrap_used, clippy::expect_used, clippy::panic)]
@@ -301,7 +302,7 @@ mod native {
             let px = |x: i32, y: i32| cache.to_interleaved(photocraft_geom::Rect::new(x, y, x + 1, y + 1));
             assert_eq!(px(30, 20), [255, 0, 0, 255]);
             assert_eq!(px(50, 40)[3], 0, "even-odd hole");
-            // Saved as a native PhotoCraft document and opened again.
+            // Saved as a native Most Image document and opened again.
             let saved = export(d, "copy.pcraft", &ExportOptions::default()).unwrap();
             let back = import("copy.pcraft", &saved.bytes).unwrap();
             assert_eq!(back.document.layers.len(), d.layers.len());

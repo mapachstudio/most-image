@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::{EngineError, Result, Session};
 
 // ---------- file system (native only) ----------
@@ -240,9 +241,9 @@ pub fn destination_identity(path: &std::path::Path) -> Option<std::path::PathBuf
 #[cfg(any(target_os = "macos", target_os = "windows"))]
 pub(super) fn case_sensitive_destination(path: &std::path::Path) -> Option<bool> {
     let parent = path.ancestors().skip(1).find(|ancestor| ancestor.is_dir())?;
-    let probe = tempfile::Builder::new().prefix(".PhotoCraftCaseProbe-").tempfile_in(parent).ok()?;
+    let probe = tempfile::Builder::new().prefix(".Most ImageCaseProbe-").tempfile_in(parent).ok()?;
     let name = probe.path().file_name()?.to_str()?;
-    let alternate = parent.join(name.replacen("PhotoCraft", "photocraft", 1));
+    let alternate = parent.join(name.replacen("Most Image", "photocraft", 1));
     match std::fs::metadata(&alternate) {
         Ok(_) => Some(!same_file(probe.path(), &alternate)),
         Err(error) if error.kind() == std::io::ErrorKind::NotFound => Some(true),

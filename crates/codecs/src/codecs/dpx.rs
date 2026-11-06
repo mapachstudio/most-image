@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! DPX (SMPTE 268M Digital Picture Exchange), implemented here from the published layout: the
 //! 1664-byte generic header (file and image information, image source), the 384-byte industry
 //! header (film and television), then the image data of each element.
@@ -673,7 +674,7 @@ pub(crate) fn encode(src: &Image, plan: Plan, opts: &EncodeOptions) -> Result<Ve
     wr.u32(32, 0);
     let keep = |key| if opts.embed_metadata { text(&img, key) } else { None };
     wr.string(CREATION_TIME, keep(KEY_CREATION_TIME).unwrap_or(""));
-    wr.string(CREATOR, keep(KEY_CREATOR).unwrap_or("PhotoCraft"));
+    wr.string(CREATOR, keep(KEY_CREATOR).unwrap_or("Most Image"));
     wr.string(PROJECT, keep(KEY_PROJECT).unwrap_or(""));
     wr.string(COPYRIGHT, keep(KEY_COPYRIGHT).unwrap_or(""));
     wr.u32(660, UNDEF32);

@@ -1,6 +1,7 @@
+<!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # Plug-ins: the WebAssembly plug-in API (ABI v1)
 
-PhotoCraft does not host native Photoshop plug-ins (`.8BF`, CEP, UXP): that needs unsafe FFI into
+Most Image does not host native Photoshop plug-ins (`.8BF`, CEP, UXP): that needs unsafe FFI into
 arbitrary machine code and cannot work in the browser build. Instead, plug-ins are **WebAssembly
 modules** run in a sandbox. One `.wasm` file works on macOS, Windows, Linux and the web.
 
@@ -28,7 +29,7 @@ from bytes).
 Plug-ins are installed **per process**, not per document. A smart filter recorded from a plug-in
 (`{"command": "plugin.run", "params": {"id", "params"}}`) re-runs on re-render while that plug-in is
 installed; if it is missing, the filter is skipped (the cached pixels stay as they were), like other
-filters PhotoCraft does not implement.
+filters Most Image does not implement.
 
 ## The sandbox
 

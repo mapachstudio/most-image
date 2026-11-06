@@ -1,6 +1,7 @@
+<!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # Format overview
 
-External bytes enter PhotoCraft through four main paths:
+External bytes enter Most Image through four main paths:
 
 - `photocraft-psd` parses and writes PSD and PSB structures.
 - `photocraft-codecs` decodes and encodes flat raster formats.

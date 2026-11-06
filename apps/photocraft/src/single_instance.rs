@@ -1,4 +1,5 @@
-//! One PhotoCraft per user on Windows and Linux (#3708): a file opened from Explorer or a file
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+//! One Most Image per user on Windows and Linux (#3708): a file opened from Explorer or a file
 //! manager lands as a new tab in the running window, like Photoshop, instead of starting a second
 //! copy of the program.
 //!
@@ -14,11 +15,11 @@
 //! (the primary is still starting, hung, or quitting) keeps retrying the lock, so it becomes the
 //! primary itself as soon as the old one lets go, and when its time runs out it starts a separate
 //! instance: a file is never acknowledged and then dropped. [`Primary::shutdown`] runs when the
-//! event loop ends (and before the CPU-compatibility relaunch), so a closing PhotoCraft refuses new
+//! event loop ends (and before the CPU-compatibility relaunch), so a closing Most Image refuses new
 //! files and frees the lock.
 //!
 //! Only for the per-user settings folder ([`skip_reason`]): a portable copy's folder beside the
-//! executable, or a `PHOTOCRAFT_CONFIG_DIR`, may be shared between users.
+//! executable, or a `MOST_IMAGE_CONFIG_DIR`, may be shared between users.
 //! macOS doesn't need this: LaunchServices already sends a running app an open-documents event.
 
 // Only the tests use it on macOS.
@@ -125,9 +126,9 @@ pub struct LaunchContext<'a> {
     pub per_user_settings: bool,
     /// `--new-instance`.
     pub new_instance_flag: bool,
-    /// `PHOTOCRAFT_NEW_INSTANCE`, if set.
+    /// `MOST_IMAGE_NEW_INSTANCE`, if set.
     pub new_instance_env: Option<&'a str>,
-    /// `--control` or `PHOTOCRAFT_CONTROL_PORT`: automation gets its own process.
+    /// `--control` or `MOST_IMAGE_CONTROL_PORT`: automation gets its own process.
     pub control: bool,
     /// Paths that aren't valid Unicode: this launch reports them.
     pub unreadable_paths: bool,
@@ -137,15 +138,15 @@ pub struct LaunchContext<'a> {
 }
 
 /// Variables documented as the equivalent of a per-launch flag, each with the option it stands for
-/// (`PHOTOCRAFT_PRESENT_MODE` is `--present-mode`) and the rule that says whether its value asks for
+/// (`MOST_IMAGE_PRESENT_MODE` is `--present-mode`) and the rule that says whether its value asks for
 /// that option at all. Setting one asks for the same thing as giving the flag, so it belongs to this
 /// process alone. These are read where they take effect, not by the command line; the variables
-/// that are a flag's fallback (`PHOTOCRAFT_IN_WINDOW_MENUS`, the automation roots) are counted by
+/// that are a flag's fallback (`MOST_IMAGE_IN_WINDOW_MENUS`, the automation roots) are counted by
 /// [`crate::launch_args::parse`], as clap reads them.
 const ENV_LAUNCH_OPTIONS: [(&str, PerProcess, ValueRule); 3] = [
-    ("PHOTOCRAFT_PRESENT_MODE", PerProcess::PresentMode, present_mode_is_on),
-    ("PHOTOCRAFT_FRAME_LATENCY", PerProcess::FrameLatency, frame_latency_is_on),
-    ("PHOTOCRAFT_STROKE_TRACE", PerProcess::StrokeTrace, stroke_trace_is_on),
+    ("MOST_IMAGE_PRESENT_MODE", PerProcess::PresentMode, present_mode_is_on),
+    ("MOST_IMAGE_FRAME_LATENCY", PerProcess::FrameLatency, frame_latency_is_on),
+    ("MOST_IMAGE_STROKE_TRACE", PerProcess::StrokeTrace, stroke_trace_is_on),
 ];
 
 /// Whether a variable's value asks this launch for its own option. Each rule matches how that
@@ -153,13 +154,13 @@ const ENV_LAUNCH_OPTIONS: [(&str, PerProcess, ValueRule); 3] = [
 type ValueRule = fn(&str) -> bool;
 
 /// A value `presentation::parse` accepts, handed over as written: it trims, treats empty as unset and
-/// warns and ignores anything it does not recognise, so an unrecognised `PHOTOCRAFT_PRESENT_MODE`
+/// warns and ignores anything it does not recognise, so an unrecognised `MOST_IMAGE_PRESENT_MODE`
 /// changes nothing there and so needs no process of its own here.
 fn present_mode_is_on(value: &str) -> bool {
     crate::presentation::parse(Some(value), None).0.mode.is_some()
 }
 
-/// [`present_mode_is_on`] for `PHOTOCRAFT_FRAME_LATENCY`, which takes `1` to `3`.
+/// [`present_mode_is_on`] for `MOST_IMAGE_FRAME_LATENCY`, which takes `1` to `3`.
 fn frame_latency_is_on(value: &str) -> bool {
     crate::presentation::parse(None, Some(value)).0.latency.is_some()
 }
@@ -184,7 +185,7 @@ fn env_launch_options_from(get: impl Fn(&str) -> Option<std::ffi::OsString>) -> 
 /// Why this launch runs as its own instance, or `None` to take part in single-instance.
 pub fn skip_reason(c: &LaunchContext) -> Option<String> {
     if !c.per_user_settings {
-        return Some("the settings folder isn't the per-user one (portable or PHOTOCRAFT_CONFIG_DIR)".into());
+        return Some("the settings folder isn't the per-user one (portable or MOST_IMAGE_CONFIG_DIR)".into());
     }
     if c.new_instance_flag || c.new_instance_env.is_some_and(|v| !v.is_empty() && v != "0") {
         return Some("--new-instance".into());
@@ -352,7 +353,7 @@ pub fn claim_in(dir: &Path, paths: &[String], timing: Timing, transport: &Transp
             }
         }
         if Instant::now() >= deadline {
-            return Launch::Standalone(format!("the running PhotoCraft didn't take the files ({last})"));
+            return Launch::Standalone(format!("the running Most Image didn't take the files ({last})"));
         }
         std::thread::sleep(Duration::from_millis(100));
     }

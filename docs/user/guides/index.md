@@ -1,6 +1,7 @@
+<!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 ---
 title: Guides
-description: Step-by-step guides for the everyday tasks in PhotoCraft.
+description: Step-by-step guides for the everyday tasks in Most Image.
 order: 20
 verified: 0.8.2
 ---

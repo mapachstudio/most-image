@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Smart Guides › measuring distances, as in Photoshop (#4946): with Smart Guides on (View › Show
 //! › Smart Guides, Extras on) and the Move tool, holding ⌘ (Ctrl off the Mac) with no button down
 //! and hovering another layer shows the distances between the selected layers' bounds and that
@@ -376,7 +377,7 @@ mod tests {
         h.run_steps(2);
         let boxes = h.state().move_distance.as_ref().and_then(|c| c.boxes);
         assert_eq!(boxes, Some(([40.0, 40.0, 90.0, 80.0], [300.0, 200.0, 350.0, 260.0])));
-        if let Ok(path) = std::env::var("PHOTOCRAFT_MOVE_DISTANCE_SCREENSHOT") {
+        if let Ok(path) = std::env::var("MOST_IMAGE_MOVE_DISTANCE_SCREENSHOT") {
             h.render().unwrap().save(path).unwrap();
         }
         assert_eq!(h.state().session.active().unwrap().revision, revision, "hovering changed nothing");

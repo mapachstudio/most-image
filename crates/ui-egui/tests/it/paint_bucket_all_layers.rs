@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! #1118: Paint Bucket's All Layers checkbox must sample the visible image while painting
 //! only the active layer. Drive the checkbox and canvas through real egui pointer events.
 
@@ -110,7 +111,7 @@ fn all_layers_checkbox_limits_bucket_fill_to_the_visible_color() {
         h.run_steps(6);
 
         // Optional real UI evidence, saved before assertions so a failing baseline has a frame.
-        if let Some(dir) = std::env::var_os("PHOTOCRAFT_BUCKET_EVIDENCE_DIR") {
+        if let Some(dir) = std::env::var_os("MOST_IMAGE_BUCKET_EVIDENCE_DIR") {
             std::fs::create_dir_all(&dir).expect("evidence directory");
             let name = if all_layers { "all-layers-on.png" } else { "all-layers-off.png" };
             h.render().expect("render UI").save(std::path::Path::new(&dir).join(name)).expect("save UI evidence");

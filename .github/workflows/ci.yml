@@ -1,8 +1,9 @@
+# Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 name: CI
 
 # Quality gates for every push to main and every pull request. The Linux gate runs through the
 # suite's shared gate workflow in craft-common-actions (`cargo xtask ci`); the Windows legs, the
-# test variant and the corpus, web and fuzz jobs are PhotoCraft's own.
+# test variant and the corpus, web and fuzz jobs are Most Image's own.
 on:
   push:
     branches: [main]
@@ -54,10 +55,10 @@ permissions:
 env:
   CARGO_TERM_COLOR: always
   RUST_BACKTRACE: 1
-  PHOTOCRAFT_FULL_SWEEP: ${{ inputs.full_sweep && '1' || '0' }}
+  MOST_IMAGE_FULL_SWEEP: ${{ inputs.full_sweep && '1' || '0' }}
   # No test or fuzz run may print a page: the engine refuses to spool, and if something ever
   # bypasses that, lp fails loudly on a printer that does not exist.
-  PHOTOCRAFT_NO_PRINT: "1"
+  MOST_IMAGE_NO_PRINT: "1"
   LPDEST: photocraft-no-such-printer
 
 # A newer push to a PR branch cancels its older run. Every push to main gets a run of its own that
@@ -158,8 +159,8 @@ jobs:
       # Cargo.toml's dev profile already keeps line tables only.
       dev-debug: ""
       env: |
-        PHOTOCRAFT_FULL_SWEEP=${{ inputs.full_sweep && '1' || '0' }}
-        PHOTOCRAFT_NO_PRINT=1
+        MOST_IMAGE_FULL_SWEEP=${{ inputs.full_sweep && '1' || '0' }}
+        MOST_IMAGE_NO_PRINT=1
         LPDEST=photocraft-no-such-printer
       timeout-minutes: 100
       # fmt, clippy, layers, scorecard, tests, panic_hunt, doctests and the wasm32 check, with

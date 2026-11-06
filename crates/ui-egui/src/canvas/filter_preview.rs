@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::display::canvas_display;
 use super::textures::texture_buffer;
 use super::{Document, LayerContent, PhotocraftApp};
@@ -14,7 +15,7 @@ use super::{Document, LayerContent, PhotocraftApp};
 /// Full resolution costs a whole filter per parameter change, which only the background worker
 /// absorbs. The web build has no worker and computes the preview inline on the UI thread (#1676),
 /// where that would freeze the page: there the document's proxy stands. The test and
-/// `PHOTOCRAFT_INLINE_JOBS` inline paths keep the cap deliberately, because `background_jobs` is
+/// `MOST_IMAGE_INLINE_JOBS` inline paths keep the cap deliberately, because `background_jobs` is
 /// flipped mid-session (a shell save during `actions.play`): a factor that followed it would change
 /// [`crate::filter_dialog::FilterPreviewKey`] under a finished preview and recompute it inline,
 /// the very stall this avoids.
@@ -26,7 +27,7 @@ pub(crate) fn filter_preview_factor(app: &PhotocraftApp, doc: &Document, cmd: &s
 
 /// Live preview for an open filter dialog: run the filter on the proxy and upload it. With
 /// background jobs (the desktop app) it computes on one background worker
-/// (`filter_preview_worker`); otherwise (web, tests, `PHOTOCRAFT_INLINE_JOBS`) it keeps the
+/// (`filter_preview_worker`); otherwise (web, tests, `MOST_IMAGE_INLINE_JOBS`) it keeps the
 /// deterministic inline path (#1676), which also lets headless/CPU tests inspect previews
 /// without a GPU texture.
 pub(crate) fn ensure_filter_preview(app: &mut PhotocraftApp, idx: usize, ctx: &egui::Context) -> Option<(u32, u64, [u32; 2])> {

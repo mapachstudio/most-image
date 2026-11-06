@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! 16/32-bit documents get an `Rgba16Float` canvas texture (#46): smooth gradients keep more than
 //! 256 levels, 32-bit values above 1.0 survive for View › 32-bit Preview Options, and 8-bit
 //! documents keep their `Rgba8Unorm` texture byte for byte. Skips when there is no GPU adapter or
@@ -27,7 +28,7 @@ fn canvas() -> Option<(GpuCanvas, RenderState)> {
         eprintln!("skipping: no GPU adapter");
         return None;
     };
-    if !gpu_canvas::supports_f16_canvas(&rs.adapter) || std::env::var("PHOTOCRAFT_CANVAS_F16").as_deref() == Ok("0") {
+    if !gpu_canvas::supports_f16_canvas(&rs.adapter) || std::env::var("MOST_IMAGE_CANVAS_F16").as_deref() == Ok("0") {
         eprintln!("skipping: adapter can't render/filter Rgba16Float");
         return None;
     }
@@ -140,7 +141,7 @@ fn format_follows_depth_and_budget() {
     assert_eq!(g.format_for(SampleType::U16, [7360, 4912]), TextureFormat::Rgba16Float);
     assert_eq!(g.format_for(SampleType::F32, [7360, 4912]), TextureFormat::Rgba16Float);
     // Over the budget (a 14000² 16-bit document): 8-bit, so it stays on the GPU.
-    if std::env::var_os("PHOTOCRAFT_CANVAS_F16").is_none() {
+    if std::env::var_os("MOST_IMAGE_CANVAS_F16").is_none() {
         assert_eq!(g.format_for(SampleType::U16, [14000, 14000]), TextureFormat::Rgba8Unorm);
     }
 }
@@ -190,7 +191,7 @@ fn screen(doc: Document, setup: &[(&str, serde_json::Value)], name: &str) -> Opt
                 PhotocraftApp::setup_context(&cc.egui_ctx, Default::default());
                 let mut app = PhotocraftApp::new(photocraft_engine::Session::new(), Default::default());
                 if let Some(rs) = cc.wgpu_render_state.as_ref() {
-                    ok2.store(gpu_canvas::supports_f16_canvas(&rs.adapter) && std::env::var("PHOTOCRAFT_CANVAS_F16").as_deref() != Ok("0"), Ordering::SeqCst);
+                    ok2.store(gpu_canvas::supports_f16_canvas(&rs.adapter) && std::env::var("MOST_IMAGE_CANVAS_F16").as_deref() != Ok("0"), Ordering::SeqCst);
                     app.set_wgpu(rs.clone());
                 }
                 app.session.open_document(doc, None);

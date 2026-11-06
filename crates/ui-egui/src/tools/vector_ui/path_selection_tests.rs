@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! #306: ⌘↩ (Ctrl+Enter off the Mac) loads a path as a selection, as in Photoshop: the path
 //! being drawn with the Pen, the path selected in the Paths panel, or the work path. The key is
 //! rebindable in Edit › Keyboard Shortcuts, and with no path it says why instead of doing nothing.
@@ -307,7 +308,7 @@ fn thumbnail_selection_ctrl_click_layer_path_preserves_panel_target() {
     assert_eq!(selection(&h), Some([40, 20, 60, 40]));
     assert_eq!(h.state().ui.selected_path.as_deref(), Some("work"));
     assert!(!h.state().ui.mask_target && !h.state().ui.vector_mask_target);
-    if let Ok(path) = std::env::var("PHOTOCRAFT_THUMBNAIL_SELECTION_SCREENSHOT") {
+    if let Ok(path) = std::env::var("MOST_IMAGE_THUMBNAIL_SELECTION_SCREENSHOT") {
         h.render().unwrap().save(path).unwrap();
     }
 }

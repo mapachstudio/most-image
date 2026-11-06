@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Persistent preferences (Edit › Preferences), keyboard-shortcut, menu and toolbar
 //! customisation, grouped like Photoshop's Preferences dialog sections.
 //!
@@ -65,7 +66,7 @@ choice!(CanvasBorder { DropShadow = "dropShadow", Line = "line", None = "none" }
 choice!(UiScale { Auto = "auto", P75 = "75", P80 = "80", P85 = "85", P90 = "90", P95 = "95", P100 = "100", P105 = "105", P110 = "110", P115 = "115", P120 = "120", P125 = "125", P150 = "150", P175 = "175", P200 = "200", P250 = "250", P300 = "300" } default Auto);
 choice!(
     /// Graphics backend of the desktop app's window and GPU canvas (applies at next launch).
-    /// `auto` lets PhotoCraft pick (DX12 for Intel adapters on Windows); `cpu` composites on the
+    /// `auto` lets Most Image pick (DX12 for Intel adapters on Windows); `cpu` composites on the
     /// CPU and draws the window with a software adapter where the platform has one. A start that
     /// crashes inside the graphics driver moves this to the next safer choice.
     GpuBackend { Auto = "auto", Vulkan = "vulkan", Dx12 = "dx12", Metal = "metal", Gl = "gl", Cpu = "cpu" } default Auto
@@ -77,9 +78,9 @@ choice!(
 );
 choice!(
     /// Linux display server of the desktop app's window (applies at next launch). `x11` runs
-    /// PhotoCraft through XWayland on a Wayland session, where native file drag and drop works
+    /// Most Image through XWayland on a Wayland session, where native file drag and drop works
     /// (winit 0.30 has none on Wayland, issue #386); fractional scaling may then look softer.
-    /// It needs an X server (`DISPLAY`); without one PhotoCraft starts as `auto`. Other
+    /// It needs an X server (`DISPLAY`); without one Most Image starts as `auto`. Other
     /// platforms ignore it.
     LinuxDisplayServer { Auto = "auto", X11 = "x11" } default Auto
 );
@@ -293,13 +294,13 @@ pub struct Interface {
     /// Move tool drags show only the layer's outline and an arrow, leaving its pixels in place
     /// until release. Off (the default), the pixels follow the pointer live inside the outline.
     pub show_bounding_box_when_dragging_layer: bool,
-    /// Windows and Linux: use the system's title bar and window buttons instead of PhotoCraft's
+    /// Windows and Linux: use the system's title bar and window buttons instead of Most Image's
     /// own one-row title bar (tiling window managers, desktops that draw their own decorations;
     /// #1271, #1316). The integrated title bar remains the default on Linux and Windows;
     /// the system frame is opt-in. Read when the app starts. macOS always uses the system's.
     pub system_title_bar: bool,
     /// Show the active document's file name in the title bar and the OS window title. The tabs
-    /// already name the file, so this can be turned off for a plain "PhotoCraft" title (#5037).
+    /// already name the file, so this can be turned off for a plain "Most Image" title (#5037).
     /// The unsaved-changes mark stays either way.
     pub show_file_name_in_title: bool,
     /// Notices (the lower-right cards) hide themselves after
@@ -608,7 +609,7 @@ fn effect_cache_budget_bytes_for(stored: u32, small: bool) -> u64 {
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(default, rename_all = "camelCase")]
 pub struct Performance {
-    /// Memory PhotoCraft may use, in MB: bounds each document's pixels plus its History (the
+    /// Memory Most Image may use, in MB: bounds each document's pixels plus its History (the
     /// oldest states are dropped beyond it), and the result of one transform.
     pub memory_usage_mb: u32,
     /// Percent of physical RAM for the complete process; None preserves the legacy MB limit.
@@ -632,7 +633,7 @@ pub struct Performance {
     pub gpu_backend: GpuBackend,
     /// Which graphics adapter the window and canvas use on a machine with several (applies at
     /// next launch): part of the adapter's name, matched case-insensitively ("nvidia", "arc"). Empty
-    /// is automatic. `PHOTOCRAFT_GPU_ADAPTER` overrides it for one launch. If nothing matches or the
+    /// is automatic. `MOST_IMAGE_GPU_ADAPTER` overrides it for one launch. If nothing matches or the
     /// match can't present to the window, startup falls back to automatic and says so.
     pub gpu_adapter: String,
     /// Live previews of large documents (adjustment and filter dialogs, an adjustment layer's
@@ -683,10 +684,10 @@ impl Performance {
     }
 
     /// Pixel bytes kept in memory before tiles move to the scratch disk: half of Memory Usage
-    /// (the rest is for the GPU canvas, caches and the app). `PHOTOCRAFT_TILE_BUDGET_MB`
+    /// (the rest is for the GPU canvas, caches and the app). `MOST_IMAGE_TILE_BUDGET_MB`
     /// overrides it (tests, stress runs).
     pub fn tile_budget_bytes(&self) -> usize {
-        let bytes = std::env::var("PHOTOCRAFT_TILE_BUDGET_MB")
+        let bytes = std::env::var("MOST_IMAGE_TILE_BUDGET_MB")
             .ok()
             .and_then(|v| v.trim().parse::<u64>().ok())
             .map(|mb| mb.saturating_mul(1 << 20))

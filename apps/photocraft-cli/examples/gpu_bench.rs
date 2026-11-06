@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Benchmark example measuring headless CPU vs GPU rendering and export performance.
 //!
 //! Usage:
@@ -43,7 +44,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let layers = args.layers as usize;
     let warm_runs = args.warm_runs as usize;
 
-    println!("# PhotoCraft CLI Headless Rendering Benchmark");
+    println!("# Most Image CLI Headless Rendering Benchmark");
     println!();
 
     const MAX_SYNTHETIC_PIXELS: u64 = 256 * 1024 * 1024;

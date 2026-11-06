@@ -1,4 +1,5 @@
-//! PhotoCraft's type engine.
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+//! Most Image's type engine.
 //!
 //! * [`fonts::FontDb`]: bundled fonts (Inter, JetBrains Mono; always available, including on the
 //!   web), optional system fonts from platform directory scans plus Fontconfig's Linux file list,
@@ -147,9 +148,9 @@ impl TextEngine {
 static SHARED: warm::Warm<std::sync::Mutex<TextEngine>> = warm::Warm::new();
 
 /// Whether [`shared`] scans the installed fonts (native builds, outside tests, unless
-/// `PHOTOCRAFT_NO_SYSTEM_FONTS` is set). Without the scan it is cheap to build.
+/// `MOST_IMAGE_NO_SYSTEM_FONTS` is set). Without the scan it is cheap to build.
 fn uses_system_fonts() -> bool {
-    cfg!(not(target_arch = "wasm32")) && !cfg!(test) && std::env::var_os("PHOTOCRAFT_NO_SYSTEM_FONTS").is_none()
+    cfg!(not(target_arch = "wasm32")) && !cfg!(test) && std::env::var_os("MOST_IMAGE_NO_SYSTEM_FONTS").is_none()
 }
 
 fn new_shared() -> std::sync::Mutex<TextEngine> {

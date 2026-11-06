@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Image › Analysis and Notes in the shell: the Ruler, Count, Note and Color Sampler tools
 //! (eyedropper group), their canvas overlays and options bars, Window › Measurement Log and
 //! Window › Notes, and the Set Measurement Scale / Select Data Points / Place Scale Marker dialogs.
@@ -539,7 +540,7 @@ pub fn options_bar(app: &mut PhotocraftApp, ui: &mut egui::Ui, tool: Tool) -> bo
                     let _ = app.run("count.setGroup", json!({"group": gi, "visible": !g.visible}));
                 }
                 let rgb = g.color.to_rgb();
-                // PhotoCraft's Color Picker (sRGB), as everywhere else (#2144).
+                // Most Image's Color Picker (sRGB), as everywhere else (#2144).
                 if crate::widgets::color_swatch_button(ui, color32(rgb), tl!("Color")).clicked() {
                     crate::color_picker_ui::open_for_command(
                         app,

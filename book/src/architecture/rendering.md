@@ -1,6 +1,7 @@
+<!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # Rendering
 
-PhotoCraft has two compositors with distinct roles:
+Most Image has two compositors with distinct roles:
 
 - `photocraft-compose` is the CPU compositor and correctness oracle used by export and tests.
 - `photocraft-gpu` plans and executes supported canvas composition through wgpu.

@@ -1,6 +1,7 @@
-//! Sandboxed WebAssembly plug-ins for PhotoCraft.
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+//! Sandboxed WebAssembly plug-ins for Most Image.
 //!
-//! A plug-in is a WebAssembly module that implements the PhotoCraft plug-in ABI (v1, documented
+//! A plug-in is a WebAssembly module that implements the Most Image plug-in ABI (v1, documented
 //! in `docs/plugins.md`). It runs in [`wasmi`], a pure-Rust interpreter, with:
 //!
 //! - **no host imports**: no WASI, file system, network, clock or randomness. A module that

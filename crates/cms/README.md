@@ -1,6 +1,7 @@
+<!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # photocraft-cms
 
-Pure-Rust ICC colour management for PhotoCraft. No workspace dependencies (L0, publishable),
+Pure-Rust ICC colour management for Most Image. No workspace dependencies (L0, publishable),
 no C, no `unsafe`. Implemented from the public ICC.1:2010 (v4.3) and ICC.1:2001-04 (v2)
 specifications, CIE 15, and Adobe's published black point compensation paper.
 
@@ -61,13 +62,13 @@ t.eval(&[1.0, 0.0, 0.0], &mut out);                        // exact single colou
 | `rec2020` | Rec. 2020 primaries, Rec. 709 OETF |
 | `gray-gamma-2.2`, `sgray` | gray gamma 2.2; gray with the sRGB curve (default gray working space) |
 | `lab-d50` | Lab identity (v4 encoding) |
-| `coated-cmyk` | **PhotoCraft Coated CMYK (synthetic, 300% TAC, medium GCR)** — default CMYK |
+| `coated-cmyk` | **Most Image Coated CMYK (synthetic, 300% TAC, medium GCR)** — default CMYK |
 
 ### The CMYK profile
 
 Adobe's CMYK profiles (U.S. Web Coated SWOP, Coated FOGRA39) are proprietary, and the freely
 downloadable characterisation-based profiles (ECI/FOGRA, colord, Ghostscript) carry
-redistribution conditions or unclear licences, so PhotoCraft generates its own
+redistribution conditions or unclear licences, so Most Image generates its own
 (`src/synth.rs`): a Yule–Nielsen modified Neugebauer model (n = 2) over the 16 overprints with
 ISO 12647-2 coated-paper Lab aims for paper/C/M/Y/RGB overprints, parabolic dot gain (14 % CMY,
 17 % K at 50 %), GCR black generation (starts at 20 % gray component, K max 95 %), total ink
@@ -76,7 +77,7 @@ sampled gamut boundary. `profiles/photocraft-coated-cmyk.icc` (237 KB, AToB 11�
 21³ lut16) is that output, dedicated to the public domain (CC0-1.0). Regenerate with
 
 ```sh
-PHOTOCRAFT_REGEN_PROFILES=1 cargo test -p photocraft-cms --release --test it -- regen::
+MOST_IMAGE_REGEN_PROFILES=1 cargo test -p photocraft-cms --release --test it -- regen::
 ```
 
 It is a plausible coated-offset profile, not a measured characterisation: use your printer's

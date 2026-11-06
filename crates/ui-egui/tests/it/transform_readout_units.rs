@@ -1,8 +1,9 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! #9400: while a Free Transform handle is dragged, the W/H readout beside the pointer shows the
 //! box's size in the Units & Rulers unit (as Photoshop does), not always its scale in percent.
 //!
 //! The real app runs offscreen on wgpu with real egui pointer events. Skips when no GPU adapter
-//! exists (like `drag_preview_canvas.rs`). Set `PHOTOCRAFT_TRANSFORM_READOUT_EVIDENCE_DIR` to save
+//! exists (like `drag_preview_canvas.rs`). Set `MOST_IMAGE_TRANSFORM_READOUT_EVIDENCE_DIR` to save
 //! the frames, mid-drag, as PNGs.
 
 use egui::{Modifiers, PointerButton, Pos2};
@@ -104,7 +105,7 @@ fn the_scale_readout_shows_the_size_in_the_ruler_unit() {
         if unit != Unit::Percent {
             assert!(h.query_all_by_label("200.0%").next().is_none(), "{name}: no percent readout");
         }
-        if let Some(dir) = std::env::var_os("PHOTOCRAFT_TRANSFORM_READOUT_EVIDENCE_DIR") {
+        if let Some(dir) = std::env::var_os("MOST_IMAGE_TRANSFORM_READOUT_EVIDENCE_DIR") {
             let dir = std::path::PathBuf::from(dir);
             std::fs::create_dir_all(&dir).expect("evidence directory");
             h.render().expect("render").save(dir.join(format!("transform-readout-{name}.png"))).expect("save evidence");

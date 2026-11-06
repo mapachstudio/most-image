@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Process-wide memory admission and adaptive tile residency. Native measurements are safe
 //! `sysinfo` calls; web clients retain their explicit MB limit without filesystem assumptions.
 
@@ -111,7 +112,7 @@ pub fn refresh() -> Budgets {
     let b = budgets(policy, sample, crate::spill::stats().resident_bytes as u64);
     *CURRENT.lock().unwrap_or_else(PoisonError::into_inner) = (sample, b);
     // The test override remains fixed even when process pressure changes.
-    let tiles = std::env::var("PHOTOCRAFT_TILE_BUDGET_MB").ok().and_then(|s| s.parse::<u64>().ok()).map_or(b.tile_bytes, |mb| mb.saturating_mul(MIB));
+    let tiles = std::env::var("MOST_IMAGE_TILE_BUDGET_MB").ok().and_then(|s| s.parse::<u64>().ok()).map_or(b.tile_bytes, |mb| mb.saturating_mul(MIB));
     crate::spill::set_budget(usize::try_from(tiles).unwrap_or(usize::MAX));
     b
 }

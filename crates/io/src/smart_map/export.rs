@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::import::{
     CHANNELS, CUSTOM_CELL, CUSTOM_OFFSET, CUSTOM_SCALE, DIFFUSE_MODES, EXTRUDE_DEPTH, EXTRUDE_DEPTHS, EXTRUDE_SIZE, EXTRUDE_TYPES, GALLERY_COMMAND, Known,
     LENSES, MEZZOTINT_TYPES, NO_OPTIONS, OFFSET_FILL, POLAR_MODE, RADIAL_METHOD, RADIAL_QUALITY, RIPPLE_SIZE, SMART_BLUR_MODE, SMART_BLUR_QUALITY,
@@ -267,7 +268,7 @@ fn fltr_for(k: &Known, p: &J) -> Result<Option<Descriptor>, String> {
                 Some(s) => Value::Integer(s as i32),
                 None => pi(p, "seed", 0.0),
             };
-            // The renderer draws at most MAX_WAVE_GENERATORS: write what PhotoCraft rendered, so
+            // The renderer draws at most MAX_WAVE_GENERATORS: write what Most Image rendered, so
             // Photoshop doesn't draw more generators than the user saw.
             let generators = pf(p, "generators", 5.0).round().clamp(1.0, f64::from(photocraft_algo::MAX_WAVE_GENERATORS)) as i32;
             d.with("Wvtp", enum_param(p, "type", "sine", "Wvtp", &WAVE_TYPE)?)

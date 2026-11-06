@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Shared security primitives for the loopback JSON control transports.
 
 use std::fs::OpenOptions;
@@ -222,7 +223,7 @@ pub fn client_token(supplied: Option<&str>, token_file: Option<&Path>) -> Result
     token_file.map_or_else(
         || {
             Err(AutomationError::BadRequest(
-                "bridge mode needs --control-token, --control-token-file, PHOTOCRAFT_CONTROL_TOKEN, or PHOTOCRAFT_CONTROL_TOKEN_FILE".into(),
+                "bridge mode needs --control-token, --control-token-file, MOST_IMAGE_CONTROL_TOKEN, or MOST_IMAGE_CONTROL_TOKEN_FILE".into(),
             ))
         },
         |path| read_token_file(path).map(|v| v.to_ascii_lowercase()),

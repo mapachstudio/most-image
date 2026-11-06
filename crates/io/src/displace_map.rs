@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Displace smart filters (`Fltr` class `Dspl`) as observed in Photoshop-authored mockup PSDs.
 //!
 //! The filter descriptor holds the scales (`HrzS`, `VrtS`, percent), the fit (`DspM`: `StrF`
@@ -42,7 +43,7 @@ const HEADER: usize = 10;
 const MODE_TWO_PLANES: u16 = 3;
 /// 8K × 8K: far beyond the observed document-sized maps, and bounds the f32 map we build.
 const MAX_MAP_PIXELS: usize = 1 << 26;
-/// 4K × 4K: the largest map PhotoCraft embeds itself. Params hold it as hex, about 4 bytes per
+/// 4K × 4K: the largest map Most Image embeds itself. Params hold it as hex, about 4 bytes per
 /// pixel, copied with every history state and written into `.pcraft`'s manifest, so a few of the
 /// largest readable maps would make a file the reader refuses.
 const MAX_EMBED_PIXELS: usize = 1 << 24;

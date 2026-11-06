@@ -1,9 +1,10 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Crop tool: ⇧-dragging a frame corner keeps its proportions by following the pointer along the
 //! frame's diagonal, as Photoshop does (#10871).
 //!
 //! Measured in Photoshop: 800 × 500 document, frame = whole canvas, free ratio, Auto Center
 //! Preview off, ⇧-drag of the bottom-right corner by (−100, −50) px commits 706 × 441 (the drag
-//! projected onto (800, 500) shortens the frame by 11.8 %). PhotoCraft let the larger relative
+//! projected onto (800, 500) shortens the frame by 11.8 %). Most Image let the larger relative
 //! extent win and committed 720 × 450.
 //!
 //! Driven through `ui.pointer`, as an agent or the canvas sends the drag; no GPU needed. The Auto

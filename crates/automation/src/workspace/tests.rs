@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::*;
 
 fn roots(name: &str) -> (PathBuf, PathBuf, AuthorizedWorkspace) {
@@ -232,7 +233,7 @@ fn write_keeps_the_replaced_files_extended_attributes() {
     #[cfg(target_os = "macos")]
     const TAG: &str = "com.apple.metadata:_kMDItemUserTags";
     #[cfg(not(target_os = "macos"))]
-    const TAG: &str = "user.photocraft.test";
+    const TAG: &str = "user.mostimage.test";
 
     let (inside, _, workspace) = roots("xattr");
     let path = inside.join("doc.psd");

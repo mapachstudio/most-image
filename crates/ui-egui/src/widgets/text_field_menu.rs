@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! The right-click edit menu of every text field (#2921): Undo, Cut, Copy, Paste, Delete and
 //! Select All at the pointer, acting on that field, as native text fields and Photoshop's own do.
 //!
@@ -113,7 +114,7 @@ pub struct TextFieldMenu;
 
 impl egui::plugin::Plugin for TextFieldMenu {
     fn debug_name(&self) -> &'static str {
-        "PhotoCraft text field menu"
+        "Most Image text field menu"
     }
 
     /// Esc closes only the menu: the field (a layer rename cancels on Esc) and egui (which drops

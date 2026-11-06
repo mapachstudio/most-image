@@ -1,6 +1,7 @@
+<!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # Building
 
-PhotoCraft uses the Rust workspace at the repository root. Install the stable Rust toolchain, clone the repository, and run commands from that root.
+Most Image uses the Rust workspace at the repository root. Install the stable Rust toolchain, clone the repository, and run commands from that root.
 
 On Linux, install the windowing, GL and GTK development packages first. The development guide's
 [Prerequisites](https://github.com/storytold/photocraft/blob/main/docs/development.md#prerequisites)

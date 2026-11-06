@@ -1,3 +1,4 @@
+<!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # Nikon D5100 NEF development
 
 Validated 2026-10-11 with three locally supplied NEFs: DSC_0453 (portrait),
@@ -13,7 +14,7 @@ fallback treats white-balanced camera channels as linear sRGB and looks flat.
 The Nikon `44 40` quarter-span decoder issue addressed elsewhere does not apply.
 
 This branch uses the existing embedded-JPEG rendering work in
-[PhotoCraft #2135](https://github.com/storytold/photocraft/pull/2135), head
+[Most Image #2135](https://github.com/storytold/photocraft/pull/2135), head
 `d1a91d1f0dff1ed7ac74767b602051e88198b2e5`. That work fits a matrix and monotone
 tone curve with held-out acceptance checks. It supplies the appearance fix;
 this follow-up preserves that rendering in `import_raw_tuned`. Fitting happens

@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::*;
 use crate::file_dialog::{self, FileDialogAnswer, FileDialogRequest};
 use crate::{Services, menus, notices};
@@ -984,7 +985,7 @@ fn a_drop_slot_counts_documents_not_the_tabs_shown() {
     assert_eq!(crate::canvas::TabStrip { rect: strip.rect, tabs: vec![] }.slot(10.0), 0);
 }
 
-/// #5687: files dropped from another app's window bring PhotoCraft to the front (a focus request
+/// #5687: files dropped from another app's window bring Most Image to the front (a focus request
 /// in the frame that takes the drop), so the source window ends up behind it.
 #[test]
 fn a_drop_brings_the_window_to_the_front() {

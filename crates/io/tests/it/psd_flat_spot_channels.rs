@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Flat PSDs (no layer records) with spot and alpha channels. The reference editor writes one when a
 //! document is flattened (psd-tools cmyk-alpha-spot.psd, its version 24.7). Its extra channels are
 //! all alpha and spot channels: none is the merged transparency, which every extra channel used
@@ -119,7 +120,7 @@ fn flat_file_without_channel_names_keeps_its_transparency() {
     assert!(!alpha.merged_has_alpha());
 }
 
-/// A spot whose DisplayInfo colour is in a space PhotoCraft doesn't read takes its ink from the
+/// A spot whose DisplayInfo colour is in a space Most Image doesn't read takes its ink from the
 /// Alternate Spot Colors (1067), as in the reference editor's cmyk-alpha-spot.psd (Lab 58.47 /
 /// −33.27 / −14.59 for channel id 3).
 #[test]

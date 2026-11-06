@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! The on-screen GPU conversion must preserve the ICC matrix/TRC result near black.
 //!
 //! No photo, hardware profile or application's output is an oracle here: the generated
@@ -145,7 +146,7 @@ fn gpu_display_shadows_match_independent_icc_reference_at_all_depths() {
         eprintln!("skipping: no GPU adapter");
         return;
     };
-    if !gpu_canvas::supports_f16_canvas(&rs.adapter) || std::env::var("PHOTOCRAFT_CANVAS_F16").as_deref() == Ok("0") {
+    if !gpu_canvas::supports_f16_canvas(&rs.adapter) || std::env::var("MOST_IMAGE_CANVAS_F16").as_deref() == Ok("0") {
         eprintln!("skipping: adapter can't render/filter Rgba16Float");
         return;
     }
@@ -179,7 +180,7 @@ fn gpu_display_shadows_match_independent_icc_reference_at_all_depths() {
         let xform = ViewXform::active(harness.state()).expect("canvas mapping");
         let image = harness.render().expect("render GPU canvas");
         // Optional local diagnostic artifact: entirely synthetic, never a user's document.
-        if let Some(dir) = std::env::var_os("PHOTOCRAFT_DISPLAY_TEST_OUTPUT") {
+        if let Some(dir) = std::env::var_os("MOST_IMAGE_DISPLAY_TEST_OUTPUT") {
             let path = std::path::PathBuf::from(dir).join(format!("display-shadows-{depth:?}.png"));
             image.save(&path).expect("save requested synthetic chart");
             eprintln!("synthetic chart: {}", path.display());

@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Large-file open benchmark (P20, #210, #216, #5107): open the generated 2 GB PSD (17,000² px, a
 //! raw full-canvas layer and merged image, just under Photoshop's PSD cap) and the 4.4 GB PSB
 //! (25,000² px, data past 4 GiB) until the document is editable: read the file, decode it into a
@@ -10,7 +11,7 @@
 //! ```
 //!
 //! The fixtures (`photocraft_psd::fixtures`, about 6.4 GB together) are generated once into
-//! `--cache` (default: `$PHOTOCRAFT_FIXTURE_DIR`, else `fixtures/` in the target directory next
+//! `--cache` (default: `$MOST_IMAGE_FIXTURE_DIR`, else `fixtures/` in the target directory next
 //! to this binary) and kept for the next run; `--clean` removes them afterwards. Each row also
 //! records the peak resident memory of its opens. Needs about 30 GB of memory for the PSB.
 
@@ -28,7 +29,7 @@ fn arg(args: &[String], name: &str) -> Option<String> {
 
 /// `<target>/fixtures`: the binary lives in `<target>/release/examples/`.
 fn default_cache() -> PathBuf {
-    if let Some(d) = std::env::var_os("PHOTOCRAFT_FIXTURE_DIR") {
+    if let Some(d) = std::env::var_os("MOST_IMAGE_FIXTURE_DIR") {
         return PathBuf::from(d);
     }
     std::env::current_exe().ok().and_then(|e| e.ancestors().nth(3).map(|t| t.join("fixtures"))).unwrap_or_else(std::env::temp_dir)

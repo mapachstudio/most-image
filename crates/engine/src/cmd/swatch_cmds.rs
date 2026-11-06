@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Swatches panel commands (`swatches.*`): add, delete, rename, reorder and group swatches, set
 //! the foreground or background colour from one, restore the defaults, and import or export
 //! Photoshop `.aco` and Adobe Swatch Exchange `.ase` files.
@@ -498,7 +499,7 @@ pub fn read_file(bytes: &[u8], format: Format, group: &str) -> std::result::Resu
             let books = f.swatches.iter().filter(|s| matches!(s.color, AcoColor::Other { .. })).count();
             if books > 0 {
                 warnings.push(format!(
-                    "{books} swatches use a colour book or colour space PhotoCraft can't show; they are kept (shown gray) and saved back unchanged"
+                    "{books} swatches use a colour book or colour space Most Image can't show; they are kept (shown gray) and saved back unchanged"
                 ));
             }
             let items = f

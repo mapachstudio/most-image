@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::dialogs::toolbar_tab;
 use super::{BTreeMap, Map, PhotocraftApp, RichText, Tokens, Value, default_shortcut, json, prefs, vec2};
 
@@ -448,7 +449,7 @@ pub(super) fn shortcuts_body(app: &mut PhotocraftApp, ui: &mut egui::Ui, f: &mut
             if ui.button(tl!("Reset All to Defaults")).clicked() {
                 overrides.clear();
                 alt_overrides.clear();
-                message = tl!("All shortcuts reset to PhotoCraft defaults.").into();
+                message = tl!("All shortcuts reset to Most Image defaults.").into();
                 message_warning = false;
             }
             // A Photoshop set (`.kys`) fills the overrides; the file arrives after this frame
@@ -580,7 +581,7 @@ fn set_row(
     // The engine decides what a set holds and when it is modified (not the actions' F-keys).
     let now = ShortcutSet::from_bindings(overrides, alternates);
     let modified = shortcut_sets::differs(&sets, &active, overrides, alternates);
-    let defaults = tl!("PhotoCraft Defaults").to_string();
+    let defaults = tl!("Most Image Defaults").to_string();
     let shown = |name: &str| -> String {
         let base = if name.is_empty() { defaults.clone() } else { name.to_string() };
         if name == active && modified { crate::i18n::fmt(tl!("{set} (modified)"), &[("set", &base)]) } else { base }

@@ -1,7 +1,8 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Printing through the XDG Print portal (`org.freedesktop.portal.Print`): the system print
 //! dialog, which a sandboxed app can reach without a CUPS socket. The engine prints over IPP
 //! when it can reach a print server (`photocraft-ipp`); this is its fallback when it cannot, and
-//! the only route with `PHOTOCRAFT_PRINT_PORTAL=1` (`0` disables it). `PreparePrint` shows the
+//! the only route with `MOST_IMAGE_PRINT_PORTAL=1` (`0` disables it). `PreparePrint` shows the
 //! dialog seeded with the job's copies and paper; `Print` hands it the PDF. Both answer through a
 //! `Request` object's `Response` signal, which this module waits for on its own thread so the
 //! window keeps painting while the dialog is open; the outcome goes to the log.
@@ -10,11 +11,11 @@
 #[cfg(target_os = "linux")]
 use photocraft_engine::print_cmds::{PrintJob, Spooler};
 
-/// The spooler to install on the session, unless `PHOTOCRAFT_PRINT_PORTAL=0`. The portal itself
+/// The spooler to install on the session, unless `MOST_IMAGE_PRINT_PORTAL=0`. The portal itself
 /// is looked up per job, so a missing one costs nothing at start-up.
 #[cfg(target_os = "linux")]
 pub fn spooler() -> Option<Spooler> {
-    let setting = std::env::var("PHOTOCRAFT_PRINT_PORTAL").ok();
+    let setting = std::env::var("MOST_IMAGE_PRINT_PORTAL").ok();
     if setting.as_deref() == Some("0") {
         return None;
     }

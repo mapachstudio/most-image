@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::*;
 use photocraft_color::BlendMode;
 use serde_json::json;
@@ -6,7 +7,7 @@ fn render_state() -> Option<eframe::egui_wgpu::RenderState> {
     match std::panic::catch_unwind(|| egui_kittest::wgpu::create_render_state(crate::gpu_canvas::wgpu_setup(), Default::default())) {
         Ok(rs) => Some(rs),
         Err(error) => {
-            if std::env::var_os("PHOTOCRAFT_REQUIRE_GPU_TESTS").is_some() {
+            if std::env::var_os("MOST_IMAGE_REQUIRE_GPU_TESTS").is_some() {
                 std::panic::resume_unwind(error);
             }
             eprintln!("skipping blend viewport regression: no GPU adapter");

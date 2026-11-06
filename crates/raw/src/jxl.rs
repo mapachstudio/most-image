@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! JPEG XL-compressed DNG tiles and strips (Adobe DNG Specification 1.7, Compression 52546).
 //!
 //! Each strip or tile holds one JPEG XL codestream (bare or in the ISO/IEC 18181-2 container)
@@ -19,7 +20,7 @@ use crate::error::{RawError, Result};
 /// The browser build has no JPEG XL decoder (see the module docs).
 #[cfg(target_arch = "wasm32")]
 pub(crate) fn decode(_src: &[u8], _w: usize, _h: usize, _samples: usize, _bits: u32, _float_scale: Option<f32>, _limits: &Limits) -> Result<Vec<u16>> {
-    Err(RawError::unsupported("JPEG XL-compressed DNG (DNG 1.7) can't be opened in the browser version of PhotoCraft; open it in the desktop app"))
+    Err(RawError::unsupported("JPEG XL-compressed DNG (DNG 1.7) can't be opened in the browser version of Most Image; open it in the desktop app"))
 }
 
 /// Decodes one segment into `w * h * samples` interleaved samples at `bits` per sample (the

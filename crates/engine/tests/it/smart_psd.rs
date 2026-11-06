@@ -1,8 +1,9 @@
-//! Smart objects and smart filters made in PhotoCraft survive a PSD save and open (#215): the
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+//! Smart objects and smart filters made in Most Image survive a PSD save and open (#215): the
 //! layer comes back as a live smart object (not pixels) with the same nested document (embedded
 //! in `lnk2` as a PSB), transform, filter list and filter mask, and re-renders like before.
 //!
-//! Set `PHOTOCRAFT_SMART_PSD_OUT=<dir>` to keep the exported files (for opening in Photoshop).
+//! Set `MOST_IMAGE_SMART_PSD_OUT=<dir>` to keep the exported files (for opening in Photoshop).
 
 use photocraft_doc::{Document, LayerContent, SmartObject, SmartSource};
 use photocraft_engine::Session;
@@ -70,7 +71,7 @@ fn structure_errors(bytes: &[u8]) -> Vec<String> {
 }
 
 fn keep(name: &str, bytes: &[u8]) {
-    if let Ok(dir) = std::env::var("PHOTOCRAFT_SMART_PSD_OUT") {
+    if let Ok(dir) = std::env::var("MOST_IMAGE_SMART_PSD_OUT") {
         std::fs::write(std::path::Path::new(&dir).join(name), bytes).unwrap();
     }
 }
@@ -216,12 +217,12 @@ fn camera_raw_psd_filters_survive_re_editing_native_save_and_undo() {
     }
 }
 
-/// Private, user-supplied files remain outside the repository. Set PHOTOCRAFT_CAMERA_RAW_PSD
-/// to check a Camera Raw fixture and PHOTOCRAFT_SMART_PSD_OUT to retain exports for manual checks.
+/// Private, user-supplied files remain outside the repository. Set MOST_IMAGE_CAMERA_RAW_PSD
+/// to check a Camera Raw fixture and MOST_IMAGE_SMART_PSD_OUT to retain exports for manual checks.
 #[test]
 #[ignore = "requires a user-supplied Camera Raw PSD"]
 fn camera_raw_psd_fixture() {
-    let path = std::env::var("PHOTOCRAFT_CAMERA_RAW_PSD").expect("set PHOTOCRAFT_CAMERA_RAW_PSD");
+    let path = std::env::var("MOST_IMAGE_CAMERA_RAW_PSD").expect("set MOST_IMAGE_CAMERA_RAW_PSD");
     let bytes = std::fs::read(&path).unwrap();
     let imported = photocraft_io::import("fixture.psd", &bytes).unwrap();
     let (_, sm) = smart(&imported.document);
@@ -309,7 +310,7 @@ fn smart_filters_survive_psd_in_every_colour_model() {
     }
 }
 
-/// Writes sample files for checking in Photoshop (`PHOTOCRAFT_SMART_PSD_OUT`): per depth, a
+/// Writes sample files for checking in Photoshop (`MOST_IMAGE_SMART_PSD_OUT`): per depth, a
 /// plain layer, a smart object without filters, and one with filters.
 #[test]
 #[ignore = "writes files for a manual Photoshop check"]

@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Computational-photography automation: File › Automate › Photomerge, Merge to HDR Pro and
 //! Crop and Straighten Photos. The registration and blending code
 //! ([`photocraft_algo::panorama`]) is shared with Edit › Auto-Align / Auto-Blend Layers
@@ -484,9 +485,9 @@ pub(crate) fn plane_matrix(pl: &Placement, origin: (f64, f64)) -> Option<Homogra
 }
 
 /// Photomerge's working-memory budget in bytes, from [`budget_from`]: the `memoryBudget` param,
-/// else `PHOTOCRAFT_PHOTOMERGE_BUDGET_MB`, else half of the machine's physical memory.
+/// else `MOST_IMAGE_PHOTOMERGE_BUDGET_MB`, else half of the machine's physical memory.
 fn photomerge_memory_budget(p: &Value) -> usize {
-    let env_mb = std::env::var("PHOTOCRAFT_PHOTOMERGE_BUDGET_MB").ok();
+    let env_mb = std::env::var("MOST_IMAGE_PHOTOMERGE_BUDGET_MB").ok();
     budget_from(p.get("memoryBudget").and_then(Value::as_u64), env_mb.as_deref(), crate::memory::physical_memory())
 }
 

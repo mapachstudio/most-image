@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! **Every test-corpus pin lives here.** Real-file corpora are never committed to this
 //! repository: `cargo xtask corpus --all` fetches them into `corpus/` (gitignored) at the commits
 //! below and verifies each file against the `xtask/*.sha256` manifests. The CI corpus job's cache
@@ -13,10 +14,10 @@ use crate::pinned::{PinnedCorpus, Upstream};
 
 /// https://github.com/storytold/photocraft-corpus: our Photoshop-authored oracle PSDs
 /// (`photoshop/`). Bump through a PR after committing there.
-pub const PHOTOCRAFT_CORPUS_COMMIT: &str = "f5b1178cab15309e05b7b504545df3c701f6d8fd";
+pub const MOST_IMAGE_CORPUS_COMMIT: &str = "f5b1178cab15309e05b7b504545df3c701f6d8fd";
 /// https://github.com/storytold/photocraft-corpus: our GIMP-authored XCF oracles (`gimp/`). Its own
 /// pin, so that set can move without refetching `photoshop/`. Bump through a PR after committing there.
-pub const PHOTOCRAFT_CORPUS_GIMP_COMMIT: &str = "fbe9227a48d06de87061e527541209a178fd685c";
+pub const MOST_IMAGE_CORPUS_GIMP_COMMIT: &str = "fbe9227a48d06de87061e527541209a178fd685c";
 /// https://github.com/psd-tools/psd-tools (MIT): `tests/psd_files` (main, 2026-10-05).
 pub const PSD_TOOLS_COMMIT: &str = "96eb134c17b2c65edf4c4151c0f00b802ada86c2";
 /// https://github.com/Agamnentzar/ag-psd (MIT): `test/` (master, 2026-07-02).
@@ -55,7 +56,7 @@ pub const PHOTOSHOP: PinnedCorpus = PinnedCorpus {
     upstreams: &[Upstream {
         prefix: "",
         repo: "storytold/photocraft-corpus",
-        commit: PHOTOCRAFT_CORPUS_COMMIT,
+        commit: MOST_IMAGE_CORPUS_COMMIT,
         subdir: "photoshop",
         extras: &[("README.md", "README.md"), ("LICENSE-MIT", "LICENSE-MIT"), ("LICENSE-APACHE", "LICENSE-APACHE")],
     }],
@@ -64,8 +65,8 @@ pub const PHOTOSHOP: PinnedCorpus = PinnedCorpus {
     subset: false,
     sources_md: |c| {
         format!(
-            "# Photoshop oracle corpus\n\n`photoshop/` of https://github.com/storytold/photocraft-corpus at commit {PHOTOCRAFT_CORPUS_COMMIT} \
-             (see `README.md`). MIT OR Apache-2.0, authored by the PhotoCraft contributors. Fetched and sha256-verified by \
+            "# Photoshop oracle corpus\n\n`photoshop/` of https://github.com/storytold/photocraft-corpus at commit {MOST_IMAGE_CORPUS_COMMIT} \
+             (see `README.md`). MIT OR Apache-2.0, authored by the Most Image contributors. Fetched and sha256-verified by \
              `cargo xtask corpus --photoshop` against `{}`. Gitignored; never commit these files.\n",
             c.manifest
         )
@@ -80,7 +81,7 @@ pub const GIMP: PinnedCorpus = PinnedCorpus {
     upstreams: &[Upstream {
         prefix: "",
         repo: "storytold/photocraft-corpus",
-        commit: PHOTOCRAFT_CORPUS_GIMP_COMMIT,
+        commit: MOST_IMAGE_CORPUS_GIMP_COMMIT,
         subdir: "gimp",
         extras: &[("README.md", "README.md"), ("LICENSE-MIT", "LICENSE-MIT"), ("LICENSE-APACHE", "LICENSE-APACHE")],
     }],
@@ -89,8 +90,8 @@ pub const GIMP: PinnedCorpus = PinnedCorpus {
     subset: false,
     sources_md: |c| {
         format!(
-            "# GIMP XCF oracle corpus\n\n`gimp/` of https://github.com/storytold/photocraft-corpus at commit {PHOTOCRAFT_CORPUS_GIMP_COMMIT} \
-             (see `README.md`). MIT OR Apache-2.0, authored by the PhotoCraft contributors with GIMP 3.2.6. Fetched and sha256-verified by \
+            "# GIMP XCF oracle corpus\n\n`gimp/` of https://github.com/storytold/photocraft-corpus at commit {MOST_IMAGE_CORPUS_GIMP_COMMIT} \
+             (see `README.md`). MIT OR Apache-2.0, authored by the Most Image contributors with GIMP 3.2.6. Fetched and sha256-verified by \
              `cargo xtask corpus --gimp` against `{}`. Gitignored; never commit these files.\n",
             c.manifest
         )
@@ -108,7 +109,7 @@ pub const PSD_TOOLS: PinnedCorpus = PinnedCorpus {
     sources_md: |c| {
         format!(
             "# psd-tools test corpus\n\nThe PSD/PSB files of https://github.com/psd-tools/psd-tools/tree/{PSD_TOOLS_COMMIT}/tests/psd_files, \
-             unmodified. MIT licence, Copyright (c) 2019 Kota Yamaguchi (see `LICENSE`). Fetched and sha256-verified by \
+             unmodified. MIT licence, Copyright (c) 2019 Kota Yamaguchi (see `LICENSE`); modificaciones Copyright (c) 2026 Grupo MOST. Fetched and sha256-verified by \
              `cargo xtask corpus --psd-tools` against `{}`. Gitignored; never commit these files.\n",
             c.manifest
         )
@@ -136,8 +137,8 @@ pub const PSD_MIXED: PinnedCorpus = PinnedCorpus {
     sources_md: |c| {
         format!(
             "# PSD test corpus (mixed)\n\nSmall PSD/PSB files selected from https://github.com/psd-tools/psd-tools/tree/{PSD_TOOLS_COMMIT}/tests/psd_files \
-             (`psd-tools/`, MIT, Copyright (c) 2019 Kota Yamaguchi) and https://github.com/Agamnentzar/ag-psd/tree/{AG_PSD_COMMIT}/test \
-             (`ag-psd/`, MIT, Copyright (c) 2016 Agamnentzar), unmodified; licences next to them. Selected by and sha256-verified \
+             (`psd-tools/`, MIT, Copyright (c) 2019 Kota Yamaguchi) and https://github; modificaciones Copyright (c) 2026 Grupo MOST.com/Agamnentzar/ag-psd/tree/{AG_PSD_COMMIT}/test \
+             (`ag-psd/`, MIT, Copyright (c) 2016 Agamnentzar), unmodified; licences next to them; modificaciones Copyright (c) 2026 Grupo MOST. Selected by and sha256-verified \
              against `{}` by `cargo xtask corpus --psd`. Gitignored; never commit these files.\n",
             c.manifest
         )
@@ -258,8 +259,8 @@ pub const AFFINITY: PinnedCorpus = PinnedCorpus {
         format!(
             "# Affinity test corpus\n\nPublic Affinity documents, unmodified, with their licences next to them: \
              https://github.com/samuel-etver/vector-art/tree/{VECTOR_ART_COMMIT}/simple (`vector-art/`, CC0-1.0), \
-             https://github.com/NickBeeuwsaert/AFDesignLoad/tree/{AFDESIGNLOAD_COMMIT}/testDesigns (`afdesignload/`, MIT, Copyright (c) 2015 Nick Beeuwsaert), \
-             https://github.com/Jac21/Branding/tree/{JAC21_BRANDING_COMMIT}/Logos/JC/DesignerFiles/Affinity (`jac21/`, MIT, Copyright (c) 2018 Jeremy Cantu) and \
+             https://github.com/NickBeeuwsaert/AFDesignLoad/tree/{AFDESIGNLOAD_COMMIT}/testDesigns (`afdesignload/`, MIT, Copyright (c) 2015 Nick Beeuwsaert), \; modificaciones Copyright (c) 2026 Grupo MOST
+             https://github.com/Jac21/Branding/tree/{JAC21_BRANDING_COMMIT}/Logos/JC/DesignerFiles/Affinity (`jac21/`, MIT, Copyright (c) 2018 Jeremy Cantu) and \; modificaciones Copyright (c) 2026 Grupo MOST
              https://github.com/eviltwo/AssetStoreTemplate/tree/{ASSET_STORE_TEMPLATE_COMMIT}/AssetStoreTemplate (`asset-store-template/`, MIT) and \
              https://github.com/satoshoe-dev/affinity-samples/tree/{AFFINITY_SAMPLES_COMMIT} (`affinity-samples/`, CC0-1.0; includes PNG references for issue #1606). \
              Selected by and sha256-verified against `{}` by `cargo xtask corpus --affinity`. Gitignored; never commit these files.\n",

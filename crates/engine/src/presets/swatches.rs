@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Window › Swatches: named colours in groups (folders), as in Photoshop's Swatches panel.
 //!
 //! A swatch keeps its colour in the model it was made in: RGB, HSB, CMYK, Lab or grayscale,
@@ -37,7 +38,7 @@ pub enum SwatchColor {
     Lab([f32; 3]),
     /// Black ink 0..1 (0 = white) in the gray working space, as Photoshop's K slider.
     Gray(f32),
-    /// A colour space PhotoCraft does not model (colour books and the like), kept verbatim from
+    /// A colour space Most Image does not model (colour books and the like), kept verbatim from
     /// an `.aco` file so it survives a round trip.
     Book { space: u16, values: [u16; 4] },
 }

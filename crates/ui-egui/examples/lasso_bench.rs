@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Frame times of a freehand Lasso drag on a large document (#1773): the real `PhotocraftApp` in
 //! an offscreen egui_kittest harness on wgpu, a 6336×7920 RGB document, the view at 125 %, then a
 //! spiral drag of many pointer moves, one per frame, and the release (the `select.lasso` commit)
@@ -11,7 +12,7 @@
 //! `--layers` layers, the first `--full` of them canvas-sized (the rest 1024×1024 patches);
 //! `--selection` starts from an elliptical selection; `--render` also tessellates and paints
 //! each frame on the GPU (with a readback, about 7 ms here), otherwise only the app's logic runs.
-//! `PHOTOCRAFT_GPU_SYNC=1` makes a canvas refresh wait for the GPU.
+//! `MOST_IMAGE_GPU_SYNC=1` makes a canvas refresh wait for the GPU.
 
 use std::time::Instant;
 

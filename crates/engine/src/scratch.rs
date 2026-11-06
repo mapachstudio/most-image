@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Native tile storage configuration, kept out of the preference data model.
 
 use crate::prefs::Preferences;
@@ -132,7 +133,7 @@ pub(crate) fn configure(prefs: &Preferences) {
         // An unusable or full directory pauses eviction without dropping resident pixels and
         // is retried with backoff; History's byte limit applies meanwhile (sync_scratch_state).
         // The reason is exposed in ui.inspect and the application's status bar.
-        let tiles = if std::env::var_os("PHOTOCRAFT_TILE_BUDGET_MB").is_some() {
+        let tiles = if std::env::var_os("MOST_IMAGE_TILE_BUDGET_MB").is_some() {
             prefs.performance.tile_budget_bytes()
         } else {
             usize::try_from(budget.tile_bytes).unwrap_or(usize::MAX)

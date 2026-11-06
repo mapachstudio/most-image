@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::paths::{join, sanitize, stem, write_file};
 use super::save::{SaveOpts, encode};
 use super::{ColorMode, Document, EngineError, Layer, LayerContent, LayerId, Rect, Result, Session, Surface, Value, from_rgba_into, json, str_param};
@@ -172,7 +173,7 @@ fn bake_cube_layers(size: usize, title: &str, layers: &[&Layer]) -> String {
         lattice.layers.push(a);
     }
     let out = photocraft_compose::flatten(&lattice);
-    let mut s = format!("TITLE \"{}\"\n# Created by PhotoCraft\nLUT_3D_SIZE {n}\nDOMAIN_MIN 0.0 0.0 0.0\nDOMAIN_MAX 1.0 1.0 1.0\n", title.replace('"', "'"));
+    let mut s = format!("TITLE \"{}\"\n# Created by Most Image\nLUT_3D_SIZE {n}\nDOMAIN_MIN 0.0 0.0 0.0\nDOMAIN_MAX 1.0 1.0 1.0\n", title.replace('"', "'"));
     // .cube order: red changes fastest, then green, then blue.
     for b in 0..n {
         for g in 0..n {

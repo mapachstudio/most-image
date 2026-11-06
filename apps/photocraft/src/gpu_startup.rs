@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Crash-safe GPU startup (#4).
 //!
 //! A graphics driver that segfaults while the window's wgpu device is created (the Intel Vulkan
@@ -333,14 +334,14 @@ pub fn applicable_adapter(wanted: Option<String>, backend: GpuBackend, linux: bo
     wanted.filter(|_| linux && backend != GpuBackend::Cpu)
 }
 
-/// Whether `PHOTOCRAFT_GPU_ADAPTER` makes this launch its own process: only when startup will act
+/// Whether `MOST_IMAGE_GPU_ADAPTER` makes this launch its own process: only when startup will act
 /// on it (a non-empty value, on Linux, outside CPU mode). Otherwise it changes nothing, and the
 /// launch may still be forwarded to the running window.
 pub fn adapter_override_is_process_specific(env: Option<&str>, mode: RenderingMode, linux: bool) -> bool {
     env.is_some_and(|v| !v.trim().is_empty()) && linux && mode != RenderingMode::Cpu
 }
 
-/// The adapter to ask for: `PHOTOCRAFT_GPU_ADAPTER` when set (for one launch), else
+/// The adapter to ask for: `MOST_IMAGE_GPU_ADAPTER` when set (for one launch), else
 /// `performance.gpuAdapter`; `None` is automatic.
 pub fn wanted_adapter(env: Option<&str>, pref: &str) -> Option<String> {
     [env.unwrap_or(""), pref].iter().map(|s| s.trim()).find(|s| !s.is_empty()).map(|s| s.chars().take(256).collect())
@@ -362,7 +363,7 @@ pub fn dx12_default_applied(adapters: &[Candidate], chosen: usize, os: Os, vulka
 
 /// wgpu compiles indirect-call validation shaders inside `request_device`; Metal's compiler
 /// crashes on them on old Intel Macs (Iris Pro, GPUFamily 1 on Monterey), so no mode could start
-/// (#3107). Only Intel Macs skip them: PhotoCraft issues no indirect draws or dispatches, but every
+/// (#3107). Only Intel Macs skip them: Most Image issues no indirect draws or dispatches, but every
 /// other GPU keeps wgpu's default. `WGPU_VALIDATION_INDIRECT_CALL=1` still wins.
 fn skips_indirect_validation(os: Os, intel: bool) -> bool {
     os == Os::Mac && intel

@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::{
     PhotocraftApp, analysis_ui, brush_panel, brush_picker, camera_raw_ui, canvas, dds_options_ui, dialogs, discard_ui, distort_ui, field_wheel, gpu_canvas,
     gpu_status, gradient_ui, i18n, jobs_ui, jpeg_options_ui, kys_import, last_brush, layers_panel_ui, monitor_status, native_menu, notices, paint_mouse,
@@ -123,7 +124,7 @@ impl PhotocraftApp {
         if !dropped.is_empty() {
             let at = self.services.cursor_pos.as_mut().and_then(|f| f(ctx));
             self.open_dropped(ctx, dropped, at);
-            // Files dragged in from another app's window: PhotoCraft comes to the front and takes
+            // Files dragged in from another app's window: Most Image comes to the front and takes
             // the keyboard, as Photoshop does, instead of staying behind the source (#5687).
             ctx.send_viewport_cmd(egui::ViewportCommand::Focus);
         }
@@ -172,7 +173,7 @@ impl PhotocraftApp {
         i18n::set_current(i18n::Lang::from_pref(&self.session.prefs().interface.language));
         // Fonts registered via set_fonts only take effect next frame; named families would panic now.
         if !self.fonts_ready {
-            // egui consumed this pass's input without PhotoCraft handling it: keep the synthetic
+            // egui consumed this pass's input without Most Image handling it: keep the synthetic
             // batch for the next pass instead of losing the step.
             self.defer_synthetic_pass();
             ctx.request_repaint();

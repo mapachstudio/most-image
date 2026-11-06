@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! The command line, as clap types. Values are parsed into their types here, so a bad one is a
 //! usage error naming its flag (exit 2) and the handlers never see it (#7071). A flag a
 //! subcommand doesn't take is a usage error too, so a typo such as `--fromat` can't be silently
@@ -20,7 +21,7 @@ use photocraft_codecs::{JpegFormat, TiffCompression};
 use photocraft_io::{DdsCompression, DpxBits, TgaBits};
 use serde_json::Value;
 
-/// photocraft-cli: headless PhotoCraft
+/// photocraft-cli: headless Most Image
 #[derive(Parser)]
 #[command(name = "photocraft-cli", version = photocraft_engine::build_info::long_version_static(), arg_required_else_help = true)]
 pub(crate) struct Cli {
@@ -252,14 +253,14 @@ pub(crate) struct CommandsArgs {
 ///
 /// Headless: each automation root grants that direction of file access; an omitted root denies it.
 /// Prefer absolute root paths in MCP client configurations. Bridge: set the roots on the desktop
-/// app; root flags are refused. The token flags require --bridge (or PHOTOCRAFT_CONTROL_PORT).
+/// app; root flags are refused. The token flags require --bridge (or MOST_IMAGE_CONTROL_PORT).
 #[derive(Args)]
 pub(crate) struct McpArgs {
-    /// Bridge to the PhotoCraft app listening here instead of a headless engine; a bare port means
+    /// Bridge to the Most Image app listening here instead of a headless engine; a bare port means
     /// 127.0.0.1:<PORT>
-    #[arg(long, value_name = "127.0.0.1:PORT", env = "PHOTOCRAFT_CONTROL_PORT", value_parser = bridge)]
+    #[arg(long, value_name = "127.0.0.1:PORT", env = "MOST_IMAGE_CONTROL_PORT", value_parser = bridge)]
     pub(crate) bridge: Option<Bridge>,
-    /// `--bridge` came from PHOTOCRAFT_CONTROL_PORT, set by [`parse`].
+    /// `--bridge` came from MOST_IMAGE_CONTROL_PORT, set by [`parse`].
     #[arg(skip)]
     pub(crate) bridge_from_env: bool,
     #[command(flatten)]
@@ -276,13 +277,13 @@ pub(crate) struct McpArgs {
 /// jobs.list/cancel, engine.commands,
 /// doc.open/new/place/save/exportLayers/exportDataSets/importDataSets/inspect/render/select/close,
 /// session.list, batch, methods (docs/control-protocol.md#headless-server). The token flags require
-/// --port (or PHOTOCRAFT_CONTROL_PORT); stdio needs no control token.
+/// --port (or MOST_IMAGE_CONTROL_PORT); stdio needs no control token.
 #[derive(Args)]
 pub(crate) struct ServeArgs {
     /// Listen on 127.0.0.1:<PORT> instead of stdio
-    #[arg(long, value_name = "PORT", env = "PHOTOCRAFT_CONTROL_PORT", value_parser = control_port)]
+    #[arg(long, value_name = "PORT", env = "MOST_IMAGE_CONTROL_PORT", value_parser = control_port)]
     pub(crate) port: Option<u16>,
-    /// `--port` came from PHOTOCRAFT_CONTROL_PORT, set by [`parse`].
+    /// `--port` came from MOST_IMAGE_CONTROL_PORT, set by [`parse`].
     #[arg(skip)]
     pub(crate) port_from_env: bool,
     #[command(flatten)]
@@ -308,7 +309,7 @@ enum ValueError {
     JpegFormat,
     #[error("expected on or off")]
     OnOff,
-    /// Why a `--bridge` value, or a PHOTOCRAFT_CONTROL_PORT value for `mcp`, is refused.
+    /// Why a `--bridge` value, or a MOST_IMAGE_CONTROL_PORT value for `mcp`, is refused.
     #[error("expected a port, 0-65535 (--bridge also takes 127.0.0.1:<PORT>)")]
     Bridge,
 }
@@ -317,16 +318,16 @@ enum ValueError {
 /// (exit 2).
 #[derive(Debug, thiserror::Error)]
 enum ServerOptionError {
-    /// PHOTOCRAFT_CONTROL_PORT holds a port, as for the desktop app's --control: only the flag
+    /// MOST_IMAGE_CONTROL_PORT holds a port, as for the desktop app's --control: only the flag
     /// takes host:port.
-    #[error("invalid value '{0}' for 'PHOTOCRAFT_CONTROL_PORT': {bridge}", bridge = ValueError::Bridge)]
+    #[error("invalid value '{0}' for 'MOST_IMAGE_CONTROL_PORT': {bridge}", bridge = ValueError::Bridge)]
     BridgeVar(String),
     /// With --bridge the roots are the desktop process's to set: accepting them here promises
     /// authority the bridge can't give (#8035).
     #[error("configure automation roots on the desktop app; --automation-read-root and --automation-write-root require headless MCP mode")]
     BridgeRoots,
-    /// Invalid value for PHOTOCRAFT_GPU.
-    #[error("invalid value '{0}' for 'PHOTOCRAFT_GPU': expected '1' or '0'")]
+    /// Invalid value for MOST_IMAGE_GPU.
+    #[error("invalid value '{0}' for 'MOST_IMAGE_GPU': expected '1' or '0'")]
     GpuVar(String),
     /// Explicit GPU flags require headless MCP mode, not bridge mode.
     #[error("configure rendering on the desktop app; --gpu and --no-gpu require headless MCP mode")]
@@ -398,7 +399,7 @@ impl fmt::Display for Bridge {
     }
 }
 
-/// `mcp --bridge`, or PHOTOCRAFT_CONTROL_PORT, which holds a port.
+/// `mcp --bridge`, or MOST_IMAGE_CONTROL_PORT, which holds a port.
 fn bridge(s: &str) -> Result<Bridge, ValueError> {
     match control_port(s) {
         Ok(port) => Ok(Bridge::Port(port)),
@@ -504,7 +505,7 @@ fn check_gpu_env(cmd: &mut clap::Command, m: &ArgMatches) -> Result<(), clap::Er
     if m.value_source("gpu") == Some(ValueSource::CommandLine) || m.value_source("no_gpu") == Some(ValueSource::CommandLine) {
         return Ok(());
     }
-    if let Some(v) = std::env::var_os("PHOTOCRAFT_GPU") {
+    if let Some(v) = std::env::var_os("MOST_IMAGE_GPU") {
         // A non-UTF-8 value is still a value other than empty, "0" or "1": reject it rather
         // than silently treating it as unset and running on the CPU.
         let v = v.to_string_lossy();

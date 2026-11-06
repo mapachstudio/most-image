@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::tabs::{open_on_double_click, paint_dots};
 use super::{PhotocraftApp, Rect, Sense};
 
@@ -199,7 +200,7 @@ fn render_start_content(app: &mut PhotocraftApp, ui: &mut egui::Ui, recent: &[St
     let t = crate::theme::Tokens::get(ui.ctx());
     ui.add_space(8.0);
 
-    // Top Row: [01] PhotoCraft
+    // Top Row: [01] Most Image
     ui.horizontal(|ui| {
         let badge_size = egui::vec2(24.0, 19.0);
         let (badge_rect, _) = ui.allocate_exact_size(badge_size, Sense::hover());
@@ -208,7 +209,7 @@ fn render_start_content(app: &mut PhotocraftApp, ui: &mut egui::Ui, recent: &[St
 
         ui.add_space(10.0);
 
-        let title_galley = ui.painter().layout_no_wrap(tl!("PhotoCraft").into(), crate::theme::semibold(20.0), t.text);
+        let title_galley = ui.painter().layout_no_wrap(tl!("Most Image").into(), crate::theme::semibold(20.0), t.text);
         let (title_r, _) = ui.allocate_exact_size(title_galley.size(), Sense::hover());
         ui.painter().galley(title_r.min, title_galley, t.text);
     });

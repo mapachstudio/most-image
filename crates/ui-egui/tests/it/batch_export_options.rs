@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! #2399: batch conversion exposes the formats and quality its engine already supports.
 //! The menu controls are exercised separately from the existing engine's decoded outputs.
 
@@ -35,7 +36,7 @@ fn open(h: &mut Harness, command: &str) {
 }
 
 fn evidence(h: &mut Harness, name: &str) {
-    if let Some(dir) = std::env::var_os("PHOTOCRAFT_BATCH_EVIDENCE_DIR") {
+    if let Some(dir) = std::env::var_os("MOST_IMAGE_BATCH_EVIDENCE_DIR") {
         std::fs::create_dir_all(&dir).unwrap();
         h.render().expect("offscreen UI render").save(Path::new(&dir).join(format!("{name}.png"))).unwrap();
     }

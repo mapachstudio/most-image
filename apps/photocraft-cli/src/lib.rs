@@ -1,4 +1,5 @@
-//! Headless PhotoCraft command line. `run` is the whole program, so it can be
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+//! Headless Most Image command line. `run` is the whole program, so it can be
 //! tested in-process as well as through the binary.
 
 #![deny(clippy::unwrap_used, clippy::expect_used, clippy::panic, clippy::unimplemented, clippy::todo, clippy::unreachable)]

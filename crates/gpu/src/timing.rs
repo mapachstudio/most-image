@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! GPU execution time of a composite (#7186), measured with wgpu timestamp queries.
 //!
 //! `GpuCanvas::refresh` reports `composite_ms`, the CPU cost of *encoding and submitting* the
@@ -26,7 +27,7 @@
 //! encode-and-submit time it replaces.
 //!
 //! **What it costs.** Nothing measurable. The same refresh on the same device with
-//! `PHOTOCRAFT_NO_GPU_TIMING` set waits 88.1 ms against 87.9 ms measured — a difference of
+//! `MOST_IMAGE_NO_GPU_TIMING` set waits 88.1 ms against 87.9 ms measured — a difference of
 //! −0.2 ms on an ~88 ms refresh, i.e. inside the noise of a shared host. Per refresh the
 //! queries add two timestamp writes (two more per flush), one resolve and one copy of at most
 //! 1 KiB, a `map_async` and an `Arc` allocation; the query set and both buffers are allocated

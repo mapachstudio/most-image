@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::*;
 use photocraft_psd::abr::{AbrSample, LegacyBrush, LegacyTip, write_v12};
 use serde_json::json;
@@ -687,7 +688,7 @@ fn folders_moved_into_other_folders_persist() {
 
 #[test]
 fn a_group_file_that_failed_to_load_is_not_overwritten() {
-    // e.g. written by a newer PhotoCraft: skipped on load, so a save must not replace it.
+    // e.g. written by a newer Most Image: skipped on load, so a save must not replace it.
     let mem = MemBackend::default();
     let file = group_file_name("");
     let newer = br#"{"format":"photocraft-brush-group","version":2,"group":"","presets":[]}"#.to_vec();
@@ -702,7 +703,7 @@ fn a_group_file_that_failed_to_load_is_not_overwritten() {
 
 #[test]
 fn an_actions_file_that_failed_to_load_is_not_overwritten() {
-    // e.g. written by a newer PhotoCraft: skipped on load, so recording an action must not replace it.
+    // e.g. written by a newer Most Image: skipped on load, so recording an action must not replace it.
     let mem = MemBackend::default();
     let newer = br#"{"version":2,"actions":[{"name":"Keep","steps":[]}]}"#.to_vec();
     mem.files.lock().unwrap().insert(ACTIONS_FILE.into(), newer.clone());

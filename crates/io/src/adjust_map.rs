@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Mapping between PSD adjustment-layer blocks and [`Adjustment`].
 //!
 //! Binary layouts follow the Adobe spec ("Adjustment layer" section). The
@@ -347,7 +348,7 @@ pub(crate) fn retarget_gradient_map(data: &mut [u8], target: &Adjustment, channe
     }
 }
 
-/// `true` for a `grdm` block exactly as older PhotoCraft builds wrote it: [`write_gradient_map`]'s
+/// `true` for a `grdm` block exactly as older Most Image builds wrote it: [`write_gradient_map`]'s
 /// output without the two padding bytes, which makes Photoshop refuse the file (#8070). Blocks
 /// from other writers, whatever their length, are not matched.
 pub(crate) fn is_unpadded_photocraft_gradient_map(data: &[u8]) -> bool {

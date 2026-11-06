@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! `cargo xtask corpus [...]` (fetch test corpora) and `cargo xtask test-corpus [...]` (fetch,
 //! then run the corpus tests). Pins: `corpus_pins.rs`. Docs: `docs/development.md` › Test corpora.
 
@@ -8,7 +9,7 @@ use std::process::{Child, Command, Stdio};
 use std::sync::atomic::{AtomicU64, Ordering};
 
 use crate::corpus_pins::{
-    self, AG_PSD_COMMIT, HEIC_RS_COMMIT, OPENEXR_COMMIT, PHOTOCRAFT_CORPUS_COMMIT, PHOTOCRAFT_CORPUS_GIMP_COMMIT, PILLOW_HEIF_COMMIT, PNGSUITE_SHA256,
+    self, AG_PSD_COMMIT, HEIC_RS_COMMIT, OPENEXR_COMMIT, MOST_IMAGE_CORPUS_COMMIT, MOST_IMAGE_CORPUS_GIMP_COMMIT, PILLOW_HEIF_COMMIT, PNGSUITE_SHA256,
     PNGSUITE_URL, PSD_TOOLS_COMMIT,
 };
 use crate::pinned::{PinnedCorpus, USER_AGENT};
@@ -98,14 +99,14 @@ pub fn cmd(args: &[&str]) -> Result<(), String> {
     Ok(())
 }
 
-/// The authoring clone of photocraft-corpus: `$PHOTOCRAFT_CORPUS_REPO`, else `../photocraft-corpus`.
+/// The authoring clone of photocraft-corpus: `$MOST_IMAGE_CORPUS_REPO`, else `../photocraft-corpus`.
 fn local_clone() -> Result<PathBuf, String> {
-    if let Some(p) = std::env::var_os("PHOTOCRAFT_CORPUS_REPO").filter(|v| !v.is_empty()) {
+    if let Some(p) = std::env::var_os("MOST_IMAGE_CORPUS_REPO").filter(|v| !v.is_empty()) {
         return Ok(PathBuf::from(p));
     }
     let sibling = root().parent().map(|p| p.join("photocraft-corpus"));
     sibling.filter(|s| s.join("photoshop").is_dir()).ok_or_else(|| {
-        "no local photocraft-corpus clone: expected ../photocraft-corpus next to this checkout, or set PHOTOCRAFT_CORPUS_REPO=<path>".to_string()
+        "no local photocraft-corpus clone: expected ../photocraft-corpus next to this checkout, or set MOST_IMAGE_CORPUS_REPO=<path>".to_string()
     })
 }
 
@@ -149,11 +150,11 @@ fn list() {
   cargo xtask test-corpus       fetch, then run every corpus test (--release --features corpus)
 
   corpus/photoshop/  [{}] our Photoshop-authored oracles (MIT OR Apache-2.0), from
-                     https://github.com/storytold/photocraft-corpus at {PHOTOCRAFT_CORPUS_COMMIT}
+                     https://github.com/storytold/photocraft-corpus at {MOST_IMAGE_CORPUS_COMMIT}
                      manifest xtask/photoshop-corpus.sha256. Fetch: --photoshop
-                     (--photoshop --local copies from ../photocraft-corpus or $PHOTOCRAFT_CORPUS_REPO)
+                     (--photoshop --local copies from ../photocraft-corpus or $MOST_IMAGE_CORPUS_REPO)
   corpus/gimp/       [{}] our GIMP-authored XCF oracles with GIMP's PNG renderings (MIT OR Apache-2.0),
-                     from the same repository at {PHOTOCRAFT_CORPUS_GIMP_COMMIT}
+                     from the same repository at {MOST_IMAGE_CORPUS_GIMP_COMMIT}
                      manifest xtask/gimp-corpus.sha256. Fetch: --gimp (--gimp --local copies from the clone)
   corpus/psd/        [{}] 170 small psd-tools + ag-psd files (MIT), psd-tools@{} and
                      ag-psd@{}, manifest xtask/psd-corpus.sha256. Fetch: --psd

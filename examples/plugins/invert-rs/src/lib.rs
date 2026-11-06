@@ -1,4 +1,5 @@
-//! Invert: a minimal PhotoCraft filter plug-in (plug-in ABI v1, see `docs/plugins.md`).
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+//! Invert: a minimal Most Image filter plug-in (plug-in ABI v1, see `docs/plugins.md`).
 //!
 //! `no_std`, no allocator, no imports: the host hands us an interleaved `f32` buffer and we
 //! invert the colour channels in place, leaving alpha (and fully transparent pixels) alone,
@@ -11,12 +12,12 @@ fn panic(_: &core::panic::PanicInfo) -> ! {
 }
 
 const MANIFEST: &str = r#"{
-  "id": "org.photocraft.example.invert",
+  "id": "org.mostimage.example.invert",
   "name": "Invert (WebAssembly)",
   "version": "1.0.0",
   "kind": "filter",
-  "author": "PhotoCraft contributors",
-  "description": "Inverts the colour channels; an example of the PhotoCraft plug-in ABI.",
+  "author": "Most Image contributors",
+  "description": "Inverts the colour channels; an example of the Most Image plug-in ABI.",
   "params": {}
 }"#;
 

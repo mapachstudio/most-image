@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Layers-panel pieces for smart objects: the thumbnail badge and the Smart Filters sub-rows
 //! (eye toggles; double-click a filter to re-open its dialog with the recorded parameters; click
 //! to select one; drag onto another smart object to move it there, ⌥-drag to copy it, #4271;
@@ -62,7 +63,7 @@ pub fn thumb_badge(ui: &egui::Ui, l: &Layer, thumb: Rect) {
 }
 
 /// The display name of a smart filter (its command's label without the ellipsis). A Photoshop
-/// filter PhotoCraft doesn't implement shows its own name and is marked as kept as is.
+/// filter Most Image doesn't implement shows its own name and is marked as kept as is.
 pub(crate) fn filter_label(f: &photocraft_doc::SmartFilter) -> String {
     let command = f.command.as_str();
     if command == photocraft_engine::smart_cmds::UNSUPPORTED_FILTER {
@@ -577,7 +578,7 @@ mod layer_thumbnail_scaling_tests {
             assert!((rect.height() - header).abs() < 1.0, "{setting:?}: Smart Filters was {rect:?}, expected {header}");
             assert!(mask <= header - 6.0 || mask == 0.0, "{setting:?}: a {mask} mask must fit a {header} row");
             assert_eq!(mask == 0.0, setting == LayerThumbnailSize::None, "{setting:?}: the mask hides only at None");
-            if let Some(dir) = std::env::var_os("PHOTOCRAFT_LAYERS_SNAPSHOTS") {
+            if let Some(dir) = std::env::var_os("MOST_IMAGE_LAYERS_SNAPSHOTS") {
                 let dir = std::path::PathBuf::from(dir);
                 std::fs::create_dir_all(&dir).unwrap();
                 h.render().unwrap().save(dir.join(format!("layers-sub-rows-{setting:?}.png"))).unwrap();

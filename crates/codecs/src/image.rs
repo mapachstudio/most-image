@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! The crate's own flat raster image type.
 //!
 //! Samples are stored interleaved (`RGBARGBA…`), row-major, top-to-bottom,
@@ -21,7 +22,7 @@ pub enum ChannelLayout {
     /// Ink amounts, `0 = no ink`, `max = full ink` (not Adobe-inverted).
     Cmyk,
     CmykA,
-    /// CIE L*a*b* (D50), as PhotoCraft's Lab documents hold it: L* 0..100 as 0..1, a* and b*
+    /// CIE L*a*b* (D50), as Most Image's Lab documents hold it: L* 0..100 as 0..1, a* and b*
     /// −128..127 as `(v + 128) / 255` (Photoshop's unsigned encoding).
     Lab,
     LabA,

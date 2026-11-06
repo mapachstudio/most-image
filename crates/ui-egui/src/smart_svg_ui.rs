@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Explicit desktop SVG editor selection and bounded, undoable Smart Object save-back.
 
 use base64::Engine as _;
@@ -93,7 +94,7 @@ pub(crate) fn intercept(app: &mut PhotocraftApp, id: &str, params: &Value) -> Op
         return None;
     }
     let doc = st.doc.id;
-    // Contents already open in PhotoCraft's own editor: the engine switches to that document.
+    // Contents already open in Most Image's own editor: the engine switches to that document.
     if app.session.smart_links.iter().any(|link| link.parent == doc && link.contents_id == smart.contents_id) {
         return None;
     }
@@ -284,7 +285,7 @@ pub(crate) fn show(app: &mut PhotocraftApp, ctx: &egui::Context) {
             (Editor::VectorCraft, "VectorCraft"),
             (Editor::Illustrator, "Adobe Illustrator"),
             (Editor::Program, "Other application"),
-            (Editor::Internal, "PhotoCraft (internal editor)"),
+            (Editor::Internal, "Most Image (internal editor)"),
         ] {
             // The desktop shell discovers Illustrator installations only on Windows and macOS.
             if choice == Editor::Illustrator && !cfg!(any(windows, target_os = "macos")) {
@@ -303,9 +304,9 @@ pub(crate) fn show(app: &mut PhotocraftApp, ctx: &egui::Context) {
         ui.add_space(8.0);
         ui.label(
             egui::RichText::new(tr(if pending.target.extension == "svg" {
-                "Save to the opened SVG file. Each saved change becomes one undo step in PhotoCraft."
+                "Save to the opened SVG file. Each saved change becomes one undo step in Most Image."
             } else {
-                "Save to the opened original-format file. Each saved change becomes one undo step in PhotoCraft."
+                "Save to the opened original-format file. Each saved change becomes one undo step in Most Image."
             }))
             .small()
             .color(tokens.text_dim),

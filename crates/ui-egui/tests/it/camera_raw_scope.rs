@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Real dialog/controller acceptance: interactions never make a second document edit path.
 use egui::{Event, Modifiers, PointerButton, Pos2, Rect, pos2, vec2};
 use egui_kittest::{Harness, kittest::Queryable};
@@ -610,7 +611,7 @@ fn curve_gpu_paints_the_moved_handle_in_every_theme_part(part: usize) {
             after.get_pixel(b.x.round() as u32, b.y.round() as u32),
             "moved handle must appear in the native GPU frame"
         );
-        if let Ok(dir) = std::env::var("PHOTOCRAFT_CURVE_SNAPSHOTS") {
+        if let Ok(dir) = std::env::var("MOST_IMAGE_CURVE_SNAPSHOTS") {
             std::fs::create_dir_all(&dir).unwrap();
             after.save(std::path::Path::new(&dir).join(format!("{theme:?}.png"))).unwrap();
         }
@@ -732,7 +733,7 @@ fn pixel_hover_gpu_badge_single_band_and_crosshair_appear_and_clear_in_all_theme
             })
         });
         assert!(bright_target, "{theme:?}: target must contrast against the dark scope even in light themes");
-        if let Ok(dir) = std::env::var("PHOTOCRAFT_HOVER_SNAPSHOTS") {
+        if let Ok(dir) = std::env::var("MOST_IMAGE_HOVER_SNAPSHOTS") {
             std::fs::create_dir_all(&dir).unwrap();
             hovered.save(std::path::Path::new(&dir).join(format!("{theme:?}.png"))).unwrap();
         }

@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! `--control` setup failures must exit non-zero (#1816): a launcher that sees
 //! status 0 believes the control server is running when it is not.
 //!
@@ -29,13 +30,13 @@ fn run_with(args: &[&str], vars: &[(&str, &str)]) -> Run {
     std::fs::create_dir_all(&dir).unwrap();
     let mut child = std::process::Command::new(crate::binary())
         .args(args)
-        .env("PHOTOCRAFT_CONFIG_DIR", &dir)
+        .env("MOST_IMAGE_CONFIG_DIR", &dir)
         // Isolate from the host environment so the test is reproducible.
-        .env_remove("PHOTOCRAFT_CONTROL_PORT")
-        .env_remove("PHOTOCRAFT_CONTROL_TOKEN")
-        .env_remove("PHOTOCRAFT_CONTROL_TOKEN_FILE")
-        .env_remove("PHOTOCRAFT_AUTOMATION_READ_ROOT")
-        .env_remove("PHOTOCRAFT_AUTOMATION_WRITE_ROOT")
+        .env_remove("MOST_IMAGE_CONTROL_PORT")
+        .env_remove("MOST_IMAGE_CONTROL_TOKEN")
+        .env_remove("MOST_IMAGE_CONTROL_TOKEN_FILE")
+        .env_remove("MOST_IMAGE_AUTOMATION_READ_ROOT")
+        .env_remove("MOST_IMAGE_AUTOMATION_WRITE_ROOT")
         .env_remove("DISPLAY")
         .env_remove("WAYLAND_DISPLAY")
         .env_remove("WAYLAND_SOCKET")
@@ -58,7 +59,7 @@ fn run_with(args: &[&str], vars: &[(&str, &str)]) -> Run {
     let output = child.wait_with_output().unwrap();
     let gpu_started = dir.join("gpu-starting.json").exists();
     std::fs::remove_dir_all(&dir).ok();
-    assert!(!timed_out, "PhotoCraft did not exit: {}", String::from_utf8_lossy(&output.stderr));
+    assert!(!timed_out, "Most Image did not exit: {}", String::from_utf8_lossy(&output.stderr));
     assert!(!gpu_started, "control setup errors must exit before GPU startup");
     Run { status: output.status, stderr: String::from_utf8_lossy(&output.stderr).into_owned() }
 }
@@ -114,7 +115,7 @@ fn missing_automation_write_root_exits_with_status_2() {
 
 #[test]
 fn automation_roots_come_from_the_environment_too() {
-    for var in ["PHOTOCRAFT_AUTOMATION_READ_ROOT", "PHOTOCRAFT_AUTOMATION_WRITE_ROOT"] {
+    for var in ["MOST_IMAGE_AUTOMATION_READ_ROOT", "MOST_IMAGE_AUTOMATION_WRITE_ROOT"] {
         let Run { status, stderr } = run_with(&["--control", "0", "--control-token", VALID_TOKEN], &[(var, "/nonexistent/photocraft-test-path")]);
         assert_eq!(status.code(), Some(2), "{var}: missing root must exit 2, stderr: {stderr}");
         assert!(stderr.contains("cannot configure automation workspace"), "{var}: stderr: {stderr}");

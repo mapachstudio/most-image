@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! #1436: a size-changing Arbitrary rotation preview must remain visible on the real GPU canvas.
 //! Synthetic blue pixels are measured outside the dialog, so its controls cannot pass the test.
 
@@ -69,7 +70,7 @@ fn blue(h: &mut Harness, name: &str) -> (usize, u32, u32) {
     let modals: Vec<_> =
         h.state().ui.dialogs.iter().map(|d| h.ctx.memory(|m| m.area_rect(egui::Id::unique(("dialog", d.id)))).expect("laid-out dialog").expand(4.0)).collect();
     let img = h.render().expect("render");
-    if let Some(dir) = std::env::var_os("PHOTOCRAFT_ROTATION_EVIDENCE_DIR") {
+    if let Some(dir) = std::env::var_os("MOST_IMAGE_ROTATION_EVIDENCE_DIR") {
         std::fs::create_dir_all(&dir).expect("evidence directory");
         img.save(std::path::Path::new(&dir).join(format!("{name}.png"))).expect("save UI frame");
     }

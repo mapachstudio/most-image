@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! The two-modal save/close workflow, including the writer's success/failure boundary.
 use super::*;
 use crate::{FileDialogAnswer, tiff_options_ui};
@@ -21,7 +22,7 @@ fn tiff_prompt(command: &str) -> (Prompted, Writes, DocId, DocId) {
         Ok(())
     }));
     let builder = egui_kittest::Harness::builder().with_size(egui::vec2(800.0, 600.0));
-    let builder = if std::env::var_os("PHOTOCRAFT_TIFF_SNAPSHOTS").is_some() { builder.wgpu() } else { builder };
+    let builder = if std::env::var_os("MOST_IMAGE_TIFF_SNAPSHOTS").is_some() { builder.wgpu() } else { builder };
     let mut h = builder.build_ui_state(
         |ui, app| {
             show(app, ui.ctx());
@@ -38,7 +39,7 @@ fn tiff_prompt(command: &str) -> (Prompted, Writes, DocId, DocId) {
 }
 
 fn capture(h: &mut Prompted, name: &str) {
-    if let Some(dir) = std::env::var_os("PHOTOCRAFT_TIFF_SNAPSHOTS") {
+    if let Some(dir) = std::env::var_os("MOST_IMAGE_TIFF_SNAPSHOTS") {
         let dir = std::path::PathBuf::from(dir);
         std::fs::create_dir_all(&dir).unwrap();
         h.render().unwrap().save(dir.join(format!("{name}.png"))).unwrap();

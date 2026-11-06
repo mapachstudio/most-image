@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Linux start-up check for the shared libraries winit and wgpu load at runtime (issue #201).
 //!
 //! The windowing (X11/Wayland, xkbcommon) and GPU (Vulkan, EGL) libraries aren't ELF `NEEDED`
@@ -10,7 +11,7 @@
 //! No `dlopen` here (that needs `unsafe`): we read the dynamic linker's cache (`ldconfig -p`) and
 //! look in `LD_LIBRARY_PATH` and the usual library directories. Only the cache is conclusive: if
 //! it can't be read (musl, NixOS, some containers) and a library isn't found in the directories,
-//! that proves nothing, so we start silently. `PHOTOCRAFT_SKIP_LIB_CHECK=1` skips the check.
+//! that proves nothing, so we start silently. `MOST_IMAGE_SKIP_LIB_CHECK=1` skips the check.
 //!
 //! The parsing and decision logic is pure and tested on every platform; only [`preflight`]
 //! and [`available`] touch the system, and they are only called on Linux.
@@ -221,7 +222,7 @@ pub fn missing_message(session: DisplaySession, missing: &[AnyOf], distro: Distr
         let fedora: Vec<&str> = missing.iter().filter_map(|any| any.first()).map(|l| l.fedora).collect();
         msg.push_str(&format!("  Fedora: sudo dnf install {}\n", fedora.join(" ")));
     }
-    msg.push_str("(Set PHOTOCRAFT_SKIP_LIB_CHECK=1 to start anyway.)\n");
+    msg.push_str("(Set MOST_IMAGE_SKIP_LIB_CHECK=1 to start anyway.)\n");
     msg
 }
 
@@ -280,7 +281,7 @@ pub fn available(session: DisplaySession) -> bool {
 /// Run the check for the display server the window opens on against this system. `Err` carries
 /// the message to print before exiting with a non-zero status.
 pub fn preflight(session: DisplaySession) -> Result<(), String> {
-    if std::env::var_os("PHOTOCRAFT_SKIP_LIB_CHECK").is_some_and(|v| !v.is_empty() && v != "0") {
+    if std::env::var_os("MOST_IMAGE_SKIP_LIB_CHECK").is_some_and(|v| !v.is_empty() && v != "0") {
         return Ok(());
     }
     if session == DisplaySession::None {
@@ -376,7 +377,7 @@ mod tests {
         let msg = missing_message(DisplaySession::X11, &missing, Distro::Debian);
         assert!(msg.contains("libxkbcommon-x11.so.0"), "{msg}");
         assert!(msg.contains("sudo apt install libxkbcommon-x11-0"), "{msg}");
-        assert!(msg.contains("PHOTOCRAFT_SKIP_LIB_CHECK"), "{msg}");
+        assert!(msg.contains("MOST_IMAGE_SKIP_LIB_CHECK"), "{msg}");
     }
 
     #[test]

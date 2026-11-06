@@ -1,3 +1,4 @@
+<!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # Italian terminology and dynamic UI labels
 
 This note goes with the completion of the Italian catalog (`crates/ui-egui/src/i18n/it.tsv`).
@@ -7,7 +8,7 @@ already translate: filter and adjustment parameter names, Camera Raw panels, lig
 History, Layers, path and channel menu labels, metadata fields, status messages, System Info and
 dialog text. In Italian those showed in English.
 They are now translated, and a review pass fixed mistranslations and inconsistent terms in the
-existing entries. Translations are written from the meaning of PhotoCraft's English labels; no
+existing entries. Translations are written from the meaning of Most Image's English labels; no
 proprietary translation resources, fonts, screenshots or user documents are included.
 
 ## Register and style
@@ -75,5 +76,5 @@ current code; they are translated to stay aligned with the other catalogs.
   `properties_edit_shown_metrics_and_paragraphs_with_a_non_type_primary`, fail on `main` as well
   without this change.
 - `cargo xtask i18n-coverage`: 1,726 / 1,726 for `it`.
-- The offscreen `snapshot` example with `PHOTOCRAFT_LOCALE=it` rendered Lighting Effects, the
+- The offscreen `snapshot` example with `MOST_IMAGE_LOCALE=it` rendered Lighting Effects, the
   Camera Raw filter and Wind with Italian labels, without missing glyphs or clipped text.

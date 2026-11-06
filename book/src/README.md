@@ -1,6 +1,7 @@
-# PhotoCraft Documentation
+<!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
+# Most Image Documentation
 
-PhotoCraft is a native image editor written in Rust. This book is the maintained entry point for installation, architecture, formats, automation, development, and security documentation.
+Most Image is a native image editor written in Rust. This book is the maintained entry point for installation, architecture, formats, automation, development, and security documentation.
 
 The repository's existing `docs/` directory remains authoritative for detailed design notes, parity reports, UI conventions, release procedures, and the complete control-protocol method reference. The book links to those documents instead of copying them.
 

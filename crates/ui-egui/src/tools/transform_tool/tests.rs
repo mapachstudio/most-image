@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::*;
 
 fn session() -> TransformSession {
@@ -3151,7 +3152,7 @@ fn transform_covering_layer_uses_the_same_monitor_profile() {
 #[ignore = "requires a GPU adapter; renders profile-managed transform evidence"]
 fn transform_profile_visual_evidence() {
     let _guard = photocraft_testkit::gpu_lock();
-    let destination = std::env::var("PHOTOCRAFT_TRANSFORM_EVIDENCE").unwrap_or_else(|_| "transform-profile-evidence".into());
+    let destination = std::env::var("MOST_IMAGE_TRANSFORM_EVIDENCE").unwrap_or_else(|_| "transform-profile-evidence".into());
     std::fs::create_dir_all(&destination).unwrap();
     for monitor in ["srgb", "display-p3"] {
         let mut h = egui_kittest::Harness::builder().with_size(vec2(1200.0, 800.0)).with_max_steps(64).wgpu().build_eframe(move |cc| {

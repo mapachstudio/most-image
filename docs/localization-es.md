@@ -1,3 +1,4 @@
+<!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # Spanish terminology and dynamic UI labels
 
 This note goes with the review and completion of the Spanish catalog
@@ -6,7 +7,7 @@ This note goes with the review and completion of the Spanish catalog
 Spanish-speaking image editor already knows, fixed mistranslations, and made the register
 consistent. A later pass added the 1,276 runtime-only labels it still lacked. No proprietary
 translation resources, fonts, screenshots or user documents are included: every translation was
-written from the meaning of PhotoCraft's own English label.
+written from the meaning of Most Image's own English label.
 
 ## Register and style
 

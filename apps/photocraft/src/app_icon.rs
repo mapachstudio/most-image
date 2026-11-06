@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! The app icon, everywhere Windows, macOS and Linux show one (#248).
 //!
 //! - **Executable:** `build.rs` embeds `assets/app-icon/photocraft.ico` (16–256 px) as icon
@@ -27,7 +28,7 @@ pub fn window_icon() -> egui::IconData {
 }
 
 /// Whether the window gets [`window_icon`] at runtime: everywhere except inside a macOS app
-/// bundle. There the Dock shows the bundle's `PhotoCraft.icns` (`CFBundleIconFile`), which macOS
+/// bundle. There the Dock shows the bundle's `Most Image.icns` (`CFBundleIconFile`), which macOS
 /// renders in its own style (Liquid Glass and its tinted and dark variants); a runtime PNG
 /// replaced it with a flat picture (#5849). `exe` is the running executable.
 pub fn sets_runtime_icon(exe: Option<&std::path::Path>) -> bool {
@@ -55,7 +56,7 @@ fn in_app_bundle(exe: &std::path::Path) -> bool {
 #[cfg(target_os = "macos")]
 const PNG: &[u8] = include_bytes!("../../../assets/app-icon/photocraft-1024.png");
 #[cfg(not(target_os = "macos"))]
-const PNG: &[u8] = include_bytes!("../../../assets/app-icon/hicolor/256x256/apps/ai.storyteller.photocraft.png");
+const PNG: &[u8] = include_bytes!("../../../assets/app-icon/hicolor/256x256/apps/com.grupomostmexico.mostimage.png");
 
 #[cfg(test)]
 mod tests {
@@ -76,22 +77,22 @@ mod tests {
     #[test]
     fn only_a_macos_app_bundle_skips_the_runtime_icon() {
         use std::path::Path;
-        assert!(in_app_bundle(Path::new("/Applications/PhotoCraft.app/Contents/MacOS/photocraft")));
-        assert!(in_app_bundle(Path::new("/Users/a/Downloads/PhotoCraft Beta.APP/Contents/MacOS/photocraft")));
+        assert!(in_app_bundle(Path::new("/Applications/Most Image.app/Contents/MacOS/photocraft")));
+        assert!(in_app_bundle(Path::new("/Users/a/Downloads/Most Image Beta.APP/Contents/MacOS/photocraft")));
         assert!(!in_app_bundle(Path::new("/Users/a/src/photocraft/target/release/photocraft")));
         assert!(!in_app_bundle(Path::new("/opt/Contents/MacOS/photocraft")), "not inside a .app");
         assert!(!in_app_bundle(Path::new("/.app/Contents/MacOS/photocraft")), "a bare `.app` is no bundle name");
         assert!(!in_app_bundle(Path::new("photocraft")));
         assert!(sets_runtime_icon(None));
         assert!(sets_runtime_icon(Some(Path::new("/usr/bin/photocraft"))));
-        assert_eq!(sets_runtime_icon(Some(Path::new("/Applications/PhotoCraft.app/Contents/MacOS/photocraft"))), !cfg!(target_os = "macos"));
+        assert_eq!(sets_runtime_icon(Some(Path::new("/Applications/Most Image.app/Contents/MacOS/photocraft"))), !cfg!(target_os = "macos"));
     }
 
     /// #7253: omitting `with_icon` made eframe paint its default glyph on the Dock once the window loaded.
     #[test]
     fn viewport_icon_blocks_eframe_default_when_runtime_icon_is_skipped() {
         use std::path::Path;
-        let bundled = Some(Path::new("/Applications/PhotoCraft.app/Contents/MacOS/photocraft"));
+        let bundled = Some(Path::new("/Applications/Most Image.app/Contents/MacOS/photocraft"));
         if sets_runtime_icon(bundled) {
             let icon = viewport_icon(bundled);
             assert!(icon.width >= 256 && icon.width == icon.height);
@@ -111,7 +112,7 @@ mod tests {
     #[test]
     fn windows_and_linux_icons_keep_the_round_corners() {
         // rx=112 of 512 leaves (10, 10) of a 256 px render transparent; the old crop filled it (#4478).
-        let png = include_bytes!("../../../assets/app-icon/hicolor/256x256/apps/ai.storyteller.photocraft.png");
+        let png = include_bytes!("../../../assets/app-icon/hicolor/256x256/apps/com.grupomostmexico.mostimage.png");
         let icon = eframe::icon_data::from_png_bytes(png).unwrap();
         assert_eq!(icon.width, 256);
         assert_eq!(icon.rgba[(10 * 256 + 10) * 4 + 3], 0, "corner is transparent");

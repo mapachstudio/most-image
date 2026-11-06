@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::build::engine_antialias;
 use super::{
     Affine, AntiAlias, Caps, CharStyle, Color, ColorMode, D, Descriptor, E, FontBaseline, Kerning, Orientation, ParagraphRun, ParagraphStyle, Point, TextAlign,
@@ -182,7 +183,7 @@ pub fn apply_txt2_frame(layer: &mut TextLayer, tysh: &[u8], txt2: &E) {
         return;
     }
     // The frame's origin (point text: the anchor; box text: the box's top left) must land in
-    // the text-space `bounds` Photoshop wrote beside it, and not already be there without it. A `TySh` PhotoCraft rewrote (an edited
+    // the text-space `bounds` Photoshop wrote beside it, and not already be there without it. A `TySh` Most Image rewrote (an edited
     // or moved layer whose text is unchanged keeps its old `Txt2` object and frame) already has
     // the frame folded into its transform and its `bounds` near the origin: applying the frame
     // again would move it twice.

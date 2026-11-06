@@ -1,9 +1,10 @@
+# Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 [book]
-authors = ["PhotoCraft contributors"]
+authors = ["Most Image contributors"]
 language = "en"
 multilingual = false
 src = "src"
-title = "PhotoCraft Documentation"
+title = "Most Image Documentation"
 
 [build]
 build-dir = "output"

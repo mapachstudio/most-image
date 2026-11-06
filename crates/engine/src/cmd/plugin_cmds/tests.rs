@@ -1,9 +1,10 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::*;
 use photocraft_geom::Rect;
 
 /// The example Invert plug-in, built from `examples/plugins/invert-rs`.
 const INVERT: &[u8] = include_bytes!("../../../../plugins/tests/fixtures/invert.wasm");
-const INVERT_ID: &str = "org.photocraft.example.invert";
+const INVERT_ID: &str = "org.mostimage.example.invert";
 
 fn b64(b: &[u8]) -> String {
     const T: &[u8; 64] = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";

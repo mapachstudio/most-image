@@ -1,4 +1,5 @@
-//! Native embedded files stay native while PhotoCraft retains a source-bound display preview.
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+//! Native embedded files stay native while Most Image retains a source-bound display preview.
 
 use std::sync::Arc;
 

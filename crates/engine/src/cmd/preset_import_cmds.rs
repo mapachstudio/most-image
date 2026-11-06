@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Importing Photoshop preset files.
 //!
 //! - `brush.presets.importAbr` adds the presets of an `.abr` file (v1, v2, v6+) to the brush
@@ -416,7 +417,7 @@ fn import_grd(s: &mut Session, p: &Value) -> Result<Value> {
         warnings.push("colour and opacity midpoints other than 50 % are drawn at 50 %".to_string());
     }
     if items.is_empty() {
-        return Err(bad(cmd, "the file holds no gradients PhotoCraft can use (noise gradients only)"));
+        return Err(bad(cmd, "the file holds no gradients Most Image can use (noise gradients only)"));
     }
     let names: Vec<String> = items.iter().map(|g| g.name.clone()).collect();
     let st = &mut s.presets;

@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! HEIF / HEIC (the iPhone and Mac photo format), read-only: see [`crate::ASYMMETRIC_EXCEPTIONS`].
 //!
 //! Decoding lives in the optional `photocraft-heif` crate (heic-rs, a pure-Rust HEVC
@@ -18,7 +19,7 @@ const F: Format = Format::Heif;
 
 /// The reason given when this build has no HEIF decoder.
 #[cfg(not(feature = "heif"))]
-pub(crate) const NOT_IN_BUILD: &str = "HEIC/HEIF support isn't included in this build of PhotoCraft";
+pub(crate) const NOT_IN_BUILD: &str = "HEIC/HEIF support isn't included in this build of Most Image";
 
 #[cfg(not(feature = "heif"))]
 pub(crate) fn decode(_bytes: &[u8], _limits: &Limits, _keep_orientation: bool) -> Result<Image, CodecError> {

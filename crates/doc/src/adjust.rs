@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Adjustment parameters (data only). Evaluation lives in `photocraft-compose`.
 
 use serde::{Deserialize, Serialize};
@@ -279,7 +280,7 @@ pub enum Adjustment {
         #[serde(default)]
         dither: bool,
         /// The LUT file `lut` was read from, embedded unchanged on PSD save as Photoshop does.
-        /// None for a table made in PhotoCraft (a built-in look); a save also ignores it when
+        /// None for a table made in Most Image (a built-in look); a save also ignores it when
         /// it no longer parses to `lut`.
         #[serde(default, skip_serializing_if = "Option::is_none")]
         source: Option<LutSource>,

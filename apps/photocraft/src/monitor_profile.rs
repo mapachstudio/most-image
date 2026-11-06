@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! The displays and their ICC profiles, for the colour-managed canvas (Edit › Color Settings ›
 //! Monitor Profile = `auto`; #569).
 //!
@@ -10,7 +11,7 @@
 //! by the exact `XRANDR_name` metadata; cloned outputs get a profile only when every output has
 //! the same ICC bytes. Native Wayland, including Xwayland windows opened from a Wayland session,
 //! reports no display profiles: eframe/winit has no safe way to set the app surface's Wayland
-//! image description, so applying the output ICC in PhotoCraft could double-transform it.
+//! image description, so applying the output ICC in Most Image could double-transform it.
 //! Other platforms report no displays (sRGB, or the profile chosen in Color Settings).
 
 use std::sync::mpsc::Receiver;

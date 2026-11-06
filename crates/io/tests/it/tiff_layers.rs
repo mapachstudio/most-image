@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Layered TIFF (Photoshop layer data in tags 37724 / 34377): Document → TIFF → Document round
 //! trips in every mode and depth, equivalence with the PSD path, the flat fall-backs, files
 //! written by an independent implementation (psdtags, both byte orders), and malformed input.
@@ -406,7 +407,7 @@ fn damaged_layer_data_opens_flattened_part(part: u64) {
     }
 }
 
-/// Every sample of a TIFF, read by the `tiff` crate rather than PhotoCraft's decoder.
+/// Every sample of a TIFF, read by the `tiff` crate rather than Most Image's decoder.
 ///
 /// That decoder drops unspecified extra samples when the photometric interpretation is RGB, so
 /// the file is retagged MinIsBlack first. The result is then a multiband image of every sample,

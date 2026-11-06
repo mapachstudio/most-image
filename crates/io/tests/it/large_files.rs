@@ -1,10 +1,11 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Large-file fixtures (#216, #5107), generated at test time by `photocraft_psd::fixtures`: a 20 MP
 //! layered PSD, a 150-layer layout, a PSD just under Photoshop's 2 GB cap and a 4.4 GB PSB. Each
 //! is opened through `photocraft_io`, checked (size, layers, masks, effects, merged pixels), saved
 //! again and re-opened.
 //!
 //! The two layered documents run in memory; the streamed files are written to
-//! `$PHOTOCRAFT_FIXTURE_DIR` (default: the system temp dir), removed afterwards, and are opt-in:
+//! `$MOST_IMAGE_FIXTURE_DIR` (default: the system temp dir), removed afterwards, and are opt-in:
 //! `cargo test --release -p photocraft-io --test it -- large_files:: --ignored`.
 
 use std::path::PathBuf;
@@ -86,7 +87,7 @@ fn layered_20_mp_psd_opens_and_saves() {
 }
 
 fn fixture_dir() -> PathBuf {
-    let dir = std::env::var_os("PHOTOCRAFT_FIXTURE_DIR").map_or_else(std::env::temp_dir, PathBuf::from).join("photocraft-large-files");
+    let dir = std::env::var_os("MOST_IMAGE_FIXTURE_DIR").map_or_else(std::env::temp_dir, PathBuf::from).join("photocraft-large-files");
     std::fs::create_dir_all(&dir).unwrap();
     dir
 }

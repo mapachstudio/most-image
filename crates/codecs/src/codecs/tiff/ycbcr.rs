@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! YCbCr (PhotometricInterpretation 6) to RGB, after the `tiff` crate has decoded the samples.
 //!
 //! The crate decompresses JPEG data and upsamples subsampled chroma, but hands back the stored
@@ -26,7 +27,7 @@
 //! For other weights the spec's equation scales Y in green by `(1 - LumaRed - LumaBlue) / LumaGreen`,
 //! which tints neutral grays.
 //!
-//! PhotoCraft deliberately follows libtiff here (decided in PR #10319, for issue #10316), so such
+//! Most Image deliberately follows libtiff here (decided in PR #10319, for issue #10316), so such
 //! files open as they do in libtiff-based tools (ImageMagick, GIMP) and grays stay neutral. This is
 //! a contributor choice, not a requirement of the spec; the test
 //! `weights_that_do_not_sum_to_one_keep_grays_neutral` in `tests/it/tiff_ycbcr.rs` pins it.

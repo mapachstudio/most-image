@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! #292: Edit › Keyboard Shortcuts records the key pressed with the modifiers, not the
 //! modifier key itself (egui reports Ctrl, Shift, Alt and ⌘ as key presses too), so Ctrl+F and
 //! any other non-system combination can be bound; a shortcut already in use is reported.
@@ -231,8 +232,8 @@ fn ctrl_k_is_recorded_as_ctrl_k_not_the_control_key() {
 /// Opt-in visual check, following the Camera Raw localization snapshot convention.
 #[test]
 fn captured_shortcut_gpu_snapshots() {
-    let Some(directory) = std::env::var_os("PHOTOCRAFT_SHORTCUT_SNAPSHOTS") else {
-        eprintln!("set PHOTOCRAFT_SHORTCUT_SNAPSHOTS to capture the shortcut dialog at 1x and 2x");
+    let Some(directory) = std::env::var_os("MOST_IMAGE_SHORTCUT_SNAPSHOTS") else {
+        eprintln!("set MOST_IMAGE_SHORTCUT_SNAPSHOTS to capture the shortcut dialog at 1x and 2x");
         return;
     };
     let _gpu = photocraft_testkit::gpu_lock();

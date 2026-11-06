@@ -1,6 +1,7 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Process-wide, capped pool of large scratch buffers.
 //!
-//! With glibc's mmap threshold pinned (`MALLOC_TRIM_THRESHOLD_`, which is how PhotoCraft returns
+//! With glibc's mmap threshold pinned (`MALLOC_TRIM_THRESHOLD_`, which is how Most Image returns
 //! memory to the OS), every allocation over 128 KiB is a fresh `mmap` that is page-faulted in and
 //! `munmap`ed on free. Tiles, compositor bands and filter scratch are all that size, so a single
 //! viewport render took 350× the page faults. This pool keeps freed buffers (at least

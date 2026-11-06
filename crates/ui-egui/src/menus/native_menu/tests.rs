@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::*;
 use serde_json::json;
 
@@ -30,14 +31,14 @@ fn ids(nodes: &[Node]) -> Vec<String> {
 fn photocraft_gets_a_mac_app_menu() {
     let l = layout(true);
     let app = &l.bar.menus[0];
-    assert_eq!((app.title.as_str(), app.role), ("PhotoCraft", MenuRole::App));
+    assert_eq!((app.title.as_str(), app.role), ("Most Image", MenuRole::App));
     assert_eq!(
         ids(&app.children),
         ["help.about", "---", "[Settings]", "[Language]", "[Appearance]", "---", "<Services>", "---", HIDE, "<HideOthers>", "<ShowAll>", "---", "file.exit"]
     );
     let quit = l.bar.find("file.exit").unwrap();
-    assert_eq!((quit.label.as_str(), quit.shortcut.as_deref()), ("Quit PhotoCraft", Some("Cmd+Q")));
-    assert_eq!(l.bar.find("help.about").unwrap().label, "About PhotoCraft");
+    assert_eq!((quit.label.as_str(), quit.shortcut.as_deref()), ("Quit Most Image", Some("Cmd+Q")));
+    assert_eq!(l.bar.find("help.about").unwrap().label, "About Most Image");
 }
 
 #[test]
@@ -48,10 +49,10 @@ fn moved_items_leave_their_old_menus() {
     assert!(!ids(&by("Help").children).contains(&"help.about".to_string()));
     assert!(!ids(&by("Edit").children).contains(&"[Preferences]".to_string()));
     let titles: Vec<&str> = l.bar.menus.iter().map(|m| m.title.as_str()).collect();
-    assert_eq!(titles, ["PhotoCraft", "File", "Edit", "Image", "Layer", "Type", "Select", "Filter", "View", "Window", "Help"]);
+    assert_eq!(titles, ["Most Image", "File", "Edit", "Image", "Layer", "Type", "Select", "Filter", "View", "Window", "Help"]);
 }
 
-/// PhotoCraft keeps Photoshop's ⌘H, ⌘M, ⌘W and ⌘, (Hide Layers): the system items give way.
+/// Most Image keeps Photoshop's ⌘H, ⌘M, ⌘W and ⌘, (Hide Layers): the system items give way.
 #[test]
 fn clashes_are_resolved_in_photocrafts_favour() {
     let l = layout(true);
@@ -222,7 +223,7 @@ impl Backend for Fake {
     }
 }
 
-/// A key equivalent reaches PhotoCraft's own key handling as the key press it was, so the
+/// A key equivalent reaches Most Image's own key handling as the key press it was, so the
 /// shortcut runs once, through the same rules as without a native menu.
 #[test]
 fn key_equivalents_run_through_the_normal_shortcut_path() {

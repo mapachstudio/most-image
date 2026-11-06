@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::*;
 
 #[test]
@@ -938,7 +939,7 @@ fn exports_are_written_all_or_nothing() {
     };
     assert!(write_files_atomically(&[(pa, "new A"), (pb, "new B")], &failing).is_err());
     assert_eq!((std::fs::read_to_string(&a).unwrap(), std::fs::read_to_string(&b).unwrap()), ("old A".into(), "old B".into()));
-    let leftovers = || std::fs::read_dir(&dir).unwrap().filter_map(|e| e.ok()).filter(|e| e.file_name().to_string_lossy().contains(".photocraft-")).count();
+    let leftovers = || std::fs::read_dir(&dir).unwrap().filter_map(|e| e.ok()).filter(|e| e.file_name().to_string_lossy().contains(".mostimage-")).count();
     assert_eq!(leftovers(), 0);
     // A backup move that fails leaves no empty placeholder behind.
     let backups = std::cell::Cell::new(0);
@@ -958,11 +959,11 @@ fn exports_are_written_all_or_nothing() {
     assert!(write_files_atomically(&[(pa, "x"), (pa, "y")], &|f, t| std::fs::rename(f, t)).is_err());
     assert_eq!(std::fs::read_to_string(&a).unwrap(), "old A");
     // A target named like a staging file is just a file.
-    let odd = dir.join("c.kys.photocraft-tmp");
+    let odd = dir.join("c.kys.mostimage-tmp");
     std::fs::write(&odd, "old C").unwrap();
     write_files_atomically(&[(pa, "new A"), (odd.to_str().unwrap(), "new C")], &|f, t| std::fs::rename(f, t)).unwrap();
     assert_eq!((std::fs::read_to_string(&a).unwrap(), std::fs::read_to_string(&odd).unwrap()), ("new A".into(), "new C".into()));
-    assert_eq!(leftovers(), 1, "only c.kys.photocraft-tmp itself");
+    assert_eq!(leftovers(), 1, "only c.kys.mostimage-tmp itself");
     let _ = std::fs::remove_dir_all(&dir);
 }
 

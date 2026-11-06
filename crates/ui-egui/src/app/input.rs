@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::{PhotocraftApp, SyntheticTarget};
 
 /// Remove one contiguous run equal to `batch` from `events` (eframe's preserved synthetic
@@ -38,7 +39,7 @@ impl PhotocraftApp {
     /// further step is drained, so hidden logic ticks cannot accumulate several batches into one
     /// pass. A document or focus change observed here is before eframe consumes the events, so the
     /// batch is dropped and its waiting control replies fail instead of landing somewhere else.
-    /// If a pass consumed it but PhotoCraft returned before handling input (fonts not ready), the
+    /// If a pass consumed it but Most Image returned before handling input (fonts not ready), the
     /// same batch is appended again on the next hook, exactly once.
     pub(crate) fn inject_synthetic(&mut self, ctx: &egui::Context, raw_input: &mut egui::RawInput) {
         if self.synthetic_batch.is_some() {

@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Photoshop brushes (`.abr`) → brush presets.
 //!
 //! [`photocraft_psd::abr`] reads the file; this module maps its tips and `brushPreset`
@@ -122,7 +123,7 @@ pub fn map_file_with(f: &AbrFile, group: &str, ctl: &photocraft_raster::Interrup
     }
     out.warnings.extend(m.warnings);
     if !m.unknown.is_empty() {
-        out.warnings.push(format!("settings without a PhotoCraft equivalent were ignored: {}", m.unknown.into_iter().collect::<Vec<_>>().join(", ")));
+        out.warnings.push(format!("settings without a Most Image equivalent were ignored: {}", m.unknown.into_iter().collect::<Vec<_>>().join(", ")));
     }
     ctl.progress(1.0);
     Ok(out)

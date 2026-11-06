@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use std::io::Write;
 use std::net::{Ipv4Addr, SocketAddr};
 
@@ -46,7 +47,7 @@ pub(crate) fn serve(a: &ServeArgs, err: &mut dyn Write) -> Result {
             if a.port_from_env {
                 // Name the mode switch: an exported variable changes what this command does, and
                 // unsetting it (or setting it empty) is the way back to stdio.
-                let _ = writeln!(err, "photocraft-cli: PHOTOCRAFT_CONTROL_PORT={port} is set; serving on TCP instead of stdio (unset it to serve stdio)");
+                let _ = writeln!(err, "photocraft-cli: MOST_IMAGE_CONTROL_PORT={port} is set; serving on TCP instead of stdio (unset it to serve stdio)");
             }
             let addr = SocketAddr::from((Ipv4Addr::LOCALHOST, port)).to_string();
             let (supplied, token_file) = (a.control.control_token.as_deref(), a.control.control_token_file.as_deref());
@@ -75,7 +76,7 @@ pub(crate) fn mcp(a: &McpArgs, err: &mut dyn Write) -> Result {
                 // Name the mode switch, as `serve` does: the way back to headless is to unset it.
                 let _ = writeln!(
                     err,
-                    "photocraft-cli: PHOTOCRAFT_CONTROL_PORT is set; bridging to the app on {addr} instead of a headless engine (unset it to run headless)"
+                    "photocraft-cli: MOST_IMAGE_CONTROL_PORT is set; bridging to the app on {addr} instead of a headless engine (unset it to run headless)"
                 );
             }
             let token = security::client_token(a.control.control_token.as_deref(), a.control.control_token_file.as_deref())?;

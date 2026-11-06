@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! The macOS menu bar end to end, on the main thread (`harness = false`): install it through the
 //! real muda backend (`src/mac_menu.rs`), read AppKit's menu bar back, open a document and see the
 //! items update in place, then choose items the two ways AppKit can: a key equivalent (a real ⌘R
@@ -109,13 +110,13 @@ fn main() {
     // The Mac layout, as AppKit has it.
     let bar = main_menu();
     let tops: Vec<String> = (0..bar.numberOfItems()).filter_map(|i| bar.itemAtIndex(i)?.submenu()).map(|m| m.title().to_string()).collect();
-    assert_eq!(tops, ["PhotoCraft", "File", "Edit", "Image", "Layer", "Type", "Select", "Filter", "View", "Window", "Help"]);
-    let app_menu = submenu(&bar, "PhotoCraft");
+    assert_eq!(tops, ["Most Image", "File", "Edit", "Image", "Layer", "Type", "Select", "Filter", "View", "Window", "Help"]);
+    let app_menu = submenu(&bar, "Most Image");
     let names = titles(&app_menu);
-    for want in ["About PhotoCraft", "Settings", "Language", "Appearance", "Hide PhotoCraft", "Quit PhotoCraft"] {
+    for want in ["About Most Image", "Settings", "Language", "Appearance", "Hide Most Image", "Quit Most Image"] {
         assert!(names.iter().any(|n| n == want), "{want} missing from the app menu: {names:?}");
     }
-    let quit = app_menu.itemAtIndex(index(&app_menu, "Quit PhotoCraft")).expect("Quit");
+    let quit = app_menu.itemAtIndex(index(&app_menu, "Quit Most Image")).expect("Quit");
     assert_eq!(quit.keyEquivalent().to_string(), "q");
     assert_eq!(quit.keyEquivalentModifierMask(), NSEventModifierFlags::Command);
     assert!(!titles(&submenu(&bar, "File")).iter().any(|n| n == "Exit"), "Exit moved to the app menu as Quit");

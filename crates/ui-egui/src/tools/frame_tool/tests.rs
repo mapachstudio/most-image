@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::*;
 use crate::canvas::tool_event;
 use photocraft_doc::LayerId;
@@ -196,7 +197,7 @@ fn modifiers_shape_selection_and_invalid_control_params_are_consistent() {
 
 #[test]
 fn frame_creation_handles_render_at_native_scales() {
-    let Some(out) = std::env::var_os("PHOTOCRAFT_FRAME_SNAPSHOTS") else { return };
+    let Some(out) = std::env::var_os("MOST_IMAGE_FRAME_SNAPSHOTS") else { return };
     let _guard = photocraft_testkit::gpu_lock();
     let out = std::path::PathBuf::from(out);
     std::fs::create_dir_all(&out).unwrap();

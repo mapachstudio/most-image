@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Tests for photocraft-cli GPU rendering flags, precedence, and fallback behavior.
 
 use std::path::{Path, PathBuf};
@@ -7,10 +8,10 @@ use serde_json::Value;
 
 fn bin() -> Command {
     let mut cmd = Command::new(crate::binary());
-    cmd.env_remove("PHOTOCRAFT_CONTROL_PORT");
-    cmd.env_remove("PHOTOCRAFT_CONTROL_TOKEN");
-    cmd.env_remove("PHOTOCRAFT_CONTROL_TOKEN_FILE");
-    cmd.env_remove("PHOTOCRAFT_GPU");
+    cmd.env_remove("MOST_IMAGE_CONTROL_PORT");
+    cmd.env_remove("MOST_IMAGE_CONTROL_TOKEN");
+    cmd.env_remove("MOST_IMAGE_CONTROL_TOKEN_FILE");
+    cmd.env_remove("MOST_IMAGE_GPU");
     cmd
 }
 
@@ -50,18 +51,18 @@ fn gpu_env_var_validation() {
 
     // Invalid non-empty value rejected with usage error naming the variable
     for bad in ["2", "true", "yes", "false", "on", "off"] {
-        let o = bin().env("PHOTOCRAFT_GPU", bad).args(["convert", in_png.to_str().unwrap(), out_png.to_str().unwrap()]).output().unwrap();
-        assert_eq!(o.status.code(), Some(2), "expected exit 2 for PHOTOCRAFT_GPU={bad}");
+        let o = bin().env("MOST_IMAGE_GPU", bad).args(["convert", in_png.to_str().unwrap(), out_png.to_str().unwrap()]).output().unwrap();
+        assert_eq!(o.status.code(), Some(2), "expected exit 2 for MOST_IMAGE_GPU={bad}");
         let stderr = String::from_utf8_lossy(&o.stderr);
-        assert!(stderr.contains("PHOTOCRAFT_GPU"), "expected stderr to name variable: {stderr}");
+        assert!(stderr.contains("MOST_IMAGE_GPU"), "expected stderr to name variable: {stderr}");
         assert!(stderr.contains("expected '1' or '0'"), "expected usage note: {stderr}");
     }
 
     // Empty or blank value is accepted as unset (CPU default)
     for empty in ["", "   "] {
         let out_sub = d.join(format!("out_{}.png", empty.trim()));
-        let o = bin().env("PHOTOCRAFT_GPU", empty).args(["convert", in_png.to_str().unwrap(), out_sub.to_str().unwrap()]).output().unwrap();
-        assert!(o.status.success(), "expected success for PHOTOCRAFT_GPU={empty:?}");
+        let o = bin().env("MOST_IMAGE_GPU", empty).args(["convert", in_png.to_str().unwrap(), out_sub.to_str().unwrap()]).output().unwrap();
+        assert!(o.status.success(), "expected success for MOST_IMAGE_GPU={empty:?}");
         assert!(out_sub.is_file());
     }
 
@@ -80,10 +81,10 @@ fn gpu_env_var_rejects_a_non_utf8_value() {
     write_png(&in_png, 16, 16);
 
     let bad = OsString::from_vec(vec![0xff, 0xfe]);
-    let o = bin().env("PHOTOCRAFT_GPU", bad).args(["convert", in_png.to_str().unwrap(), out_png.to_str().unwrap()]).output().unwrap();
-    assert_eq!(o.status.code(), Some(2), "a non-UTF-8 PHOTOCRAFT_GPU must be a usage error");
+    let o = bin().env("MOST_IMAGE_GPU", bad).args(["convert", in_png.to_str().unwrap(), out_png.to_str().unwrap()]).output().unwrap();
+    assert_eq!(o.status.code(), Some(2), "a non-UTF-8 MOST_IMAGE_GPU must be a usage error");
     let stderr = String::from_utf8_lossy(&o.stderr);
-    assert!(stderr.contains("PHOTOCRAFT_GPU"), "the usage error must name the variable: {stderr}");
+    assert!(stderr.contains("MOST_IMAGE_GPU"), "the usage error must name the variable: {stderr}");
     let _ = std::fs::remove_dir_all(&d);
 }
 
@@ -100,13 +101,13 @@ fn explicit_flags_override_environment() {
     let o = bin().args(["run", "--new", r#"{"width":16,"height":16}"#, "--cmd", "layer.new.layer", "--out", in_layers.to_str().unwrap()]).output().unwrap();
     assert!(o.status.success(), "stderr: {}", String::from_utf8_lossy(&o.stderr));
 
-    // --no-gpu overrides PHOTOCRAFT_GPU=1
-    let o = bin().env("PHOTOCRAFT_GPU", "1").args(["convert", "--no-gpu", in_png.to_str().unwrap(), out1.to_str().unwrap()]).output().unwrap();
+    // --no-gpu overrides MOST_IMAGE_GPU=1
+    let o = bin().env("MOST_IMAGE_GPU", "1").args(["convert", "--no-gpu", in_png.to_str().unwrap(), out1.to_str().unwrap()]).output().unwrap();
     assert!(o.status.success(), "stderr: {}", String::from_utf8_lossy(&o.stderr));
     assert!(out1.is_file());
 
-    // --gpu overrides PHOTOCRAFT_GPU=0
-    let o = bin().env("PHOTOCRAFT_GPU", "0").args(["convert", "--gpu", in_layers.to_str().unwrap(), out2.to_str().unwrap()]).output().unwrap();
+    // --gpu overrides MOST_IMAGE_GPU=0
+    let o = bin().env("MOST_IMAGE_GPU", "0").args(["convert", "--gpu", in_layers.to_str().unwrap(), out2.to_str().unwrap()]).output().unwrap();
     assert!(o.status.success(), "stderr: {}", String::from_utf8_lossy(&o.stderr));
     assert!(out2.is_file());
     let stderr = String::from_utf8_lossy(&o.stderr);
@@ -117,7 +118,7 @@ fn explicit_flags_override_environment() {
 
     // Explicit flag overrides even bad environment value
     let out3 = d.join("out3.png");
-    let o = bin().env("PHOTOCRAFT_GPU", "invalid").args(["convert", "--no-gpu", in_png.to_str().unwrap(), out3.to_str().unwrap()]).output().unwrap();
+    let o = bin().env("MOST_IMAGE_GPU", "invalid").args(["convert", "--no-gpu", in_png.to_str().unwrap(), out3.to_str().unwrap()]).output().unwrap();
     assert!(o.status.success(), "stderr: {}", String::from_utf8_lossy(&o.stderr));
     assert!(out3.is_file());
 
@@ -138,11 +139,11 @@ fn mcp_bridge_rejects_explicit_gpu_flags_and_ignores_env() {
     let stderr = String::from_utf8_lossy(&o.stderr);
     assert!(stderr.contains("configure rendering on the desktop app"), "{stderr}");
 
-    // An invalid PHOTOCRAFT_GPU value is ignored in bridge mode: the desktop process controls
+    // An invalid MOST_IMAGE_GPU value is ignored in bridge mode: the desktop process controls
     // rendering, so the bridge must not validate the variable or reject the request for it.
-    let o = bin().env("PHOTOCRAFT_GPU", "invalid").args(["mcp", "--bridge", "127.0.0.1:50000"]).stdin(std::process::Stdio::null()).output().unwrap();
+    let o = bin().env("MOST_IMAGE_GPU", "invalid").args(["mcp", "--bridge", "127.0.0.1:50000"]).stdin(std::process::Stdio::null()).output().unwrap();
     let stderr = String::from_utf8_lossy(&o.stderr);
-    assert!(!stderr.contains("PHOTOCRAFT_GPU"), "bridge mode must ignore the GPU environment: {stderr}");
+    assert!(!stderr.contains("MOST_IMAGE_GPU"), "bridge mode must ignore the GPU environment: {stderr}");
 }
 
 #[test]

@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Unit tests on synthetic inputs; `tests/it/real_files.rs` covers public Affinity documents.
 
 mod preview {
@@ -638,7 +639,7 @@ mod pixels {
 }
 
 /// Spot colours that link to themselves or to each other. Each document is read on a 1 MiB
-/// stack, the smallest main-thread stack PhotoCraft runs on (Windows), first in a child process
+/// stack, the smallest main-thread stack Most Image runs on (Windows), first in a child process
 /// that must finish within 20 s. A stack overflow aborts the process it happens in, so unbounded
 /// recursion fails the one test that caused it instead of taking the other tests in the binary
 /// down with it.
@@ -670,7 +671,7 @@ mod spot_colours {
     }
 
     /// Set in the child process to the name of the test it reads for.
-    const CHILD: &str = "PHOTOCRAFT_AFFINITY_READ_CHILD";
+    const CHILD: &str = "MOST_IMAGE_AFFINITY_READ_CHILD";
 
     /// Runs `read_child` in a new process of this test binary on `bytes` and fails the test if
     /// that process crashes, panics or takes over 20 s, or never read the document.

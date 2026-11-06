@@ -1,7 +1,8 @@
-//! Regenerates the shipped synthetic CMYK profile when `PHOTOCRAFT_REGEN_PROFILES=1`:
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+//! Regenerates the shipped synthetic CMYK profile when `MOST_IMAGE_REGEN_PROFILES=1`:
 //!
 //! ```sh
-//! PHOTOCRAFT_REGEN_PROFILES=1 cargo test -p photocraft-cms --release --test it -- regen::
+//! MOST_IMAGE_REGEN_PROFILES=1 cargo test -p photocraft-cms --release --test it -- regen::
 //! ```
 //!
 //! Without the variable the test only checks that the generator's model still matches the
@@ -13,7 +14,7 @@ use photocraft_cms::{Builtin, Intent, Profile, Transform};
 #[test]
 fn regen_or_check_coated_cmyk() {
     let path = concat!(env!("CARGO_MANIFEST_DIR"), "/profiles/photocraft-coated-cmyk.icc");
-    if std::env::var_os("PHOTOCRAFT_REGEN_PROFILES").is_some() {
+    if std::env::var_os("MOST_IMAGE_REGEN_PROFILES").is_some() {
         let t = std::time::Instant::now();
         let p = photocraft_cms::synth::coated_cmyk();
         let bytes = p.to_bytes();

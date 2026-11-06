@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! CJK font fallback: which installed system fonts cover Japanese, Simplified Chinese,
 //! Traditional Chinese and Korean, and in which order to try them for the user's locale.
 //!
@@ -98,7 +99,7 @@ pub fn script_order(locale: Option<&str>) -> [CjkScript; 4] {
     }
 }
 
-/// The user's UI locale (cached). `PHOTOCRAFT_LOCALE` overrides; then macOS's preferred
+/// The user's UI locale (cached). `MOST_IMAGE_LOCALE` overrides; then macOS's preferred
 /// language list, the Windows user locale, and finally `LC_ALL` / `LC_MESSAGES` / `LANG` /
 /// `LANGUAGE`. `None` on the web or when nothing is set.
 pub fn ui_locale() -> Option<&'static str> {
@@ -113,7 +114,7 @@ pub fn ui_script_order() -> [CjkScript; 4] {
 
 fn detect_locale() -> Option<String> {
     let env = |k: &str| std::env::var(k).ok().map(|v| v.trim().to_string()).filter(|v| !v.is_empty() && v != "C" && v != "POSIX" && !v.starts_with("C."));
-    if let Some(v) = env("PHOTOCRAFT_LOCALE") {
+    if let Some(v) = env("MOST_IMAGE_LOCALE") {
         return Some(v);
     }
     if let Some(v) = os_locale() {

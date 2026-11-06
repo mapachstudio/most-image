@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! `photocraft --help` and unknown options must not open the window (#6431): before the fix,
 //! any argument the loop didn't know was taken as a file, so `--help` or a typo such as
 //! `--safegpu` launched the GUI and logged "Couldn't open --help".
@@ -10,12 +11,12 @@
 
 /// The variables the command line reads: a test that wants one sets it.
 const VARS: [&str; 6] = [
-    "PHOTOCRAFT_CONTROL_PORT",
-    "PHOTOCRAFT_CONTROL_TOKEN",
-    "PHOTOCRAFT_CONTROL_TOKEN_FILE",
-    "PHOTOCRAFT_AUTOMATION_READ_ROOT",
-    "PHOTOCRAFT_AUTOMATION_WRITE_ROOT",
-    "PHOTOCRAFT_IN_WINDOW_MENUS",
+    "MOST_IMAGE_CONTROL_PORT",
+    "MOST_IMAGE_CONTROL_TOKEN",
+    "MOST_IMAGE_CONTROL_TOKEN_FILE",
+    "MOST_IMAGE_AUTOMATION_READ_ROOT",
+    "MOST_IMAGE_AUTOMATION_WRITE_ROOT",
+    "MOST_IMAGE_IN_WINDOW_MENUS",
 ];
 
 /// A usage error found only after every argument is read.
@@ -41,7 +42,7 @@ fn run_with(args: &[&str], vars: &[(&str, &str)]) -> Run {
     let output = cmd
         .args(args)
         .envs(vars.iter().copied())
-        .env("PHOTOCRAFT_CONFIG_DIR", &dir)
+        .env("MOST_IMAGE_CONFIG_DIR", &dir)
         .env_remove("DISPLAY")
         .env_remove("WAYLAND_DISPLAY")
         .env_remove("WAYLAND_SOCKET")
@@ -70,7 +71,7 @@ fn help_prints_usage_and_exits_0() {
         let Run { status, stdout, stderr } = run_photocraft(&[flag]);
         assert_eq!(status.code(), Some(0), "{flag} must exit 0, stderr: {stderr}");
         assert!(stdout.contains("Usage: photocraft"), "{flag} stdout: {stdout}");
-        for option in ["--safe-gpu", "--new-instance", "--control <PORT>", "--version", "`--`", "PHOTOCRAFT_AUTOMATION_READ_ROOT", "PHOTOCRAFT_NEW_INSTANCE"] {
+        for option in ["--safe-gpu", "--new-instance", "--control <PORT>", "--version", "`--`", "MOST_IMAGE_AUTOMATION_READ_ROOT", "MOST_IMAGE_NEW_INSTANCE"] {
             assert!(stdout.contains(option), "{flag} usage must list {option}: {stdout}");
         }
         assert!(!stderr.contains("Couldn't open"), "{flag} was taken as a file: {stderr}");
@@ -135,23 +136,23 @@ fn new_instance_is_a_known_option() {
 /// when its variable is set (#6429).
 #[test]
 fn variables_are_the_flags_fallbacks() {
-    let Run { status, stderr, .. } = run_with(&[], &[("PHOTOCRAFT_CONTROL_PORT", "nope")]);
+    let Run { status, stderr, .. } = run_with(&[], &[("MOST_IMAGE_CONTROL_PORT", "nope")]);
     assert_eq!(status.code(), Some(2), "stderr: {stderr}");
-    assert!(stderr.contains("invalid value 'nope' for 'PHOTOCRAFT_CONTROL_PORT'"), "stderr: {stderr}");
+    assert!(stderr.contains("invalid value 'nope' for 'MOST_IMAGE_CONTROL_PORT'"), "stderr: {stderr}");
     // With the flag (in LATE_ERROR), the variable is never read.
-    let stderr = late_error(&[], &[("PHOTOCRAFT_CONTROL_PORT", "nope")]);
-    assert!(!stderr.contains("PHOTOCRAFT_CONTROL_PORT"), "stderr: {stderr}");
+    let stderr = late_error(&[], &[("MOST_IMAGE_CONTROL_PORT", "nope")]);
+    assert!(!stderr.contains("MOST_IMAGE_CONTROL_PORT"), "stderr: {stderr}");
     // The variable turns the control server on as the flag does, so the token pair is checked.
-    let Run { status, stderr, .. } = run_with(&LATE_ERROR[2..], &[("PHOTOCRAFT_CONTROL_PORT", "0")]);
+    let Run { status, stderr, .. } = run_with(&LATE_ERROR[2..], &[("MOST_IMAGE_CONTROL_PORT", "0")]);
     assert_eq!(status.code(), Some(2), "stderr: {stderr}");
     assert!(stderr.contains("cannot be used with"), "stderr: {stderr}");
-    let Run { status, stderr, .. } = run_with(&["--automation-read-root"], &[("PHOTOCRAFT_AUTOMATION_READ_ROOT", "/env/read")]);
+    let Run { status, stderr, .. } = run_with(&["--automation-read-root"], &[("MOST_IMAGE_AUTOMATION_READ_ROOT", "/env/read")]);
     assert_eq!(status.code(), Some(2), "stderr: {stderr}");
     assert!(stderr.contains("a value is required for '--automation-read-root <DIR>'"), "stderr: {stderr}");
     // The other half of the token pair from a variable is the same either/or error, naming it
     // but never showing the token.
     let token = "a".repeat(64);
-    let Run { status, stderr, .. } = run_with(&["--control", "0", "--control-token-file", "token"], &[("PHOTOCRAFT_CONTROL_TOKEN", token.as_str())]);
+    let Run { status, stderr, .. } = run_with(&["--control", "0", "--control-token-file", "token"], &[("MOST_IMAGE_CONTROL_TOKEN", token.as_str())]);
     assert_eq!(status.code(), Some(2), "stderr: {stderr}");
-    assert!(stderr.contains("PHOTOCRAFT_CONTROL_TOKEN") && stderr.contains("cannot be used with") && !stderr.contains(&token), "stderr: {stderr}");
+    assert!(stderr.contains("MOST_IMAGE_CONTROL_TOKEN") && stderr.contains("cannot be used with") && !stderr.contains(&token), "stderr: {stderr}");
 }

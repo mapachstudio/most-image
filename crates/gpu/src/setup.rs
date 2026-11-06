@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::batch::tile_grid;
 use super::consts::{ACC_FORMAT, CHUNK, CHUNK_UNIFORM, FX_BUDGET, MAX_PATTERN_TEXTURE_BYTES, OP_UNIFORM, PAGE, PATTERN_BUDGET, RESIDENT_BUDGET};
 use super::kit::{Kit, SHADER, build_jobs, tex_entry, uniform_entry, vertex_shader};
@@ -592,10 +593,10 @@ impl Compositor {
     /// A measurement arrives a frame or two after the refresh it belongs to, so it carries that
     /// refresh's own pixel count; take it with [`Compositor::take_gpu_timing`].
     pub fn measure_gpu_time(&mut self, device: &wgpu::Device, queue: &wgpu::Queue) -> bool {
-        // `PHOTOCRAFT_NO_GPU_TIMING` turns it off: a kill switch for a driver whose timestamp
+        // `MOST_IMAGE_NO_GPU_TIMING` turns it off: a kill switch for a driver whose timestamp
         // queries misbehave, and the control arm for measuring what the queries themselves
         // cost — the device is identical either way, so only the instrumentation varies.
-        if std::env::var_os("PHOTOCRAFT_NO_GPU_TIMING").is_some() {
+        if std::env::var_os("MOST_IMAGE_NO_GPU_TIMING").is_some() {
             return false;
         }
         if self.timer.is_none() {

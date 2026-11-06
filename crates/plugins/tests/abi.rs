@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! The plug-in ABI end to end: the example Invert plug-in, and hostile modules (infinite loops,
 //! memory bombs, out-of-bounds access, bad manifests…), which must all fail with an error, quickly.
 
@@ -68,7 +69,7 @@ fn run_err(bytes: &[u8], limits: Limits) -> (Error, Duration) {
 fn example_invert_loads_and_reports_its_manifest() {
     let p = Plugin::load(INVERT, Limits::default()).unwrap();
     let m = p.manifest();
-    assert_eq!(m.id, "org.photocraft.example.invert");
+    assert_eq!(m.id, "org.mostimage.example.invert");
     assert_eq!(m.name, "Invert (WebAssembly)");
     assert_eq!(m.kind, photocraft_plugins::Kind::Filter);
     assert!(m.params.is_empty());
@@ -235,7 +236,7 @@ fn assert_names(bytes: &[u8], format: &str) {
     let m = refusal(bytes);
     assert!(m.starts_with(NOT_WASM), "{m}");
     assert!(m.contains(format), "{m}");
-    assert!(m.contains("PhotoCraft plug-ins are WebAssembly modules"), "{m}");
+    assert!(m.contains("Most Image plug-ins are WebAssembly modules"), "{m}");
     assert!(!m.contains('\n'), "{m}");
 }
 
@@ -387,7 +388,7 @@ fn folder_loading_skips_bad_files() {
     std::fs::write(dir.join("b-broken.wasm"), b"\0asm junk").unwrap();
     std::fs::write(dir.join("notes.txt"), b"ignored").unwrap();
     let r = photocraft_plugins::registry::load_folder(&dir).unwrap();
-    assert_eq!(r.loaded, ["org.photocraft.example.invert"]);
+    assert_eq!(r.loaded, ["org.mostimage.example.invert"]);
     assert_eq!(r.failed.len(), 1);
     assert!(r.failed[0].0.ends_with("b-broken.wasm"));
     assert!(photocraft_plugins::registry::load_folder(&dir.join("missing")).is_err());

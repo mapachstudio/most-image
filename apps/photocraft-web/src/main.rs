@@ -1,4 +1,5 @@
-//! PhotoCraft in the browser.
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+//! Most Image in the browser.
 //!
 //! Runs the same [`photocraft_ui_egui::PhotocraftApp`] as the desktop app through eframe's web
 //! runner (wgpu: WebGPU where available, WebGL2 otherwise). Build with `trunk build --release`
@@ -11,7 +12,7 @@
 //! - saving/exporting triggers a browser download;
 //! - dropped files are read asynchronously by `web::WebShell` and delivered through `Services::inbox`.
 //!
-//! URL query flags: `?cpu` forces the CPU canvas path (same as `PHOTOCRAFT_CPU_CANVAS=1`);
+//! URL query flags: `?cpu` forces the CPU canvas path (same as `MOST_IMAGE_CPU_CANVAS=1`);
 //! `?webgl` forces the WebGL2 backend instead of WebGPU; `?free-mb=N` pretends only N MiB can be
 //! allocated, so the memory gates and the low-memory warning can be seen without gigabytes of
 //! images (diagnostics only).

@@ -1,6 +1,7 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! CIE L*a*b* (D50) ⇄ encoded sRGB for [`crate::ChannelLayout::Lab`] samples, the same formulas
 //! and constants as `photocraft-color` (this crate stays standalone). Samples are normalized as
-//! PhotoCraft holds Lab: L* 0..100 as 0..1, a* and b* −128..127 as `(v + 128) / 255`.
+//! Most Image holds Lab: L* 0..100 as 0..1, a* and b* −128..127 as `(v + 128) / 255`.
 
 const D50: [f32; 3] = [0.964_22, 1.0, 0.825_21];
 /// Linear sRGB → D50 XYZ (Bradford-adapted, as in the ICC sRGB profile).

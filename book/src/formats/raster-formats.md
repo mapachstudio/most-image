@@ -1,3 +1,4 @@
+<!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # Raster formats
 
 `photocraft-codecs` provides format detection, capability declarations, decode limits, metadata handling, and encoding for flat images. The default build declares read/write support for PNG, JPEG, TIFF, WebP, GIF, BMP, TGA, ICO, Netpbm/PFM, QOI, OpenEXR, and Radiance HDR. HEIF/HEIC (iPhone and Mac photos) is read-only, decoded in pure Rust by `heic-rs` through the optional `photocraft-heif` crate. It is a build-time choice behind the `heif` cargo feature (`cargo build -p photocraft --features heif`): official builds include it; without it HEIC files are still recognised and opening one reports that HEIC support isn't included in that build. AVIF encoding is optional; AVIF decoding is not implemented in the current crate. Lossless JPEG XL (.jxl) export uses the pure-Rust `zune-jpegxl` encoder for 8/16-bit gray, RGB and RGBA data; gray+alpha is expanded to RGBA at the same bit depth. JPEG XL import is tracked separately in #2868.
@@ -20,7 +21,7 @@ JPEG XL opening remains under review in #2868.
 
 ## WebP
 
-Lossless WebP (VP8L) is encoded and decoded by `image-webp`. Lossy WebP is written by PhotoCraft's own VP8 key-frame encoder in `crates/codecs/src/codecs/vp8`, a clean-room implementation of RFC 6386: BT.601 4:2:0 conversion, 16×16 and 4×4 intra prediction chosen per macroblock by reconstruction error, the forward DCT and Walsh-Hadamard transforms paired with the bit-exact inverse transforms, quantisation on the RFC's `dc_qlookup`/`ac_qlookup` tables, token coding with per-frame probability updates, and skipped macroblocks for flat areas. `EncodeOptions::webp_lossless` picks the encoder and `webp_quality` (0–100, the libwebp scale) sets the quantiser; alpha travels losslessly in an `ALPH` chunk and ICC/EXIF/XMP in their own chunks of the extended (`VP8X`) container. The decoder applies the frame's loop filter; no C library is involved on either side.
+Lossless WebP (VP8L) is encoded and decoded by `image-webp`. Lossy WebP is written by Most Image's own VP8 key-frame encoder in `crates/codecs/src/codecs/vp8`, a clean-room implementation of RFC 6386: BT.601 4:2:0 conversion, 16×16 and 4×4 intra prediction chosen per macroblock by reconstruction error, the forward DCT and Walsh-Hadamard transforms paired with the bit-exact inverse transforms, quantisation on the RFC's `dc_qlookup`/`ac_qlookup` tables, token coding with per-frame probability updates, and skipped macroblocks for flat areas. `EncodeOptions::webp_lossless` picks the encoder and `webp_quality` (0–100, the libwebp scale) sets the quantiser; alpha travels losslessly in an `ALPH` chunk and ICC/EXIF/XMP in their own chunks of the extended (`VP8X`) container. The decoder applies the frame's loop filter; no C library is involved on either side.
 
 Capability details such as sample depth, channel layout, alpha, ICC, EXIF, XMP, DPI, and animation behavior are defined by `crates/codecs/src/format.rs`. Do not infer fidelity from the filename extension alone.
 
@@ -36,7 +37,7 @@ Every route that writes a document to a flat format (Save As, the CLI, MCP `doc_
 
 Flat TIFF and JPEG exports of composited CMYK documents convert the RGB composite back through
 the document's CMYK ICC profile (relative colorimetric with black point compensation) and embed
-that exact profile. Untagged composites use and embed PhotoCraft's synthetic coated CMYK profile;
+that exact profile. Untagged composites use and embed Most Image's synthetic coated CMYK profile;
 invalid, non-CMYK or unusable embedded profiles are rejected before compositing. TIFF retains
 8/16/32f depth and straight alpha; JPEG reduces to 8-bit with a warning and mattes transparency
 over zero-ink white. A plain single raster layer retains its native samples. RGB-only formats use

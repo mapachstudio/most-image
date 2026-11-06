@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! A failed Linux desktop launch must not poison the next launch's graphics policy.
 #![cfg(target_os = "linux")]
 
@@ -31,13 +32,13 @@ fn missing_display_preserves_existing_gpu_crash_evidence() {
 
 fn launch_without_display(dir: &std::path::Path) -> String {
     let output = std::process::Command::new(crate::binary())
-        .env("PHOTOCRAFT_CONFIG_DIR", dir)
+        .env("MOST_IMAGE_CONFIG_DIR", dir)
         .env_remove("DISPLAY")
         .env_remove("WAYLAND_DISPLAY")
         .env_remove("WAYLAND_SOCKET")
         .env_remove("WGPU_BACKEND")
-        .env_remove("PHOTOCRAFT_GPU_STARTUP_FAILURE")
-        .env_remove("PHOTOCRAFT_CONTROL_PORT")
+        .env_remove("MOST_IMAGE_GPU_STARTUP_FAILURE")
+        .env_remove("MOST_IMAGE_CONTROL_PORT")
         .output()
         .unwrap();
     let error = String::from_utf8_lossy(&output.stderr);

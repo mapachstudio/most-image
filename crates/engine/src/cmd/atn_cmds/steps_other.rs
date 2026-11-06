@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Photoshop's Video, Other, Average and matting steps (#10607): De-Interlace, NTSC Colors,
 //! HSB/HSL, Custom, Average and Remove Black / White Matte, with the keys Photoshop records.
 
@@ -43,7 +44,7 @@ pub(super) fn bare_to(_: &str, p: &Value) -> Option<Descriptor> {
     (pixel_target(p) && sets_only(p, &["target"])).then(|| desc("null"))
 }
 
-/// An enumeration key: (key, param, type, Photoshop ↔ PhotoCraft values, Photoshop's default).
+/// An enumeration key: (key, param, type, Photoshop ↔ Most Image values, Photoshop's default).
 type EnumKey = (&'static str, &'static str, &'static str, &'static [(&'static str, &'static str)], &'static str);
 
 pub(super) const DE_INTERLACE: &[EnumKey] = &[

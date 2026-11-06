@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::*;
 
 /// A GPU measurement arrives a frame or two after its refresh, so most GPU refreshes carry
@@ -99,7 +100,7 @@ fn separate_mip_targets_only_for_intel_on_dx12() {
     assert!(!separate_mip_targets(Dx12, amd, None));
     assert!(!separate_mip_targets(Vulkan, intel, None));
     assert!(!separate_mip_targets(Metal, 0, None));
-    // PHOTOCRAFT_SEPARATE_MIPS forces either way; anything else leaves the default.
+    // MOST_IMAGE_SEPARATE_MIPS forces either way; anything else leaves the default.
     assert!(separate_mip_targets(Dx12, nvidia, Some("1")));
     assert!(!separate_mip_targets(Dx12, intel, Some(" 0 ")));
     assert!(separate_mip_targets(Dx12, intel, Some("yes")));

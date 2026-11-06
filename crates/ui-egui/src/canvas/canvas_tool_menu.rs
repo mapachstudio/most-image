@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Canvas context menus for the selection tools, the Pen, the Zoom and Hand tools, an active Free
 //! Transform box, text being edited with a Type tool, committed type under a Type tool, the
 //! pasteboard (outside the image), a guide and a pending crop.
@@ -372,7 +373,7 @@ pub const VIEW_MENU: &[Row] = &[
 pub const FILL_SCREEN: &str = "view.fillScreen";
 
 /// Photoshop's selection-tool context menu with an active selection, in its order. Its Generative
-/// Fill row has no PhotoCraft command and is left out. Rows stay visible and grey out exactly like
+/// Fill row has no Most Image command and is left out. Rows stay visible and grey out exactly like
 /// their menu-bar twins.
 pub const SELECTION_MENU: &[Row] = &[
     Some(("Deselect", "select.deselect")),

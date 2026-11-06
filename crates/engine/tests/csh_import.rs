@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Original geometric CSH fixture, assembled from the public container/path layout.
 //! No Adobe or third-party shape assets are embedded.
 
@@ -26,7 +27,7 @@ fn csh_import_stores_the_display_form_of_a_localization_key() {
 #[test]
 fn csh_import_makes_an_original_shape_available_without_a_document() {
     let bytes = triangle_csh();
-    if let Some(path) = std::env::var_os("PHOTOCRAFT_CSH_FIXTURE") {
+    if let Some(path) = std::env::var_os("MOST_IMAGE_CSH_FIXTURE") {
         std::fs::write(path, &bytes).unwrap();
     }
     let mut session = Session::new();

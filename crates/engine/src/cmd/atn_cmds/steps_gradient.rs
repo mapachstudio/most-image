@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Classic Gradient recordings (#10710), using the existing pixel-paint command.
 //!
 //! Presets have centred midpoints and RGB byte colours. Other gradient forms stay
@@ -87,7 +88,7 @@ fn location(d: &Descriptor, previous: &mut f64) -> Option<f64> {
 
 /// Decode every accepted setting; no source metadata is ever executed.
 fn params(d: &Descriptor) -> Option<Value> {
-    // Recordings use the event class; PhotoCraft's canonical exports use null.
+    // Recordings use the event class; Most Image's canonical exports use null.
     let class = if d.class_id.is("Grdn") { "Grdn" } else { "null" };
     shape(d, class, &["From", "T   ", "Opct", "Md  ", "Type", "Rvrs", "Dthr", "UsMs", "gradientsInterpolationMethod", "Grad"])?;
     let style = enumeration(d.get("Type")?, "GrdT")?;

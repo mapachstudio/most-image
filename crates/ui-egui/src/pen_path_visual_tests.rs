@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Synthetic offscreen evidence for editing a selected saved path beside the Work Path.
 
 use egui::{Event, Modifiers, PointerButton, Pos2, vec2};
@@ -28,13 +29,13 @@ fn button(pos: Pos2, pressed: bool) -> Event {
     Event::PointerButton { pos, button: PointerButton::Primary, pressed, modifiers: Modifiers::NONE }
 }
 
-/// Run explicitly with a wgpu adapter. PHOTOCRAFT_PEN_VISUAL_DIR chooses the output directory;
-/// PHOTOCRAFT_PEN_VISUAL_BASELINE=1 characterizes the old Work Path targeting for a before capture.
+/// Run explicitly with a wgpu adapter. MOST_IMAGE_PEN_VISUAL_DIR chooses the output directory;
+/// MOST_IMAGE_PEN_VISUAL_BASELINE=1 characterizes the old Work Path targeting for a before capture.
 #[test]
 #[ignore = "manual offscreen visual fixture; writes synthetic screenshots"]
 fn saved_path_drag_visual_fixture() {
-    let baseline = std::env::var("PHOTOCRAFT_PEN_VISUAL_BASELINE").is_ok_and(|v| v == "1");
-    let output = std::env::var_os("PHOTOCRAFT_PEN_VISUAL_DIR").map(std::path::PathBuf::from).unwrap_or_else(|| "log/pen-path-visual".into());
+    let baseline = std::env::var("MOST_IMAGE_PEN_VISUAL_BASELINE").is_ok_and(|v| v == "1");
+    let output = std::env::var_os("MOST_IMAGE_PEN_VISUAL_DIR").map(std::path::PathBuf::from).unwrap_or_else(|| "log/pen-path-visual".into());
     std::fs::create_dir_all(&output).expect("create synthetic screenshot directory");
     let mut h = egui_kittest::Harness::builder().with_size(vec2(1280.0, 800.0)).with_max_steps(64).wgpu().build_eframe(|cc| {
         PhotocraftApp::setup_context(&cc.egui_ctx, Default::default());

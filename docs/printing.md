@@ -1,3 +1,4 @@
+<!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # Printing
 
 File › Print renders the flattened document onto one PDF page (paper size and orientation,
@@ -27,7 +28,7 @@ the preview and generated PDF continue to share `print_cmds::layout`.
 |---|---|---|
 | **`craft-print`** (`lp` on CUPS, the Windows spooler) | `lp` is on the path (macOS, Linux, the Flatpak, which bundles it) and CUPS lists a printer, or on Windows | `Sent to the printer (request id is Office-42)` |
 | **CUPS over IPP** (`photocraft-ipp`) | No `lp` on the path and a print server answers: `CUPS_SERVER`, then `/run/cups/cups.sock`, `/var/run/cups/cups.sock`, `/private/var/run/cupsd`, then `localhost:631`; always for a `printServer` named in the request | `Sent to the printer (job 42 on Office)` |
-| **Print portal** (`org.freedesktop.portal.Print`, desktop app on Linux) | Linux only (the Flatpak included): no print server reachable or no printer set up (including when `lp` is there but CUPS lists no printer and none was named), or always with `PHOTOCRAFT_PRINT_PORTAL=1`. Elsewhere a missing route is an error | The system print dialog, seeded with the copies and paper; the outcome goes to the log |
+| **Print portal** (`org.freedesktop.portal.Print`, desktop app on Linux) | Linux only (the Flatpak included): no print server reachable or no printer set up (including when `lp` is there but CUPS lists no printer and none was named), or always with `MOST_IMAGE_PRINT_PORTAL=1`. Elsewhere a missing route is an error | The system print dialog, seeded with the copies and paper; the outcome goes to the log |
 | **Print to PDF** | `output` given (the Output field of the dialog) | The file; nothing is spooled unless `send` is true |
 
 A route that exists but fails (an unknown printer, a job the queue refuses) is an error; only a
@@ -84,8 +85,8 @@ job went) and `pdf` (the page's path, only when `output` named one).
 | Variable | Effect |
 |---|---|
 | `CUPS_SERVER` | The print server, as CUPS itself reads it: `host[:port]` or a socket path |
-| `PHOTOCRAFT_PRINT_PORTAL=1` | Always use the system print dialog (the portal) instead of `lp` or CUPS directly |
-| `PHOTOCRAFT_PRINT_PORTAL=0` | Never use the portal; a missing print server is then an error |
+| `MOST_IMAGE_PRINT_PORTAL=1` | Always use the system print dialog (the portal) instead of `lp` or CUPS directly |
+| `MOST_IMAGE_PRINT_PORTAL=0` | Never use the portal; a missing print server is then an error |
 
 ## Verification
 

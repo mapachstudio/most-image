@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Build and package PhotoCraft for FreeBSD:
+# Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+# Build and package Most Image for FreeBSD:
 #
 #   $DIST/photocraft-<version>-freebsd-<arch>.tar.gz   a /usr/local-style tree (arch x86_64 or aarch64):
 #       photocraft-<version>-freebsd-<arch>/{bin, man/man1, share/applications, share/icons,
@@ -16,7 +17,7 @@ set -euo pipefail
 # shellcheck source=../env.sh
 . "$(dirname "${BASH_SOURCE[0]}")/../env.sh"
 LINUX="$ROOT/packaging/linux"
-APP_ID=ai.storyteller.photocraft
+APP_ID=com.grupomostmexico.mostimage
 
 SKIP_BUILD=0
 DRY_RUN=0
@@ -62,7 +63,7 @@ if [[ "$DRY_RUN" = 0 ]] && [[ "$(uname -s)" != FreeBSD ]]; then
 fi
 BASENAME="photocraft-$VERSION-freebsd-$ARCH"
 
-echo "==> PhotoCraft $VERSION for FreeBSD $ARCH"
+echo "==> Most Image $VERSION for FreeBSD $ARCH"
 
 # The release VM has 12 GB; full parallelism on the biggest crates runs it out of memory.
 export CARGO_BUILD_JOBS="${CARGO_BUILD_JOBS:-4}"
@@ -103,7 +104,7 @@ strip "$STAGE/bin/photocraft" "$STAGE/bin/photocraft-cli" 2>/dev/null || true
 # The desktop entry, MIME type, metainfo and icons are the freedesktop files Linux ships.
 install -m 644 "$LINUX/$APP_ID.desktop" "$STAGE/share/applications/$APP_ID.desktop"
 install -m 644 "$LINUX/$APP_ID.mime.xml" "$STAGE/share/mime/packages/$APP_ID.xml"
-sed -e "s/@VERSION@/$VERSION/g" -e "s/@DATE@/$PHOTOCRAFT_BUILD_DATE/g" \
+sed -e "s/@VERSION@/$VERSION/g" -e "s/@DATE@/$MOST_IMAGE_BUILD_DATE/g" \
   "$LINUX/$APP_ID.metainfo.xml.in" >"$STAGE/share/metainfo/$APP_ID.metainfo.xml"
 cp -R "$ROOT/assets/app-icon/hicolor" "$STAGE/share/icons/"
 copy_docs "$STAGE/share/doc/photocraft"

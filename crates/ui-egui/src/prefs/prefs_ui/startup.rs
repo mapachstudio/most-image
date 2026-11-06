@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::{JobEvent, JobOutcome, PhotocraftApp, Started, Value, json, prefs};
 
 /// View › Rulers follows `unitsAndRulers.showRulers` when the preference changes (at launch, from
@@ -106,7 +107,7 @@ fn repair_invalid(app: &mut PhotocraftApp, invalid: &[prefs::InvalidPref]) {
     let paths = invalid.iter().map(prefs::InvalidPref::path).collect::<Vec<_>>().join(", ");
     let (title, line) = (
         "Some preferences were reset",
-        "The preferences file held values PhotoCraft can't read for {paths}. Those settings are back to their defaults; the rest of your preferences loaded.",
+        "The preferences file held values Most Image can't read for {paths}. Those settings are back to their defaults; the rest of your preferences loaded.",
     );
     // Notices keep their English source and are translated when drawn.
     let id = crate::notices::post(app, title, vec![line.into()], false, None);

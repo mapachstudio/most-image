@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Memory-only SVG smart-object handoff. The shell owns editor selection and temporary files;
 //! commands own optimistic concurrency, bounded rendering and one shared-content transaction.
 
@@ -138,7 +139,7 @@ fn check_instances(s: &Session, id: LayerId) -> Result<Vec<LayerId>> {
     let doc = &s.active().ok_or(EngineError::NoDocument)?.doc;
     let contents = smart(doc, id)?.contents_id;
     if s.smart_links.iter().any(|link| link.parent == doc.id && link.contents_id == contents) {
-        return Err(EngineError::Other("these smart-object contents are already open in PhotoCraft".into()));
+        return Err(EngineError::Other("these smart-object contents are already open in Most Image".into()));
     }
     let ids: Vec<_> =
         doc.walk().into_iter().filter_map(|(_, _, l)| matches!(&l.content, LayerContent::Smart(sm) if sm.contents_id == contents).then_some(l.id)).collect();

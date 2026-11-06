@@ -1,3 +1,4 @@
+<!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # MCP
 
 `photocraft-automation` implements an MCP server over stdio with two backends:
@@ -23,9 +24,9 @@ photocraft-cli mcp --bridge 127.0.0.1:7878 --control-token-file /private/path/co
 Use absolute root paths in MCP client configurations, since a relative root is resolved from the
 client's launch directory. In bridge mode the roots are configured on the desktop app, and root
 flags on `photocraft-cli mcp --bridge` are rejected. Explicit `--control-token` and
-`--control-token-file` flags require `--bridge` (or `PHOTOCRAFT_CONTROL_PORT`) and are mutually
-exclusive; bridge credentials can also come from `PHOTOCRAFT_CONTROL_TOKEN` or
-`PHOTOCRAFT_CONTROL_TOKEN_FILE`. Each launch option
+`--control-token-file` flags require `--bridge` (or `MOST_IMAGE_CONTROL_PORT`) and are mutually
+exclusive; bridge credentials can also come from `MOST_IMAGE_CONTROL_TOKEN` or
+`MOST_IMAGE_CONTROL_TOKEN_FILE`. Each launch option
 except `--help`/`-h` takes one non-empty value and cannot be repeated. Stray positional arguments,
 missing values and options for the wrong mode are usage errors (exit 2) reported on stderr before
 the server starts.
@@ -38,13 +39,13 @@ The release packages ship `photocraft-cli` alongside the desktop app, so no buil
 
 | Install | CLI |
 |---|---|
-| Windows (MSI) | `%LOCALAPPDATA%\Programs\ArtCraft\PhotoCraft\photocraft-cli.exe` by default (`C:\Program Files\ArtCraft\PhotoCraft\photocraft-cli.exe` for an all-users install, under `Program Files (x86)` instead for the 32-bit build, or wherever you installed it otherwise), not on `PATH` |
+| Windows (MSI) | `%LOCALAPPDATA%\Programs\ArtCraft\Most Image\photocraft-cli.exe` by default (`C:\Program Files\ArtCraft\Most Image\photocraft-cli.exe` for an all-users install, under `Program Files (x86)` instead for the 32-bit build, or wherever you installed it otherwise), not on `PATH` |
 | Linux (deb, rpm) | `/usr/bin/photocraft-cli` |
 | macOS | the separate `photocraft-cli-<version>-macos-<arch>.zip` release asset (the `.app` holds only the desktop app) |
 
 ```sh
 # Windows (PowerShell), default install folder
-claude mcp add photocraft -- "$env:LOCALAPPDATA\Programs\ArtCraft\PhotoCraft\photocraft-cli.exe" mcp --automation-read-root <dir> --automation-write-root <dir>
+claude mcp add photocraft -- "$env:LOCALAPPDATA\Programs\ArtCraft\Most Image\photocraft-cli.exe" mcp --automation-read-root <dir> --automation-write-root <dir>
 # Linux, or macOS with the CLI unzipped onto PATH
 claude mcp add photocraft -- photocraft-cli mcp --automation-read-root <dir> --automation-write-root <dir>
 ```

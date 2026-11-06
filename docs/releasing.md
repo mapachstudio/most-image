@@ -1,11 +1,12 @@
-# Releasing PhotoCraft
+<!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
+# Releasing Most Image
 
 Every push to the `release` branch runs `.github/workflows/release.yml`. The workflow builds
 signed installers for macOS, Windows, Linux and the web, plus a FreeBSD tarball, then creates
-or updates a **draft** GitHub Release named `PhotoCraft v<version>`. Nobody sees a draft until a
+or updates a **draft** GitHub Release named `Most Image v<version>`. Nobody sees a draft until a
 maintainer publishes it.
 
-User-facing names say **PhotoCraft**. Files, binaries and ids stay lowercase (`photocraft-<version>-<platform>-<arch>.<ext>`, `ai.storyteller.photocraft`).
+User-facing names say **Most Image**. Files, binaries and ids stay lowercase (`photocraft-<version>-<platform>-<arch>.<ext>`, `com.grupomostmexico.mostimage`).
 
 ## In-app update checks
 
@@ -36,7 +37,7 @@ changes are required: publishing a newer stable GitHub Release makes it discover
    Commit the change (`Cargo.toml` + `Cargo.lock`) through the normal review flow.
 2. **Merge `main` into `release`** (or fast-forward it) and push. The workflow starts by itself.
 3. **Wait for the draft.** After about 30 to 45 minutes (notarization is the slow part), the
-   Releases page has a draft `PhotoCraft v0.2.0`, tagged `v0.2.0` on the pushed commit, with
+   Releases page has a draft `Most Image v0.2.0`, tagged `v0.2.0` on the pushed commit, with
    every artifact and `SHA256SUMS.txt`. The notes are generated from the merged PRs.
 4. **Check it.** Download an installer or two and look at the job summaries. Any
    `::warning::` there means a signing secret was missing and that artifact is unsigned.
@@ -72,8 +73,8 @@ in the dialog.
 | Web | `photocraft-web-<v>.zip` (static site; see [`packaging/web/README.md`](../packaging/web/README.md)) | `ubuntu-latest` |
 
 Every binary reports its version, the commit and the build date: `photocraft --version`,
-`photocraft-cli --version`, and *Help › About PhotoCraft*. CI sets `PHOTOCRAFT_BUILD_SHA` and
-`PHOTOCRAFT_BUILD_DATE`, and `crates/engine/src/build_info.rs` reads them at compile time. A plain
+`photocraft-cli --version`, and *Help › About Most Image*. CI sets `MOST_IMAGE_BUILD_SHA` and
+`MOST_IMAGE_BUILD_DATE`, and `crates/engine/src/build_info.rs` reads them at compile time. A plain
 `cargo build` doesn't set them and reports `0.2.0 (dev build)`.
 
 Every desktop build job (macOS, Windows, Linux, FreeBSD) also checks out [craft-fonts](https://github.com/storytold/craft-fonts)
@@ -87,11 +88,11 @@ in `ci.yml`. Build option: `docs/development.md` › Fonts.
 ### macOS
 
 `packaging/macos/package.sh` builds `aarch64-apple-darwin` and `x86_64-apple-darwin` with
-`MACOSX_DEPLOYMENT_TARGET=11.0`, joins them with `lipo`, and assembles `PhotoCraft.app`:
+`MACOSX_DEPLOYMENT_TARGET=11.0`, joins them with `lipo`, and assembles `Most Image.app`:
 
-- `Info.plist` is generated from `Info.plist.in`. The bundle id is `ai.storyteller.photocraft`.
+- `Info.plist` is generated from `Info.plist.in`. The bundle id is `com.grupomostmexico.mostimage`.
   The plist sets `LSMinimumSystemVersion` 11.0, `NSHighResolutionCapable`, and document types:
-  `.pcraft` (Owner), plus PSD/PSB and the image formats PhotoCraft reads (Alternate, so it never
+  `.pcraft` (Owner), plus PSD/PSB and the image formats Most Image reads (Alternate, so it never
   takes over Preview's defaults). The icon is `assets/app-icon/photocraft.icns`.
 - **Signing** goes inside-out with the hardened runtime and a secure timestamp. The executable
   is signed first, then the bundle. There's no `--deep` on the final signature. The
@@ -101,14 +102,14 @@ in `ci.yml`. Build option: `docs/development.md` › Fonts.
   to drag onto). The DMG is signed, notarized and stapled too. The script checks the results
   with `codesign --verify --strict`, `stapler validate` and `spctl -a -vvv`.
   Its Finder window (background, icon size and positions) comes from
-  [`packaging/macos/dmg/`](../packaging/macos/dmg/README.md), and its volume is named `PhotoCraft`
+  [`packaging/macos/dmg/`](../packaging/macos/dmg/README.md), and its volume is named `Most Image`
   without the version, which the window's background needs; the DMG file name keeps the version.
-- **CLI:** `PhotoCraft.app/Contents/MacOS/photocraft-cli` is bundled and signed so generated
+- **CLI:** `Most Image.app/Contents/MacOS/photocraft-cli` is bundled and signed so generated
   droplet scripts can run without installing the separate CLI download. The scripts prefer
-  `PHOTOCRAFT_CLI` when set, then the bundled CLI in `/Applications` or `~/Applications`, then
+  `MOST_IMAGE_CLI` when set, then the bundled CLI in `/Applications` or `~/Applications`, then
   `photocraft-cli` on `PATH`. Finder drag-and-drop onto droplets still requires an app wrapper.
   The universal standalone `photocraft-cli` is signed with the same Developer ID, the hardened
-  runtime and a secure timestamp (identifier `ai.storyteller.photocraft-cli`), zipped, and the zip
+  runtime and a secure timestamp (identifier `com.grupomostmexico.mostimage-cli`), zipped, and the zip
   is sent to `notarytool`. Only `.app`, `.dmg` and `.pkg` can hold a stapled ticket, not a bare
   Mach-O, so Gatekeeper looks the CLI's ticket up online the first time a downloaded
   (quarantined) copy runs. Offline, that first run can be refused until the Mac is online again.
@@ -141,25 +142,25 @@ goes in `CARGO_TARGET_<TRIPLE>_RUSTFLAGS`, so host build scripts aren't affected
 - `apps/photocraft/build.rs` and `apps/photocraft-cli/build.rs` embed the icon
   (`assets/app-icon/photocraft.ico`) and VERSIONINFO with the `winresource` crate
   (build dependency `0.1`). They only do this when targeting Windows. Elsewhere each
-  script is a no-op, even if `PHOTOCRAFT_REQUIRE_WINRES` is set, and the web build
-  doesn't touch that crate. Both set ProductName to PhotoCraft, CompanyName to
-  Learning Machines LLC and the same copyright line. The GUI description is
-  "PhotoCraft image editor" (`photocraft.exe`). The CLI description is
-  "PhotoCraft command-line interface", with OriginalFilename `photocraft-cli.exe`
+  script is a no-op, even if `MOST_IMAGE_REQUIRE_WINRES` is set, and the web build
+  doesn't touch that crate. Both set ProductName to Most Image, CompanyName to
+  Grupo MOST and the same copyright line. The GUI description is
+  "Most Image image editor" (`photocraft.exe`). The CLI description is
+  "Most Image command-line interface", with OriginalFilename `photocraft-cli.exe`
   and InternalName `photocraft-cli`. Version strings are the Cargo package version,
   so a pre-release tag is kept; the numeric file and product versions are
   winresource's `major.minor.patch.0`. A missing resource compiler warns, so an
-  optional cross-compile still links. `package.ps1` sets `PHOTOCRAFT_REQUIRE_WINRES=1`.
+  optional cross-compile still links. `package.ps1` sets `MOST_IMAGE_REQUIRE_WINRES=1`.
   The CLI build script then returns an error naming `rc.exe` or `windres` and does
   not panic.
 - Release builds use the GUI subsystem, so Start Menu launches don't open a console window.
   The CLI stays console subsystem 3 so its output reaches the terminal.
 - `photocraft.wxs` (WiX v5) is a dual-scope package (Microsoft "Single Package Authoring"):
-  it installs per-user by default, without a UAC prompt, into `%LOCALAPPDATA%\Programs\ArtCraft\PhotoCraft`
+  it installs per-user by default, without a UAC prompt, into `%LOCALAPPDATA%\Programs\ArtCraft\Most Image`
   (Windows Installer redirects the ProgramFiles folder in a per-user install); the setup
   wizard's "Everyone on this computer" option, or `msiexec ... ALLUSERS=1`, installs per-machine into
-  `Program Files\ArtCraft\PhotoCraft` (`Program Files (x86)` for the 32-bit build). It installs an advertised Start Menu shortcut associated with the
-  `PhotocraftExe` file component. PhotoCraft
+  `Program Files\ArtCraft\Most Image` (`Program Files (x86)` for the 32-bit build). It installs an advertised Start Menu shortcut associated with the
+  `PhotocraftExe` file component. Most Image
   becomes the default app for `.pcraft` and is listed under "Open with" for PSD/PSB and image
   files (in a per-user install those registrations and the `InstallDir` record live under
   HKCU instead of HKLM; the package's registry roots follow the context automatically). It also
@@ -171,9 +172,9 @@ goes in `CARGO_TARGET_<TRIPLE>_RUSTFLAGS`, so host build scripts aren't affected
 - Double-clicking the MSI opens a setup wizard (WixUI_InstallDir without the licence page; the scope page appears only for a new full-UI install, not for
   maintenance, uninstall or reduced and silent runs):
   a scope page ("Only for me" or "Everyone on this computer"), Welcome, the install folder
-  (remembered for upgrades in `HKLM` or `HKCU\Software\PhotoCraft\InstallDir` according to context),
+  (remembered for upgrades in `HKLM` or `HKCU\Software\Most Image\InstallDir` according to context),
   Ready, a progress page, and a Finish page that says where to find the app, with a ticked "Launch
-  PhotoCraft" box. The pages name the full version (`photocraft.en-us.wxl`). `package.ps1` draws
+  Most Image" box. The pages name the full version (`photocraft.en-us.wxl`). `package.ps1` draws
   the wizard's banner and side bitmaps from the app icon, so no WiX stock art ships. `msiexec /qn`
   installs a new product silently per-user unless `ALLUSERS=1` is passed. Maintenance keeps the
   existing installation context, and a major upgrade of an existing per-machine installation without
@@ -184,8 +185,8 @@ goes in `CARGO_TARGET_<TRIPLE>_RUSTFLAGS`, so host build scripts aren't affected
   icon. `packaging/windows/check-icons.ps1` checks the references and extensions in CI;
   `package.ps1` also validates the built MSI with ICE50 before signing it.
 - **Portable zip:** it ships `packaging/windows/portable.txt` beside `photocraft.exe`. That
-  marker (or a `PhotoCraft.portable` file) switches on portable mode: preferences, presets,
-  recovery autosaves and the GPU startup marker go to `PhotoCraftData\` next to the exe instead
+  marker (or a `Most Image.portable` file) switches on portable mode: preferences, presets,
+  recovery autosaves and the GPU startup marker go to `Most ImageData\` next to the exe instead
   of `%APPDATA%\Photocraft`. If that folder isn't writable the app warns and uses `%APPDATA%`.
   The MSI has no marker. The logic is in `apps/photocraft/src/app_dirs.rs` and works the same
   on macOS and Linux.
@@ -212,7 +213,7 @@ Locally on Windows: `dotnet tool install -g wix --version 5.0.2`,
 ### Linux
 
 `packaging/linux/package.sh` stages one FHS tree and makes every format from it. The tree
-holds both binaries, `ai.storyteller.photocraft.desktop`, hicolor icons from 16 px to 512 px
+holds both binaries, `com.grupomostmexico.mostimage.desktop`, hicolor icons from 16 px to 512 px
 plus a scalable SVG, AppStream metainfo, a shared-mime-info file for `.pcraft`, `.psb` and
 `.qoi`, and `photocraft-cli`'s man pages and bash, zsh and fish completions. The
 `man-and-completions` example, built with the binaries, writes those; a cross build runs it
@@ -239,12 +240,12 @@ Why these formats:
   Wayland the dock icon comes from the compositor resolving the window's app_id against an
   *installed* `.desktop` file, which an AppImage alone never provides — without this every
   AppImage run shows the generic Wayland logo (#593). Best effort: it installs
-  `~/.local/share/applications/ai.storyteller.photocraft.desktop` with `Exec` rewritten to
+  `~/.local/share/applications/com.grupomostmexico.mostimage.desktop` with `Exec` rewritten to
   the AppImage's path (`TryExec` dropped, the binary isn't on the host PATH) and the
   hicolor icons beside it, rewriting only when the content changed, and any failure leaves
-  the launch untouched. `PHOTOCRAFT_NO_DESKTOP_INTEGRATION=1` opts out; to uninstall, `rm
-  ~/.local/share/applications/ai.storyteller.photocraft.desktop` and `find
-  ~/.local/share/icons/hicolor -name 'ai.storyteller.photocraft*' -delete`. The script is
+  the launch untouched. `MOST_IMAGE_NO_DESKTOP_INTEGRATION=1` opts out; to uninstall, `rm
+  ~/.local/share/applications/com.grupomostmexico.mostimage.desktop` and `find
+  ~/.local/share/icons/hicolor -name 'com.grupomostmexico.mostimage*' -delete`. The script is
   covered by `packaging/linux/apprun-test.sh` in the packaging-lint workflow.
   A leading `--cli` launches the bundled `usr/bin/photocraft-cli`, without desktop
   integration: `./photocraft-<version>-linux-x86_64.AppImage --cli mcp` serves MCP on
@@ -262,7 +263,7 @@ Why these formats:
 - **Flatpak bundle** (`.flatpak`) is a single file that installs into Flatpak, sandboxed and
   updatable by installing a newer bundle, for people who prefer Flatpak to AppImage.
   `packaging/linux/flatpak-bundle.sh` repackages the job's `.tar.gz` with
-  `packaging/linux/flatpak/ai.storyteller.photocraft.bundle.yml` on the freedesktop 26.08
+  `packaging/linux/flatpak/com.grupomostmexico.mostimage.bundle.yml` on the freedesktop 26.08
   runtime. It does no Rust build and needs no network inside `flatpak-builder`, so the bundle
   holds the same binaries as the other formats. A separate `flatpak` job per architecture
   (`ubuntu-24.04` and `ubuntu-24.04-arm`, for flatpak-builder 1.4) downloads the Linux job's
@@ -272,7 +273,7 @@ Why these formats:
 
   ```sh
   flatpak install --user photocraft-<v>-linux-x86_64.flatpak   # pulls org.freedesktop.Platform//26.08 from Flathub if missing
-  flatpak run ai.storyteller.photocraft
+  flatpak run com.grupomostmexico.mostimage
   ```
 
   Sandbox permissions (justified in the manifest): Wayland with X11 fallback, IPC (X11
@@ -282,7 +283,7 @@ Why these formats:
   checks and makes the optional loopback `--control` server reachable from the host. Host fonts
   are read from `/run/host/fonts` and `/run/host/user-fonts`. Locally (on Linux, with `flatpak` and
   `flatpak-builder`): `packaging/linux/package.sh --formats tar && packaging/linux/flatpak-bundle.sh`.
-- **Flathub**: `packaging/linux/flatpak/ai.storyteller.photocraft.yml` builds from source and
+- **Flathub**: `packaging/linux/flatpak/com.grupomostmexico.mostimage.yml` builds from source and
   is ready for a Flathub submission (it keeps the same runtime and `finish-args` as the bundle
   manifest, which packaging-lint checks). CI doesn't build it. A real build needs vendored crate
   sources (`cargo-sources.json` from `flatpak-cargo-generator.py`) and adds 20+ minutes per
@@ -297,7 +298,7 @@ doesn't bundle them. The Flatpak gets them from the freedesktop runtime. Because
 and the tarball can't declare dependencies, `photocraft` checks for the libraries its session
 (X11 or Wayland) needs before it opens a window (`apps/photocraft/src/linux_libs.rs`) and, if
 one is missing, prints the package to install and exits with status 1 instead of crashing.
-`PHOTOCRAFT_SKIP_LIB_CHECK=1` skips the check.
+`MOST_IMAGE_SKIP_LIB_CHECK=1` skips the check.
 
 Locally (on Linux): install [nfpm](https://nfpm.goreleaser.com/install/), then
 `packaging/linux/package.sh` (or `--formats "deb tar"`).
@@ -355,7 +356,7 @@ the run shows a `::warning::`.
 
 | Secret | Used for |
 |---|---|
-| `APPLE_CERTIFICATE` | base64 `.p12` with "Developer ID Application: Learning Machines LLC (DJ6XS33FX8)" |
+| `APPLE_CERTIFICATE` | base64 `.p12` with "Developer ID Application: Grupo MOST (DJ6XS33FX8)" |
 | `APPLE_CERTIFICATE_PASSWORD` | password for that `.p12` |
 | `KEYCHAIN_PASSWORD` | password for the temporary CI keychain (random if unset) |
 | `APPLE_ID` | Apple ID used by `notarytool` |

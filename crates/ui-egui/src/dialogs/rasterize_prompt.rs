@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! "Rasterize?" prompt: painting the pixels of a type, shape, Smart Object or fill layer with a
 //! pixel tool asks first, as Photoshop does ("This type layer must be rasterized before
 //! proceeding. Its text will no longer be editable. Rasterize the type?"), instead of failing
@@ -117,7 +118,7 @@ pub fn open(app: &mut PhotocraftApp, kind: Kind, layer: photocraft_doc::LayerId,
     let mut f = Map::new();
     f.insert(MARK.into(), json!(kind.key()));
     f.insert("__command".into(), json!(kind.command()));
-    f.insert("__label".into(), json!("PhotoCraft"));
+    f.insert("__label".into(), json!("Most Image"));
     f.insert("message".into(), json!(kind.message()));
     f.insert("layer".into(), json!(layer.0));
     f.insert("tool".into(), json!(format!("{tool:?}")));
@@ -161,7 +162,7 @@ pub fn intercept_filter(app: &mut PhotocraftApp, id: &str, params: &Value) -> Op
     }
     let mut f = Map::new();
     f.insert(MARK.into(), json!(Kind::Type.key()));
-    f.insert("__label".into(), json!("PhotoCraft"));
+    f.insert("__label".into(), json!("Most Image"));
     f.insert("message".into(), json!(Kind::Type.message()));
     f.insert("layer".into(), json!(layer.0));
     f.insert("filter".into(), json!(id));

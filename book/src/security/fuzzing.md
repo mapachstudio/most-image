@@ -1,6 +1,7 @@
+<!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # Fuzzing and regression testing
 
-PhotoCraft already has `cargo-fuzz` workspaces next to its primary untrusted-format crates:
+Most Image already has `cargo-fuzz` workspaces next to its primary untrusted-format crates:
 
 | Crate | Targets |
 |---|---|

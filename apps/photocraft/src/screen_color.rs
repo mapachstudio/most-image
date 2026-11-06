@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Desktop colour capture starts only on an explicit UI request. No snapshots are written to
 //! disk, transmitted or retained after a pick. Wayland delegates to its permission portal.
 use photocraft_ui_egui::screen_picker::{Capture, Pending, Service};
@@ -294,7 +295,7 @@ fn capture(_wayland: bool, _scale: f32, stop: &std::sync::atomic::AtomicBool, pl
 fn capture(_wayland: bool, _scale: f32, stop: &std::sync::atomic::AtomicBool, placements: &[Placement]) -> Result<Capture, String> {
     use core_graphics2::{display::get_active_display_list, image::CGImageAlphaInfo as Alpha, window};
     if !window::preflight_screen_capture_access() && !window::request_screen_capture_access() {
-        return Err("Allow PhotoCraft in System Settings > Privacy & Security > Screen Recording, then reopen PhotoCraft".into());
+        return Err("Allow Most Image in System Settings > Privacy & Security > Screen Recording, then reopen Most Image".into());
     }
     let displays = get_active_display_list(17).ok_or("Could not enumerate displays")?;
     if displays.is_empty() || displays.len() > 16 {
@@ -315,7 +316,7 @@ fn capture(_wayland: bool, _scale: f32, stop: &std::sync::atomic::AtomicBool, pl
             return Ok(Capture::Color(None));
         }
         // Capture a composed monitor at native resolution through safe bindings. Keeping the
-        // CoreGraphics seam preserves PhotoCraft's existing macOS 11 deployment target.
+        // CoreGraphics seam preserves Most Image's existing macOS 11 deployment target.
         let bounds = display.bounds();
         let image = window::new_image(
             bounds,

@@ -1,6 +1,7 @@
+<!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # Scratch disks and memory residency
 
-Native PhotoCraft keeps pixel tiles in RAM and spills cold tiles to a configured scratch
+Native Most Image keeps pixel tiles in RAM and spills cold tiles to a configured scratch
 directory. A read or write guard keeps a tile resident while a consumer uses its bytes. Undo
 snapshots keep their copy-on-write tiles, including disk-backed tiles, until History States
 retires them. Web builds retain their explicit memory limit (capped like Memory Usage) and do not use a
@@ -16,7 +17,7 @@ not a measurement of committed memory or a substitute for scratch storage.
 Enable a directory in Preferences → Scratch Disks. `(system temp)` selects the operating
 system's temporary directory. Only the first enabled, nonempty directory is used. Changing
 directories creates a new scratch file; old disk-backed tiles keep their old file alive.
-The development override `PHOTOCRAFT_TILE_BUDGET_MB` fixes the tile allowance for stress tests.
+The development override `MOST_IMAGE_TILE_BUDGET_MB` fixes the tile allowance for stress tests.
 
 Scratch extents are LZ4 compressed, CRC-checked and reused after a tile is released. Closing
 the last tile truncates its file. No scratch file outlives the process, including a crash or

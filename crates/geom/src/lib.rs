@@ -1,4 +1,5 @@
-//! Geometry primitives shared by every PhotoCraft crate.
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+//! Geometry primitives shared by every Most Image crate.
 //!
 //! Document space is integer pixels with the origin at the canvas top-left.
 //! Layers may extend beyond the canvas (negative coordinates are valid).

@@ -1,8 +1,9 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Synthetic CMYK output profiles.
 //!
 //! Adobe's CMYK profiles (U.S. Web Coated SWOP, Coated FOGRA39 …) are proprietary, and the
 //! freely downloadable characterisation-based profiles come with redistribution conditions, so
-//! PhotoCraft ships a CMYK profile it generates itself from a documented printer model:
+//! Most Image ships a CMYK profile it generates itself from a documented printer model:
 //!
 //! * **Forward model** (CMYK → XYZ): Yule–Nielsen modified Neugebauer (n = 2) over the 16
 //!   ink overprints, with Demichel coverage weights and a parabolic tone value increase (dot
@@ -29,7 +30,7 @@ use crate::math;
 use crate::pipeline::Stage;
 use crate::profile::{ColorSpace, Lut, LutKind, Pcs, Profile, ProfileClass};
 
-pub const DESCRIPTION: &str = "PhotoCraft Coated CMYK (synthetic, 300% TAC, medium GCR)";
+pub const DESCRIPTION: &str = "Most Image Coated CMYK (synthetic, 300% TAC, medium GCR)";
 
 /// Parameters of the synthetic profile.
 #[derive(Clone, Debug)]

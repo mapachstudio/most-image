@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Face detection (#3603): the faces in the document, with their box and five landmarks, from
 //! [`photocraft_algo::faces`]. Select › Color Range's Detect Faces and Face-Aware Liquify read
 //! faces through [`faces_in`]; `image.detectFaces` reports them to scripts and agents.
@@ -14,7 +15,7 @@ use crate::{EngineError, Result, Session};
 pub const MIN_SCORE: f32 = 0.5;
 
 /// Why there are no faces in the browser build (see [`photocraft_algo::faces`]).
-const UNAVAILABLE: &str = "face detection isn't available in the browser version of PhotoCraft; use the desktop app";
+const UNAVAILABLE: &str = "face detection isn't available in the browser version of Most Image; use the desktop app";
 
 /// The faces in `px` (`w × h` straight RGBA), as [`faces::detect`] finds them.
 pub fn detect(px: &[[f32; 4]], w: usize, h: usize, min_score: f32) -> Result<Vec<Face>> {

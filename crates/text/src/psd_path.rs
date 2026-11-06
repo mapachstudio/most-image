@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Type on a path in a PSD (#7962): the path lives only in the type layer's frame in the
 //! document's `Txt2` block (EngineData marks such a layer as box text, `ShapeType 1`, with the
 //! path's bounds as its `BoxBounds`).
@@ -207,7 +208,7 @@ fn starting_at(path: &Subpath, s: f64) -> Subpath {
 }
 
 /// The path a frame is written with for `TextShape::Path { path, start, flip }`: flipped type is
-/// the path run backwards and a moved start the path from there on (exactly how PhotoCraft lays
+/// the path run backwards and a moved start the path from there on (exactly how Most Image lays
 /// type on a path out), so Photoshop, which starts at the path's beginning, sets the same type.
 pub(crate) fn frame_path(path: &Subpath, start: f32, flip: bool) -> Subpath {
     let path = if flip { reversed(path) } else { path.clone() };

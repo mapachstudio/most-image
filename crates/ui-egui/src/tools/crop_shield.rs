@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! The Crop tool's shield options (Photoshop's options-bar gear menu, "Set additional Crop
 //! options", #1919): whether the area outside the crop box shows at all (Show Cropped Area, H),
 //! and the shield dimming it (Enable Crop Shield: Match Canvas or a custom colour, an opacity, and
@@ -202,7 +203,7 @@ pub fn options_button(s: &mut CropShield, ui: &mut egui::Ui) -> bool {
     pick
 }
 
-/// Custom…: PhotoCraft's Color Picker on the custom shield colour; OK sets it
+/// Custom…: Most Image's Color Picker on the custom shield colour; OK sets it
 /// (`color_picker_ui::confirm`, target `cropShield`).
 pub fn pick_custom_color(app: &mut PhotocraftApp) -> u64 {
     let rgb = app.ui.tool_options.crop_shield.custom_color.map(|v| v as f32 / 255.0);

@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! The brush model: tip shape plus Photoshop-style dynamics sections, all plain serde data.
 //!
 //! Every section is optional (an `enabled` flag, or a neutral default), so a partial JSON object
@@ -767,7 +768,7 @@ impl BrushSettings {
 pub struct BrushPreset {
     pub name: String,
     pub brush: BrushSettings,
-    /// Shipped with PhotoCraft (built-ins can be deleted from a session but are regenerated on reset).
+    /// Shipped with Most Image (built-ins can be deleted from a session but are regenerated on reset).
     #[serde(default)]
     pub builtin: bool,
     /// Preset group (folder) in the Brushes panel, e.g. "General" or an imported file's name.

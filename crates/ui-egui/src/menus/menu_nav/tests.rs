@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Menus on small displays (#138): every row of the longest menus is reachable by keyboard, wheel
 //! and the scroll arrows, and the keyboard drives submenus and runs commands.
 
@@ -282,13 +283,13 @@ fn help_search_keeps_the_arrows_and_space_that_edit_it() {
     };
     typing(&mut h, "levls");
     key(&mut h, egui::Key::ArrowLeft);
-    assert!(h.query_by_label_contains("About PhotoCraft").is_some(), "← keeps Help open");
+    assert!(h.query_by_label_contains("About Most Image").is_some(), "← keeps Help open");
     key(&mut h, egui::Key::ArrowLeft);
     typing(&mut h, "e");
     assert_eq!(text(&h), "levels", "← moved the cursor");
     // The cursor sits at `leve|ls`: two → take it to the end.
     key(&mut h, egui::Key::ArrowRight);
-    assert!(h.query_by_label_contains("About PhotoCraft").is_some(), "→ keeps Help open");
+    assert!(h.query_by_label_contains("About Most Image").is_some(), "→ keeps Help open");
     key(&mut h, egui::Key::ArrowRight);
     // The pointer resting on a result lights it; a space typed then is text, not a click.
     // "levels" finds both Image › Adjustments › Levels… and the Levels adjustment layer.
@@ -300,7 +301,7 @@ fn help_search_keeps_the_arrows_and_space_that_edit_it() {
     h.event(egui::Event::Text(" ".into()));
     h.event(egui::Event::Key { key: egui::Key::Space, physical_key: None, pressed: false, repeat: false, modifiers: egui::Modifiers::NONE });
     h.run_steps(3);
-    assert!(is_open(&h.ctx) && h.query_by_label_contains("About PhotoCraft").is_some(), "Space keeps Help open");
+    assert!(is_open(&h.ctx) && h.query_by_label_contains("About Most Image").is_some(), "Space keeps Help open");
     assert!(h.state().ui.dialogs.is_empty(), "Space ran no command: {:?}", h.state().ui.dialogs);
     assert_eq!(text(&h), "levels ");
 }

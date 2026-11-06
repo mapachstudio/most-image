@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Actions panel: record and replay command sequences.
 //!
 //! The list and the recording flag live on the engine session (`actions.record` / `stop` /
@@ -684,7 +685,7 @@ fn step_label(id: &str, params: &Value) -> String {
     } else if id == photocraft_engine::atn_cmds::STOP_MESSAGE {
         format!("{}: {}", label_of(id), params.get("message").and_then(Value::as_str).unwrap_or_default())
     } else if id == photocraft_engine::atn_cmds::PHOTOSHOP_STEP {
-        // A step from a .atn file PhotoCraft can't play yet: its Photoshop name, marked.
+        // A step from a .atn file Most Image can't play yet: its Photoshop name, marked.
         let name = params.get("name").and_then(Value::as_str).filter(|n| !n.is_empty()).unwrap_or("?");
         crate::i18n::fmt(tl!("{name} (Photoshop)"), &[("name", name)])
     } else {
@@ -721,8 +722,8 @@ fn load_source(app: &mut PhotocraftApp, name: &str, params: Value) -> Result<Val
         let note = crate::i18n::trn(
             crate::i18n::current(),
             unsupported as u64,
-            "{n} step has no PhotoCraft equivalent yet",
-            "{n} steps have no PhotoCraft equivalent yet",
+            "{n} step has no Most Image equivalent yet",
+            "{n} steps have no Most Image equivalent yet",
         );
         let template = "{message} ({note})";
         crate::i18n::fmt(tl!(template), &[("message", &loaded), ("note", &note)])
@@ -804,7 +805,7 @@ fn load_dialog(app: &mut PhotocraftApp) -> Result<Value, String> {
         let files = crate::i18n::trn(lang, loaded as u64, "{n} action file loaded", "{n} action files loaded");
         let mut notes = vec![crate::i18n::trn(lang, actions as u64, "{n} action", "{n} actions")];
         if unsupported > 0 {
-            notes.push(crate::i18n::trn(lang, unsupported as u64, "{n} step has no PhotoCraft equivalent yet", "{n} steps have no PhotoCraft equivalent yet"));
+            notes.push(crate::i18n::trn(lang, unsupported as u64, "{n} step has no Most Image equivalent yet", "{n} steps have no Most Image equivalent yet"));
         }
         notes.extend(replaced);
         if !errors.is_empty() {

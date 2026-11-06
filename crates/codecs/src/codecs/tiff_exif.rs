@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! EXIF in a TIFF file: the Exif (34665) and GPS (34853) directories that IFD0 points to, plus
 //! IFD0's descriptive tags (make, model, software, artist, …), the way cameras and Photoshop
 //! write them.
@@ -5,7 +6,7 @@
 //! An EXIF block (`Metadata::exif`) is itself a small TIFF stream, so both directions go through
 //! the same reader ([`super::tiff_ifd::File`]): reading a TIFF builds a block from the file's own
 //! directories, writing one copies the block's directories into the file. Values are copied as
-//! bytes (re-ordered when the byte orders differ), so tags PhotoCraft doesn't know survive.
+//! bytes (re-ordered when the byte orders differ), so tags Most Image doesn't know survive.
 //! Classic TIFF only on the reading side: an EXIF block has 4-byte offsets. What is copied is
 //! bounded by the stream's own size and a fixed cap, because entries of a hostile file can
 //! overlap (see [`read`]).

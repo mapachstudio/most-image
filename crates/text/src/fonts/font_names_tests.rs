@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Reproduce numeric subfamilies without redistributing proprietary fonts.
 use super::*;
 use photocraft_doc::text::CharStyle;
@@ -54,7 +55,7 @@ fn numeric_subfamilies_with_identical_weights_select_distinct_faces() {
     assert_ne!(a.font_family, b.font_family);
     assert_eq!(db.faces(&a.font_family)[0].postscript_name.as_deref(), Some("UnrelatedPS20"));
     assert_eq!(db.faces(&b.font_family)[0].postscript_name.as_deref(), Some("UnrelatedPS30"));
-    assert!(!db.families().iter().any(|f| f.starts_with(".PhotoCraft-face-")));
+    assert!(!db.families().iter().any(|f| f.starts_with(".Most Image-face-")));
     let alias = b.font_family.clone();
     b.font_family = "Numeric Test".into();
     db.select_named_face(&mut b);

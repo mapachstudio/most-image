@@ -1,8 +1,9 @@
+<!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # Synthetic ATN parser fixtures
 
 These seven tiny files are original synthetic test data. The four version-16 files were independently
 encoded field by field from the version-16 layout documented in `src/atn.rs`, without calling
-PhotoCraft's writer; the three version-12 files (`v12-*.atn`) encode the version-12 layout documented
+Most Image's writer; the three version-12 files (`v12-*.atn`) encode the version-12 layout documented
 there (#10743). They are licensed MIT OR Apache-2.0 under the repository's licenses. They contain no
 user artwork, Photoshop program code or proprietary assets. They are not Photoshop-authored
 interoperability oracles.

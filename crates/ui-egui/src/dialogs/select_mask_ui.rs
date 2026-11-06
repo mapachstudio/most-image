@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Select › Select and Mask…: Photoshop's Select and Mask workspace (#7069, #8148, TOOL-214-1), a
 //! full-window workspace like Content-Aware Fill's.
 //!
@@ -1534,7 +1535,7 @@ fn options_bar(ui: &mut egui::Ui, w: &mut SelectMaskWorkspace) -> Option<Value> 
         if widgets::secondary_button(ui, tl!("Select Subject"), 0.0).clicked() {
             edit = Some(json!({"tool": "subject", "sampleAllLayers": w.sample_all}));
         }
-        // Refine Hair needs hair detection PhotoCraft doesn't have yet (#2671): greyed, saying so.
+        // Refine Hair needs hair detection Most Image doesn't have yet (#2671): greyed, saying so.
         ui.add_enabled_ui(false, |ui| widgets::secondary_button(ui, tl!("Refine Hair"), 0.0))
             .inner
             .on_disabled_hover_text(tl!("Refine Hair needs hair detection, which isn't available yet"));

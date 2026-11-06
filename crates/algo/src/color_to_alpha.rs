@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Filter › Other › Color to Alpha: removes a known colour from the pixels, turning it into
 //! transparency while keeping what was mixed with it.
 //!
@@ -16,7 +17,7 @@
 //! above `opacity` fully opaque, linear in between (`0` and `1` leave `a` as computed).
 //!
 //! The arithmetic runs on the stored channel values of the document (encoded, not linearised, at
-//! every depth). That is the space PhotoCraft's Normal blending composites in, so the unmixed
+//! every depth). That is the space Most Image's Normal blending composites in, so the unmixed
 //! layer over a fill of the removed colour gives back the original pixels exactly.
 
 use photocraft_geom::Rect;

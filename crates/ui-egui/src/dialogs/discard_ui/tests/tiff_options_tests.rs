@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! TIFF Options on Save As and Save a Copy (#8827): Image Compression, Save Image Pyramid, Save
 //! Transparency and the layers choice; the scripted params that skip it; recording and playback.
 use super::*;
@@ -30,7 +31,7 @@ fn tiff_app(background: &str, to: &str) -> (Prompted, Writes) {
         Ok(())
     }));
     let builder = egui_kittest::Harness::builder().with_size(egui::vec2(800.0, 600.0));
-    let builder = if std::env::var_os("PHOTOCRAFT_TIFF_SNAPSHOTS").is_some() { builder.wgpu() } else { builder };
+    let builder = if std::env::var_os("MOST_IMAGE_TIFF_SNAPSHOTS").is_some() { builder.wgpu() } else { builder };
     let h = builder.build_ui_state(
         |ui, app| {
             show(app, ui.ctx());
@@ -44,9 +45,9 @@ fn tiff_app(background: &str, to: &str) -> (Prompted, Writes) {
     (h, writes)
 }
 
-/// `PHOTOCRAFT_TIFF_SNAPSHOTS=<dir>` saves the dialog as a PNG to look at.
+/// `MOST_IMAGE_TIFF_SNAPSHOTS=<dir>` saves the dialog as a PNG to look at.
 fn capture(h: &mut Prompted, name: &str) {
-    if let Some(dir) = std::env::var_os("PHOTOCRAFT_TIFF_SNAPSHOTS") {
+    if let Some(dir) = std::env::var_os("MOST_IMAGE_TIFF_SNAPSHOTS") {
         let dir = std::path::PathBuf::from(dir);
         std::fs::create_dir_all(&dir).unwrap();
         h.render().unwrap().save(dir.join(format!("{name}.png"))).unwrap();

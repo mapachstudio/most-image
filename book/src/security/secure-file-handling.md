@@ -1,6 +1,7 @@
+<!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # Secure file handling
 
-PhotoCraft reads and writes documents in the desktop app, CLI, headless RPC server, and MCP server.
+Most Image reads and writes documents in the desktop app, CLI, headless RPC server, and MCP server.
 Remote automation paths are untrusted relative names resolved beneath explicitly granted roots.
 
 ## Implemented

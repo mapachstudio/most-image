@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 # Build the browser version and zip it:  $DIST/photocraft-web-<version>.zip
 #
 # Usage: packaging/web/package.sh [--skip-build]
@@ -35,8 +36,8 @@ done
 # Size limit (issues #198, #5302): Cloudflare Pages/Workers reject any single file over 25 MiB,
 # and other hosts and CDNs have similar caps. No file in the site may come near that; the app's
 # wasm, the one file that does, ships as parts of PART_BYTES. Override only to investigate.
-MAX_FILE_BYTES=$((10#${PHOTOCRAFT_WEB_MAX_FILE_BYTES:-25165824})) # 24 MiB
-PART_BYTES=$((10#${PHOTOCRAFT_WEB_PART_BYTES:-20971520}))         # 20 MiB
+MAX_FILE_BYTES=$((10#${MOST_IMAGE_WEB_MAX_FILE_BYTES:-25165824})) # 24 MiB
+PART_BYTES=$((10#${MOST_IMAGE_WEB_PART_BYTES:-20971520}))         # 20 MiB
 if [[ "$PART_BYTES" -le 0 ]] || [[ "$PART_BYTES" -gt "$MAX_FILE_BYTES" ]]; then
   echo "error: a part of $PART_BYTES bytes doesn't fit the $MAX_FILE_BYTES-byte file limit" >&2
   exit 1
@@ -77,12 +78,12 @@ echo "$(basename "$WASM"): $wasm_bytes bytes ($((wasm_bytes / 1048576)) MiB), sh
 cp "$HERE/_headers" "$HERE/.htaccess" "$WORK/$NAME/"
 cp "$HERE/README.md" "$WORK/$NAME/HOSTING.md"
 copy_docs "$WORK/$NAME"
-# Optional served fonts (README.md › Fonts): PHOTOCRAFT_WEB_FONTS_DIR=<a craft-fonts checkout, or any
+# Optional served fonts (README.md › Fonts): MOST_IMAGE_WEB_FONTS_DIR=<a craft-fonts checkout, or any
 # folder with a fonts/manifest.txt in its format> copies the manifest, every font and licence file
 # it lists into the site, at the same paths. The wasm is unchanged; the app fetches fonts on demand.
-if [[ -n "${PHOTOCRAFT_WEB_FONTS_DIR:-}" ]]; then
-  FONTS_MANIFEST="$PHOTOCRAFT_WEB_FONTS_DIR/fonts/manifest.txt"
-  [[ -f "$FONTS_MANIFEST" ]] || { echo "error: $FONTS_MANIFEST missing (PHOTOCRAFT_WEB_FONTS_DIR)" >&2; exit 1; }
+if [[ -n "${MOST_IMAGE_WEB_FONTS_DIR:-}" ]]; then
+  FONTS_MANIFEST="$MOST_IMAGE_WEB_FONTS_DIR/fonts/manifest.txt"
+  [[ -f "$FONTS_MANIFEST" ]] || { echo "error: $FONTS_MANIFEST missing (MOST_IMAGE_WEB_FONTS_DIR)" >&2; exit 1; }
   mkdir -p "$WORK/$NAME/fonts"
   cp "$FONTS_MANIFEST" "$WORK/$NAME/fonts/manifest.txt"
   # Field 3 is the font file, field 6 (if any) its licence file; both relative to the folder.
@@ -91,9 +92,9 @@ if [[ -n "${PHOTOCRAFT_WEB_FONTS_DIR:-}" ]]; then
       "" | /* | *..* | *\\* | *://*) echo "error: $FONTS_MANIFEST: '$f' is not a relative path inside the folder" >&2; exit 1 ;;
     esac
     mkdir -p "$WORK/$NAME/$(dirname "$f")"
-    cp "$PHOTOCRAFT_WEB_FONTS_DIR/$f" "$WORK/$NAME/$f"
+    cp "$MOST_IMAGE_WEB_FONTS_DIR/$f" "$WORK/$NAME/$f"
   done
-  echo "served fonts: $(grep -cvE '^[[:space:]]*(#|$)' "$FONTS_MANIFEST") manifest lines from $PHOTOCRAFT_WEB_FONTS_DIR"
+  echo "served fonts: $(grep -cvE '^[[:space:]]*(#|$)' "$FONTS_MANIFEST") manifest lines from $MOST_IMAGE_WEB_FONTS_DIR"
 fi
 largest=0
 while IFS= read -r file; do

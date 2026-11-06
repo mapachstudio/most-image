@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::{Color32, CornerRadius, Pos2, Rect, Response, Sense, Stroke, StrokeKind, Tokens, Ui, Vec2, pos2};
 
 /// Cached RGB data; drawing work is bounded by the 256 display bins, never the image size.
@@ -76,7 +77,7 @@ fn checker_tile(ctx: &egui::Context) -> egui::TextureHandle {
     tile
 }
 
-/// A colour swatch that opens PhotoCraft's Color Picker dialog (HSB, RGB, Lab, CMYK, hex and the
+/// A colour swatch that opens Most Image's Color Picker dialog (HSB, RGB, Lab, CMYK, hex and the
 /// eyedropper), titled `title` as Photoshop's "Color Picker (…)", on its colour. While it is open
 /// the swatch previews the colour it shows; OK keeps the colour (the alpha stays), Cancel restores
 /// the exact colour the swatch had. The response is `changed` in every frame the colour changes;
@@ -108,7 +109,7 @@ pub fn pick_pos(resp: &Response) -> Option<Pos2> {
     if held || resp.clicked() { resp.interact_pointer_pos() } else { None }
 }
 
-/// A colour swatch that only reports clicks (no popup): for colours edited in PhotoCraft's own
+/// A colour swatch that only reports clicks (no popup): for colours edited in Most Image's own
 /// Color Picker dialog. `label` names it for hover text and accessibility.
 pub fn color_swatch_button(ui: &mut Ui, color: Color32, label: &str) -> Response {
     let t = Tokens::get(ui.ctx());

@@ -1,6 +1,7 @@
+<!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # Automation architecture
 
-PhotoCraft exposes the same engine through several transports:
+Most Image exposes the same engine through several transports:
 
 ```text
 photocraft-cli commands/run/batch

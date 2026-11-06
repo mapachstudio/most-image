@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Explicit, one-shot desktop sampling. Snapshots remain in memory until selection/cancellation.
 use crate::PhotocraftApp;
 use egui::{Color32, Context, Id, Pos2, Rect, Sense, Stroke, StrokeKind, TextureOptions, vec2};
@@ -262,7 +263,7 @@ pub fn cancel(ctx: &Context) {
 /// The picker window: hidden until its snapshot has been painted (#3210).
 fn viewport_builder(ctx: &Context, image: &ScreenImage) -> egui::ViewportBuilder {
     let mut builder = crate::os_window::builder()
-        .with_title(tl!("PhotoCraft — Screen Color Picker"))
+        .with_title(tl!("Most Image — Screen Color Picker"))
         .with_decorations(false)
         .with_resizable(false)
         .with_position(image.position / ctx.zoom_factor())

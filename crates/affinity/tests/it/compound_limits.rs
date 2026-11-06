@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! #6423: compound operands form a graph, not necessarily a tree.
 #![cfg(feature = "synth")]
 #![allow(clippy::unwrap_used, clippy::expect_used, clippy::panic)]
@@ -44,7 +45,7 @@ fn document(definitions: Vec<F>, roots: Vec<F>) -> Document {
 // A stack overflow aborts rather than unwinds. Keep that failure (and an exponential hang)
 // inside a child process, so the regression fails without killing the entire test runner.
 fn isolated(name: &str, check: impl FnOnce()) {
-    if std::env::var("PHOTOCRAFT_COMPOUND_CASE").as_deref() == Ok(name) {
+    if std::env::var("MOST_IMAGE_COMPOUND_CASE").as_deref() == Ok(name) {
         check();
         return;
     }
@@ -52,7 +53,7 @@ fn isolated(name: &str, check: impl FnOnce()) {
     let test = module_path!().split_once("::").map_or(name.to_string(), |(_, m)| format!("{m}::{name}"));
     let mut child = std::process::Command::new(std::env::current_exe().unwrap())
         .args(["--exact", &test, "--nocapture"])
-        .env("PHOTOCRAFT_COMPOUND_CASE", name)
+        .env("MOST_IMAGE_COMPOUND_CASE", name)
         .spawn()
         .unwrap();
     let start = Instant::now();

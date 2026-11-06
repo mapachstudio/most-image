@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Real-file corpora (feature `corpus`; run with `cargo xtask test-corpus`). The corpora are
 //! gitignored, never committed, and fetched at pinned commits and sha256-verified by
 //! `cargo xtask corpus --all` (pins: `xtask/src/corpus_pins.rs`). A missing corpus fails.
@@ -34,7 +35,7 @@
 //! filters, knockout); the run asserts no crashes, and that the oracle pass count and the export
 //! round-trip count do not fall below the source's floors. Raise the floors when they improve;
 //! never lower them.
-//! Set `PHOTOCRAFT_CORPUS_STRICT=1` to also fail on import/export errors
+//! Set `MOST_IMAGE_CORPUS_STRICT=1` to also fail on import/export errors
 //! (files listed in `KNOWN_BAD` excepted).
 //!
 //! Every exported file must also pass `common::strict_block_errors` (#200): each tagged block
@@ -427,7 +428,7 @@ fn run_oracle(src: &Source) {
     eprintln!("{label}: export -> re-import renders the same for {rt_same} files; differs for {}: {}", rt_diff.len(), rt_diff.join(", "));
     let block_errors = BLOCK_ERRORS.with(|b| b.borrow().clone());
     eprintln!("{label}: exported files whose tagged blocks fail the strict re-parse: {}", block_errors.len());
-    if std::env::var_os("PHOTOCRAFT_CORPUS_STRICT").is_some() {
+    if std::env::var_os("MOST_IMAGE_CORPUS_STRICT").is_some() {
         assert_eq!(errors, 0);
     }
     assert!(crashes.is_empty(), "{label}: panics (Rule 9): {crashes:?}");

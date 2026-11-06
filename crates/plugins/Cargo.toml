@@ -1,6 +1,7 @@
+# Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 [package]
 name = "photocraft-plugins"
-description = "Sandboxed WebAssembly filter plug-ins: a resource-limited wasmi host for the PhotoCraft plug-in ABI"
+description = "Sandboxed WebAssembly filter plug-ins: a resource-limited wasmi host for the Most Image plug-in ABI"
 version.workspace = true
 edition.workspace = true
 license.workspace = true

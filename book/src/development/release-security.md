@@ -1,6 +1,7 @@
+<!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # Release security
 
-PhotoCraft's release workflow builds platform packages and a draft GitHub Release from the `release` branch. The authoritative process is [`docs/releasing.md`](https://github.com/storytold/photocraft/blob/main/docs/releasing.md).
+Most Image's release workflow builds platform packages and a draft GitHub Release from the `release` branch. The authoritative process is [`docs/releasing.md`](https://github.com/storytold/photocraft/blob/main/docs/releasing.md).
 
 ## Implemented workflow elements
 

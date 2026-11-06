@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::rendering::{refresh_or_fail, refresh_or_fail_in};
 use super::source::source_bytes;
 use super::{
@@ -205,7 +206,7 @@ pub(super) fn set_filter_params(s: &mut Session, p: &Value) -> Result<Value> {
         let i = filter_index(CMD, p, sm)?;
         let f = &mut sm.smart_filters[i];
         if f.command == photocraft_io::smart_map::UNSUPPORTED_FILTER {
-            return Err(bad(CMD, "this smart filter isn't implemented in PhotoCraft: it is kept as is (it can be hidden, moved or deleted)"));
+            return Err(bad(CMD, "this smart filter isn't implemented in Most Image: it is kept as is (it can be hidden, moved or deleted)"));
         }
         if let Some(params) = shape_params {
             f.params = params;

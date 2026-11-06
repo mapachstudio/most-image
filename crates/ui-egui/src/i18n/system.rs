@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Native UI-language preferences, queried once without subprocesses or registry parsing.
 
 use super::{Lang, lang_from_tag};
@@ -41,7 +42,7 @@ fn bounded_tags(tags: impl IntoIterator<Item = String>) -> Vec<String> {
 
 #[cfg(not(target_arch = "wasm32"))]
 fn detect_system_tags() -> Vec<String> {
-    if let Ok(tag) = std::env::var("PHOTOCRAFT_LOCALE")
+    if let Ok(tag) = std::env::var("MOST_IMAGE_LOCALE")
         && !tag.trim().is_empty()
     {
         return bounded_tags([tag]);

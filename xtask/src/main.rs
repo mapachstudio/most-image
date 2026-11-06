@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Workspace tooling: `cargo xtask <command>`.
 //!
 //! Pure Rust (std + serde_json). External tools (`cargo`, `curl`, `tar`) are
@@ -33,7 +34,7 @@ commands:
   corpus [--all | --pngsuite | --psd | --psd-tools | --pixls | --atn | --photoshop | --gimp] [--local] [--update-manifest]
                   show where test corpora live and their pins (xtask/src/corpus_pins.rs), or fetch
                   them into corpus/ (pinned commits, sha256-verified; --all = every corpus but pixls,
-                  --photoshop/--gimp --local copy from ../photocraft-corpus or $PHOTOCRAFT_CORPUS_REPO)
+                  --photoshop/--gimp --local copy from ../photocraft-corpus or $MOST_IMAGE_CORPUS_REPO)
   test-corpus [-p <crate>]... [--changed] [--pixls] [--local] [-- <test args>]
                   fetch every corpus, then cargo test --release --features corpus on the corpus
                   crates; --changed runs only if psd/io/codecs/compose/gpu/text/format/raw changed;

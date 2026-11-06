@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! The desktop app's command line, as clap types (#7071): `photocraft --help` comes from these doc
 //! comments, so the help and the parser can't disagree. Anything they don't declare is a usage
 //! error naming it (exit status 2), so a typo such as `--safegpu` doesn't open the window and then
@@ -7,7 +8,7 @@
 //! except for negative numbers, and a file whose name starts with `-` goes after `--`.
 //!
 //! The control and automation flags are `photocraft-automation`'s, shared with `photocraft-cli`.
-//! Only the desktop app reads the automation roots from `PHOTOCRAFT_AUTOMATION_*_ROOT` (#1551).
+//! Only the desktop app reads the automation roots from `MOST_IMAGE_AUTOMATION_*_ROOT` (#1551).
 
 use std::ffi::OsString;
 use std::fmt;
@@ -21,11 +22,11 @@ use photocraft_automation::args::{AutomationArgs, ControlArgs, blank_env_is_unse
 
 use crate::presentation;
 
-/// Opens PhotoCraft with the given files
+/// Opens Most Image with the given files
 #[derive(Parser)]
 #[command(name = "photocraft", version = photocraft_engine::build_info::long_version_static(), after_help = ENVIRONMENT)]
 pub(crate) struct LaunchArgs {
-    /// Files to open. On Windows and Linux they open as new tabs in the PhotoCraft already running.
+    /// Files to open. On Windows and Linux they open as new tabs in the Most Image already running.
     /// Put `--` before a name that starts with `-`
     pub(crate) files: Vec<PathBuf>,
     /// Start with the CPU renderer for this launch (after a graphics driver crash)
@@ -33,26 +34,26 @@ pub(crate) struct LaunchArgs {
     pub(crate) safe_gpu: bool,
     /// macOS: keep the menus inside the window instead of the menu bar (the variable: 0, false, no
     /// or off is off; empty is unset)
-    #[arg(long, env = "PHOTOCRAFT_IN_WINDOW_MENUS", value_parser = FalseyValueParser::new())]
+    #[arg(long, env = "MOST_IMAGE_IN_WINDOW_MENUS", value_parser = FalseyValueParser::new())]
     pub(crate) in_window_menus: bool,
-    /// Windows and Linux: start a separate PhotoCraft instead of opening the files in the one
+    /// Windows and Linux: start a separate Most Image instead of opening the files in the one
     /// already running
     #[arg(long)]
     pub(crate) new_instance: bool,
     /// How frames reach the display: fifo, autovsync or novsync (also immediate or mailbox).
-    /// Without it, PHOTOCRAFT_PRESENT_MODE
+    /// Without it, MOST_IMAGE_PRESENT_MODE
     #[arg(long, value_name = "MODE", value_parser = present_mode)]
     pub(crate) present_mode: Option<PresentMode>,
-    /// Frames queued for the display, 1 to 3. Without it, PHOTOCRAFT_FRAME_LATENCY
+    /// Frames queued for the display, 1 to 3. Without it, MOST_IMAGE_FRAME_LATENCY
     // allow_negative_numbers makes `--frame-latency -1` a bad value rather than an unexpected argument.
     #[arg(long, value_name = "1-3", value_parser = frame_latency, allow_negative_numbers = true)]
     pub(crate) frame_latency: Option<u32>,
     /// Time each brush stroke's frames: stderr prints a summary per stroke, a CSV file path also
-    /// records every frame. Without it, PHOTOCRAFT_STROKE_TRACE
+    /// records every frame. Without it, MOST_IMAGE_STROKE_TRACE
     #[arg(long, value_name = "stderr|FILE.csv")]
     pub(crate) stroke_trace: Option<String>,
     /// Start the localhost JSON-lines control server on this port
-    #[arg(long, value_name = "PORT", env = "PHOTOCRAFT_CONTROL_PORT", value_parser = control_port, allow_negative_numbers = true)]
+    #[arg(long, value_name = "PORT", env = "MOST_IMAGE_CONTROL_PORT", value_parser = control_port, allow_negative_numbers = true)]
     pub(crate) control: Option<u16>,
     #[command(flatten)]
     pub(crate) auth: ControlArgs,
@@ -65,7 +66,7 @@ pub(crate) struct LaunchArgs {
 
 /// The variables that aren't a flag's fallback, for the end of `--help`.
 const ENVIRONMENT: &str = "\
-Environment: PHOTOCRAFT_NEW_INSTANCE (anything but 0 or empty: as --new-instance), PHOTOCRAFT_CONFIG_DIR (the settings folder)";
+Environment: MOST_IMAGE_NEW_INSTANCE (anything but 0 or empty: as --new-instance), MOST_IMAGE_CONFIG_DIR (the settings folder)";
 
 /// An option that applies only to the process it's given to: a launch with any of them keeps its
 /// own process instead of handing its files to the running one (`single_instance`). Shown as the
@@ -79,7 +80,7 @@ pub(crate) enum PerProcess {
     PresentMode,
     FrameLatency,
     StrokeTrace,
-    /// PHOTOCRAFT_GPU_ADAPTER, when startup will act on it (`gpu_startup`). Not a flag.
+    /// MOST_IMAGE_GPU_ADAPTER, when startup will act on it (`gpu_startup`). Not a flag.
     GpuAdapterEnv,
 }
 
@@ -115,7 +116,7 @@ impl fmt::Display for PerProcess {
             Self::PresentMode => "--present-mode",
             Self::FrameLatency => "--frame-latency",
             Self::StrokeTrace => "--stroke-trace",
-            Self::GpuAdapterEnv => "PHOTOCRAFT_GPU_ADAPTER",
+            Self::GpuAdapterEnv => "MOST_IMAGE_GPU_ADAPTER",
         })
     }
 }
@@ -147,8 +148,8 @@ impl LaunchArgs {
 /// variable counts as unset.
 pub(crate) fn command() -> Command {
     LaunchArgs::command()
-        .mut_arg("automation_read_root", |a| a.env("PHOTOCRAFT_AUTOMATION_READ_ROOT"))
-        .mut_arg("automation_write_root", |a| a.env("PHOTOCRAFT_AUTOMATION_WRITE_ROOT"))
+        .mut_arg("automation_read_root", |a| a.env("MOST_IMAGE_AUTOMATION_READ_ROOT"))
+        .mut_arg("automation_write_root", |a| a.env("MOST_IMAGE_AUTOMATION_WRITE_ROOT"))
         .mut_args(blank_env_is_unset)
 }
 
@@ -171,7 +172,7 @@ pub(crate) fn parse(mut cmd: Command, args: impl IntoIterator<Item = OsString>) 
     if launch.control.is_some() {
         conflict(&mut cmd, &matches, "control_token", "control_token_file")?;
     }
-    // `PHOTOCRAFT_IN_WINDOW_MENUS=0` (or off, false, no) is a variable that turns the menus off.
+    // `MOST_IMAGE_IN_WINDOW_MENUS=0` (or off, false, no) is a variable that turns the menus off.
     let menus = launch.in_window_menus;
     let given = |p: &PerProcess| match p.id().and_then(|id| matches.value_source(id)) {
         Some(ValueSource::CommandLine) => true,

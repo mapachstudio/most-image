@@ -1,3 +1,4 @@
+# Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 # .deb and .rpm packages (nfpm: https://nfpm.goreleaser.com). Run by package.sh, which stages
 # the file tree, substitutes its path for ${STAGE} (nfpm doesn't expand env vars in `src`) and
 # exports VERSION and NFPM_ARCH.
@@ -12,8 +13,8 @@ version_schema: semver
 release: 1
 section: graphics
 priority: optional
-maintainer: ${PHOTOCRAFT_MAINTAINER}
-vendor: Learning Machines LLC
+maintainer: ${MOST_IMAGE_MAINTAINER}
+vendor: Grupo MOST
 homepage: https://getartcraft.com/apps/photocraft
 license: MIT OR Apache-2.0
 description: |-

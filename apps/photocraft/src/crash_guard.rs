@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Last-resort crash guard (AGENTS.md, Never crash).
 //!
 //! Code must return errors, never panic. This is the safety net for a panic that escapes anyway:
@@ -11,7 +12,7 @@ use std::panic::{AssertUnwindSafe, catch_unwind};
 pub fn install_hook() {
     let default = std::panic::take_hook();
     std::panic::set_hook(Box::new(move |info| {
-        log::error!("PhotoCraft internal error: {info}");
+        log::error!("Most Image internal error: {info}");
         default(info);
     }));
 }

@@ -1,4 +1,5 @@
-//! #6541: the Layers panel marks an adjustment layer PhotoCraft keeps as imported but cannot
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+//! #6541: the Layers panel marks an adjustment layer Most Image keeps as imported but cannot
 //! render, so a picture that differs from Photoshop's has a visible reason.
 
 use egui::vec2;

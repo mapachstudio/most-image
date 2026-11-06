@@ -1,6 +1,7 @@
+<!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # Credits
 
-PhotoCraft is created and maintained by the ArtCraft team and PhotoCraft contributors. Project ownership, copyright, and licensing remain as stated in the repository's `README.md`, `NOTICE`, and license files. Every merged contribution is credited in the repository history and release notes.
+Most Image is created and maintained by the ArtCraft team and Most Image contributors. Project ownership, copyright, and licensing remain as stated in the repository's `README.md`, `NOTICE`, and license files. Every merged contribution is credited in the repository history and release notes.
 
 ## Documentation
 

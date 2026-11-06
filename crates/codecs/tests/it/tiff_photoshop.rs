@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Photoshop's private TIFF tags (34377 image resources, 37724 ImageSourceData) travel through
 //! `Metadata` as opaque bytes: written when present, read from either byte order and from
 //! BigTIFF, and never a panic or an allocation on malformed input.
@@ -66,7 +67,7 @@ fn extra_samples_round_trip() {
 
 /// Tall enough that the default strip size (about 1 MB) cannot hold every row, so a writer
 /// that only fills the first strip, or predicts across the wrong sample count, cannot hide.
-/// The spot plane is checked with the `tiff` crate, not PhotoCraft's decoder.
+/// The spot plane is checked with the `tiff` crate, not Most Image's decoder.
 #[test]
 fn multi_strip_spot_round_trip_and_dump() {
     let w = 800u32;

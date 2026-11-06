@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Edit › Keyboard Shortcuts › Set: named shortcut sets, as in Photoshop. The bindings in use
 //! stay in [`Preferences::shortcuts`] / [`Preferences::alternate_shortcuts`] (what dispatch
 //! reads); a set is a saved copy of them, `Preferences::shortcut_sets` keyed by name, and
@@ -18,7 +19,7 @@ use serde_json::{Value, json};
 use crate::prefs::{Preferences, alternate_keys, normalize_shortcut};
 
 /// The built-in set's name: the default bindings.
-pub const DEFAULTS_NAME: &str = "PhotoCraft Defaults";
+pub const DEFAULTS_NAME: &str = "Most Image Defaults";
 /// Saved sets are small; the cap keeps a hostile settings file or call bounded.
 pub const MAX_SETS: usize = 64;
 /// Longest set name, in characters.
@@ -375,7 +376,7 @@ mod tests {
     #[test]
     fn bad_names_sets_and_params_are_errors() {
         let mut p = prefs();
-        for name in ["", "   ", "PhotoCraft defaults", "a\u{7}b", &"x".repeat(65)] {
+        for name in ["", "   ", "Most Image defaults", "a\u{7}b", &"x".repeat(65)] {
             assert!(store(&mut p, &json!({"saveSet": name})).is_err(), "{name:?}");
         }
         assert!(load(&mut p, &json!({"useSet": "Nope"})).is_err());
@@ -404,7 +405,7 @@ mod tests {
         assert!(modified(&p), "activeSet names the set; it doesn't load it");
         load(&mut p, &json!({"useSet": "A"})).unwrap();
         assert!(!modified(&p));
-        store(&mut p, &json!({"activeSet": "PhotoCraft Defaults"})).unwrap();
+        store(&mut p, &json!({"activeSet": "Most Image Defaults"})).unwrap();
         assert_eq!(p.shortcut_set, "");
     }
 

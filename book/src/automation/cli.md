@@ -1,3 +1,4 @@
+<!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # Command-line interface
 
 `apps/photocraft-cli` provides the following current subcommands:
@@ -8,7 +9,7 @@
 | `info` | Print document size, mode, depth, and layer information as JSON |
 | `run` | Open or create a document, execute engine commands, and optionally save |
 | `batch` | Apply an action list to files in one input directory |
-| `droplet` | Run a PhotoCraft droplet against files or folders |
+| `droplet` | Run a Most Image droplet against files or folders |
 | `commands` | List command IDs and parameter documentation |
 | `mcp` | Start the MCP server on stdio, optionally bridged to the desktop app |
 | `serve` | Start the JSON-lines headless server on stdio or loopback TCP |
@@ -53,7 +54,7 @@ always baked in **document stacking order**, bottom to top. When `path` is
 omitted, the command returns the .cube text in `cube`; both forms return
 `size` and `layerCount`.
 
-Valid LUT dimensions are 2–129 (same maximum as PhotoCraft's LUT reader).
+Valid LUT dimensions are 2–129 (same maximum as Most Image's LUT reader).
 Selected IDs must exist, be visible top-level adjustment layers, and contain
 no duplicates; invalid selections report an error rather than silently
 exporting a different look. Masks, vector masks and clipping are spatial
@@ -67,10 +68,10 @@ CLI parsing checks the flags and their values before any work starts. A flag the
 
 `mcp` and `serve` reject positional arguments, empty values and options for the wrong mode before
 starting a server. Explicit control-token flags require `mcp --bridge` or `serve --port` (or
-`PHOTOCRAFT_CONTROL_PORT`, below). Configure automation roots on the desktop process when using
+`MOST_IMAGE_CONTROL_PORT`, below). Configure automation roots on the desktop process when using
 bridge mode; the CLI rejects root flags there. See the [MCP launch guide](mcp.md) for examples.
 
-`mcp` and `serve` fall back to environment variables: `PHOTOCRAFT_CONTROL_TOKEN` and `PHOTOCRAFT_CONTROL_TOKEN_FILE` for the token flags, and `PHOTOCRAFT_CONTROL_PORT` for `serve --port` and `mcp --bridge` (which then bridges to `127.0.0.1:<port>`). The automation roots are flags only: the desktop app's `PHOTOCRAFT_AUTOMATION_READ_ROOT` and `PHOTOCRAFT_AUTOMATION_WRITE_ROOT` grant the CLI nothing. A flag wins over its variable, an empty variable counts as unset, and a bad value is a usage error naming the variable. When `PHOTOCRAFT_CONTROL_PORT` switches `serve` to TCP or `mcp` to bridging, the command says so on standard error. A token together with a token file is a usage error only where a token is read (`serve` on TCP, `mcp` bridging), so a stale exported pair doesn't stop stdio `serve` or headless `mcp`. An automation root given to `mcp` while the variable would switch it to bridging is a usage error too: the roots are the headless engine's, and the bridge would drop them. `<subcommand> --help` lists each variable (unless it is set but empty), never with the token's value. A variable holds a port, so `PHOTOCRAFT_CONTROL_PORT=127.0.0.1:7878` is refused; only `--bridge` takes `host:port`.
+`mcp` and `serve` fall back to environment variables: `MOST_IMAGE_CONTROL_TOKEN` and `MOST_IMAGE_CONTROL_TOKEN_FILE` for the token flags, and `MOST_IMAGE_CONTROL_PORT` for `serve --port` and `mcp --bridge` (which then bridges to `127.0.0.1:<port>`). The automation roots are flags only: the desktop app's `MOST_IMAGE_AUTOMATION_READ_ROOT` and `MOST_IMAGE_AUTOMATION_WRITE_ROOT` grant the CLI nothing. A flag wins over its variable, an empty variable counts as unset, and a bad value is a usage error naming the variable. When `MOST_IMAGE_CONTROL_PORT` switches `serve` to TCP or `mcp` to bridging, the command says so on standard error. A token together with a token file is a usage error only where a token is read (`serve` on TCP, `mcp` bridging), so a stale exported pair doesn't stop stdio `serve` or headless `mcp`. An automation root given to `mcp` while the variable would switch it to bridging is a usage error too: the roots are the headless engine's, and the bridge would drop them. `<subcommand> --help` lists each variable (unless it is set but empty), never with the token's value. A variable holds a port, so `MOST_IMAGE_CONTROL_PORT=127.0.0.1:7878` is refused; only `--bridge` takes `host:port`.
 
 This checking is not a security policy layer. Engine commands remain responsible for validating their own parameters.
 

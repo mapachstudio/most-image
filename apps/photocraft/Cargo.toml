@@ -1,10 +1,11 @@
+# Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 [package]
 name = "photocraft"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
 default-run = "photocraft"
-description = "PhotoCraft: an open-source, native image editor"
+description = "Most Image: an open-source, native image editor"
 build = "build.rs"
 
 [features]

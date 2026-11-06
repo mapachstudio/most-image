@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::*;
 use crate::smart_map::{UNSUPPORTED_FILTER, filter_from_item, item_for_filter};
 use photocraft_color::BlendMode;
@@ -168,7 +169,7 @@ fn active_unimplemented_controls_and_malformed_curves_stay_opaque() {
 #[test]
 #[ignore = "requires a user-supplied Camera Raw PSD"]
 fn all_sliders_fixture() {
-    let path = std::env::var("PHOTOCRAFT_CAMERA_RAW_PSD").expect("set PHOTOCRAFT_CAMERA_RAW_PSD");
+    let path = std::env::var("MOST_IMAGE_CAMERA_RAW_PSD").expect("set MOST_IMAGE_CAMERA_RAW_PSD");
     let doc = crate::import("fixture.psd", &std::fs::read(path).unwrap()).unwrap().document;
     let original = doc
         .walk()

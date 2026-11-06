@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! `manifest.json` schema. This is a *separate* serde model from
 //! `photocraft-doc` on purpose: the on-disk schema is versioned and migrated
 //! independently of in-memory refactors.
@@ -285,7 +286,7 @@ pub enum ContentM {
         #[serde(default)]
         live: Option<LiveShape>,
         /// Arrow parameters stored separately for backward compatibility.
-        /// Older PhotoCraft versions ignore this optional field.
+        /// Older Most Image versions ignore this optional field.
         #[serde(default, skip_serializing_if = "Option::is_none")]
         arrow_live: Option<LiveShape>,
         /// The path's density as the fill's mask; older files have none (100 %).

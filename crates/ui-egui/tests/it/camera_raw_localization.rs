@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Camera Raw labels and language changes through the real shared native/WASM shell.
 use egui::{accesskit::Role, pos2, vec2};
 use egui_kittest::{Harness, kittest::Queryable};
@@ -13,7 +14,7 @@ fn all_registered_languages_render_camera_raw_and_switch_without_resetting_view_
     assert_required_camera_raw_fonts();
     let _gpu = photocraft_testkit::gpu_lock();
     for lang in i18n::Lang::all() {
-        let gpu = std::env::var_os("PHOTOCRAFT_LOCALE_SNAPSHOTS").is_some();
+        let gpu = std::env::var_os("MOST_IMAGE_LOCALE_SNAPSHOTS").is_some();
         let builder = Harness::builder().with_step_dt(1.0 / 60.0).with_size(vec2(1440.0, 1000.0));
         let builder = if gpu { builder.wgpu() } else { builder };
         let mut h = builder.build_eframe(move |cc| {
@@ -100,7 +101,7 @@ fn all_registered_languages_render_camera_raw_and_switch_without_resetting_view_
         let preview = control::inspect(h.state(), &ctx)["cameraRaw"]["previewRect"].clone();
         h.hover_at(pos2((preview[0].as_f64().unwrap() + preview[2].as_f64().unwrap()) as f32 * 0.5, 400.0));
         h.run_steps(3);
-        if let Ok(dir) = std::env::var("PHOTOCRAFT_LOCALE_SNAPSHOTS") {
+        if let Ok(dir) = std::env::var("MOST_IMAGE_LOCALE_SNAPSHOTS") {
             std::fs::create_dir_all(&dir).unwrap();
             h.render().unwrap().save(std::path::Path::new(&dir).join(format!("{}.png", lang.code()))).unwrap();
         }

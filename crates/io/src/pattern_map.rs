@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Patterns ⇄ PSD: the global `Patt`/`Pat2`/`Pat3` blocks and `.pat` files.
 //!
 //! Import parses the blocks into [`Document::patterns`] and keeps the raw blocks. Export reuses
@@ -220,7 +221,7 @@ pub fn export_global_blocks(doc: &Document) -> Vec<photocraft_doc::PsdGlobalBloc
     out
 }
 
-/// `raw` with each pattern block that keeps transparency where older PhotoCraft builds put it
+/// `raw` with each pattern block that keeps transparency where older Most Image builds put it
 /// (which Photoshop refuses, #8054) rewritten in place from its own patterns. Every other block,
 /// unreadable pattern blocks included, is kept verbatim. Blocks are decoded in order with one
 /// shared budget, as [`from_global_blocks`] decodes them.

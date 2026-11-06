@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Build and package PhotoCraft for Linux (<arch> is x86_64, aarch64 or riscv64):
+# Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+# Build and package Most Image for Linux (<arch> is x86_64, aarch64 or riscv64):
 #
 #   $DIST/photocraft-<version>-linux-<arch>.AppImage  any distro with glibc >= the build host's
 #   $DIST/photocraft-<version>-linux-<arch>.AppImage.zsync  delta updates (needs zsyncmake)
@@ -23,7 +24,7 @@ set -euo pipefail
 HERE="$ROOT/packaging/linux"
 # shellcheck source=verified-download.sh
 . "$HERE/verified-download.sh"
-APP_ID=ai.storyteller.photocraft
+APP_ID=com.grupomostmexico.mostimage
 
 SKIP_BUILD=0
 FORMATS="appimage deb rpm tar"
@@ -43,10 +44,10 @@ case "$ARCH" in
   aarch64 | arm64) ARCH=aarch64; DEB_ARCH=arm64 ;;
   *) echo "unsupported architecture $ARCH" >&2; exit 2 ;;
 esac
-export PHOTOCRAFT_MAINTAINER="${PHOTOCRAFT_MAINTAINER:-PhotoCraft maintainers <photocraft@storyteller.ai>}"
+export MOST_IMAGE_MAINTAINER="${MOST_IMAGE_MAINTAINER:-Most Image maintainers <photocraft@storyteller.ai>}"
 BASENAME="photocraft-$VERSION-linux-$ARCH"
 
-echo "==> PhotoCraft $VERSION for Linux $ARCH ($FORMATS)"
+echo "==> Most Image $VERSION for Linux $ARCH ($FORMATS)"
 
 # The man-and-completions example writes photocraft-cli's man pages and shell completions below. It
 # is built in its own cargo run: built with the binaries, its dev-dependencies' features would be
@@ -72,7 +73,7 @@ install -Dm755 "$BIN/photocraft-cli" "$STAGE/usr/bin/photocraft-cli"
 install -Dm644 "$HERE/$APP_ID.desktop" "$STAGE/usr/share/applications/$APP_ID.desktop"
 install -Dm644 "$HERE/$APP_ID.mime.xml" "$STAGE/usr/share/mime/packages/$APP_ID.xml"
 mkdir -p "$STAGE/usr/share/metainfo"
-sed -e "s/@VERSION@/$VERSION/g" -e "s/@DATE@/$PHOTOCRAFT_BUILD_DATE/g" \
+sed -e "s/@VERSION@/$VERSION/g" -e "s/@DATE@/$MOST_IMAGE_BUILD_DATE/g" \
   "$HERE/$APP_ID.metainfo.xml.in" >"$STAGE/usr/share/metainfo/$APP_ID.metainfo.xml"
 mkdir -p "$STAGE/usr/share/icons"
 cp -R "$ROOT/assets/app-icon/hicolor" "$STAGE/usr/share/icons/"
@@ -135,7 +136,7 @@ fi
 
 # ---- AppImage -----------------------------------------------------------------------------------
 if has appimage; then
-  APPDIR="$WORK/PhotoCraft.AppDir"
+  APPDIR="$WORK/Most Image.AppDir"
   cp -R "$STAGE" "$APPDIR"
   # Preserve the sctk-adwaita MIT notice in the packaged AppImage.
   install -Dm644 "$ROOT/NOTICE" "$APPDIR/usr/share/doc/photocraft/NOTICE"

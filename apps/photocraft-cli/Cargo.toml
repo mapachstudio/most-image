@@ -1,6 +1,7 @@
+# Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 [package]
 name = "photocraft-cli"
-description = "Headless PhotoCraft: convert, inspect, run commands, batch, MCP server"
+description = "Headless Most Image: convert, inspect, run commands, batch, MCP server"
 version.workspace = true
 edition.workspace = true
 license.workspace = true

@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::*;
 use std::collections::HashMap;
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -50,7 +51,7 @@ fn no_marker_uses_the_platform_dir() {
 fn either_marker_keeps_everything_beside_the_exe() {
     for marker in PORTABLE_MARKERS {
         let root = temp("portable");
-        let exe = root.join("PhotoCraft");
+        let exe = root.join("Most Image");
         std::fs::create_dir_all(&exe).unwrap();
         std::fs::write(exe.join(marker), b"").unwrap();
         let d = resolve(fake_home(&root), Some(&exe));
@@ -105,7 +106,7 @@ fn override_wins_over_portable() {
     std::fs::create_dir_all(&exe).unwrap();
     std::fs::write(exe.join("portable.txt"), b"").unwrap();
     let custom = root.join("custom");
-    let d = resolve(env_of(&[("PHOTOCRAFT_CONFIG_DIR", &custom)]), Some(&exe));
+    let d = resolve(env_of(&[("MOST_IMAGE_CONFIG_DIR", &custom)]), Some(&exe));
     assert_eq!((d.mode, d.dir), (Mode::Override, Some(custom)));
     assert!(!exe.join(PORTABLE_DATA_DIR).exists());
     let _ = std::fs::remove_dir_all(&root);
@@ -353,7 +354,7 @@ fn a_launch_that_times_out_never_writes_where_a_move_removes() {
     let _ = std::fs::remove_dir_all(&root);
 }
 
-/// A writer that still uses the old path while it is being copied (an older PhotoCraft)
+/// A writer that still uses the old path while it is being copied (an older Most Image)
 /// starts a new folder there; the move removes only the original it held aside.
 #[test]
 fn a_write_to_the_old_path_during_a_copy_is_not_removed() {
@@ -440,7 +441,7 @@ fn missing_exe_dir_or_env_never_panics() {
     let d = resolve(|_| None, None);
     assert_eq!((d.mode, d.dir), (Mode::Platform, None));
     let empty = PathBuf::new();
-    let d = resolve(env_of(&[("PHOTOCRAFT_CONFIG_DIR", &empty), ("HOME", &empty), ("APPDATA", &empty)]), None);
+    let d = resolve(env_of(&[("MOST_IMAGE_CONFIG_DIR", &empty), ("HOME", &empty), ("APPDATA", &empty)]), None);
     assert_eq!(d.dir, None, "empty variables are ignored");
 }
 

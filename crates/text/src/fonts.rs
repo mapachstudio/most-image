@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Font database: bundled fonts (always available, also on the web), the optional craft-fonts
 //! fonts of every script ([`crate::craft_fonts`], when built with `CRAFT_FONTS_DIR`), optional
 //! system fonts found by scanning platform directories (plus Fontconfig's file list on Linux),
@@ -37,7 +38,7 @@ pub static INTER_MEDIUM: LazyLock<Vec<u8>> = LazyLock::new(|| inflate_font(bundl
 pub static INTER_SEMIBOLD: LazyLock<Vec<u8>> = LazyLock::new(|| inflate_font(bundled_font!("Inter-SemiBold.ttf")));
 pub static JETBRAINS_MONO_REGULAR: LazyLock<Vec<u8>> = LazyLock::new(|| inflate_font(bundled_font!("JetBrainsMono-Regular.ttf")));
 
-/// Fonts shipped with PhotoCraft (OFL; licences in `assets/fonts`).
+/// Fonts shipped with Most Image (OFL; licences in `assets/fonts`).
 pub static BUNDLED: [(&str, &LazyLock<Vec<u8>>); 4] = [
     ("Inter-Regular.ttf", &INTER_REGULAR),
     ("Inter-Medium.ttf", &INTER_MEDIUM),
@@ -547,7 +548,7 @@ impl FontDb {
             let Some(font) = info.fonts().get(index) else { return };
             let Some(blob) = font.load(Some(&mut self.fcx.source_cache)) else { return };
             let Some(blob) = isolated_face(blob, font.index()) else { return };
-            let alias = format!(".PhotoCraft-face-{}-{index}", info.id().to_u64());
+            let alias = format!(".Most Image-face-{}-{index}", info.id().to_u64());
             self.fcx.collection.register_fonts(blob, Some(FontInfoOverride { family_name: Some(&alias), ..Default::default() }));
             self.face_aliases.insert(key, alias.clone());
             alias

@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! File › Print…, Print One Copy, File › Package… and File › Export › Paths to Illustrator….
 //!
 //! Printing renders the flattened document into a PDF page (paper size, orientation, position,
@@ -11,7 +12,7 @@
 //! Where `lp` is not on the path (a Flatpak has none), the job goes to CUPS over IPP in-process
 //! (`photocraft-ipp`, through the sandbox's `--socket=cups`), and when no print server or no
 //! printer is reachable, to the app's spooler, the XDG Print portal (`Session::print_spooler`;
-//! `PHOTOCRAFT_PRINT_PORTAL=1` prefers it, `=0` removes it). `"printServer"` names a server for
+//! `MOST_IMAGE_PRINT_PORTAL=1` prefers it, `=0` removes it). `"printServer"` names a server for
 //! one job and always takes the IPP route; `file.printers` lists the queues (#2728).
 //!
 //! Paths to Illustrator writes the document's paths as an Adobe Illustrator 3 compatible
@@ -1039,7 +1040,7 @@ fn render_and_spool(doc: &Document, p: &Value, cmd: &str, spooler: Option<&Spool
         printer: p.get("printer").and_then(Value::as_str).filter(|v| !v.is_empty()).map(str::to_string),
         copies,
         title: doc.name.clone(),
-        // PhotoCraft already placed and scaled the image on its physical sheet. Scaling again
+        // Most Image already placed and scaled the image on its physical sheet. Scaling again
         // in the driver would change the preview, print resolution and crop-mark positions.
         scaling: craft_print::Scaling::Exact,
         ..Default::default()
@@ -1327,19 +1328,19 @@ fn printer_page(_: &mut Session, p: &Value) -> Result<Value> {
 static PRINTING_DISABLED: std::sync::atomic::AtomicBool = std::sync::atomic::AtomicBool::new(false);
 
 /// Refuse to spool anything from this process from now on (tests, fuzzing). The
-/// `PHOTOCRAFT_NO_PRINT` environment variable does the same for a whole shell (CI).
+/// `MOST_IMAGE_NO_PRINT` environment variable does the same for a whole shell (CI).
 pub fn disable_printing() {
     PRINTING_DISABLED.store(true, std::sync::atomic::Ordering::Relaxed);
 }
 
-/// Whether spooling is blocked by [`disable_printing`] or `PHOTOCRAFT_NO_PRINT`.
+/// Whether spooling is blocked by [`disable_printing`] or `MOST_IMAGE_NO_PRINT`.
 pub fn printing_disabled() -> bool {
-    PRINTING_DISABLED.load(std::sync::atomic::Ordering::Relaxed) || std::env::var_os("PHOTOCRAFT_NO_PRINT").is_some_and(|v| !v.is_empty() && v != "0")
+    PRINTING_DISABLED.load(std::sync::atomic::Ordering::Relaxed) || std::env::var_os("MOST_IMAGE_NO_PRINT").is_some_and(|v| !v.is_empty() && v != "0")
 }
 
 fn require_printing_enabled() -> Result<()> {
     if printing_disabled() {
-        Err(other("printing is disabled in this process (photocraft_engine::print_cmds::disable_printing or PHOTOCRAFT_NO_PRINT); use dryRun: true"))
+        Err(other("printing is disabled in this process (photocraft_engine::print_cmds::disable_printing or MOST_IMAGE_NO_PRINT); use dryRun: true"))
     } else {
         Ok(())
     }
@@ -1429,7 +1430,7 @@ fn package(s: &mut Session, p: &Value) -> Result<Value> {
                     missing.push(path.clone());
                     continue;
                 };
-                // Only a file PhotoCraft can place is copied; anything else is packaged as missing.
+                // Only a file Most Image can place is copied; anything else is packaged as missing.
                 match read_file(&file.to_string_lossy()).ok().filter(|bytes| crate::file_cmds::import(&fname, bytes).is_ok()) {
                     Some(bytes) => {
                         write_file(&t, &bytes)?;
@@ -1476,7 +1477,7 @@ pub fn paths_to_ai(doc: &Document, which: &str) -> Result<(String, usize)> {
         name => chosen.extend(doc.paths.iter().filter(|p| p.name == name).map(|p| (p.name.clone(), &p.path))),
     }
     let mut s = String::new();
-    s.push_str("%!PS-Adobe-2.0 EPSF-1.2\n%%Creator: PhotoCraft\n");
+    s.push_str("%!PS-Adobe-2.0 EPSF-1.2\n%%Creator: Most Image\n");
     s.push_str(&format!("%%Title: ({})\n", doc.name.replace([')', '('], "_")));
     s.push_str(&format!(
         "%%BoundingBox: 0 0 {} {}\n%%HiResBoundingBox: 0 0 {w:.4} {h:.4}\n%AI3_Cropmarks: 0 0 {w:.4} {h:.4}\n",

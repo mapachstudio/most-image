@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! The wasmi host: loading, instantiating and calling a plug-in under resource limits.
 
 use std::sync::{Arc, Mutex};
@@ -196,7 +197,7 @@ impl Plugin {
         if !bytes.starts_with(b"\0asm") {
             let msg = "not a WebAssembly binary (missing \\0asm header)";
             return Err(Error::Module(match format_hint(bytes) {
-                Some(hint) => format!("{msg}; this file looks like {hint} - PhotoCraft plug-ins are WebAssembly modules (.wasm)"),
+                Some(hint) => format!("{msg}; this file looks like {hint} - Most Image plug-ins are WebAssembly modules (.wasm)"),
                 None => msg.to_string(),
             }));
         }

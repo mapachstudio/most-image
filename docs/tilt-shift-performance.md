@@ -1,3 +1,4 @@
+<!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # Tilt-Shift computation (2026-10-10)
 
 Starting base: `a28d786638ffbb84c5fb7d5d30ea1c3d594cd3bc`, freshly fetched
@@ -246,7 +247,7 @@ limited to this Windows x86_64 machine. `cargo xtask test-corpus --changed`
 correctly skips its suites because no format, IO, compositor, GPU or text crate
 changed. Command registrations and UI code are unchanged.
 
-The measurements establish equivalence to the starting PhotoCraft kernel, not a
+The measurements establish equivalence to the starting Most Image kernel, not a
 new Photoshop oracle or broader parity increase. Cold startup, actual GUI
 input/frame latency, allocation counts and other platforms' native performance
 remain unmeasured. No performance budget, scorecard checklist or parity floor is

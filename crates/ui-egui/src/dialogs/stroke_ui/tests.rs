@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use serde_json::json;
 
 use super::*;
@@ -139,7 +140,7 @@ fn command_params_do_not_leak_private_dialog_fields() {
     assert_eq!(out["color"], "#ff0000");
 }
 
-/// The Stroke dialog's colour swatch opens PhotoCraft's Color Picker on the stroke colour (as in
+/// The Stroke dialog's colour swatch opens Most Image's Color Picker on the stroke colour (as in
 /// Photoshop), not egui's compact popup; OK sets the stroke colour, not the foreground, and the
 /// stroke is drawn in it.
 #[test]

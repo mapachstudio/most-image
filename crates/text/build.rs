@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Optional craft-fonts build input (https://github.com/storytold/craft-fonts, recipe from its
 //! `docs/integration.md`).
 //!
@@ -7,7 +8,7 @@
 //! scripts run in the crate's directory, so a relative one resolves from `crates/text`. A bad
 //! checkout is a warning, or an error with `CRAFT_FONTS_REQUIRED=1` (release builds).
 //!
-//! PhotoCraft difference from the recipe: the web build (wasm32) embeds nothing. The wasm must
+//! Most Image difference from the recipe: the web build (wasm32) embeds nothing. The wasm must
 //! stay under the 24 MiB gate in `packaging/web/package.sh` (#237; Cloudflare's per-file cap is
 //! 25 MiB). Measured 2026-10-06 (`trunk build --release`): 24,190,076 bytes
 //! without craft-fonts, 28,867,488 with only the UI face (BIZ UDPGothic Regular) embedded, over

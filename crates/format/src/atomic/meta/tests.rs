@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! What a save keeps from the file it replaces.
 //!
 //! The Unix tests run for real. The Windows ones exercise `ReplaceFileW` through
@@ -46,7 +47,7 @@ mod xattrs {
     #[cfg(target_os = "macos")]
     const TAG: &str = "com.apple.metadata:_kMDItemUserTags";
     #[cfg(not(target_os = "macos"))]
-    const TAG: &str = "user.photocraft.test";
+    const TAG: &str = "user.mostimage.test";
 
     fn set(path: &Path, name: &str, value: &[u8]) -> bool {
         rustix::fs::setxattr(path, name, value, rustix::fs::XattrFlags::empty()).is_ok()

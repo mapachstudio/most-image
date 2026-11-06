@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! The desktop app's logger: `log::` records go to standard error and to a log file.
 //!
 //! Without a logger every `log::warn!`/`log::error!` in the workspace (GPU startup fallbacks, a
@@ -8,7 +9,7 @@
 //! instance is still running leaves that instance's log alone and writes `photocraft-<pid>.log`
 //! (see [`rotate`]).
 //!
-//! Levels: `info` for PhotoCraft's own crates, `warn` for everything else (wgpu and naga are
+//! Levels: `info` for Most Image's own crates, `warn` for everything else (wgpu and naga are
 //! chatty). `RUST_LOG` replaces that with env_logger-style directives: `debug`,
 //! `warn,photocraft_gpu=trace`, `wgpu_core=info`. A directive ending in `*` matches every target
 //! that starts with it (`photocraft*=debug`).

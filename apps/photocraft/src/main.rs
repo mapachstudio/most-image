@@ -1,25 +1,26 @@
-//! PhotoCraft desktop app.
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+//! Most Image desktop app.
 //!
 //! Usage: `photocraft [options] [--] [files…]`; `photocraft --help` lists the options, which are
 //! declared, with what makes a usage error (exit status 2), in `launch_args`.
 //!
-//! On Windows and Linux a launch hands its files to the PhotoCraft that is already running (new
+//! On Windows and Linux a launch hands its files to the Most Image that is already running (new
 //! tabs in its window) and exits; `--new-instance` starts a separate copy instead, as does any
 //! `--control` launch (see `single_instance`).
 //!
 //! `--present-mode` (`fifo`, `autovsync`, `novsync`) and `--frame-latency` (1–3) override how
-//! frames reach the display for this launch (`PHOTOCRAFT_PRESENT_MODE` / `…_FRAME_LATENCY`;
-//! `presentation`); `--stroke-trace` times each brush stroke's frames (`PHOTOCRAFT_STROKE_TRACE`;
+//! frames reach the display for this launch (`MOST_IMAGE_PRESENT_MODE` / `…_FRAME_LATENCY`;
+//! `presentation`); `--stroke-trace` times each brush stroke's frames (`MOST_IMAGE_STROKE_TRACE`;
 //! `photocraft_ui_egui::stroke_trace`).
 //!
 //! `--safe-gpu` starts with the CPU renderer (no GPU canvas; a software adapter for the window
 //! where the platform has one) for this launch, e.g. after a graphics driver crash. A start that
 //! crashes inside the driver also falls back by itself next time (see `gpu_startup`).
 //!
-//! `--in-window-menus` (or `PHOTOCRAFT_IN_WINDOW_MENUS=1`) keeps the menus inside the window on
+//! `--in-window-menus` (or `MOST_IMAGE_IN_WINDOW_MENUS=1`) keeps the menus inside the window on
 //! macOS instead of the macOS menu bar (`mac_menu`).
 //!
-//! `--control <port>` (or `PHOTOCRAFT_CONTROL_PORT`) starts a localhost JSON-lines control server.
+//! `--control <port>` (or `MOST_IMAGE_CONTROL_PORT`) starts a localhost JSON-lines control server.
 //! The first line must authenticate; subsequent request lines get reply lines.
 //! `{"id":1,"ok":true,"result":…}`. See `photocraft_ui_egui::control` for the methods.
 
@@ -121,7 +122,7 @@ fn integrations(prefs_file: Option<&std::path::Path>) -> photocraft_engine::pref
 }
 
 /// The control port this launch listens on, and the warning to print when a request was refused.
-/// `--control` (or `PHOTOCRAFT_CONTROL_PORT`) wins over the preference; Allow Agent Control off
+/// `--control` (or `MOST_IMAGE_CONTROL_PORT`) wins over the preference; Allow Agent Control off
 /// refuses both, and says so rather than ignoring the flag silently. A preferred port outside
 /// 1..=65535 is refused the same way.
 fn control_port_for(cli: Option<u16>, prefs: &photocraft_engine::prefs::Integrations) -> (Option<u16>, Option<String>) {
@@ -151,7 +152,7 @@ fn native_options(custom_titlebar: bool) -> eframe::NativeOptions {
     eframe::NativeOptions {
         viewport: viewport
             .with_app_id(APP_ID)
-            .with_title("PhotoCraft")
+            .with_title("Most Image")
             .with_inner_size([1440.0, 900.0])
             .with_min_inner_size([760.0, 480.0])
             .with_drag_and_drop(true)
@@ -160,7 +161,7 @@ fn native_options(custom_titlebar: bool) -> eframe::NativeOptions {
             .with_titlebar_shown(false)
             .with_title_shown(false),
         centered: true,
-        // PhotoCraft owns its fallback fonts (`cjk_fonts`, craft-fonts): eframe's system-font
+        // Most Image owns its fallback fonts (`cjk_fonts`, craft-fonts): eframe's system-font
         // provider would compete with it and make glyph choice machine-dependent (#8512).
         system_font_fallback: false,
         // eframe saves native window geometry and egui panel/window sizes on exit.
@@ -172,7 +173,7 @@ fn native_options(custom_titlebar: bool) -> eframe::NativeOptions {
 }
 
 /// The window eframe restores from `ui.ron`, corrected before it is created: at least the
-/// minimum size, and never full screen. PhotoCraft always starts in Standard Screen Mode, but
+/// minimum size, and never full screen. Most Image always starts in Standard Screen Mode, but
 /// eframe also saves and restores full screen, and a window closed in a full-screen mode is
 /// saved full screen and maximized at once: the overlap `view_cmds::screen_mode_commands` keeps
 /// apart at run time. [OBSERVED 2026-10-12, Windows 11] Restored that way, View › Screen Mode ›
@@ -183,7 +184,7 @@ fn restored_window(builder: egui::ViewportBuilder) -> egui::ViewportBuilder {
 
 /// Grow a restored window that is smaller than the minimum size, keeping its centre. On
 /// Windows, eframe saves a minimized window's size (160 pt wide, 64 pt tall once eframe has
-/// clamped it), and the minimum size isn't applied to a restored one: PhotoCraft then reopened
+/// clamped it), and the minimum size isn't applied to a restored one: Most Image then reopened
 /// as a 160 × 64 strip on every launch.
 fn at_least_min_size(mut builder: egui::ViewportBuilder) -> egui::ViewportBuilder {
     let (Some(size), Some(min)) = (builder.inner_size, builder.min_inner_size) else { return builder };
@@ -200,16 +201,16 @@ fn at_least_min_size(mut builder: egui::ViewportBuilder) -> egui::ViewportBuilde
 fn attach_log_file(logger: Option<&'static logging::AppLogger>) {
     if let (Some(logger), Some(dir)) = (logger, services::config_dir()) {
         match logger.attach_dir(&dir.join("logs")) {
-            Ok(path) => log::info!("PhotoCraft {}, log file {}", photocraft_engine::build_info::long_version(), path.display()),
+            Ok(path) => log::info!("Most Image {}, log file {}", photocraft_engine::build_info::long_version(), path.display()),
             // Standard error only by now (`attach_dir` gave up on the file); unlike `eprintln!`, never panics.
             Err(e) => log::warn!("no log file: {e}"),
         }
     }
 }
 
-/// One PhotoCraft per user (#3708). Only with the per-user settings folder (a portable copy's may
+/// One Most Image per user (#3708). Only with the per-user settings folder (a portable copy's may
 /// be shared between users), and not for automation, `--new-instance` or per-process options.
-/// `Break` when the files were handed to the running PhotoCraft and this launch is done.
+/// `Break` when the files were handed to the running Most Image and this launch is done.
 #[cfg(not(target_os = "macos"))]
 fn claim_single_instance(
     files: &[String],
@@ -219,9 +220,9 @@ fn claim_single_instance(
     mut launch_options: Vec<launch_args::PerProcess>,
 ) -> std::ops::ControlFlow<(), Option<single_instance::Primary>> {
     use std::ops::ControlFlow::{Break, Continue};
-    let new_instance_env = std::env::var("PHOTOCRAFT_NEW_INSTANCE").ok();
+    let new_instance_env = std::env::var("MOST_IMAGE_NEW_INSTANCE").ok();
     // A variable documented as the equivalent of a per-launch flag counts as that flag: a
-    // launch that sets only `PHOTOCRAFT_PRESENT_MODE` (say) has per-process options too, so it
+    // launch that sets only `MOST_IMAGE_PRESENT_MODE` (say) has per-process options too, so it
     // keeps its own process instead of handing its files over and being ignored.
     launch_options.extend_from_slice(&single_instance::env_launch_options());
     let context = single_instance::LaunchContext {
@@ -234,7 +235,7 @@ fn claim_single_instance(
     };
     match (single_instance::skip_reason(&context), services::config_dir()) {
         (Some(reason), _) => {
-            log::info!("running as a separate PhotoCraft: {reason}");
+            log::info!("running as a separate Most Image: {reason}");
             Continue(None)
         }
         (None, None) => Continue(None),
@@ -242,12 +243,12 @@ fn claim_single_instance(
             let paths: Vec<String> = files.iter().map(|f| single_instance::absolute(f)).collect();
             match single_instance::claim(&dir, &paths) {
                 single_instance::Launch::Forwarded => {
-                    log::info!("handed {} file(s) to the running PhotoCraft", paths.len());
+                    log::info!("handed {} file(s) to the running Most Image", paths.len());
                     Break(())
                 }
                 single_instance::Launch::Primary(primary) => Continue(Some(primary)),
                 single_instance::Launch::Standalone(reason) => {
-                    log::warn!("starting a separate PhotoCraft: {reason}");
+                    log::warn!("starting a separate Most Image: {reason}");
                     Continue(None)
                 }
             }
@@ -349,7 +350,7 @@ fn main() -> eframe::Result {
     #[cfg(not(target_arch = "wasm32"))]
     if let Some(done) = craft_update::self_update::finish(&photocraft_ui_egui::UPDATE_APP, &std::env::args_os().skip(1).collect::<Vec<_>>()) {
         if let Err(e) = done {
-            eprintln!("PhotoCraft update helper failed: {e}");
+            eprintln!("Most Image update helper failed: {e}");
             std::process::exit(1);
         }
         return Ok(());
@@ -358,7 +359,7 @@ fn main() -> eframe::Result {
     // The system font scan can take seconds (minutes on some Macs): run it off the UI thread.
     photocraft_ui_egui::type_tool::warm_fonts();
     // `--help` and `--version` print to standard output and exit 0. A usage error (an unknown
-    // option, a missing or bad value, a bad PHOTOCRAFT_CONTROL_PORT: issues #701, #6429, #6431)
+    // option, a missing or bad value, a bad MOST_IMAGE_CONTROL_PORT: issues #701, #6429, #6431)
     // names the argument on standard error and exits 2, so a launcher sees the failure. Neither
     // panics when the stream is closed or a pipe (`photocraft --help | head -1`).
     let launch = launch_args::parse(launch_args::command(), std::env::args_os().skip(1)).unwrap_or_else(|e| e.exit());
@@ -381,10 +382,10 @@ fn main() -> eframe::Result {
 
     // An adapter named in the environment is chosen at startup, which a forwarded launch never reaches.
     let rendering_mode = gpu_startup::read_rendering_prefs(services::prefs_file().as_deref()).1;
-    if gpu_startup::adapter_override_is_process_specific(std::env::var("PHOTOCRAFT_GPU_ADAPTER").ok().as_deref(), rendering_mode, gpu_startup::ADAPTER_CHOICE) {
+    if gpu_startup::adapter_override_is_process_specific(std::env::var("MOST_IMAGE_GPU_ADAPTER").ok().as_deref(), rendering_mode, gpu_startup::ADAPTER_CHOICE) {
         launch_options.push(launch_args::PerProcess::GpuAdapterEnv);
     }
-    // One PhotoCraft per user (#3708): files opened from Explorer or a file manager while it runs
+    // One Most Image per user (#3708): files opened from Explorer or a file manager while it runs
     // become tabs in its window. Lives until the event loop returns, then `shutdown` lets the next
     // launch become the primary.
     #[cfg(not(target_os = "macos"))]
@@ -466,7 +467,7 @@ fn main() -> eframe::Result {
     let gpu_note: std::sync::Arc<std::sync::Mutex<Option<String>>> = Default::default();
     // The adapter's real texture limits (egui asks for 8192 px), so big documents stay on the GPU.
     let wanted_adapter =
-        gpu_startup::wanted_adapter(std::env::var("PHOTOCRAFT_GPU_ADAPTER").ok().as_deref(), &gpu_startup::read_gpu_adapter(services::prefs_file().as_deref()));
+        gpu_startup::wanted_adapter(std::env::var("MOST_IMAGE_GPU_ADAPTER").ok().as_deref(), &gpu_startup::read_gpu_adapter(services::prefs_file().as_deref()));
     gpu_startup::configure(&mut options.wgpu_options.wgpu_setup, &plan, os, wanted_adapter, sentinel.clone(), gpu_note.clone());
     // Preferences › Performance › Low-Latency Drawing (#1343): without vsync a stroke shows about
     // 50 ms sooner; wgpu picks Immediate, else Mailbox, else Fifo by what the driver offers.
@@ -495,7 +496,7 @@ fn main() -> eframe::Result {
     let created_in_callback = app_created.clone();
     let started_sentinel = sentinel.clone();
     let result = eframe::run_native(
-        "PhotoCraft",
+        "Most Image",
         options,
         Box::new(move |cc| {
             created_in_callback.store(true, std::sync::atomic::Ordering::Relaxed);
@@ -531,7 +532,7 @@ fn main() -> eframe::Result {
             #[cfg(target_os = "macos")]
             mac_window::disable_native_title_drag();
             // Long commands and file opens run as background jobs with progress and Cancel (#210).
-            app.background_jobs = std::env::var_os("PHOTOCRAFT_INLINE_JOBS").is_none();
+            app.background_jobs = std::env::var_os("MOST_IMAGE_INLINE_JOBS").is_none();
             // Displays and their profiles (#569): wait briefly so the first frames already use
             // the right profile; a slower reading is applied when it arrives, and the shell reads
             // again when the displays may have changed.
@@ -584,7 +585,7 @@ fn main() -> eframe::Result {
                 }
                 if !software_window
                     && plan.backend != photocraft_engine::prefs::GpuBackend::Cpu
-                    && std::env::var_os("PHOTOCRAFT_CPU_CANVAS").is_none()
+                    && std::env::var_os("MOST_IMAGE_CPU_CANVAS").is_none()
                     && app.session.prefs().performance.effective_rendering_mode() != photocraft_engine::prefs::RenderingMode::Cpu
                 {
                     app.set_wgpu(rs);
@@ -595,7 +596,7 @@ fn main() -> eframe::Result {
                     app.watch_window_device(&rs.device);
                 }
             }
-            let fallback_reason = std::env::var("PHOTOCRAFT_GPU_STARTUP_FAILURE").ok().or_else(|| {
+            let fallback_reason = std::env::var("MOST_IMAGE_GPU_STARTUP_FAILURE").ok().or_else(|| {
                 (app.perf.gpu_info.canvas == "cpu" && mode != photocraft_engine::prefs::RenderingMode::Cpu)
                     .then(|| app.perf.gpu_info.fallback.clone())
                     .flatten()
@@ -728,7 +729,7 @@ fn main() -> eframe::Result {
                 .arg("--safe-gpu")
                 .args(std::env::args_os().skip(1))
                 .env_remove("WGPU_BACKEND")
-                .env("PHOTOCRAFT_GPU_STARTUP_FAILURE", &reason)
+                .env("MOST_IMAGE_GPU_STARTUP_FAILURE", &reason)
                 .spawn();
             match launched {
                 Ok(_) => return Ok(()),
@@ -741,7 +742,7 @@ fn main() -> eframe::Result {
     // file to attach (#7643). A terminal or automation launch can read standard error or the
     // exit status instead, so it keeps the silent exit.
     if let Err(error) = &result {
-        log::error!("PhotoCraft could not start: {error}");
+        log::error!("Most Image could not start: {error}");
         if startup_report::needs_dialog(control_port.is_some()) {
             startup_report::show(&error.to_string(), &started_renderer, started_note.as_deref(), logger.and_then(logging::AppLogger::path).as_deref());
         }
@@ -935,7 +936,7 @@ mod tests {
             .with_fullscreen(true)
             .with_maximized(true);
         let opened = hook(saved);
-        assert_eq!(opened.fullscreen, Some(false), "Standard Screen Mode is where PhotoCraft starts");
+        assert_eq!(opened.fullscreen, Some(false), "Standard Screen Mode is where Most Image starts");
         assert_eq!(opened.maximized, Some(true), "the rest of the saved geometry is kept");
         assert_eq!(opened.inner_size, Some(egui::vec2(2560.0, 1392.0)));
     }
@@ -1053,7 +1054,7 @@ mod tests {
     /// so it has to be the class the window carries: the app id, on Wayland and X11 alike.
     #[test]
     fn the_desktop_entry_names_the_window_class() {
-        let entry = include_str!("../../../packaging/linux/ai.storyteller.photocraft.desktop");
+        let entry = include_str!("../../../packaging/linux/com.grupomostmexico.mostimage.desktop");
         let class = entry.lines().find_map(|line| line.strip_prefix("StartupWMClass="));
         assert_eq!(class, Some(super::APP_ID));
     }

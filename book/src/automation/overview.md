@@ -1,6 +1,7 @@
+<!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # Automation overview
 
-PhotoCraft automation has three entry styles:
+Most Image automation has three entry styles:
 
 1. `photocraft-cli` runs finite convert, inspect, command, batch, and droplet jobs.
 2. `photocraft-cli serve` keeps a headless session alive over JSON lines on stdio or loopback TCP.

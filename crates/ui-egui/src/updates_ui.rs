@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! One background check at startup and a non-modal window for release information.
 
 use photocraft_engine::updates_cmds::Status;
@@ -30,7 +31,7 @@ fn release_of(found: &photocraft_engine::updates_cmds::Release) -> craft_update:
     craft_update::Release {
         tag: format!("v{}", found.version),
         version: craft_update::parse_version(&found.version),
-        name: format!("PhotoCraft {}", found.version),
+        name: format!("Most Image {}", found.version),
         html_url: found.url.clone(),
         ..Default::default()
     }

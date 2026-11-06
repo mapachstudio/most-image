@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::texels::texels;
 use super::{egui_wgpu, wgpu};
 use crate::render_path::CpuReason;
@@ -96,13 +97,13 @@ pub fn device_descriptor(adapter: &wgpu::Adapter) -> wgpu::DeviceDescriptor<'sta
 /// feature an adapter lacks fails device creation, and a canvas without GPU timing is far better
 /// than no canvas.
 ///
-/// `PHOTOCRAFT_NO_GPU_TIMING` suppresses the request as well as the timer
+/// `MOST_IMAGE_NO_GPU_TIMING` suppresses the request as well as the timer
 /// ([`photocraft_gpu::Compositor::measure_gpu_time`]), so the variable also rescues a driver
 /// that advertises the features and then fails or misbehaves on device creation — not only one
 /// whose timestamps come back wrong.
 pub fn timing_features(adapter: &wgpu::Adapter) -> wgpu::Features {
     let want = photocraft_gpu::timing::FEATURES;
-    if std::env::var_os("PHOTOCRAFT_NO_GPU_TIMING").is_some() {
+    if std::env::var_os("MOST_IMAGE_NO_GPU_TIMING").is_some() {
         return wgpu::Features::empty();
     }
     if adapter.features().contains(want) { want } else { wgpu::Features::empty() }

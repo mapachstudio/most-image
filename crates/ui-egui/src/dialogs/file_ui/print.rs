@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::{Arc, DialogKind, Map, PhotocraftApp, Tokens, Value, b, check, dropdown_str, json, n, number, params, s};
 
 /// Print's Printer menu: the default printer (value ""), then every printer `file.printers`
@@ -30,7 +31,7 @@ pub(super) fn printer_options(list: Option<&Value>, current: &str) -> Vec<(Strin
 pub fn open_print(app: &mut PhotocraftApp) -> u64 {
     let mut f = Map::new();
     f.insert("__print".into(), json!(true));
-    f.insert("__label".into(), json!("PhotoCraft Print Settings"));
+    f.insert("__label".into(), json!("Most Image Print Settings"));
     // The settings of the last print, also from an earlier session (#7410).
     if let Some(Value::Object(m)) = photocraft_engine::print_cmds::last_print(&app.session) {
         f.extend(m);
@@ -507,7 +508,7 @@ pub(super) fn print_body(app: &mut PhotocraftApp, ui: &mut egui::Ui, f: &mut Map
                 "colorHandling",
                 &[
                     ("printerManages", tl!("Printer Manages Colors")),
-                    ("photocraftManages", tl!("PhotoCraft Manages Colors")),
+                    ("photocraftManages", tl!("Most Image Manages Colors")),
                     ("noColorManagement", tl!("No Color Management")),
                 ],
                 240.0,

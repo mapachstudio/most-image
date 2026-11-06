@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! TIFF Options (#8827): Save Transparency on and off, flat and layered, with and without spot
 //! channels, and Save Image Pyramid. Unset Save Transparency is covered in `tiff_layers`.
 
@@ -247,16 +248,16 @@ fn pyramid_levels_follow_the_full_image_and_open_the_same_document() {
     }
 }
 
-/// `PHOTOCRAFT_TIFF_INTEROP=<dir>` writes every TIFF Options combination there, to check with
+/// `MOST_IMAGE_TIFF_INTEROP=<dir>` writes every TIFF Options combination there, to check with
 /// other readers (libtiff `tiffinfo`, ImageMagick, vips):
 ///
 /// ```sh
-/// PHOTOCRAFT_TIFF_INTEROP=/tmp/tiff cargo test -p photocraft-io --test it -- tiff_save_options::write_interop_samples --ignored
+/// MOST_IMAGE_TIFF_INTEROP=/tmp/tiff cargo test -p photocraft-io --test it -- tiff_save_options::write_interop_samples --ignored
 /// ```
 #[test]
-#[ignore = "writes sample files for other readers; set PHOTOCRAFT_TIFF_INTEROP"]
+#[ignore = "writes sample files for other readers; set MOST_IMAGE_TIFF_INTEROP"]
 fn write_interop_samples() {
-    let Some(dir) = std::env::var_os("PHOTOCRAFT_TIFF_INTEROP") else { return };
+    let Some(dir) = std::env::var_os("MOST_IMAGE_TIFF_INTEROP") else { return };
     let dir = std::path::PathBuf::from(dir);
     std::fs::create_dir_all(&dir).unwrap();
     for (mode, mname) in [(ColorMode::Rgb, "rgb"), (ColorMode::Cmyk, "cmyk"), (ColorMode::Grayscale, "gray")] {

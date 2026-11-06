@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! CPU-canvas opacity invalidation and the software renderer's hidden checker pass.
 use super::*;
 use serde_json::json;
@@ -135,7 +136,7 @@ fn omitting_an_occluded_checker_preserves_cpu_canvas_pixels() {
         let reference = h.render().unwrap();
         h.step();
         let optimized = h.render().unwrap();
-        if let Some(dir) = std::env::var_os("PHOTOCRAFT_CPU_PIXEL_OUTPUT") {
+        if let Some(dir) = std::env::var_os("MOST_IMAGE_CPU_PIXEL_OUTPUT") {
             let dir = std::path::PathBuf::from(dir);
             std::fs::create_dir_all(&dir).unwrap();
             let tag = format!("rotation-{rotation}-flip-{flip}-pattern-{pattern}");
@@ -200,7 +201,7 @@ fn pattern_preview_keeps_the_legacy_checker_for_every_copy() {
 fn cpu_canvas_background_benchmark() {
     use std::time::Instant;
     let mut results = Vec::new();
-    let output = std::env::var_os("PHOTOCRAFT_CPU_BENCH_OUTPUT").map(std::path::PathBuf::from);
+    let output = std::env::var_os("MOST_IMAGE_CPU_BENCH_OUTPUT").map(std::path::PathBuf::from);
     for background in ["white", "transparent"] {
         let mut h = harness([6000, 4000], background).expect("an offscreen graphics adapter");
         assert_fixture(&h, background);

@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! What the page says when the module stops, and the `?free-mb` diagnostic flag (#10024).
 //!
 //! A failed allocation on `wasm32-unknown-unknown` aborts the module: the page keeps the last
@@ -50,7 +51,7 @@ pub fn is_trap(name: &str, message: &str) -> bool {
 /// bounds` is not among them: it is a bug.
 const OUT_OF_MEMORY: [&str; 3] = ["unreachable", "could not allocate memory", "out of memory"];
 
-/// The line under "PhotoCraft stopped": a captured panic means an internal error; a trap with no
+/// The line under "Most Image stopped": a captured panic means an internal error; a trap with no
 /// panic before it is out of memory when its message says so (or says nothing), and otherwise
 /// unexpected.
 pub fn detail(panic: Option<&str>, trap_message: &str) -> String {

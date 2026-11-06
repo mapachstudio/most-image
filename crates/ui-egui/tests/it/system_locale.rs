@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Use the actual platform UI-language API and the production (non-cfg(test)) Auto path.
 #![cfg(not(target_arch = "wasm32"))]
 
@@ -6,7 +7,7 @@ use photocraft_ui_egui::{PhotocraftApp, i18n};
 
 #[test]
 fn native_first_launch_follows_os_ui_preferences() {
-    let tags: Vec<String> = match std::env::var("PHOTOCRAFT_LOCALE").ok().filter(|tag| !tag.trim().is_empty()) {
+    let tags: Vec<String> = match std::env::var("MOST_IMAGE_LOCALE").ok().filter(|tag| !tag.trim().is_empty()) {
         Some(tag) => vec![tag],
         None => sys_locale::get_locales().take(64).collect(),
     };

@@ -1,3 +1,4 @@
+# Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 name: Release
 
 on:
@@ -31,7 +32,7 @@ jobs:
     uses: storytold/craft-common-actions/.github/workflows/release.yml@main
     with:
       app-name: photocraft
-      app-title: PhotoCraft
+      app-title: Most Image
       craft-fonts-ref: b076417b5880bd4154bd22f00695b1d28c6bea83
       version: ${{ inputs.version }}
       contributors-artifact: ${{ needs.credits.outputs.artifact-name }}

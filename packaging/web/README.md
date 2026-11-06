@@ -1,4 +1,5 @@
-# Hosting PhotoCraft for the web
+<!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
+# Hosting Most Image for the web
 
 `photocraft-web-<version>.zip` (from the GitHub release, or `packaging/web/package.sh`) holds a
 static site in `photocraft-web-<version>/`:
@@ -42,7 +43,7 @@ the default Rust version is the stable release CI used when the `Dockerfile` was
 (CI and releases always use the latest stable), and Trunk is pinned to the release workflow's
 `TRUNK_VERSION`. `RUST_VERSION`, `TRUNK_VERSION`, and `NGINX_VERSION` can be overridden with
 `--build-arg`. To stamp the About dialog with the commit and date instead of "dev build", pass
-`--build-arg PHOTOCRAFT_BUILD_SHA=$(git rev-parse HEAD) --build-arg PHOTOCRAFT_BUILD_DATE=$(date -u +%F)`.
+`--build-arg MOST_IMAGE_BUILD_SHA=$(git rev-parse HEAD) --build-arg MOST_IMAGE_BUILD_DATE=$(date -u +%F)`.
 The web build does not embed the optional `craft-fonts` checkout.
 
 The Docker build uses thin LTO and one Cargo build job to reduce peak memory, while keeping
@@ -104,7 +105,7 @@ without such a cap.
 
 The app is built with the `wasm-release` Cargo profile (fat LTO, size-optimized code with the
 pixel and file-decoding crates kept at speed) plus `wasm-opt -Oz`, and stores the bundled fonts
-(PhotoCraft's and egui's) and the translation catalogs compressed, unpacked on first use.
+(Most Image's and egui's) and the translation catalogs compressed, unpacked on first use.
 
 ## Any path works
 
@@ -123,7 +124,7 @@ their names and need revalidation.
   are gzip already, and the page inflates them). Their extension is one servers don't
   know, so the usual result, `application/octet-stream` and no compression, is right.
 - **Missing files are 404s:** a host that answers every unknown path with `index.html` (a
-  single-page-app fallback) hides a failed upload. PhotoCraft notices and says the download
+  single-page-app fallback) hides a failed upload. Most Image notices and says the download
   failed, but a 404 is clearer in the server's logs.
 - **Compression:** turn on gzip or Brotli for `.wasm`, `.js` and `.html`. It matters little for
   the download, since the parts are compressed already; it shrinks the two `.js` files and the
@@ -133,7 +134,7 @@ their names and need revalidation.
   `app/photocraft-web.js` and `app/parts.txt`. The sample `_headers` and `.htaccess` do this.
 - **HTTPS:** WebGPU (and the clipboard) only work in a secure context, which means `https://`
   or `http://localhost`. Over plain HTTP elsewhere, the app falls back to WebGL2.
-- **No special isolation headers:** PhotoCraft doesn't use `SharedArrayBuffer`, so it doesn't
+- **No special isolation headers:** Most Image doesn't use `SharedArrayBuffer`, so it doesn't
   need `Cross-Origin-Opener-Policy` or `Cross-Origin-Embedder-Policy`. If your site already sends
   COEP `require-corp`, also send `Cross-Origin-Resource-Policy: same-origin` (or `cross-origin`
   when the files live on a CDN) on the app's files.
@@ -179,7 +180,7 @@ it is picked or a document's text needs it, so starting the app costs one small 
 3. Put each font's licence next to it; the SIL Open Font License, for one, requires that.
 
 A craft-fonts checkout is already laid out this way, and so is any folder with a
-`fonts/manifest.txt` and the files it lists: `PHOTOCRAFT_WEB_FONTS_DIR=<that folder>
+`fonts/manifest.txt` and the files it lists: `MOST_IMAGE_WEB_FONTS_DIR=<that folder>
 packaging/web/package.sh` copies the manifest, the fonts and their licences into the zip, keeping
 their paths. Without `fonts/manifest.txt` (a 404) nothing changes.
 
@@ -193,7 +194,7 @@ fetches them with `fetch()`, so a Content Security Policy needs them allowed by 
 ```html
 <iframe
   src="https://example.com/photocraft/"
-  title="PhotoCraft image editor"
+  title="Most Image image editor"
   style="width: 100%; height: 720px; border: 0;"
   allow="fullscreen; clipboard-read; clipboard-write"
   allowfullscreen>
@@ -213,7 +214,7 @@ fetches them with `fetch()`, so a Content Security Policy needs them allowed by 
 
 ## Renderer selection and fallback flags
 
-PhotoCraft renders with wgpu. It uses **WebGPU** when the browser has it and falls back to
+Most Image renders with wgpu. It uses **WebGPU** when the browser has it and falls back to
 **WebGL2** on its own. URL query flags override this, and they work on the iframe `src` too:
 
 | Flag | Effect |

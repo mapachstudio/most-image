@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Clipping marker orientation and the Alt-click gesture that reveals it.
 
 use egui::{Event, Modifiers, PointerButton, pos2, vec2};
@@ -200,7 +201,7 @@ fn panel_adjustment_clips_to_selected_layer_and_scope_undoes_at_all_depths() {
 #[test]
 #[ignore = "writes synthetic compact adjustment-panel screenshots to log/adjustment-scope"]
 fn write_adjustment_scope_preview() {
-    let phase = std::env::var("PHOTOCRAFT_EVIDENCE_PHASE").unwrap_or_else(|_| "after".into());
+    let phase = std::env::var("MOST_IMAGE_EVIDENCE_PHASE").unwrap_or_else(|_| "after".into());
     let output = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../log/adjustment-scope");
     std::fs::create_dir_all(&output).unwrap();
     for theme in [crate::theme::ThemeKind::Pro, crate::theme::ThemeKind::Studio] {

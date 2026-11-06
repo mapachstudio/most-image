@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::*;
 
 /// The flags each pinned corpus is fetched with by `fetch_all(local, update)`.
@@ -263,7 +264,7 @@ fn pngsuite_download_copy_accepts_boundary_and_never_writes_excess() {
 // enables emission; it stays alive so cleanup must kill and reap that particular child.
 #[test]
 fn pngsuite_stream_fixture() {
-    if std::env::var_os("PHOTOCRAFT_PNGSUITE_STREAM_TEST").is_some() {
+    if std::env::var_os("MOST_IMAGE_PNGSUITE_STREAM_TEST").is_some() {
         let mut out = std::io::stdout().lock();
         for _ in 0..256 {
             let _ = out.write_all(&[0xa5; 8192]);
@@ -275,7 +276,7 @@ fn pngsuite_stream_fixture() {
 fn stream_child() -> Child {
     Command::new(std::env::current_exe().unwrap())
         .args(["--exact", "corpus::tests::pngsuite_stream_fixture", "--nocapture"])
-        .env("PHOTOCRAFT_PNGSUITE_STREAM_TEST", "1")
+        .env("MOST_IMAGE_PNGSUITE_STREAM_TEST", "1")
         .stdout(Stdio::piped())
         .stderr(Stdio::null())
         .spawn()

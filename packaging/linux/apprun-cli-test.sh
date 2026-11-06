@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 # AppImage CLI selection, argument boundaries, stdio and exit status (#3385, #3176).
 # No build or AppImage mount required; the bundled binaries are stand-ins.
 set -euo pipefail
@@ -6,11 +7,11 @@ set -euo pipefail
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 test_dir="$(mktemp -d)"
 trap 'rm -rf "$test_dir"' EXIT
-app_dir="$test_dir/PhotoCraft test.AppDir"
+app_dir="$test_dir/Most Image test.AppDir"
 mkdir -p "$app_dir/usr/bin" "$app_dir/usr/share/applications"
 cp "$HERE/AppRun" "$app_dir/AppRun"
-printf '[Desktop Entry]\nType=Application\nName=PhotoCraft\nExec=photocraft %%F\n' \
-  >"$app_dir/usr/share/applications/ai.storyteller.photocraft.desktop"
+printf '[Desktop Entry]\nType=Application\nName=Most Image\nExec=photocraft %%F\n' \
+  >"$app_dir/usr/share/applications/com.grupomostmexico.mostimage.desktop"
 cat >"$app_dir/usr/bin/photocraft" <<'EOF'
 #!/bin/sh
 printf 'gui\n'
@@ -32,7 +33,7 @@ case "${1:-}" in
 esac
 EOF
 chmod +x "$app_dir/AppRun" "$app_dir/usr/bin/photocraft" "$app_dir/usr/bin/photocraft-cli"
-export APPIMAGE="$test_dir/PhotoCraft test.AppImage"
+export APPIMAGE="$test_dir/Most Image test.AppImage"
 : >"$APPIMAGE"
 export ARGV0="$APPIMAGE"
 export XDG_DATA_HOME="$test_dir/data"
@@ -64,7 +65,7 @@ status=0
 # GUI invocations still forward all arguments; only a leading --cli is a selector.
 out="$("$app_dir/AppRun" 'input file.png' --cli)"
 [ "$out" = $'gui\n<input file.png>\n<--cli>' ] || fail "GUI arguments changed: $out"
-[ -f "$XDG_DATA_HOME/applications/ai.storyteller.photocraft.desktop" ] || fail "GUI integration lost"
+[ -f "$XDG_DATA_HOME/applications/com.grupomostmexico.mostimage.desktop" ] || fail "GUI integration lost"
 out="$(ARGV0=another-photocraft-cli "$app_dir/AppRun" mcp)"
 [ "$out" = $'gui\n<mcp>' ] || fail "an unrelated filename selected CLI"
 

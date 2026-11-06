@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Kerning of PSD type layers (#206): manual kerning in EngineData (`AutoKerning`/`Kerning`
 //! style-run fields), the automatic mode in `Txt2`, and the layout against Photoshop's own
 //! glyph positions.
@@ -80,7 +81,7 @@ fn manual_and_off_kerning_round_trip_through_psd() {
 }
 
 /// #1348: the automatic mode (Metrics/Optical) lives in the document `Txt2` block, one model
-/// object per `TextIndex`. A PhotoCraft-authored PSD must carry it or a reopened layer falls
+/// object per `TextIndex`. A Most Image-authored PSD must carry it or a reopened layer falls
 /// back to Metrics — Optical used to be silently lost.
 #[test]
 fn optical_kerning_round_trips_through_psd() {
@@ -120,7 +121,7 @@ fn fresh_metrics_text_writes_no_txt2_block() {
     assert!(saves_txt2(Kerning::Optical), "Optical lives only in Txt2");
 }
 
-/// #10308: stylistic sets (and other Txt2-only OpenType flags) on a PhotoCraft-native document
+/// #10308: stylistic sets (and other Txt2-only OpenType flags) on a Most Image-native document
 /// write a `Txt2` block and round-trip through save and reopen.
 #[test]
 fn fresh_stylistic_sets_round_trip_through_psd() {

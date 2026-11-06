@@ -1,5 +1,6 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! GIMP XCF files written by GIMP 3.2.6 itself (feature `corpus`; `cargo xtask test-corpus -p io`).
-//! They come from `corpus/gimp/` (`cargo xtask corpus --gimp`; pin `PHOTOCRAFT_CORPUS_GIMP_COMMIT` in
+//! They come from `corpus/gimp/` (`cargo xtask corpus --gimp`; pin `MOST_IMAGE_CORPUS_GIMP_COMMIT` in
 //! `xtask/src/corpus_pins.rs`, generator `tools/gimp-xcf/xcf_fixtures.py` in photocraft-corpus); a
 //! missing corpus fails. What the reader gets out is checked against the procedural images the
 //! generator drew (`pattern`, `alpha`), and our composite of each file against GIMP's own merged
@@ -295,7 +296,7 @@ fn broken_files_are_errors_not_crashes() {
 }
 
 /// Our composite against GIMP's merged rendering. The `-perceptual` files have every layer set
-/// to blend and composite in gamma-encoded RGB, which is how PhotoCraft composes, so they must
+/// to blend and composite in gamma-encoded RGB, which is how Most Image composes, so they must
 /// match tightly. GIMP's defaults compose in linear light, so those files measure the known gap
 /// (the tolerance and the allowed share of pixels over it are the numbers seen, not goals).
 /// Per file: tolerance (premultiplied, 0..1), the share of pixels allowed over it, and why.

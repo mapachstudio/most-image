@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! # photocraft-io
 //!
 //! Import and export between [`photocraft_doc::Document`] and files:
@@ -1098,7 +1099,7 @@ fn export_stages_with_renderer(
     }
     if ext == "xcf" {
         return Err(IoError::Unsupported(
-            "XCF is GIMP's own format and PhotoCraft only opens it; save as .pcraft to keep the layers, or export a flat image".into(),
+            "XCF is GIMP's own format and Most Image only opens it; save as .pcraft to keep the layers, or export a flat image".into(),
         ));
     }
     if ext == "ora" {

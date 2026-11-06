@@ -1,6 +1,7 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! macOS open-documents and quit Apple events.
 //!
-//! Finder double-clicks, Open With, drops on the Dock icon and `open -a PhotoCraft file.psd` don't
+//! Finder double-clicks, Open With, drops on the Dock icon and `open -a Most Image file.psd` don't
 //! pass paths on the command line: LaunchServices sends the running (or just-launched) app a
 //! `kAEOpenDocuments` ('odoc') Apple event. winit 0.30 doesn't handle it and owns the
 //! `NSApplicationDelegate`, and handling it ourselves needs Objective-C class declarations, i.e.

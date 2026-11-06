@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::*;
 
 fn tmp(name: &str) -> String {
@@ -156,8 +157,8 @@ fn droplets_are_written_and_run() {
         let shim = r["shim"].as_str().unwrap();
         let text = std::fs::read_to_string(shim).unwrap();
         assert!(text.starts_with("#!/bin/sh") && text.contains("droplet"));
-        assert!(text.contains("/Applications/PhotoCraft.app/Contents/MacOS/photocraft-cli"));
-        assert!(text.contains("${PHOTOCRAFT_CLI:-}"), "an explicit CLI path must take priority");
+        assert!(text.contains("/Applications/Most Image.app/Contents/MacOS/photocraft-cli"));
+        assert!(text.contains("${MOST_IMAGE_CLI:-}"), "an explicit CLI path must take priority");
         use std::os::unix::fs::PermissionsExt;
         assert_ne!(std::fs::metadata(shim).unwrap().permissions().mode() & 0o111, 0, "executable");
     }
@@ -281,16 +282,16 @@ fn droplet_shim_passes_shell_metacharacters_as_a_literal_path() {
     let input = format!("{dir}/input file");
     std::fs::write(
         &cli,
-        "#!/bin/sh\nif [ \"$#\" -ne 3 ] || [ \"$1\" != droplet ] || [ \"$3\" != \"$PHOTOCRAFT_EXPECTED_INPUT\" ]; then exit 90; fi\nprintf '%s' \"$2\" > \"$PHOTOCRAFT_CAPTURE\"\n",
+        "#!/bin/sh\nif [ \"$#\" -ne 3 ] || [ \"$1\" != droplet ] || [ \"$3\" != \"$MOST_IMAGE_EXPECTED_INPUT\" ]; then exit 90; fi\nprintf '%s' \"$2\" > \"$MOST_IMAGE_CAPTURE\"\n",
     )
     .unwrap();
     std::fs::set_permissions(&cli, std::fs::Permissions::from_mode(0o755)).unwrap();
     let output = std::process::Command::new(shim)
         .arg(&input)
         .current_dir(&dir)
-        .env("PHOTOCRAFT_CLI", &cli)
-        .env("PHOTOCRAFT_CAPTURE", &capture)
-        .env("PHOTOCRAFT_EXPECTED_INPUT", &input)
+        .env("MOST_IMAGE_CLI", &cli)
+        .env("MOST_IMAGE_CAPTURE", &capture)
+        .env("MOST_IMAGE_EXPECTED_INPUT", &input)
         .output()
         .unwrap();
 

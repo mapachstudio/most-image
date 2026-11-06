@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::{Format, Tag};
 
 pub(super) const F: Format = Format::Tiff;
@@ -11,7 +12,7 @@ pub(super) const TAG_PHOTOSHOP: u16 = 34377;
 pub(super) const TAG_IMAGE_SOURCE_DATA: u16 = 37724;
 
 /// `true` when [`encode`] writes little-endian (`II`) files: the `tiff` encoder writes the
-/// running target's byte order, and every target PhotoCraft builds for is little-endian.
+/// running target's byte order, and every target Most Image builds for is little-endian.
 /// Byte-order-sensitive payloads (Photoshop layer data) must be produced to match.
 pub fn writes_little_endian() -> bool {
     cfg!(target_endian = "little")

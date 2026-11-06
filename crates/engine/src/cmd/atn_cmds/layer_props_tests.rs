@@ -1,6 +1,7 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::*;
 
-/// PhotoCraft's own roundtrip accepts a combined Set, but Photoshop applies only its rename.
+/// Most Image's own roundtrip accepts a combined Set, but Photoshop applies only its rename.
 #[test]
 fn compound_properties_export_as_separate_sets_with_rename_last() {
     for target in [None, Some("Original")] {

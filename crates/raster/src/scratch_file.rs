@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! The scratch file: where cold tiles go when pixel memory is over budget.
 //!
 //! - One file per configured directory, never visible after the process ends. Unix creates it
@@ -379,7 +380,7 @@ mod tests {
     #[cfg(any(unix, windows))]
     #[test]
     fn abrupt_exit_does_not_leave_permanent_scratch_files() {
-        const CHILD_DIR: &str = "PHOTOCRAFT_SCRATCH_EXIT_TEST_DIR";
+        const CHILD_DIR: &str = "MOST_IMAGE_SCRATCH_EXIT_TEST_DIR";
         if let Some(dir) = std::env::var_os(CHILD_DIR) {
             let file = ScratchFile::create(Path::new(&dir)).unwrap();
             file.write(b"unreleased pixels").unwrap();

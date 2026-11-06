@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Smart-filter caches: the global `FEid` / `FXid` ("Filter Effects") block.
 //!
 //! Layout (Adobe PSD spec, "Filter Effects", checked against Photoshop-authored files):
@@ -13,7 +14,7 @@
 //!     after the item: u8 flag; if set rect, u64 length, u16 compression, data
 //! ```
 //!
-//! Photoshop puts one item in each section. Files written by earlier PhotoCraft versions put
+//! Photoshop puts one item in each section. Files written by earlier Most Image versions put
 //! every item in one section; both read.
 //!
 //! The slots hold the unfiltered placed pixels (colour channels from slot 0, transparency in the
@@ -284,7 +285,7 @@ mod tests {
         assert_eq!(fx.to_bytes(), bytes);
     }
 
-    /// Older PhotoCraft files hold every item in one section; they still read.
+    /// Older Most Image files hold every item in one section; they still read.
     #[test]
     fn reads_several_items_in_one_section() {
         let items = vec![item("a-1", true), item("b-2", false)];

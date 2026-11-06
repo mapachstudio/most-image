@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 /// #5472: a ⇧ square pressed between pixels snapped to 101 × 102; the short side grows to
 /// match, on the side the drag points to.
 #[test]
@@ -1401,7 +1402,7 @@ fn wayland_start_screen_hint_does_not_claim_file_drop_works() {
     assert!(hint.ends_with(&format!("paste a copied image with {}.", crate::notices::paste_hint(&wayland))), "{hint}");
 }
 
-/// A tiling window manager can hand PhotoCraft a canvas narrower than the Home card (460
+/// A tiling window manager can hand Most Image a canvas narrower than the Home card (460
 /// points): the two buttons must stay inside the window instead of being clipped at its edges.
 #[test]
 fn start_screen_buttons_stay_inside_a_narrow_canvas() {

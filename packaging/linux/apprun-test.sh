@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 # Smoke test for packaging/linux/AppRun: the AppImage's desktop integration writes
 # and refreshes the host .desktop entry and icons, is idempotent, honours the opt-out
 # and an unwritable HOME, and always launches the app (#593).
@@ -8,13 +9,13 @@ set -euo pipefail
 
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT="$(cd "$HERE/../.." && pwd)"
-APP_ID=ai.storyteller.photocraft
+APP_ID=com.grupomostmexico.mostimage
 
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 
 # Fake AppDir with the real AppRun, .desktop template, icons, and a stub binary.
-APPDIR="$TMP/PhotoCraft.AppDir"
+APPDIR="$TMP/Most Image.AppDir"
 mkdir -p "$APPDIR/usr/bin"
 install -Dm755 "$HERE/AppRun" "$APPDIR/AppRun"
 install -Dm644 "$HERE/$APP_ID.desktop" "$APPDIR/usr/share/applications/$APP_ID.desktop"
@@ -76,7 +77,7 @@ grep -Fxq "Exec=\"$(readlink -f "$APPIMAGE")\" %F" "$DESKTOP" || fail "Exec not 
 #    already launches this AppImage (e.g. AppImageLauncher's appimagekit-*.desktop), AppRun removes
 #    its own duplicate .desktop entry while keeping the hicolor icons installed.
 ext_desktop="$XDG_DATA_HOME/applications/appimagekit-photocraft.desktop"
-printf '[Desktop Entry]\nType=Application\nName=PhotoCraft\nExec="%s" %%F\nIcon=%s\n' "$(readlink -f "$APPIMAGE")" "$APP_ID" >"$ext_desktop"
+printf '[Desktop Entry]\nType=Application\nName=Most Image\nExec="%s" %%F\nIcon=%s\n' "$(readlink -f "$APPIMAGE")" "$APP_ID" >"$ext_desktop"
 "$APPDIR/AppRun" >/dev/null || fail "launch with external integrator desktop entry exited non-zero"
 [[ ! -e "$DESKTOP" ]] || fail "duplicate desktop entry kept alongside external integrator entry"
 [[ -f "$ext_desktop" ]] || fail "external integrator desktop entry removed"
@@ -98,7 +99,7 @@ DESKTOPINTEGRATION=AppImageLauncher "$APPDIR/AppRun" >/dev/null || fail "second 
 [[ "$before" = "$(stat -c %i "$DESKTOP")" ]] || fail "desktop entry rewritten under DESKTOPINTEGRATION although unchanged"
 # A real integrator entry still wins, including when DESKTOPINTEGRATION is also set (#3623).
 ext_desktop="$XDG_DATA_HOME/applications/appimagekit-photocraft.desktop"
-printf '[Desktop Entry]\nType=Application\nName=PhotoCraft\nExec="%s" %%F\nIcon=%s\n' "$(readlink -f "$APPIMAGE")" "$APP_ID" >"$ext_desktop"
+printf '[Desktop Entry]\nType=Application\nName=Most Image\nExec="%s" %%F\nIcon=%s\n' "$(readlink -f "$APPIMAGE")" "$APP_ID" >"$ext_desktop"
 DESKTOPINTEGRATION=AppImageLauncher "$APPDIR/AppRun" >/dev/null || fail "launch with integrator entry and DESKTOPINTEGRATION exited non-zero"
 [[ ! -e "$DESKTOP" ]] || fail "duplicate desktop entry kept when an integrator entry exists"
 [[ -f "$ext_desktop" ]] || fail "external integrator desktop entry removed"
@@ -107,7 +108,7 @@ rm -f "$ext_desktop"
 
 # 8. Opt-out installs nothing.
 rm -rf "$XDG_DATA_HOME"
-PHOTOCRAFT_NO_DESKTOP_INTEGRATION=1 "$APPDIR/AppRun" >/dev/null || fail "opt-out launch exited non-zero"
+MOST_IMAGE_NO_DESKTOP_INTEGRATION=1 "$APPDIR/AppRun" >/dev/null || fail "opt-out launch exited non-zero"
 [[ ! -e "$XDG_DATA_HOME" ]] || fail "opt-out still integrated"
 
 # 9. An unwritable data dir never blocks the launch.
@@ -138,7 +139,7 @@ rm -rf "$XDG_DATA_HOME"
 am_desktop="$XDG_DATA_HOME/applications/photocraft-AM.desktop"
 printf '[Desktop Entry]
 Type=Application
-Name=PhotoCraft
+Name=Most Image
 Exec=photocraft %%F
 Icon=%s
 ' "$APP_ID" >"$am_desktop"

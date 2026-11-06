@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Release checks through `craft-update`, the library every Craft App shares. Only public release
 //! metadata is requested.
 
@@ -21,7 +22,7 @@ pub fn service() -> CheckFn {
 }
 
 fn check() -> CheckResult {
-    let http = craft_update::Http::new("PhotoCraft/Update")?;
+    let http = craft_update::Http::new("Most Image/Update")?;
     let found = craft_update::check_for_update(&photocraft_ui_egui::UPDATE_APP, &http, photocraft_engine::build_info::VERSION)?;
     Ok(found.map(|release| Release { version: release.tag.trim_start_matches(['v', 'V']).to_string(), url: release.html_url }))
 }

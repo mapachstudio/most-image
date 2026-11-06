@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Vector data ⇄ PSD: path records (vector masks `vmsk`/`vsms`, saved paths 2000–2997, the
 //! work path 1025), live-shape origination (`vogk`), shape fill content (`vscg`) and shape
 //! strokes (`vstk`).
@@ -260,7 +261,7 @@ pub fn parse_vstk(data: &[u8], dpi: f32) -> Option<VstkInfo> {
     let paint = get_desc(&d, "strokeStyleContent").and_then(content_fill).unwrap_or(Fill::Solid(photocraft_color::Color::BLACK));
     let mut opacity = num(d.get("strokeStyleOpacity")).map_or(1.0, |v| v as f32 / 100.0);
     // Write folds colour alpha into strokeStyleOpacity for Photoshop. Restore both Appearance
-    // fields when pcAl is present so PhotoCraft does not show a maxed colour alpha (#6180).
+    // fields when pcAl is present so Most Image does not show a maxed colour alpha (#6180).
     if let Fill::Solid(c) = &paint
         && c.alpha.is_finite()
         && c.alpha > 1e-6

@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Canvas cursors must move with the OS pointer, independently of the canvas frame rate: the brush
 //! outline and crosshairs are OS cursor bitmaps on every desktop platform (Windows, macOS, X11 and
 //! Wayland), so they track the hardware pointer instead of trailing it by the app's render,
@@ -62,7 +63,7 @@ pub(crate) struct CursorLifecycle;
 
 impl egui::plugin::Plugin for CursorLifecycle {
     fn debug_name(&self) -> &'static str {
-        "PhotoCraft tool cursor"
+        "Most Image tool cursor"
     }
 
     fn on_begin_pass(&mut self, ui: &mut egui::Ui) {

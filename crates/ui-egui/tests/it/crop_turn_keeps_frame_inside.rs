@@ -1,10 +1,11 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Crop tool, default mode: turning the image keeps the frame inside the turned image (#10869).
 //!
 //! Measured in the reference application on an 800 × 500 document, turning by a drag outside the
 //! frame with Auto Center Preview off: the frame keeps its size where it fits the turned image,
 //! else moves the shortest way into it, else shrinks about its centre keeping its proportions.
 //! With Ctrl (⌘) held the frame isn't adjusted and the uncovered corners get the Fill.
-//! PhotoCraft never adjusted the frame, so ↵ filled the corners with the background colour.
+//! Most Image never adjusted the frame, so ↵ filled the corners with the background colour.
 //!
 //! Driven as an agent does, through `ui.pointer` (document px as the view showed them at the
 //! press).

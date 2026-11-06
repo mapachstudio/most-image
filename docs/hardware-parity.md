@@ -1,10 +1,11 @@
+<!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # Hardware parity
 
 > **Last reviewed:** 2026-10-10 · **Last updated:** 2026-10-28 · **Change:** minor (GPU compositor startup builds in the background, measurements pending; Camera Raw's preview develops its per-pixel stages on the GPU) · **Target:** Adobe Photoshop 2026
 
-Each hardware feature Photoshop 2026 (27.11.0) uses, per platform, against PhotoCraft. Photoshop
+Each hardware feature Photoshop 2026 (27.11.0) uses, per platform, against Most Image. Photoshop
 side: its bundle (Metal and OpenCL paths, "Precise Color Management for HDR Display" and EDR
-strings, Touch Bar resources, pen pressure/tilt strings) and Adobe's GPU FAQ. PhotoCraft side:
+strings, Touch Bar resources, pen pressure/tilt strings) and Adobe's GPU FAQ. Most Image side:
 `crates/tablet`, `crates/ui-egui/src/stylus.rs`, `apps/photocraft/src/gpu_startup.rs`,
 `engine/src/display_color.rs`, `apps/photocraft/src/monitor_profile.rs`.
 
@@ -15,7 +16,7 @@ HDR display to verify.
 
 ## GPU
 
-| Feature | Photoshop | PhotoCraft | Status |
+| Feature | Photoshop | Most Image | Status |
 |---|---|---|---|
 | GPU canvas, zoom/pan, rotate view | Metal (macOS), DirectX/OpenCL (Windows) | wgpu 30: Metal, Vulkan, DX12, GL; backend selectable | done |
 | GPU compositing of layers, blend modes, effects | partial (Photoshop composites mostly on CPU) | wgpu compositor, ≤ 1/255 vs CPU oracle; Multichannel and > texture-limit regions fall back to CPU | done (ahead in places) |
@@ -23,7 +24,7 @@ HDR display to verify.
 | GPU filters (Blur Gallery, Liquify, Smart Sharpen, Camera Raw) | yes | CPU (rayon) for filters; GPU for compose and effects. Camera Raw's preview runs its per-pixel stages (white balance to grain) in one wgpu pass, about 2-3 ms vs 11-28 ms on the CPU for the 858×572 proxy, depending on the machine; spatial stages, Calibration and OK still develop on the CPU (#6916) | partial |
 | Documents larger than the GPU texture limit | yes (tiled) | CPU fallback; tiling in progress (#49) | partial |
 | CPU-only fallback when no GPU | yes, reduced | `cpu` canvas preference; fails to start without an adapter on some Linux systems (#2519, #2412) | partial |
-| Choosing the GPU on a multi-GPU machine | Preferences › Performance › Use Graphics Processor | Linux only: Preferences › Performance › Advanced › GPU adapter and `PHOTOCRAFT_GPU_ADAPTER` (#1885); ignored on Windows and macOS | partial |
+| Choosing the GPU on a multi-GPU machine | Preferences › Performance › Use Graphics Processor | Linux only: Preferences › Performance › Advanced › GPU adapter and `MOST_IMAGE_GPU_ADAPTER` (#1885); ignored on Windows and macOS | partial |
 | Old / integrated GPUs | yes | black line on Intel HD (#2426), OpenCore Macs fail (#1859), Rgba32Float panic (#2020) | partial |
 
 ## Pen tablets
@@ -39,7 +40,7 @@ HDR display to verify.
 
 ## Displays and colour
 
-| Feature | Photoshop | PhotoCraft | Status |
+| Feature | Photoshop | Most Image | Status |
 |---|---|---|---|
 | Colour-managed canvas (document → monitor profile) | yes | yes, folded into the GPU 3D LUT | done |
 | Monitor profile detection | per display, live | macOS per display at launch; others sRGB or a chosen .icc | partial |
@@ -50,7 +51,7 @@ HDR display to verify.
 
 ## Input devices
 
-| Feature | Photoshop | PhotoCraft | Status |
+| Feature | Photoshop | Most Image | Status |
 |---|---|---|---|
 | Trackpad pinch zoom, two-finger pan | yes | yes; pinch scrolls instead in 0.6.0 (#2463) | partial |
 | Trackpad rotate (Rotate View) | yes | yes (`rotate_view.rs`) | done |

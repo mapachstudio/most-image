@@ -1,3 +1,4 @@
+<!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # Color selection and screen sampling
 
 Click the color swatch in the Type options bar or Character panel to open the full Color Picker. It offers the color field, component strip, HSB/RGB/Lab/CMYK and hex fields, and current/new swatches. Selecting characters targets that range; with no character selection, the active text layer is targeted. While the picker is open, the canvas shows the target in the picked colour, as Photoshop does: the preview runs `type.setStyle` on a copy of the document, so the document, its revision and its history are untouched. **OK** applies through `type.setStyle`, exactly the previewed edit, in one history step; **Cancel** leaves the text and history unchanged. The foreground color is independent of this dialog.
@@ -10,7 +11,7 @@ With a painting tool, **Shift+Alt+right-click** on the canvas opens the HUD Colo
 
 The existing canvas eyedropper continues to sample the document while the Color Picker is open, including canvas zoom and pan. This works without operating-system screen-capture permission.
 
-## Pick a color outside PhotoCraft
+## Pick a color outside Most Image
 
 **Pick screen color** is available in full Color Pickers and compact color-selection popups, including fills, shapes, gradients, layer effects, guides and preferences.
 
@@ -22,13 +23,13 @@ Screen snapshots are held in memory, are never written or transmitted by the pic
 
 ## Platform behavior
 
-- **Linux/X11:** a native Rust X11 client captures the composed desktop. An advertised primary-display ICC profile is converted to sRGB through PhotoCraft's color-management library. Outputs with no published profile use an sRGB fallback.
-- **Linux/Wayland:** the desktop's XDG `PickColor` portal owns selection and permission UI and returns sRGB. Magnification and zoom controls depend on the portal implementation; PhotoCraft cannot capture other applications directly under Wayland.
+- **Linux/X11:** a native Rust X11 client captures the composed desktop. An advertised primary-display ICC profile is converted to sRGB through Most Image's color-management library. Outputs with no published profile use an sRGB fallback.
+- **Linux/Wayland:** the desktop's XDG `PickColor` portal owns selection and permission UI and returns sRGB. Magnification and zoom controls depend on the portal implementation; Most Image cannot capture other applications directly under Wayland.
 - **Windows:** native screen capture with monitor-specific fullscreen viewports. Captured pixels currently use an sRGB fallback; HDR and arbitrary monitor-profile accuracy are not guaranteed.
 - **macOS:** safe CoreGraphics bindings capture the composed screen and use the snapshot's own ICC profile when available. Screen Recording permission may be required. The existing macOS 11 deployment target is preserved. The window-list capture API is deprecated by Apple, so current macOS releases require explicit manual validation; migration to modern native sampling must also preserve older-app compatibility.
 - **Web:** browsers exposing the standard EyeDropper API use the browser's native sampling/magnification UI. Browser support and zoom controls vary. Unsupported browsers retain document sampling and color fields; external screen sampling is unavailable.
 
-The implementation follows publicly documented Photoshop behavior for the full Type Color Picker and outside-image sampling. PhotoCraft uses an explicit screen-pick action and frozen snapshots rather than Photoshop's press-and-drag gesture.
+The implementation follows publicly documented Photoshop behavior for the full Type Color Picker and outside-image sampling. Most Image uses an explicit screen-pick action and frozen snapshots rather than Photoshop's press-and-drag gesture.
 
 ## Verification
 

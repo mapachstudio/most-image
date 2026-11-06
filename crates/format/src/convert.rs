@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Document ⇄ manifest conversion. Binary data is routed through a
 //! [`Sink`] (save) or [`Fetch`] (load) keyed by BLAKE3 hash.
 
@@ -157,7 +158,7 @@ fn layer_m(l: &Layer, sink: &mut dyn Sink) -> LayerM {
             psd_raw: opt_blob(&s.psd_raw, sink),
             path: s.path.clone(),
             stroke: s.stroke.clone(),
-            // Older PhotoCraft versions cannot deserialize ArrowLine.
+            // Older Most Image versions cannot deserialize ArrowLine.
             // The saved path preserves the arrow's visual appearance.
             live: match &s.live {
                 Some(photocraft_doc::LiveShape::ArrowLine { .. }) => None,

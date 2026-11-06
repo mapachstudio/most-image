@@ -1,6 +1,7 @@
+# Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 [package]
 name = "photocraft-automation"
-description = "MCP server (rmcp) over the PhotoCraft engine, plus a bridge to a running GUI"
+description = "MCP server (rmcp) over the Most Image engine, plus a bridge to a running GUI"
 version.workspace = true
 edition.workspace = true
 license.workspace = true

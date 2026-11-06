@@ -1,10 +1,11 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::{PhotocraftApp, gpu_canvas, gpu_status};
 
 impl PhotocraftApp {
     /// Draw the document canvas on the GPU (custom WGSL shader) instead of via egui textures.
     /// Call from the app creator with `cc.wgpu_render_state`; without it the CPU path is used.
     pub fn set_wgpu(&mut self, rs: eframe::egui_wgpu::RenderState) {
-        // Preferences › Performance › cache tile size (PHOTOCRAFT_GPU_TILE still overrides).
+        // Preferences › Performance › cache tile size (MOST_IMAGE_GPU_TILE still overrides).
         let tile = self.session.prefs().performance.cache_tile_size;
         // Escaped driver/setup panics must leave the session and CPU canvas alive.
         self.perf.gpu_info.set_adapter(&rs.adapter.get_info());
@@ -50,7 +51,7 @@ impl PhotocraftApp {
         let compiler = self.services.shader_compiler.as_deref().unwrap_or("");
         let key = gpu.compositor_memo_key(compiler);
         let mut memo = self.load_gpu_memo();
-        let bypass = retry || std::env::var("PHOTOCRAFT_GPU_REBUILD").is_ok_and(|v| v == "1");
+        let bypass = retry || std::env::var("MOST_IMAGE_GPU_REBUILD").is_ok_and(|v| v == "1");
         if bypass {
             if memo.remove(&key) {
                 self.save_gpu_memo(&memo);

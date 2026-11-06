@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::convert::clip_name;
 use super::descriptors::{
     PT, PX, Target, ang, class, code, color_desc, color_hex, desc, enm, get_bool, get_enum, get_num, get_obj, get_ref, get_text, jbool, jnum, jstr, layer_ref,
@@ -168,11 +169,11 @@ pub(super) fn delete_from(d: &Descriptor) -> Mapped {
         // The mask Photoshop adds to a new fill or adjustment layer, or to a smart object's filters.
         Some(r) if ref_class(r).as_deref() == Some("Chnl") => match target(r) {
             Target::Ordinal(o) if o == "Msk" => none("layer.layerMask.delete"),
-            // Photoshop adds an empty filter mask with the first smart filter; PhotoCraft doesn't.
+            // Photoshop adds an empty filter mask with the first smart filter; Most Image doesn't.
             Target::Ordinal(o) if o == "filterMask" => step("layer.smartFilter.deleteFilterMask", json!({"ifPresent": true})),
             _ => Mapped::Unsupported { harmless: false },
         },
-        // Timeline frames: PhotoCraft has no frame animation, so there is nothing to delete.
+        // Timeline frames: Most Image has no frame animation, so there is nothing to delete.
         Some(r) if ref_class(r).as_deref() == Some("animationClass") => Mapped::Unsupported { harmless: true },
         Some(_) => Mapped::Unsupported { harmless: false },
     }

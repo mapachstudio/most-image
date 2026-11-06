@@ -1,10 +1,11 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Crop tool: a Straighten line drawn with ⌘ (Ctrl) held turns the image but keeps the frame's
 //! size (#10870), while the options-bar Straighten button keeps fitting the frame inside the
 //! turned image.
 //!
 //! Measured in the reference application: an 800 × 500 document, the frame around the whole
 //! canvas, a line rising about 10°. The button commits 633 × 396; ⌘ held commits 800 × 500 with
-//! the uncovered corners in the background colour (Fill: Background). PhotoCraft fitted the frame
+//! the uncovered corners in the background colour (Fill: Background). Most Image fitted the frame
 //! both ways.
 //!
 //! Driven as an agent does, through `ui.pointer` (document px), in both crop modes.

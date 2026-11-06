@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Smart Objects and Smart Filters: Layer › Smart Objects, Layer › Smart Filter and
 //! Filter › Convert for Smart Filters.
 //!
@@ -50,7 +51,7 @@ pub struct SmartLink {
 /// PSD placed-layer keys that describe the smart object's source; stale once we change it.
 const PLACED_KEYS: [&[u8; 4]; 3] = [b"SoLd", b"PlLd", b"SoLE"];
 
-/// Command id of a Photoshop smart filter PhotoCraft does not implement (kept verbatim from PSD).
+/// Command id of a Photoshop smart filter Most Image does not implement (kept verbatim from PSD).
 pub use photocraft_io::smart_map::UNSUPPORTED_FILTER;
 
 fn other(msg: impl Into<String>) -> EngineError {

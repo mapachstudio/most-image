@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::cmds::bad;
 use super::{Result, Value};
 
@@ -78,7 +79,7 @@ fn path_key(path: &str) -> String {
 #[cfg(not(target_arch = "wasm32"))]
 fn sibling(path: &str, kind: &str) -> std::io::Result<(std::path::PathBuf, std::fs::File)> {
     for n in 0..1000u32 {
-        let p = std::path::PathBuf::from(format!("{path}.{}-{n}.photocraft-{kind}", std::process::id()));
+        let p = std::path::PathBuf::from(format!("{path}.{}-{n}.mostimage-{kind}", std::process::id()));
         match std::fs::OpenOptions::new().write(true).create_new(true).open(&p) {
             Ok(f) => return Ok((p, f)),
             Err(e) if e.kind() == std::io::ErrorKind::AlreadyExists => continue,

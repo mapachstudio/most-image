@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! GPU document canvas: an `egui_wgpu` paint callback that draws one document view with a custom
 //! WGSL shader.
 //!
@@ -95,7 +96,7 @@ const FORMAT_HIGH: wgpu::TextureFormat = wgpu::TextureFormat::Rgba16Float;
 /// Largest high-bit document (in pixels) given an `Rgba16Float` canvas texture: 100 MP is
 /// 800 MB at level 0, about 1.07 GB with mips (twice the `Rgba8Unorm` cost). Bigger 16/32-bit
 /// documents (a 14000² one would need 2.1 GB) use `Rgba8Unorm`, so they stay on the GPU like
-/// 8-bit ones. `PHOTOCRAFT_CANVAS_F16=0` turns the float canvas off, `=1` ignores this budget.
+/// 8-bit ones. `MOST_IMAGE_CANVAS_F16=0` turns the float canvas off, `=1` ignores this budget.
 pub const F16_BUDGET_PX: u64 = 100_000_000;
 const VIEW_UNIFORM_SIZE: u64 = 128;
 const VIEW_FLOATS: usize = 32;
@@ -145,11 +146,11 @@ pub struct ViewParams {
 /// When high-bit documents get an `Rgba16Float` canvas texture.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 enum HighPolicy {
-    /// The adapter can't render to or filter `Rgba16Float`, or `PHOTOCRAFT_CANVAS_F16=0`.
+    /// The adapter can't render to or filter `Rgba16Float`, or `MOST_IMAGE_CANVAS_F16=0`.
     Off,
     /// Up to [`F16_BUDGET_PX`].
     Budget,
-    /// Always (`PHOTOCRAFT_CANVAS_F16=1`).
+    /// Always (`MOST_IMAGE_CANVAS_F16=1`).
     Always,
 }
 
@@ -181,7 +182,7 @@ pub struct GpuCanvas {
 /// samples one mip level and renders into another of the same texture (#892, Intel UHD 620).
 /// Everywhere else it renders straight into the level: on an NVIDIA DX12 adapter the scratch
 /// textures, created per level on every refresh, cost about 1 ms of CPU time per brush dab
-/// (#4515). `PHOTOCRAFT_SEPARATE_MIPS` (`setting`) forces it on (`1`) or off (`0`).
+/// (#4515). `MOST_IMAGE_SEPARATE_MIPS` (`setting`) forces it on (`1`) or off (`0`).
 pub fn separate_mip_targets(backend: wgpu::Backend, vendor: u32, setting: Option<&str>) -> bool {
     const INTEL: u32 = 0x8086;
     match setting.map(str::trim) {
@@ -205,12 +206,12 @@ impl GpuCanvas {
         Self::with_tile(rs, None)
     }
 
-    /// Like [`GpuCanvas::new`] with a preferred texture tile side (`PHOTOCRAFT_GPU_TILE` wins).
+    /// Like [`GpuCanvas::new`] with a preferred texture tile side (`MOST_IMAGE_GPU_TILE` wins).
     pub fn with_tile(rs: &RenderState, tile: Option<u32>) -> Self {
         let max = rs.device.limits().max_texture_dimension_2d;
-        let env_tile = std::env::var("PHOTOCRAFT_GPU_TILE").ok().and_then(|v| v.parse::<u32>().ok());
+        let env_tile = std::env::var("MOST_IMAGE_GPU_TILE").ok().and_then(|v| v.parse::<u32>().ok());
         let tile = env_tile.or(tile).unwrap_or(DEFAULT_TILE).clamp(64, max);
-        let high = match std::env::var("PHOTOCRAFT_CANVAS_F16").ok().as_deref() {
+        let high = match std::env::var("MOST_IMAGE_CANVAS_F16").ok().as_deref() {
             _ if !supports_f16_canvas(&rs.adapter) => HighPolicy::Off,
             Some("0") => HighPolicy::Off,
             Some("1") => HighPolicy::Always,
@@ -221,7 +222,7 @@ impl GpuCanvas {
         let mut res = Resources::new(&rs.device, &rs.queue, rs.target_format, high != HighPolicy::Off);
         res.health = health.clone();
         let info = rs.adapter.get_info();
-        res.separate_mip_targets = separate_mip_targets(info.backend, info.vendor, std::env::var("PHOTOCRAFT_SEPARATE_MIPS").ok().as_deref());
+        res.separate_mip_targets = separate_mip_targets(info.backend, info.vendor, std::env::var("MOST_IMAGE_SEPARATE_MIPS").ok().as_deref());
         let vram = video_memory(&info);
         res.canvas_budget.store(canvas_budget(physical_memory(), vram), Ordering::Relaxed);
         let budget = res.canvas_budget.clone();
@@ -248,7 +249,7 @@ impl GpuCanvas {
     /// Start compositor compilation off the UI thread on native hardware.
     pub fn start_compositor(&self, ctx: &egui::Context) {
         #[cfg(not(target_arch = "wasm32"))]
-        if self.rs.adapter.get_info().device_type != wgpu::DeviceType::Cpu && std::env::var_os("PHOTOCRAFT_CPU_COMPOSE").is_none() {
+        if self.rs.adapter.get_info().device_type != wgpu::DeviceType::Cpu && std::env::var_os("MOST_IMAGE_CPU_COMPOSE").is_none() {
             compositor_build::start(
                 &self.rs.device,
                 photocraft_gpu::Compositor::preferred_acc_format(&self.rs.adapter),
@@ -587,7 +588,7 @@ impl GpuCanvas {
     /// Whether [`GpuCanvas::composite`] would draw `doc` with the wgpu compositor (rather than
     /// fall back to the CPU compositor).
     pub fn supports(&self, doc: &photocraft_doc::Document) -> bool {
-        if std::env::var_os("PHOTOCRAFT_CPU_COMPOSE").is_some() || doc.size.width == 0 || doc.size.height == 0 {
+        if std::env::var_os("MOST_IMAGE_CPU_COMPOSE").is_some() || doc.size.width == 0 || doc.size.height == 0 {
             return false;
         }
         let r = self.rs.renderer.read();
@@ -693,8 +694,8 @@ impl GpuCanvas {
         if size[0] == 0 || size[1] == 0 {
             return Err(photocraft_gpu::Unsupported("empty document".into()));
         }
-        if std::env::var_os("PHOTOCRAFT_CPU_COMPOSE").is_some() {
-            return Err(photocraft_gpu::Unsupported("disabled by PHOTOCRAFT_CPU_COMPOSE".into()));
+        if std::env::var_os("MOST_IMAGE_CPU_COMPOSE").is_some() {
+            return Err(photocraft_gpu::Unsupported("disabled by MOST_IMAGE_CPU_COMPOSE".into()));
         }
         if let Some(f) = self.fault() {
             return Err(photocraft_gpu::Unsupported(f.to_string()));
@@ -832,7 +833,7 @@ impl GpuCanvas {
         };
         if result.is_ok() {
             d.regenerate_mips(device, queue, res, [region.x0 as u32, region.y0 as u32, region.x1 as u32, region.y1 as u32]);
-            if std::env::var_os("PHOTOCRAFT_GPU_SYNC").is_some() {
+            if std::env::var_os("MOST_IMAGE_GPU_SYNC").is_some() {
                 // Benchmarking: wait for the GPU so callers can time the whole refresh.
                 #[cfg(not(target_arch = "wasm32"))]
                 self.health.wait(device, None);

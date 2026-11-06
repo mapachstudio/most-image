@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use serde_json::json;
 
 use super::*;
@@ -318,7 +319,7 @@ fn refused_edit_shows_the_error_and_typed_fields_in_the_dialog() {
     app.automation_input = true;
     app.services.automation_command = Some(Box::new(|_, _| Err("guide edits are denied".into())));
     assert!(crate::dialogs::confirm(&mut app, id).is_err());
-    let evidence = std::env::var_os("PHOTOCRAFT_GUIDE_RETRY_EVIDENCE");
+    let evidence = std::env::var_os("MOST_IMAGE_GUIDE_RETRY_EVIDENCE");
     let builder = egui_kittest::Harness::builder().with_size(egui::vec2(1000.0, 700.0));
     let builder = if evidence.is_some() { builder.wgpu() } else { builder };
     let mut h = builder.build_eframe(move |cc| {

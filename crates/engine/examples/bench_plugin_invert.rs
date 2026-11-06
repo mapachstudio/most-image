@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Timing: the example WebAssembly Invert plug-in vs the built-in Image › Adjustments › Invert,
 //! through the full command path, on a 6000 × 4000 (24 MP) layer.
 //! `cargo run --release -p photocraft-engine --example bench_plugin_invert [width] [height] [depth]`
@@ -42,7 +43,7 @@ fn main() {
         s.execute("image.adjustments.invert", json!({})).unwrap();
         let builtin = t.elapsed().as_secs_f64() * 1e3;
         let t = Instant::now();
-        s.execute("plugin.run", json!({"id": "org.photocraft.example.invert"})).unwrap();
+        s.execute("plugin.run", json!({"id": "org.mostimage.example.invert"})).unwrap();
         let plugin = t.elapsed().as_secs_f64() * 1e3;
         println!("built-in invert {builtin:>7.0} ms   plug-in invert {plugin:>7.0} ms");
     }

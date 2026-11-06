@@ -1,3 +1,4 @@
+// Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Creative 3D LUT files for Image › Adjustments › Color Lookup: `.cube` (Adobe/Resolve), `.3dl`
 //! (Autodesk Lustre / Flame) and `.look` (SpeedGrade XML), plus a few generated (CC0) looks.
 //!
@@ -495,7 +496,7 @@ fn smooth(x: f32) -> f32 {
     x * x * (3.0 - 2.0 * x)
 }
 
-/// Generated looks shipped with PhotoCraft (procedural, CC0): `(id, label)`.
+/// Generated looks shipped with Most Image (procedural, CC0): `(id, label)`.
 pub const BUILTIN: [(&str, &str); 8] = [
     ("warm", "Warm Filter"),
     ("cool", "Cool Filter"),
