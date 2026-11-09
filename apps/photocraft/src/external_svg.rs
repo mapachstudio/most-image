@@ -34,10 +34,10 @@ mod native {
         // A Flatpak payload belongs to the caller's sandbox when executed directly. Let the
         // desktop launch the actual editor and grant it just this writable working file.
         #[cfg(target_os = "linux")]
-        let portal = matches!(&editor, ExternalSvgEditor::Most Vector);
+        let portal = matches!(&editor, ExternalSvgEditor::MostVector);
         #[cfg(not(target_os = "linux"))]
         let portal = false;
-        let chosen_vectorcraft = matches!(&editor, ExternalSvgEditor::Most Vector);
+        let chosen_vectorcraft = matches!(&editor, ExternalSvgEditor::MostVector);
         let chosen_bundle = matches!(&editor, ExternalSvgEditor::Program(path) if cfg!(target_os = "macos") && Path::new(path).extension().is_some_and(|ext| ext.eq_ignore_ascii_case("app")) && Path::new(path).is_dir());
         let executable = if portal && source.extension == "svg" { None } else { Some(resolve(editor)?) };
         // Only Most Vector's own working copy of an AI is regenerated (it opens foreign AI
@@ -230,7 +230,7 @@ mod native {
     fn resolve(editor: ExternalSvgEditor) -> Result<Resolved, String> {
         match editor {
             ExternalSvgEditor::Program(path) => resolve_program(Path::new(&path), cfg!(target_os = "macos")),
-            ExternalSvgEditor::Most Vector => vectorcraft_programs()
+            ExternalSvgEditor::MostVector => vectorcraft_programs()
                 .into_iter()
                 .next()
                 .map(Resolved::direct)
@@ -417,7 +417,7 @@ mod native {
     fn resolve_editor(editor: ExternalSvgEditor) -> Result<PathBuf, String> {
         match editor {
             ExternalSvgEditor::Program(path) => validate_executable(Path::new(&path)),
-            ExternalSvgEditor::Most Vector => {
+            ExternalSvgEditor::MostVector => {
                 let mut candidates = vec![];
                 for variable in ["ProgramFiles", "ProgramFiles(x86)"] {
                     if let Some(root) = std::env::var_os(variable) {
@@ -465,7 +465,7 @@ mod native {
     /// The known Most Vector executable, if one is installed.
     #[cfg(windows)]
     fn vectorcraft_programs() -> Vec<PathBuf> {
-        resolve_editor(ExternalSvgEditor::Most Vector).ok().into_iter().collect()
+        resolve_editor(ExternalSvgEditor::MostVector).ok().into_iter().collect()
     }
 
     /// Require an absolute `.exe` that is a regular file, not a link or reparse point, and

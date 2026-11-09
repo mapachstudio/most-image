@@ -610,7 +610,7 @@ fn embedded_ai_link_table_handoff_preserves_source_until_saved_and_undo_restores
     let before = app.session.active().unwrap().doc.clone();
     let queue = saves.clone();
     app.services.open_external_svg = Some(Box::new(move |editor, source| {
-        assert_eq!(editor, ExternalSvgEditor::Most Vector);
+        assert_eq!(editor, ExternalSvgEditor::MostVector);
         assert_eq!(*source.bytes, original);
         assert_eq!(source.extension, "ai");
         Ok(Box::new(NativeTestSession(queue.clone())))

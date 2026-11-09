@@ -286,7 +286,7 @@ pub type ClipboardUnreadableFn = Box<dyn Fn() -> bool>;
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum ExternalSvgEditor {
     /// A known Most Vector installation, found by the desktop shell.
-    Most Vector,
+    MostVector,
     /// A known Adobe Illustrator installation (offered where the shell can discover one).
     Illustrator,
     /// The absolute path the user chose with "Other application": an executable, or on macOS
