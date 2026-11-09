@@ -4,7 +4,7 @@ name = "photocraft"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
-default-run = "photocraft"
+default-run = "most-image"
 description = "Most Image: an open-source, native image editor"
 build = "build.rs"
 
