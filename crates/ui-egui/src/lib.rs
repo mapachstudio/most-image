@@ -14,9 +14,26 @@
 /// prompt shows both, and an AppImage's menu entry gets the icon.
 #[cfg(not(target_arch = "wasm32"))]
 pub const UPDATE_APP: craft_update::app::App = craft_update::app::App {
+    // Se escribe entero, sin `..craft_update::suite::PHOTOCRAFT`.
+    //
+    // Aquel descriptor es el SUYO: su nombre, «by ArtCraft» y, sobre todo,
+    // `repo: "storytold/photocraft"`, que su propia documentación define como «el
+    // único repositorio del que se descargan releases». Con eso, Most Image
+    // consultaba las versiones de ellos, enseñaba su marca en el aviso de
+    // actualización y se ofrecía a instalar su binario encima del nuestro.
+    // Visto al abrir el .dmg que compiló el CI, no leyendo código: los
+    // textos venían de la respuesta del servidor.
+    id: "most-image",
+    name: "Most Image",
+    tagline: "Image editing",
+    repo: "mapachstudio/most-image",
+    // Sin nombres anteriores: los artefactos de la obra original no son
+    // nuestros y no se deben reclamar como versiones previas de esto.
+    former_ids: &[],
+    former_names: &[],
     icon_png: Some(include_bytes!("../../../assets/app-icon/hicolor/128x128/apps/com.grupomostmexico.mostimage.png")),
-    accent: Some([0x2f, 0x7b, 0xf5]),
-    ..craft_update::suite::PHOTOCRAFT
+    accent: Some([0x1D, 0x4E, 0xD8]),
+    developer: "Grupo MOST",
 };
 
 /// Translate a string literal into the current UI language: `tl!("Image Size…")`.
