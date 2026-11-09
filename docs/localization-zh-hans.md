@@ -2,9 +2,9 @@
 # Simplified Chinese catalog
 
 The `zh-hans` catalog is registered as **简体中文** in the shared i18n foundation
-introduced by [Most Image PR #169](https://github.com/storytold/photocraft/pull/169).
+introduced by [Most Image PR #169](https://github.com/mapachstudio/most-image/pull/169).
 Simplified Chinese support landed in
-[PR #282](https://github.com/storytold/photocraft/pull/282), after the v0.2.0 release.
+[PR #282](https://github.com/mapachstudio/most-image/pull/282), after the v0.2.0 release.
 That release does not contain the language selector or this catalog; use a build
 that includes the localisation changes.
 

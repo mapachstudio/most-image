@@ -6,7 +6,6 @@ order: 30
 verified: 0.8.2
 ---
 
-Open **Help › Report an Issue…**. It takes you to the [Most Image issue tracker](https://github.com/storytold/photocraft/issues) on GitHub. You can also ask in [Discord](https://discord.gg/artcraft).
 
 ## What to include
 

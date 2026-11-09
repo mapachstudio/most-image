@@ -1496,7 +1496,7 @@ Remaining open gates:
 
 The user clarified that reviewed plans remain local and implementation proceeds before publication. The earlier requirement to publish/land this plan first is superseded; pushes and PR publication still require explicit approval.
 
-Canonical `storytold/photocraft` `main` now resolves to `e6d6fb45a40250f518d2e824236a8fdcaa4472c8`. The owned checkout was fast-forwarded to this revision. Earlier baseline SHAs and line anchors above are retained as historical review evidence; use this new revision and its exact lockfile for current-main integration and paired measurements. The original refs remain reachable.
+Canonical `mapachstudio/most-image` `main` now resolves to `e6d6fb45a40250f518d2e824236a8fdcaa4472c8`. The owned checkout was fast-forwarded to this revision. Earlier baseline SHAs and line anchors above are retained as historical review evidence; use this new revision and its exact lockfile for current-main integration and paired measurements. The original refs remain reachable.
 
 Use release0.15.0 and its lockfile as integration baseline; preserve same-origin served fonts and encoded-path rejection, cumulative glyph raster budgets, Select and Mask tile-based edits/undo and new catalog keys. Retain0.14 upgrade fixtures too.
 

@@ -1,18 +1,16 @@
 <!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 ---
 title: Install Most Image
-description: Download Most Image for Windows 10 or 11, macOS or Linux from getartcraft.com or GitHub, or install it with ArtCraft Launcher.
 order: 10
 verified: 0.8.2
 ---
 
-The easiest way is the [Most Image page on getartcraft.com](https://getartcraft.com/apps/photocraft). You can also install it with [ArtCraft Launcher](https://getartcraft.com/docs/craft-launcher/guides/install-and-update-apps), which lists Most Image. For a specific build or file format, take it from the [latest release](https://github.com/storytold/photocraft/releases/latest) on GitHub. In the file names below, `<version>` stands for the version number, for example `0.8.2`.
 
 ## Windows
 
 Most Image needs Windows 10 or later. On Windows 7 and 8 the installer stops with "Most Image needs Windows 10 or later."
 
-1. Open the [latest release](https://github.com/storytold/photocraft/releases/latest).
+1. Open the [latest release](https://github.com/mapachstudio/most-image/releases/latest).
 2. Download `photocraft-<version>-windows-x64.msi`. It fits most PCs (64-bit Intel and AMD).
 3. Run the file and follow the installer.
 

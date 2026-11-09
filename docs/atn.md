@@ -395,7 +395,7 @@ Shape creation (`contentLayer`) with geometry or stroke settings remains a kept 
 its descriptor, and enabled playback stops instead of creating a canvas-wide solid fill. Editable
 shape creation is not mapped yet.
 
-The Vibrance event and adjustment-opacity handling incorporate [@bommerts' contribution in #8659](https://github.com/storytold/photocraft/pull/8659).
+The Vibrance event and adjustment-opacity handling incorporate [@bommerts' contribution in #8659](https://github.com/mapachstudio/most-image/pull/8659).
 
 ### Command options retained by mapped events
 
@@ -452,10 +452,10 @@ parity has not been measured.
 
 ### Custom and Fibers dialog filters
 
-Custom uses the mapping from [#10631 by @hectorviov](https://github.com/storytold/photocraft/pull/10631),
+Custom uses the mapping from [#10631 by @hectorviov](https://github.com/mapachstudio/most-image/pull/10631),
 revision `4ed3f5b5911e2dc50655fc68cd44da68dab7c219`. It retains the 25 integer
 kernel cells, scale 1..9999 and offset -9999..9999. Fibers uses the corresponding
-part of [#10620](https://github.com/storytold/photocraft/pull/10620), revision
+part of [#10620](https://github.com/mapachstudio/most-image/pull/10620), revision
 `33ee38b43165610b295e91f8b99841c591cf97b8`, with the now-measured variance and
 strength limits 1..64. Its seed retains all 32 bits. Both native commands already
 support these ranges. Custom requires all 25 kernel cells; omitted scale and offset
@@ -494,7 +494,7 @@ The nested object class is corroborated by
 The ID selects the installed shape even after a rename. If that asset is absent,
 playback fails without applying a blur; it never substitutes a shape with
 the same name. CSH libraries use the backend of
-[@jonathanwxh-cell's #5493](https://github.com/storytold/photocraft/pull/5493),
+[@jonathanwxh-cell's #5493](https://github.com/mapachstudio/most-image/pull/5493),
 ported from revision `43920ab7804cd386b91b319b33a2a8d0832d4d91` with its bounded
 reader and import tests. Imported IDs retain their exact text. Empty IDs become
 anonymous presets usable by name; repeated IDs resolve only when all matching
@@ -515,12 +515,12 @@ installed custom-shape references use the bounded converter above.
 
 ### Batch naming and the existing Batch command
 
-The Batch mapping builds on [#7170 by @HirthikBalaji](https://github.com/storytold/photocraft/pull/7170),
+The Batch mapping builds on [#7170 by @HirthikBalaji](https://github.com/mapachstudio/most-image/pull/7170),
 with original revision `ee4966260b08506336b2d8aac64488a754ca5171` retained in the
 commit history. It is adapted to the current command modules and Batch runner,
 including named actions, set-qualified references, recursion limits and output
 protection. The serial-letter conversion alone comes from
-[#4579 by @FabioLissi](https://github.com/storytold/photocraft/pull/4579), revision
+[#4579 by @FabioLissi](https://github.com/mapachstudio/most-image/pull/4579), revision
 `720a1e4b9c6fac398d2b892bdfe7a3ffc849f4ea`; its broader CLI and UI changes are
 not included.
 
@@ -556,7 +556,7 @@ returns the collected file results successfully, as measured in the reference
 application.
 
 Save and Close support builds on
-[#10026 by @edaldridgePersonal](https://github.com/storytold/photocraft/pull/10026)
+[#10026 by @edaldridgePersonal](https://github.com/mapachstudio/most-image/pull/10026)
 (revision b96be5300cfa7308f832362fe46295af6895cf91). Recorded SvAn true writes each
 successful result to the same source path and format. Existing Save snapshots
 remain usable after a recorded Close; a failed save leaves that source intact.

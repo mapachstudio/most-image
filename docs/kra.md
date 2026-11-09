@@ -60,7 +60,7 @@ it as OpenRaster. `crates/engine/tests/it/kra.rs` (opt-in) opens a Krita-authore
 session, checks it is read-only, edits with undo and saves as `.ora` and `.pcraft`.
 
 Real-file checks use the Krita-authored oracles in
-[photocraft-corpus](https://github.com/storytold/photocraft-corpus) (`krita/`, made by
+[photocraft-corpus](https://github.com/mapachstudio/most-image-corpus) (`krita/`, made by
 `tools/krita-oracles/generate.py`, which removes Krita's embedded third-party ICC profiles so
 the files are sRGB):
 

@@ -1,47 +1,31 @@
-<!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
-# Most Image app icon
+# Icono de Most Image
 
-A **nine-tailed kitsune with a brow diamond**: an engraving portrait, seated, looking back at the
-viewer, in the Crafting Apps' owl-template framing (full-bleed field, head and body filling the
-tile, tails running off the edges).
+Dibujo propio de Grupo MOST. No queda nada del icono de la obra original:
+su licencia de marca obliga a retirarlo en toda versión modificada, y en el
+caso de Most Anything además no era código abierto.
 
-## Palette
+**El dibujo.** Un azulejo de 512 a sangre con esquinas redondeadas (112 de
+radio), degradado de `#3B82F6` a `#1D4ED8` en diagonal, y encima el motivo en
+blanco: 3 trazo(s).
+Dice de un vistazo qué hace el programa.
 
-Exactly three colours:
+**Cómo se generan.** `tools/iconos.mjs` de la suite, que rasteriza con el
+motor de Most Studio: el mismo barrido de líneas que usa el texto de área,
+así que el icono es literalmente lo que Most Studio dibujaría. De ahí salen:
 
-| Colour | Hex | Used for |
-|---|---|---|
-| Ink | `#0b0b0c` | line work and contours |
-| Paper | `#efe9dc` | the figure |
-| Most Image blue (app colour) | `#2f7bf5` | the full-bleed field |
+| Archivo | Para qué |
+|---|---|
+| `most-image.svg` | La pieza canónica, 512 a sangre |
+| `most-image-small.svg` | La misma, para tamaños pequeños |
+| `hicolor/<n>x<n>/apps/com.grupomostmexico.mostimage.png` | Tema de iconos de Linux |
+| `most-image-1024.png`, `-512`, `-256`, `-64` | Los que el código incrusta por nombre |
+| `most-image-macos-512.png` | Icono de ventana y Dock en macOS |
+| `most-image.icns` | Paquete de macOS |
+| `most-image.ico` | Ejecutable e instalador de Windows |
 
-## Geometry
+Si cambia el dibujo, se regenera todo de una vez. No se editan a mano: el
+código los incrusta por nombre con `include_bytes!` y un archivo que falte
+no es un aviso, es un error de compilación.
 
-A 512-unit tile (`viewBox="0 0 512 512"`), rounded square with `rx=112`, no border. The macOS
-renders pad it onto Apple's 824/1024 icon grid; the Windows and Linux renders use the whole tile,
-as the other Crafting Apps do.
-
-## Provenance
-
-The owner's original drawing, made in ArtCraft (2880 px, engraving style, keyed to the palette),
-vectorised. License: see `LICENSE.txt`.
-
-## Files
-
-- `most-image.svg`: canonical master (traced at 2048 px).
-- `most-image-small.svg`: lighter trace (traced at 1024 px); also the hicolor scalable icon.
-- `most-image-1024.png`: 1024 px render on the macOS grid.
-- `most-image.icns`: macOS bundle icon (`CFBundleIconFile`).
-- `most-image.ico`: Windows icon, 16–256 px, embedded in the `.exe` by `apps/photocraft/build.rs`.
-- `hicolor/<size>/apps/com.grupomostmexico.mostimage.png` (16–512) and `hicolor/scalable/...svg`:
-  Linux icon theme.
-
-The app also sets the window icon and Wayland app ID at runtime (`apps/photocraft/src/app_icon.rs`,
-`main.rs`). On Windows the taskbar shows the icon of the Start Menu shortcut that launches the
-exe, so the MSI's `<Icon Id>` keeps the `.exe` extension (ICE50); `app_icon.rs` documents the
-details and tests the `.ico` sizes and the WiX icon references.
-
-## Regenerate
-
-Replace `most-image.svg` (and `most-image-small.svg`), then run `packaging/icons.sh`. It needs
-`resvg`, plus `iconutil` on macOS; the `.ico` is packed by `cargo xtask ico`.
+**Licencia.** Los dibujos son propiedad de Grupo MOST. `LICENSE.txt` es el
+de la obra original y se conserva por lo que cubre de ella.
