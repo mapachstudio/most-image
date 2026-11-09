@@ -124,7 +124,10 @@ cp "$WORK/bin/photocraft" "$APP/Contents/MacOS/Most Image"
 cp "$WORK/bin/photocraft-cli" "$APP/Contents/MacOS/photocraft-cli"
 cp "$ROOT/assets/app-icon/most-image.icns" "$APP/Contents/Resources/Most Image.icns"
 # Notices for the bundled font fallback, included before the bundle is signed.
-cp "$ROOT/NOTICE" "$ROOT/ATTRIBUTION.md" "$APP/Contents/Resources/"
+# Apache-2.0 §4: con cada distribucion van una copia de la LICENCIA y los
+# avisos del NOTICE. Antes solo se copiaba el NOTICE y la atribucion: el
+# programa se repartia sin el texto de la licencia que lo permite.
+copy_docs "$APP/Contents/Resources"
 # Licences of the embedded craft-fonts fonts (only when built with CRAFT_FONTS_DIR).
 if [[ -n "${CRAFT_FONTS_DIR:-}" ]]; then
   mkdir -p "$APP/Contents/Resources/Licenses"
