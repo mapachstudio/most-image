@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! DPX (SMPTE 268M Digital Picture Exchange), implemented here from the published layout: the
 //! 1664-byte generic header (file and image information, image source), the 384-byte industry
 //! header (film and television), then the image data of each element.

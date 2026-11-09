@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Dialogs rendered from `UiState::dialogs`. Field values live in the dialog data, so automation can
 //! set them (`ui.dialog.set`) and confirm (`ui.dialog.confirm`) exactly like a user.
 

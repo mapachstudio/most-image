@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Layer style libraries (`.asl`) ⇄ Most Image styles.
 //!
 //! The container is parsed by [`photocraft_psd::asl`]. Each style's `Lefx` is the same effects

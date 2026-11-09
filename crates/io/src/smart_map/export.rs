@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::import::{
     CHANNELS, CUSTOM_CELL, CUSTOM_OFFSET, CUSTOM_SCALE, DIFFUSE_MODES, EXTRUDE_DEPTH, EXTRUDE_DEPTHS, EXTRUDE_SIZE, EXTRUDE_TYPES, GALLERY_COMMAND, Known,
     LENSES, MEZZOTINT_TYPES, NO_OPTIONS, OFFSET_FILL, POLAR_MODE, RADIAL_METHOD, RADIAL_QUALITY, RIPPLE_SIZE, SMART_BLUR_MODE, SMART_BLUR_QUALITY,

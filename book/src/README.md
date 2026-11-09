@@ -1,4 +1,5 @@
 <!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
+<!-- Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # Most Image Documentation
 
 Most Image is a native image editor written in Rust. This book is the maintained entry point for installation, architecture, formats, automation, development, and security documentation.

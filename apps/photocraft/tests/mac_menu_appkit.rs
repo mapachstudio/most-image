@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! The macOS menu bar end to end, on the main thread (`harness = false`): install it through the
 //! real muda backend (`src/mac_menu.rs`), read AppKit's menu bar back, open a document and see the
 //! items update in place, then choose items the two ways AppKit can: a key equivalent (a real ⌘R

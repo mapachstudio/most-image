@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Photoshop's Video, Other, Average and matting steps (#10607): De-Interlace, NTSC Colors,
 //! HSB/HSL, Custom, Average and Remove Black / White Matte, with the keys Photoshop records.
 

@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Font database: bundled fonts (always available, also on the web), the optional craft-fonts
 //! fonts of every script ([`crate::craft_fonts`], when built with `CRAFT_FONTS_DIR`), optional
 //! system fonts found by scanning platform directories (plus Fontconfig's file list on Linux),

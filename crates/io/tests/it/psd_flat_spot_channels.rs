@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Flat PSDs (no layer records) with spot and alpha channels. The reference editor writes one when a
 //! document is flattened (psd-tools cmyk-alpha-spot.psd, its version 24.7). Its extra channels are
 //! all alpha and spot channels: none is the merged transparency, which every extra channel used

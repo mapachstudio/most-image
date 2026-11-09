@@ -261,7 +261,7 @@ fn gpu_zoom_animation_reuses_the_document_composite() {
     assert_eq!(h.state().perf.last_refresh, "", "immediate zoom reuses the GPU composite");
     let image = h.render().unwrap();
     if let Some(directory) = &directory {
-        image.save(directory.join("photocraft-zoom-disabled.png")).unwrap();
+        image.save(directory.join("most-image-zoom-disabled.png")).unwrap();
     }
 }
 

@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! CIE L*a*b* (D50) ⇄ encoded sRGB for [`crate::ChannelLayout::Lab`] samples, the same formulas
 //! and constants as `photocraft-color` (this crate stays standalone). Samples are normalized as
 //! Most Image holds Lab: L* 0..100 as 0..1, a* and b* −128..127 as `(v + 128) / 255`.

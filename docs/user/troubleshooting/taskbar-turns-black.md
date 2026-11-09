@@ -1,4 +1,5 @@
 <!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
+<!-- Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 ---
 title: The Windows taskbar turns black when Most Image is maximized
 description: On Windows 11, Most Image 0.7.0 can turn the taskbar black or hide it when maximized. Most Image 0.8.2 fixes this; update.

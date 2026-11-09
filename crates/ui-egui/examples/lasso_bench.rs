@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Frame times of a freehand Lasso drag on a large document (#1773): the real `PhotocraftApp` in
 //! an offscreen egui_kittest harness on wgpu, a 6336×7920 RGB document, the view at 125 %, then a
 //! spiral drag of many pointer moves, one per frame, and the release (the `select.lasso` commit)

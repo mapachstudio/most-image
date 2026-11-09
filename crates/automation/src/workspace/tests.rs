@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::*;
 
 fn roots(name: &str) -> (PathBuf, PathBuf, AuthorizedWorkspace) {
@@ -551,7 +552,7 @@ fn registry_filesystem_path_params_are_classified() {
     let probe = serde_json::json!({
         "path": "/outside/photocraft-probe",
         "file": "/outside/photocraft-probe.icc",
-        "mapPath": "/outside/photocraft-probe.png",
+        "mapPath": "/outside/most-image-probe.png",
         "profile": "/outside/photocraft-probe.icc",
         "workingRgb": "/outside/photocraft-probe.icc",
         "workingCmyk": "/outside/photocraft-probe.icc",

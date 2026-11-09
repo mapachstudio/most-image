@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! CJK font fallback: which installed system fonts cover Japanese, Simplified Chinese,
 //! Traditional Chinese and Korean, and in which order to try them for the user's locale.
 //!

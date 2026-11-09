@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Font-size drag latency (#124): a large document with many type layers, one layer's size
 //! changed step by step the way the options bar / Properties drag does it (one `type.setStyle`
 //! per frame, all sharing one coalesce key), each followed by the CPU canvas refresh the app does

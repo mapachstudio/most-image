@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! An adjustment layer whose key Most Image doesn't know (an older or newer adjustment type)
 //! opens as an unsupported adjustment with a warning and saves its block back unchanged, instead
 //! of opening silently as an empty pixel layer (#6575). Pixel layers that merely carry an unknown

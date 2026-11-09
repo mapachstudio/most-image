@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Extra OS windows (document windows, Camera Raw, the screen color picker) share the main
 //! window's app id, so docks show the Most Image icon on them and Wayland compositors' window
 //! rules can match them (Hyprland's `class:`, #6697). Without one their app id is empty.

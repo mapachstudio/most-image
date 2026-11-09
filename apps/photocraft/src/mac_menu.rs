@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! The macOS menu bar, through muda (a standalone native menu crate, not Tauri: no webview, just
 //! AppKit menus behind a safe API, no GTK on macOS). The menus themselves, their Mac layout and how their keys reach Most Image are in
 //! `photocraft_ui_egui::native_menu`; this file only builds and updates the `NSMenu`s.

@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Process-wide, capped pool of large scratch buffers.
 //!
 //! With glibc's mmap threshold pinned (`MALLOC_TRIM_THRESHOLD_`, which is how Most Image returns

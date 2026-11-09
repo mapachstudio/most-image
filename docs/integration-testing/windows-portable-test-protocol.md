@@ -1,4 +1,5 @@
 <!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
+<!-- Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 > HISTORICAL 108-PR BUILD: this record describes the earlier source and artifact. The current branch has 21 requested PRs removed. See [trimmed integration](trimmed-integration-2026-10-29.md) for current scope and validation. Do not use the old portable artifact to validate these removals.
 
 # Most Image Windows portable test protocol

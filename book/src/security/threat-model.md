@@ -1,4 +1,5 @@
 <!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
+<!-- Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # Threat model
 
 This threat model covers the source repository's desktop, CLI, WebAssembly, format, and automation surfaces. It assumes files, paths, JSON, MCP messages, agent decisions, and embedded metadata may be malicious.

@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! A guide dialog's draft. Rendering and command validation stay in Most Image; the
 //! [`edit_session`](crate::edit_session) module owns proposal validity, stale-context rejection
 //! and the single-use/no-op commit decision.

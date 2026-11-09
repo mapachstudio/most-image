@@ -507,7 +507,7 @@ fn populated_canvas_keeps_a_real_opacity_edit_after_floating_and_redocking() {
     assert!((opacity - 0.5).abs() < 0.03, "actual opacity {opacity}");
     if let Some(directory) = &directory {
         std::fs::create_dir_all(directory).unwrap();
-        h.render().unwrap().save(directory.join("photocraft-populated-opacity-floating.png")).unwrap();
+        h.render().unwrap().save(directory.join("most-image-populated-opacity-floating.png")).unwrap();
     }
     let from = tab_rect(&h, "properties").center();
     let to = tab_rect(&h, "layers").center();
@@ -515,7 +515,7 @@ fn populated_canvas_keeps_a_real_opacity_edit_after_floating_and_redocking() {
     assert!(lay(h.state()).floating.iter().all(|group| !group.contains(&"properties".to_string())));
     assert_eq!(h.state().session.active().unwrap().doc.layer(layer).unwrap().opacity, opacity);
     if let Some(directory) = &directory {
-        h.render().unwrap().save(directory.join("photocraft-populated-opacity-redocked.png")).unwrap();
+        h.render().unwrap().save(directory.join("most-image-populated-opacity-redocked.png")).unwrap();
     }
 }
 

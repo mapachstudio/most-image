@@ -3,11 +3,11 @@
   "name": "Most Image",
   "upgradeCode": "D9660F32-2D0A-4ABE-B73D-17BE25F1542C",
   "sources": [
-    "photocraft.wxs"
+    "most-image.wxs"
   ],
-  "icon": "assets/app-icon/photocraft.ico",
+  "icon": "assets/app-icon/most-image.ico",
   "localization": [
-    "photocraft.en-us.wxl"
+    "most-image.en-us.wxl"
   ],
   "extensions": [
     "UI",

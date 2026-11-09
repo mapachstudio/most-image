@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Windows only: embed the app icon and version info (VERSIONINFO) into `photocraft-cli.exe`.
 //!
 //! On every other target this does nothing, even when `MOST_IMAGE_REQUIRE_WINRES` is set. A
@@ -8,7 +9,7 @@
 
 fn main() -> std::io::Result<()> {
     println!("cargo:rerun-if-changed=build.rs");
-    println!("cargo:rerun-if-changed=../../assets/app-icon/photocraft.ico");
+    println!("cargo:rerun-if-changed=../../assets/app-icon/most-image.ico");
     println!("cargo:rerun-if-env-changed=MOST_IMAGE_REQUIRE_WINRES");
     if std::env::var("CARGO_CFG_TARGET_OS").as_deref() != Ok("windows") {
         return Ok(());
@@ -25,7 +26,7 @@ fn main() -> std::io::Result<()> {
     // FileVersion / ProductVersion strings and the numeric FILEVERSION / PRODUCTVERSION are left
     // to `WindowsResource::new`, which reads the Cargo package version. A pre-release such as
     // `1.2.3-rc.1` stays in the strings; the numeric fields are `1.2.3.0`.
-    res.set_icon("../../assets/app-icon/photocraft.ico")
+    res.set_icon("../../assets/app-icon/most-image.ico")
         .set("ProductName", "Most Image")
         .set("FileDescription", "Most Image command-line interface")
         .set("CompanyName", "Grupo MOST")

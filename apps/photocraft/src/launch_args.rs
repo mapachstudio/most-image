@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! The desktop app's command line, as clap types (#7071): `photocraft --help` comes from these doc
 //! comments, so the help and the parser can't disagree. Anything they don't declare is a usage
 //! error naming it (exit status 2), so a typo such as `--safegpu` doesn't open the window and then

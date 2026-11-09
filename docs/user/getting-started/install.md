@@ -1,4 +1,5 @@
 <!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
+<!-- Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 ---
 title: Install Most Image
 description: Download Most Image for Windows 10 or 11, macOS or Linux from getartcraft.com or GitHub, or install it with ArtCraft Launcher.
@@ -49,7 +50,7 @@ On a Wayland session, files dropped on the Most Image window do not open yet. Us
 
 ## FreeBSD and the web
 
-FreeBSD 14 (x86_64) has a tarball, `photocraft-<version>-freebsd-x86_64.tar.gz`, laid out like `/usr/local`. The web version comes as `photocraft-web-<version>.zip`, a static site you host on any web server. It runs in a modern browser.
+FreeBSD 14 (x86_64) has a tarball, `photocraft-<version>-freebsd-x86_64.tar.gz`, laid out like `/usr/local`. The web version comes as `most-image-web-<version>.zip`, a static site you host on any web server. It runs in a modern browser.
 
 ## Check your download
 

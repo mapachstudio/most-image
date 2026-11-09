@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! The plug-in ABI end to end: the example Invert plug-in, and hostile modules (infinite loops,
 //! memory bombs, out-of-bounds access, bad manifests…), which must all fail with an error, quickly.
 

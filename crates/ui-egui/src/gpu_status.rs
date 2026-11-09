@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! GPU health in the shell (#243, #4): when the wgpu device is lost or reports an error, the
 //! GPU canvas is dropped and every document keeps drawing through the CPU compositor and egui
 //! textures, with a recovery warning. After an error Retry GPU builds a new GPU canvas on the same

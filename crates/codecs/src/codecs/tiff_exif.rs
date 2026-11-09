@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! EXIF in a TIFF file: the Exif (34665) and GPS (34853) directories that IFD0 points to, plus
 //! IFD0's descriptive tags (make, model, software, artist, …), the way cameras and Photoshop
 //! write them.

@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! An embedded, empty Type 3 font for the selection plane. Visible glyphs remain paths.
 //! No source font programs are copied into this font; each code has a Unicode mapping.
 use std::collections::BTreeSet;

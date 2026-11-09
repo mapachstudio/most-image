@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Minimal ZIP container: we write STORE entries (the payloads are already
 //! zstd-compressed) and read STORE or DEFLATE entries (so a bundle that was
 //! unzipped and re-zipped by another tool still loads). No ZIP64, no

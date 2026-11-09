@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Type on a path in a PSD (#7962): the path lives only in the type layer's frame in the
 //! document's `Txt2` block (EngineData marks such a layer as box text, `ShapeType 1`, with the
 //! path's bounds as its `BoxBounds`).

@@ -1,4 +1,5 @@
 <!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
+<!-- Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # Releasing Most Image
 
 Every push to the `release` branch runs `.github/workflows/release.yml`. The workflow builds
@@ -93,7 +94,7 @@ in `ci.yml`. Build option: `docs/development.md` › Fonts.
 - `Info.plist` is generated from `Info.plist.in`. The bundle id is `com.grupomostmexico.mostimage`.
   The plist sets `LSMinimumSystemVersion` 11.0, `NSHighResolutionCapable`, and document types:
   `.pcraft` (Owner), plus PSD/PSB and the image formats Most Image reads (Alternate, so it never
-  takes over Preview's defaults). The icon is `assets/app-icon/photocraft.icns`.
+  takes over Preview's defaults). The icon is `assets/app-icon/most-image.icns`.
 - **Signing** goes inside-out with the hardened runtime and a secure timestamp. The executable
   is signed first, then the bundle. There's no `--deep` on the final signature. The
   entitlements (`entitlements.plist`) are deliberately empty.
@@ -140,7 +141,7 @@ redistributable, which matters for a standalone installer and costs only about 1
 goes in `CARGO_TARGET_<TRIPLE>_RUSTFLAGS`, so host build scripts aren't affected.
 
 - `apps/photocraft/build.rs` and `apps/photocraft-cli/build.rs` embed the icon
-  (`assets/app-icon/photocraft.ico`) and VERSIONINFO with the `winresource` crate
+  (`assets/app-icon/most-image.ico`) and VERSIONINFO with the `winresource` crate
   (build dependency `0.1`). They only do this when targeting Windows. Elsewhere each
   script is a no-op, even if `MOST_IMAGE_REQUIRE_WINRES` is set, and the web build
   doesn't touch that crate. Both set ProductName to Most Image, CompanyName to
@@ -155,7 +156,7 @@ goes in `CARGO_TARGET_<TRIPLE>_RUSTFLAGS`, so host build scripts aren't affected
   not panic.
 - Release builds use the GUI subsystem, so Start Menu launches don't open a console window.
   The CLI stays console subsystem 3 so its output reaches the terminal.
-- `photocraft.wxs` (WiX v5) is a dual-scope package (Microsoft "Single Package Authoring"):
+- `most-image.wxs` (WiX v5) is a dual-scope package (Microsoft "Single Package Authoring"):
   it installs per-user by default, without a UAC prompt, into `%LOCALAPPDATA%\Programs\ArtCraft\Most Image`
   (Windows Installer redirects the ProgramFiles folder in a per-user install); the setup
   wizard's "Everyone on this computer" option, or `msiexec ... ALLUSERS=1`, installs per-machine into
@@ -174,7 +175,7 @@ goes in `CARGO_TARGET_<TRIPLE>_RUSTFLAGS`, so host build scripts aren't affected
   a scope page ("Only for me" or "Everyone on this computer"), Welcome, the install folder
   (remembered for upgrades in `HKLM` or `HKCU\Software\Most Image\InstallDir` according to context),
   Ready, a progress page, and a Finish page that says where to find the app, with a ticked "Launch
-  Most Image" box. The pages name the full version (`photocraft.en-us.wxl`). `package.ps1` draws
+  Most Image" box. The pages name the full version (`most-image.en-us.wxl`). `package.ps1` draws
   the wizard's banner and side bitmaps from the app icon, so no WiX stock art ships. `msiexec /qn`
   installs a new product silently per-user unless `ALLUSERS=1` is passed. Maintenance keeps the
   existing installation context, and a major upgrade of an existing per-machine installation without
@@ -377,7 +378,7 @@ The keychain is deleted at the end of the job.
 
 ## Icons
 
-`assets/app-icon/photocraft.svg` is the canonical icon: the owner's ArtCraft drawing of a
+`assets/app-icon/most-image.svg` is the canonical icon: the owner's ArtCraft drawing of a
 nine-tailed kitsune, vectorised (MIT OR Apache-2.0, see `LICENSE.txt` there; palette and
 geometry in `README.md`). `packaging/icons.sh` regenerates the 1024 px PNG, the `.icns`, the `.ico` (packed by
 `cargo xtask ico`) and the hicolor PNGs from it. It needs `resvg`, plus `iconutil` on macOS.

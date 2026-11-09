@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Windows only: embed the app icon and version info (VERSIONINFO) into `photocraft.exe`.
 //!
 //! On every other target this does nothing. A missing resource compiler is a warning, so a
@@ -7,7 +8,7 @@
 
 fn main() {
     println!("cargo:rerun-if-changed=build.rs");
-    println!("cargo:rerun-if-changed=../../assets/app-icon/photocraft.ico");
+    println!("cargo:rerun-if-changed=../../assets/app-icon/most-image.ico");
     println!("cargo:rerun-if-env-changed=MOST_IMAGE_REQUIRE_WINRES");
     if std::env::var("CARGO_CFG_TARGET_OS").as_deref() != Ok("windows") {
         return;
@@ -21,7 +22,7 @@ fn main() {
         println!("cargo:rustc-link-arg-bins=delayimp.lib");
     }
     let mut res = winresource::WindowsResource::new();
-    res.set_icon("../../assets/app-icon/photocraft.ico")
+    res.set_icon("../../assets/app-icon/most-image.ico")
         .set("ProductName", "Most Image")
         .set("FileDescription", "Most Image image editor")
         .set("CompanyName", "Grupo MOST")

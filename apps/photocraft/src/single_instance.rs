@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! One Most Image per user on Windows and Linux (#3708): a file opened from Explorer or a file
 //! manager lands as a new tab in the running window, like Photoshop, instead of starting a second
 //! copy of the program.

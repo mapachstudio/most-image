@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Intel Iris Xe on DirectX 12: no egui texture upload carries an all-zero texel, because the
 //! driver shows stale memory where it does (the red blocks in Brush Preset picker strokes and
 //! around tool icons).

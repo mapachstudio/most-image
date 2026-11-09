@@ -1,4 +1,5 @@
 <!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
+<!-- Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # Most Image trimmed integration, 2026-10-29
 
 Removed all 21 requested PR contributions from the existing 108-PR integration, leaving 87 retained PRs. Reversals preserve the original branch history. Overlapping integration fixes are reconciled so unrelated retained work remains.

@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! The control and automation launch options, as clap types: `photocraft-cli mcp` and `serve`
 //! flatten them, and so does the desktop app (#7071), so each flag and its environment variable
 //! are declared once. A flag wins over its variable.

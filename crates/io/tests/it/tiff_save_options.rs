@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! TIFF Options (#8827): Save Transparency on and off, flat and layered, with and without spot
 //! channels, and Save Image Pyramid. Unset Save Transparency is covered in `tiff_layers`.
 

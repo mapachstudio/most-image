@@ -655,7 +655,7 @@ fn capture_embedded_vector_conversion_prompt() {
         app,
     );
     harness.run_steps(5);
-    harness.render().unwrap().save(directory.join("photocraft-embedded-vector-editor-en.png")).unwrap();
+    harness.render().unwrap().save(directory.join("most-image-embedded-vector-editor-en.png")).unwrap();
 }
 
 /// Filter Gallery owns a document preview even though `distort.active()` excludes it.

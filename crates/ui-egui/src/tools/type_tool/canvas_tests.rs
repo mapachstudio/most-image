@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Type tool through the real canvas (#123, #124): clicks and drags at known glyph positions
 //! place the caret and selection on the glyph under the pointer at any zoom, HiDPI scale, pan,
 //! view flip and layer transform; size edits apply at layer and selection scope, for native and

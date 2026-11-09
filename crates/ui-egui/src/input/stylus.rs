@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Stylus input: real pen pressure (and tilt / barrel rotation where the platform reports them)
 //! for the painting tools. A mouse always paints at pressure 1 with no tilt.
 //!

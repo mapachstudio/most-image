@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::descriptors::{
     color_desc, color_hex, desc, enm, get_bool, get_enum, get_list, get_num, get_obj, jbool, jnum, jstr, lab_color_hex, long, num, pct, text,
 };

@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Where the desktop app keeps its per-user data: preferences, brush presets, crash-recovery
 //! autosaves and the GPU startup marker all live under the one directory [`config_dir`] returns.
 //!

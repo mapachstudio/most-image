@@ -1,7 +1,8 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! The app icon, everywhere Windows, macOS and Linux show one (#248).
 //!
-//! - **Executable:** `build.rs` embeds `assets/app-icon/photocraft.ico` (16–256 px) as icon
+//! - **Executable:** `build.rs` embeds `assets/app-icon/most-image.ico` (16–256 px) as icon
 //!   resource 1, which Explorer, Alt+Tab and an unpinned taskbar button fall back to.
 //! - **Window:** [`window_icon`] sets the title-bar and taskbar icon at runtime (`WM_SETICON` on
 //!   Windows, `_NET_WM_ICON` on X11, the Dock when running unbundled on macOS).
@@ -54,7 +55,7 @@ fn in_app_bundle(exe: &std::path::Path) -> bool {
 }
 
 #[cfg(target_os = "macos")]
-const PNG: &[u8] = include_bytes!("../../../assets/app-icon/photocraft-1024.png");
+const PNG: &[u8] = include_bytes!("../../../assets/app-icon/most-image-1024.png");
 #[cfg(not(target_os = "macos"))]
 const PNG: &[u8] = include_bytes!("../../../assets/app-icon/hicolor/256x256/apps/com.grupomostmexico.mostimage.png");
 
@@ -62,8 +63,8 @@ const PNG: &[u8] = include_bytes!("../../../assets/app-icon/hicolor/256x256/apps
 mod tests {
     use super::*;
 
-    const ICO: &[u8] = include_bytes!("../../../assets/app-icon/photocraft.ico");
-    const WXS: &str = include_str!("../../../packaging/windows/photocraft.wxs");
+    const ICO: &[u8] = include_bytes!("../../../assets/app-icon/most-image.ico");
+    const WXS: &str = include_str!("../../../packaging/windows/most-image.wxs");
 
     fn u16_at(b: &[u8], i: usize) -> usize {
         u16::from_le_bytes([b[i], b[i + 1]]) as usize
@@ -143,7 +144,7 @@ mod tests {
             sizes.push(w);
         }
         for want in [16, 24, 32, 48, 64, 256] {
-            assert!(sizes.contains(&want), "photocraft.ico lacks {want}px (has {sizes:?})");
+            assert!(sizes.contains(&want), "most-image.ico lacks {want}px (has {sizes:?})");
         }
     }
 

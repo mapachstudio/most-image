@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Canvas context menus for the selection tools, the Pen, the Zoom and Hand tools, an active Free
 //! Transform box, text being edited with a Type tool, committed type under a Type tool, the
 //! pasteboard (outside the image), a guide and a pending crop.

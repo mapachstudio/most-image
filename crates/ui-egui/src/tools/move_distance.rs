@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Smart Guides › measuring distances, as in Photoshop (#4946): with Smart Guides on (View › Show
 //! › Smart Guides, Extras on) and the Move tool, holding ⌘ (Ctrl off the Mac) with no button down
 //! and hovering another layer shows the distances between the selected layers' bounds and that

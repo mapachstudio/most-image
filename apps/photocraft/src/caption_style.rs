@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Linux: which desktop the custom title bar's caption buttons look like, and which buttons go on
 //! which side (`photocraft_ui_egui::CaptionStyle`). GNOME gets libadwaita's buttons in the order of
 //! its `button-layout` setting (read through the settings portal, and followed as it changes); KDE

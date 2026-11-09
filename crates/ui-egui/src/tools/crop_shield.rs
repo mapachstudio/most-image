@@ -1,4 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
+// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! The Crop tool's shield options (Photoshop's options-bar gear menu, "Set additional Crop
 //! options", #1919): whether the area outside the crop box shows at all (Show Cropped Area, H),
 //! and the shield dimming it (Enable Crop Shield: Match Canvas or a custom colour, an opacity, and
