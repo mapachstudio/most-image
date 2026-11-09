@@ -106,7 +106,7 @@ debug = "line-tables-only"
 # tests run no heavier pixel code of their own (that lives in the crates that stay optimized).
 # Measured on CI: Windows build 18.9 -> 15.4 min, test run 10.0 -> 10.5. `cargo run` and
 # `cargo build` use the dev profile and are unaffected.
-[profile.test.package.mostimage-ui-egui]
+[profile.test.package.photocraft-ui-egui]
 opt-level = 0
 
 [profile.release]
@@ -131,25 +131,25 @@ strip = "debuginfo"
 opt-level = "s"
 
 # Decoding and rasterizing keep their speed.
-[profile.wasm-release.package.mostimage-codecs]
+[profile.wasm-release.package.photocraft-codecs]
 opt-level = "s"
-[profile.wasm-release.package.mostimage-raw]
+[profile.wasm-release.package.photocraft-raw]
 opt-level = "s"
-[profile.wasm-release.package.mostimage-heif]
+[profile.wasm-release.package.photocraft-heif]
 opt-level = "s"
-[profile.wasm-release.package.mostimage-vector]
+[profile.wasm-release.package.photocraft-vector]
 opt-level = "s"
 
 # Large crates off the per-frame and per-pixel paths: the document model, file parsers run once
 # per open/save, JSON (settings, presets, control channel), SVG parsing, and shader translation
 # (runs when a pipeline is created). "z" keeps the wasm well under the size gate.
-[profile.wasm-release.package.mostimage-doc]
+[profile.wasm-release.package.photocraft-doc]
 opt-level = "z"
-[profile.wasm-release.package.mostimage-psd]
+[profile.wasm-release.package.photocraft-psd]
 opt-level = "z"
-[profile.wasm-release.package.mostimage-format]
+[profile.wasm-release.package.photocraft-format]
 opt-level = "z"
-[profile.wasm-release.package.mostimage-affinity]
+[profile.wasm-release.package.photocraft-affinity]
 opt-level = "z"
 [profile.wasm-release.package.serde_json]
 opt-level = "z"
@@ -174,17 +174,17 @@ opt-level = "z"
 # every interactive filter application; "z" there is the size lever of last resort (−331 KB),
 # taken because the gate is enforced in CI: if browser filters feel too slow, restore 3 here
 # and reclaim the bytes from a feature-gated decoder instead.
-[profile.wasm-release.package.mostimage-raster]
+[profile.wasm-release.package.photocraft-raster]
 opt-level = 3
-[profile.wasm-release.package.mostimage-color]
+[profile.wasm-release.package.photocraft-color]
 opt-level = 3
-[profile.wasm-release.package.mostimage-cms]
+[profile.wasm-release.package.photocraft-cms]
 opt-level = "z"
-[profile.wasm-release.package.mostimage-compose]
+[profile.wasm-release.package.photocraft-compose]
 opt-level = "z"
-[profile.wasm-release.package.mostimage-algo]
+[profile.wasm-release.package.photocraft-algo]
 opt-level = "z"
-[profile.wasm-release.package.mostimage-paint]
+[profile.wasm-release.package.photocraft-paint]
 opt-level = 3
 
 # Keep the complete egui family and native event bridge on reviewed fork commits.
