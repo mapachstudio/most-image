@@ -1,7 +1,7 @@
 Most Image debug symbols
 
-photocraft.pdb and photocraft_cli.pdb are the debug symbols of most-image.exe and
-photocraft-cli.exe from the release with the same version and architecture as this zip. They
+most-image.pdb and photocraft_cli.pdb are the debug symbols of most-image.exe and
+most-image-cli.exe from the release with the same version and architecture as this zip. They
 were written by the same build as those exes, so they match only them: a PDB from a local build
 of the same commit doesn't.
 

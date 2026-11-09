@@ -4,9 +4,9 @@
 
 .DESCRIPTION
   Produces, in $env:DIST (default: dist/release):
-    photocraft-<version>-windows-<arch>.msi            installer (WiX v5, per-user by default, per-machine optional)
-    photocraft-<version>-windows-<arch>-portable.zip   most-image.exe + photocraft-cli.exe + portable.txt
-    photocraft-<version>-windows-<arch>-symbols.zip    photocraft.pdb + photocraft_cli.pdb (optional, for profilers)
+    most-image-<version>-windows-<arch>.msi            installer (WiX v5, per-user by default, per-machine optional)
+    most-image-<version>-windows-<arch>-portable.zip   most-image.exe + most-image-cli.exe + portable.txt
+    most-image-<version>-windows-<arch>-symbols.zip    most-image.pdb + photocraft_cli.pdb (optional, for profilers)
 
   The binaries link the C runtime statically (+crt-static), so neither the MSI nor the portable
   zip needs the Visual C++ redistributable. Signing is delegated to sign.ps1 (skipped with a
@@ -79,7 +79,7 @@ function Get-PeHeader([string] $Path) {
   return @{ Machine = [BitConverter]::ToUInt16($bytes, $pe + 4); Subsystem = [BitConverter]::ToUInt16($bytes, $pe + 0x5C) }
 }
 $Machine = switch ($Arch) { 'x64' { 0x8664 } 'x86' { 0x14C } 'arm64' { 0xAA64 } }
-foreach ($check in @(@('most-image.exe', 2), @('photocraft-cli.exe', 3))) {
+foreach ($check in @(@('most-image.exe', 2), @('most-image-cli.exe', 3))) {
   $h = Get-PeHeader (Join-Path $Bin $check[0])
   if ($h.Machine -ne $Machine) { throw "$($check[0]) is for machine 0x$('{0:X}' -f $h.Machine), expected 0x$('{0:X}' -f $Machine) ($Arch)" }
   if ($h.Subsystem -ne $check[1]) { throw "$($check[0]) has PE subsystem $($h.Subsystem), expected $($check[1])" }
@@ -88,9 +88,9 @@ foreach ($check in @(@('most-image.exe', 2), @('photocraft-cli.exe', 3))) {
 $Stage = Join-Path $TargetDir "windows-package\$Arch"
 Remove-Item -Recurse -Force $Stage -ErrorAction SilentlyContinue
 New-Item -ItemType Directory -Force -Path $Stage | Out-Null
-Copy-Item (Join-Path $Bin 'most-image.exe'), (Join-Path $Bin 'photocraft-cli.exe') $Stage
+Copy-Item (Join-Path $Bin 'most-image.exe'), (Join-Path $Bin 'most-image-cli.exe') $Stage
 
-& (Join-Path $PSScriptRoot 'sign.ps1') (Join-Path $Stage 'most-image.exe') (Join-Path $Stage 'photocraft-cli.exe')
+& (Join-Path $PSScriptRoot 'sign.ps1') (Join-Path $Stage 'most-image.exe') (Join-Path $Stage 'most-image-cli.exe')
 
 # ---- font notices for the MSI ------------------------------------------------------------------
 # The portable ZIP already carries these notices; stage the complete files before MSI creation too.
@@ -196,13 +196,13 @@ Compress-Archive -Path (Join-Path $Portable '*') -DestinationPath $Zip
 $Check = Join-Path $TargetDir 'windows-package\portable-zip-check'
 Remove-Item -Recurse -Force $Check -ErrorAction SilentlyContinue
 Expand-Archive -Path $Zip -DestinationPath $Check -Force
-foreach ($f in 'most-image.exe', 'photocraft-cli.exe', 'portable.txt') {
+foreach ($f in 'most-image.exe', 'most-image-cli.exe', 'portable.txt') {
   if (-not (Test-Path (Join-Path $Check $f))) { throw "the portable zip has no $f at its root: $Zip" }
 }
 Remove-Item -Recurse -Force $Check -ErrorAction SilentlyContinue
 
 # ---- debug symbols -----------------------------------------------------------------------------
-# The linker writes a PDB beside each exe, and the exe names it without a path (photocraft.pdb,
+# The linker writes a PDB beside each exe, and the exe names it without a path (most-image.pdb,
 # photocraft_cli.pdb). They ship as a separate, optional download so profilers (Windows Performance
 # Analyzer, Superluminal, Visual Studio) show Most Image's function names for the released
 # binaries (#688). Signing doesn't change the PDB signature an exe records, so they match the
@@ -210,7 +210,7 @@ Remove-Item -Recurse -Force $Check -ErrorAction SilentlyContinue
 $Symbols = Join-Path $TargetDir "windows-package\most-image-$Version-windows-$Arch-symbols"
 Remove-Item -Recurse -Force $Symbols -ErrorAction SilentlyContinue
 New-Item -ItemType Directory -Force -Path $Symbols | Out-Null
-foreach ($pdb in 'photocraft.pdb', 'photocraft_cli.pdb') {
+foreach ($pdb in 'most-image.pdb', 'photocraft_cli.pdb') {
   $p = Join-Path $Bin $pdb
   if (-not (Test-Path $p)) { throw "$pdb is missing from $($Bin), where the release build writes it" }
   Copy-Item $p $Symbols
@@ -224,8 +224,8 @@ Compress-Archive -Path $Symbols -DestinationPath $SymbolsZip
 # here; .github/workflows/windows-arm64.yml installs and runs it on ARM64 instead.
 $HostArch = [System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString().ToLowerInvariant()
 if ($Arch -ne 'arm64' -or $HostArch -eq 'arm64') {
-  Invoke-Native 'photocraft-cli --version' { & (Join-Path $Stage 'photocraft-cli.exe') --version }
+  Invoke-Native 'most-image-cli --version' { & (Join-Path $Stage 'most-image-cli.exe') --version }
 } else {
-  Write-Output "skipping photocraft-cli --version: an $Arch build doesn't run on this $HostArch machine"
+  Write-Output "skipping most-image-cli --version: an $Arch build doesn't run on this $HostArch machine"
 }
 Get-Item $Msi, $Zip, $SymbolsZip | Format-Table Name, Length

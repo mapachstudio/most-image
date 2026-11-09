@@ -1,8 +1,8 @@
 # Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 # Flatpak manifest for the single-file bundle attached to every GitHub release
-# (photocraft-<version>-linux-<arch>.flatpak). Build it with packaging/linux/flatpak-bundle.sh.
+# (most-image-<version>-linux-<arch>.flatpak). Build it with packaging/linux/flatpak-bundle.sh.
 #
-# It repackages the release's own Linux tarball (photocraft-<version>-linux-<arch>.tar.gz,
+# It repackages the release's own Linux tarball (most-image-<version>-linux-<arch>.tar.gz,
 # built on Ubuntu 22.04 by package.sh) instead of compiling Rust inside flatpak-builder: no
 # network and no vendored crate sources during the build, a few seconds instead of 20+ minutes,
 # and byte-for-byte the same binaries as the AppImage/deb/rpm. The script unpacks the tarball
@@ -16,7 +16,7 @@ id: com.grupomostmexico.mostimage
 runtime: org.freedesktop.Platform
 runtime-version: '26.08'
 sdk: org.freedesktop.Sdk
-command: photocraft
+command: most-image
 finish-args:
   - --filesystem=xdg-data/GrupoMOST/versions:ro
   # Display: Wayland first; X11 only when no Wayland compositor is running.
@@ -94,17 +94,17 @@ modules:
           - '  esac'
           - 'fi'
           - 'exec "/app/libexec/cups/${0##*/}" "$@"'
-  - name: photocraft
+  - name: most-image
     buildsystem: simple
     build-commands:
-      - install -Dm755 bin/photocraft /app/bin/photocraft
-      - install -Dm755 bin/photocraft-cli /app/bin/photocraft-cli
+      - install -Dm755 bin/most-image /app/bin/most-image
+      - install -Dm755 bin/most-image-cli /app/bin/most-image-cli
       - install -Dm644 share/applications/com.grupomostmexico.mostimage.desktop /app/share/applications/com.grupomostmexico.mostimage.desktop
       # .pcraft, .psb and .qoi; the runtime's shared-mime-info already knows PSD and the rest.
       - install -Dm644 share/mime/packages/com.grupomostmexico.mostimage.xml /app/share/mime/packages/com.grupomostmexico.mostimage.xml
       # Already has the release's version and date substituted by package.sh.
       - install -Dm644 share/metainfo/com.grupomostmexico.mostimage.metainfo.xml /app/share/metainfo/com.grupomostmexico.mostimage.metainfo.xml
-      - mkdir -p /app/share/icons /app/share/doc && cp -R share/icons/hicolor /app/share/icons/ && cp -R share/doc/photocraft /app/share/doc/
+      - mkdir -p /app/share/icons /app/share/doc && cp -R share/icons/hicolor /app/share/icons/ && cp -R share/doc/most-image /app/share/doc/
     sources:
       - type: dir
         path: stage

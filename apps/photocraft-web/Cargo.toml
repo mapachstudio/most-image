@@ -16,7 +16,7 @@ heif = ["photocraft-codecs/heif"]
 workspace = true
 
 [[bin]]
-name = "photocraft-web"
+name = "most-image-web"
 path = "src/main.rs"
 
 [dependencies]

@@ -10,14 +10,14 @@ trap 'rm -rf "$test_dir"' EXIT
 app_dir="$test_dir/Most Image test.AppDir"
 mkdir -p "$app_dir/usr/bin" "$app_dir/usr/share/applications"
 cp "$HERE/AppRun" "$app_dir/AppRun"
-printf '[Desktop Entry]\nType=Application\nName=Most Image\nExec=photocraft %%F\n' \
+printf '[Desktop Entry]\nType=Application\nName=Most Image\nExec=most-image %%F\n' \
   >"$app_dir/usr/share/applications/com.grupomostmexico.mostimage.desktop"
-cat >"$app_dir/usr/bin/photocraft" <<'EOF'
+cat >"$app_dir/usr/bin/most-image" <<'EOF'
 #!/bin/sh
 printf 'gui\n'
 for arg do printf '<%s>\n' "$arg"; done
 EOF
-cat >"$app_dir/usr/bin/photocraft-cli" <<'EOF'
+cat >"$app_dir/usr/bin/most-image-cli" <<'EOF'
 #!/bin/sh
 case "${1:-}" in
   mcp)
@@ -32,7 +32,7 @@ case "${1:-}" in
     ;;
 esac
 EOF
-chmod +x "$app_dir/AppRun" "$app_dir/usr/bin/photocraft" "$app_dir/usr/bin/photocraft-cli"
+chmod +x "$app_dir/AppRun" "$app_dir/usr/bin/most-image" "$app_dir/usr/bin/most-image-cli"
 export APPIMAGE="$test_dir/Most Image test.AppImage"
 : >"$APPIMAGE"
 export ARGV0="$APPIMAGE"
@@ -46,11 +46,11 @@ expected=$'cli\n<convert>\n<input file.png>\n<>\n<*.psd>\n<--out>\n<output file.
 [ "$("$app_dir/AppRun" --cli)" = cli ] || fail "empty CLI invocation"
 
 # The AppImage runtime exposes the original symlink name through ARGV0.
-for argv0 in photocraft-cli ./photocraft-cli "$test_dir/with spaces/photocraft-cli"; do
+for argv0 in most-image-cli ./most-image-cli "$test_dir/with spaces/most-image-cli"; do
   out="$(ARGV0="$argv0" "$app_dir/AppRun" --version)"
   [ "$out" = $'cli\n<--version>' ] || fail "CLI symlink not selected: $argv0"
 done
-out="$(ARGV0=photocraft-cli "$app_dir/AppRun" --cli --version)"
+out="$(ARGV0=most-image-cli "$app_dir/AppRun" --cli --version)"
 [ "$out" = $'cli\n<--version>' ] || fail "CLI selector not removed with a symlink"
 
 request='{"jsonrpc":"2.0","id":1,"method":"initialize"}'
@@ -66,11 +66,11 @@ status=0
 out="$("$app_dir/AppRun" 'input file.png' --cli)"
 [ "$out" = $'gui\n<input file.png>\n<--cli>' ] || fail "GUI arguments changed: $out"
 [ -f "$XDG_DATA_HOME/applications/com.grupomostmexico.mostimage.desktop" ] || fail "GUI integration lost"
-out="$(ARGV0=another-photocraft-cli "$app_dir/AppRun" mcp)"
+out="$(ARGV0=another-most-image-cli "$app_dir/AppRun" mcp)"
 [ "$out" = $'gui\n<mcp>' ] || fail "an unrelated filename selected CLI"
 
 # A broken package must fail visibly, rather than silently opening the GUI.
-rm "$app_dir/usr/bin/photocraft-cli"
+rm "$app_dir/usr/bin/most-image-cli"
 status=0
 "$app_dir/AppRun" --cli --version >"$test_dir/missing-out" 2>"$test_dir/missing-err" || status=$?
 [ "$status" != 0 ] || fail "missing CLI succeeded"

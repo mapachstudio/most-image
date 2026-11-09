@@ -9,7 +9,7 @@
 # from any URL path and inside an <iframe>. Hosting notes: packaging/web/README.md.
 #
 # The site holds the app's wasm gzipped and cut into parts (app/), started by the small
-# photocraft-web-boot module, so no file is larger than a part however large the app grows
+# most-image-web-boot module, so no file is larger than a part however large the app grows
 # (issue #5302). dist/web still holds the app as Trunk builds it, in one .wasm.
 set -euo pipefail
 # shellcheck source=../env.sh
@@ -50,7 +50,7 @@ for wasm in "$APP"/*_bg.wasm; do
   WASM="$wasm"
 done
 [[ -n "$WASM" ]] || { echo "error: no .wasm in $APP" >&2; exit 1; }
-STEM="$(basename "$WASM" _bg.wasm)" # photocraft-web-<content hash>
+STEM="$(basename "$WASM" _bg.wasm)" # most-image-web-<content hash>
 GLUE="$APP/$STEM.js"
 [[ -f "$GLUE" ]] || { echo "error: $GLUE missing" >&2; exit 1; }
 
@@ -60,13 +60,13 @@ rm -rf "$WORK"
 mkdir -p "$WORK/$NAME/app"
 cp -R "$BOOT/." "$WORK/$NAME/"
 # The boot module imports the app's glue by this name (it can't know Trunk's content hash).
-cp "$GLUE" "$WORK/$NAME/app/photocraft-web.js"
+cp "$GLUE" "$WORK/$NAME/app/most-image-web.js"
 # The parts keep the content hash, so they can be cached forever. Their extension is one no
 # server knows: a server that recognised gzip might decode it or label it, and the page inflates
 # the parts itself.
 gzip -9 -n -c "$WASM" | (cd "$WORK/$NAME/app" && split -b "$PART_BYTES" - "$STEM.part-")
 {
-  echo "photocraft-parts 1"
+  echo "most-image-parts 1"
   for part in "$WORK/$NAME/app/$STEM".part-*; do basename "$part"; done
 } >"$WORK/$NAME/app/parts.txt"
 size() { wc -c <"$1" | tr -d ' '; }

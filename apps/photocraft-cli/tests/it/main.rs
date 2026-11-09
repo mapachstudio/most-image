@@ -11,5 +11,5 @@ mod psd_write_oracle;
 
 /// Nextest archives relocate binaries; plain Cargo keeps the compile-time path valid.
 fn binary() -> std::ffi::OsString {
-    std::env::var_os("NEXTEST_BIN_EXE_photocraft_cli").unwrap_or_else(|| env!("CARGO_BIN_EXE_photocraft-cli").into())
+    std::env::var_os("NEXTEST_BIN_EXE_photocraft_cli").unwrap_or_else(|| env!("CARGO_BIN_EXE_most-image-cli").into())
 }

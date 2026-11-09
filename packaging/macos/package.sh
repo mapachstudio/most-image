@@ -2,8 +2,8 @@
 # Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 # Build, sign and (optionally) notarize the macOS release artifacts:
 #
-#   $DIST/photocraft-<version>-macos-<arch>.dmg          Most Image.app on a drag-to-Applications DMG
-#   $DIST/photocraft-cli-<version>-macos-<arch>.zip      the headless CLI
+#   $DIST/most-image-<version>-macos-<arch>.dmg          Most Image.app on a drag-to-Applications DMG
+#   $DIST/most-image-cli-<version>-macos-<arch>.zip      the headless CLI
 #
 # Usage: packaging/macos/package.sh [--arch universal|aarch64|x86_64] [--skip-build]
 #
@@ -64,7 +64,7 @@ fi
 
 rm -rf "$WORK"
 mkdir -p "$WORK/bin"
-for bin in photocraft photocraft-cli; do
+for bin in most-image most-image-cli; do
   inputs=()
   for t in "${TARGETS[@]}"; do inputs+=("$CARGO_TARGET_DIR/$t/release/$bin"); done
   lipo -create -output "$WORK/bin/$bin" "${inputs[@]}"
@@ -120,8 +120,8 @@ staple() {
 echo "==> assembling $APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 # Executable and icon carry the display name (CFBundleExecutable / CFBundleIconFile).
-cp "$WORK/bin/photocraft" "$APP/Contents/MacOS/Most Image"
-cp "$WORK/bin/photocraft-cli" "$APP/Contents/MacOS/photocraft-cli"
+cp "$WORK/bin/most-image" "$APP/Contents/MacOS/Most Image"
+cp "$WORK/bin/most-image-cli" "$APP/Contents/MacOS/most-image-cli"
 cp "$ROOT/assets/app-icon/most-image.icns" "$APP/Contents/Resources/Most Image.icns"
 # Notices for the bundled font fallback, included before the bundle is signed.
 # Apache-2.0 §4: con cada distribucion van una copia de la LICENCIA y los
@@ -141,7 +141,7 @@ printf 'APPL????' >"$APP/Contents/PkgInfo"
 
 # Sign inside-out: nested code first, then the bundle itself (no --deep on the final signature).
 # The bundled CLI is nested executable code; sign it before sealing the app bundle.
-sign --options runtime --identifier com.grupomostmexico.mostimage-cli "$APP/Contents/MacOS/photocraft-cli"
+sign --options runtime --identifier com.grupomostmexico.mostimage-cli "$APP/Contents/MacOS/most-image-cli"
 sign --options runtime --entitlements "$HERE/entitlements.plist" "$APP/Contents/MacOS/Most Image"
 sign --options runtime --entitlements "$HERE/entitlements.plist" "$APP"
 codesign --verify --strict --deep --verbose=2 "$APP"
@@ -182,18 +182,18 @@ fi
 echo "==> building $CLI_ZIP"
 CLI_DIR="$WORK/most-image-cli-$VERSION-macos-$ARCH"
 mkdir -p "$CLI_DIR"
-cp "$WORK/bin/photocraft-cli" "$CLI_DIR/"
+cp "$WORK/bin/most-image-cli" "$CLI_DIR/"
 copy_docs "$CLI_DIR"
 # Same Developer ID and hardened runtime as the app, with an explicit reverse-DNS identifier
 # (codesign would otherwise use the bare file name).
-sign --options runtime --identifier com.grupomostmexico.mostimage-cli "$CLI_DIR/photocraft-cli"
-codesign --verify --strict --verbose=2 "$CLI_DIR/photocraft-cli"
+sign --options runtime --identifier com.grupomostmexico.mostimage-cli "$CLI_DIR/most-image-cli"
+codesign --verify --strict --verbose=2 "$CLI_DIR/most-image-cli"
 rm -f "$CLI_ZIP"
 ditto -c -k --keepParent "$CLI_DIR" "$CLI_ZIP"
 # notarytool accepts a zip of the bare binary. A bare Mach-O can't carry a stapled ticket, so
 # Gatekeeper looks the notarization up online when a quarantined copy first runs.
 if [[ "$NOTARIZE" = 1 ]]; then notarize "$CLI_ZIP"; fi
 
-"$WORK/bin/photocraft-cli" --version
+"$WORK/bin/most-image-cli" --version
 echo "==> done (check the artifacts as shipped with packaging/macos/verify.sh --arch $ARCH)"
 ls -lh "$DMG" "$CLI_ZIP"

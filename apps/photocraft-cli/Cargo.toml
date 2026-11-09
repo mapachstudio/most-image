@@ -23,7 +23,7 @@ name = "photocraft_cli"
 path = "src/lib.rs"
 
 [[bin]]
-name = "photocraft-cli"
+name = "most-image-cli"
 path = "src/main.rs"
 
 [[example]]

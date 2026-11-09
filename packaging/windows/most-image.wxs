@@ -101,7 +101,7 @@
         <RegistryValue Root="HKMU" Key="Software\Classes\.qoi\OpenWithProgids" Name="Photocraft.Image" Value="" Type="string" />
         <RegistryValue Root="HKMU" Key="Software\Classes\.ico\OpenWithProgids" Name="Photocraft.Image" Value="" Type="string" />
 
-        <!-- "Open with" app list and the Run dialog (Win+R "photocraft"). -->
+        <!-- "Open with" app list and the Run dialog (Win+R "most-image"). -->
         <RegistryValue Root="HKMU" Key="Software\Classes\Applications\most-image.exe" Name="FriendlyAppName" Value="Most Image" Type="string" />
         <RegistryValue Root="HKMU" Key="Software\Classes\Applications\most-image.exe\shell\open\command" Value="&quot;[#PhotocraftExe]&quot; &quot;%1&quot;" Type="string" />
         <RegistryValue Root="HKMU" Key="Software\Classes\Applications\most-image.exe\SupportedTypes" Name=".pcraft" Value="" Type="string" />
@@ -130,7 +130,7 @@
       </Component>
 
       <Component Id="PhotocraftCli">
-        <File Id="PhotocraftCliExe" Source="$(var.BinDir)\photocraft-cli.exe" KeyPath="yes" />
+        <File Id="PhotocraftCliExe" Source="$(var.BinDir)\most-image-cli.exe" KeyPath="yes" />
       </Component>
     </ComponentGroup>
   </Fragment>

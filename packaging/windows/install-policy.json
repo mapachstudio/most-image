@@ -1,5 +1,5 @@
 {
-  "id": "photocraft",
+  "id": "most-image",
   "name": "Most Image",
   "upgradeCode": "D9660F32-2D0A-4ABE-B73D-17BE25F1542C",
   "sources": [
@@ -14,7 +14,7 @@
     "Util"
   ],
   "payloads": [
-    "photocraft-cli.exe",
+    "most-image-cli.exe",
     "most-image.exe"
   ],
   "registry": [

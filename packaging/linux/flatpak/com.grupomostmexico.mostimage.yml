@@ -17,7 +17,7 @@ runtime-version: '26.08'
 sdk: org.freedesktop.Sdk
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.rust-stable
-command: photocraft
+command: most-image
 finish-args:
   - --filesystem=xdg-data/GrupoMOST/versions:ro
   # Display: Wayland first; X11 only when no Wayland compositor is running.
@@ -92,17 +92,17 @@ modules:
           - '  esac'
           - 'fi'
           - 'exec "/app/libexec/cups/${0##*/}" "$@"'
-  - name: photocraft
+  - name: most-image
     buildsystem: simple
     build-options:
       env:
-        CARGO_HOME: /run/build/photocraft/cargo
+        CARGO_HOME: /run/build/most-image/cargo
         CARGO_NET_OFFLINE: 'true'
     build-commands:
       - cargo --offline build --release --locked -p photocraft --features heif
-      - install -Dm755 target/release/photocraft /app/bin/photocraft
-      - install -Dm644 NOTICE /app/share/doc/photocraft/NOTICE
-      - install -Dm644 ATTRIBUTION.md /app/share/doc/photocraft/ATTRIBUTION.md
+      - install -Dm755 target/release/most-image /app/bin/most-image
+      - install -Dm644 NOTICE /app/share/doc/most-image/NOTICE
+      - install -Dm644 ATTRIBUTION.md /app/share/doc/most-image/ATTRIBUTION.md
       - install -Dm644 packaging/linux/com.grupomostmexico.mostimage.desktop /app/share/applications/com.grupomostmexico.mostimage.desktop
       - install -Dm644 packaging/linux/com.grupomostmexico.mostimage.mime.xml /app/share/mime/packages/com.grupomostmexico.mostimage.xml
       - mkdir -p /app/share/icons && cp -R assets/app-icon/hicolor /app/share/icons/

@@ -127,3 +127,7 @@ winresource = "0.1"
 [dev-dependencies]
 # Opt-in native save-back acceptance transports embedded sources through engine JSON.
 base64 = "=0.22.1"
+
+[[bin]]
+name = "most-image"
+path = "src/main.rs"

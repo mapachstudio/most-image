@@ -10,7 +10,7 @@ publish = false
 workspace = true
 
 [[bin]]
-name = "photocraft-web-boot"
+name = "most-image-web-boot"
 path = "src/main.rs"
 
 [dependencies]

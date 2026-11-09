@@ -406,10 +406,10 @@ fn write_shim(droplet: &str) -> Result<String> {
 # Most Image droplet: runs the action on the files given (or dropped).
 if [ -n "${{MOST_IMAGE_CLI:-}}" ]; then
   cli="$MOST_IMAGE_CLI"
-elif [ -x /Applications/Most Image.app/Contents/MacOS/photocraft-cli ]; then
-  cli=/Applications/Most Image.app/Contents/MacOS/photocraft-cli
-elif [ -x "$HOME/Applications/Most Image.app/Contents/MacOS/photocraft-cli" ]; then
-  cli="$HOME/Applications/Most Image.app/Contents/MacOS/photocraft-cli"
+elif [ -x /Applications/Most Image.app/Contents/MacOS/most-image-cli ]; then
+  cli=/Applications/Most Image.app/Contents/MacOS/most-image-cli
+elif [ -x "$HOME/Applications/Most Image.app/Contents/MacOS/most-image-cli" ]; then
+  cli="$HOME/Applications/Most Image.app/Contents/MacOS/most-image-cli"
 else
   cli=photocraft-cli
 fi

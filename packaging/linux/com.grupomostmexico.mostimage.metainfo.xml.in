@@ -56,7 +56,7 @@
     <control>tablet</control>
   </supports>
   <provides>
-    <binary>photocraft</binary>
+    <binary>most-image</binary>
     <mediatype>application/x-most-image</mediatype>
     <mediatype>image/x-paintnet</mediatype>
     <mediatype>image/openraster</mediatype>

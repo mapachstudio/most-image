@@ -77,22 +77,22 @@ mod tests {
     #[test]
     fn only_a_macos_app_bundle_skips_the_runtime_icon() {
         use std::path::Path;
-        assert!(in_app_bundle(Path::new("/Applications/Most Image.app/Contents/MacOS/photocraft")));
-        assert!(in_app_bundle(Path::new("/Users/a/Downloads/Most Image Beta.APP/Contents/MacOS/photocraft")));
+        assert!(in_app_bundle(Path::new("/Applications/Most Image.app/Contents/MacOS/most-image")));
+        assert!(in_app_bundle(Path::new("/Users/a/Downloads/Most Image Beta.APP/Contents/MacOS/most-image")));
         assert!(!in_app_bundle(Path::new("/Users/a/src/photocraft/target/release/photocraft")));
-        assert!(!in_app_bundle(Path::new("/opt/Contents/MacOS/photocraft")), "not inside a .app");
-        assert!(!in_app_bundle(Path::new("/.app/Contents/MacOS/photocraft")), "a bare `.app` is no bundle name");
+        assert!(!in_app_bundle(Path::new("/opt/Contents/MacOS/most-image")), "not inside a .app");
+        assert!(!in_app_bundle(Path::new("/.app/Contents/MacOS/most-image")), "a bare `.app` is no bundle name");
         assert!(!in_app_bundle(Path::new("photocraft")));
         assert!(sets_runtime_icon(None));
-        assert!(sets_runtime_icon(Some(Path::new("/usr/bin/photocraft"))));
-        assert_eq!(sets_runtime_icon(Some(Path::new("/Applications/Most Image.app/Contents/MacOS/photocraft"))), !cfg!(target_os = "macos"));
+        assert!(sets_runtime_icon(Some(Path::new("/usr/bin/most-image"))));
+        assert_eq!(sets_runtime_icon(Some(Path::new("/Applications/Most Image.app/Contents/MacOS/most-image"))), !cfg!(target_os = "macos"));
     }
 
     /// #7253: omitting `with_icon` made eframe paint its default glyph on the Dock once the window loaded.
     #[test]
     fn viewport_icon_blocks_eframe_default_when_runtime_icon_is_skipped() {
         use std::path::Path;
-        let bundled = Some(Path::new("/Applications/Most Image.app/Contents/MacOS/photocraft"));
+        let bundled = Some(Path::new("/Applications/Most Image.app/Contents/MacOS/most-image"));
         if sets_runtime_icon(bundled) {
             let icon = viewport_icon(bundled);
             assert!(icon.width >= 256 && icon.width == icon.height);

@@ -4,8 +4,8 @@ Type=Application
 Name=Most Image
 GenericName=Image Editor
 Comment=Edit photos and layered PSD documents
-Exec=photocraft %F
-TryExec=photocraft
+Exec=most-image %F
+TryExec=most-image
 Icon=com.grupomostmexico.mostimage
 Terminal=false
 # The native runner does not complete desktop startup-notification handshakes.

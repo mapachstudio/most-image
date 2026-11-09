@@ -7,10 +7,10 @@ static site in `most-image-web-<version>/`:
 | File | What it is |
 |---|---|
 | `index.html` | The page. It loads everything through relative URLs. |
-| `photocraft-web-boot-<hash>.js`, `photocraft-web-boot-<hash>_bg.wasm` | A small module (about 120 KB) that starts the app from its parts, with its wasm-bindgen glue |
-| `app/photocraft-web-<hash>.part-aa`, `-ab`, … | The app's WebAssembly, gzipped and cut into parts of at most 20 MiB (see [Sizes](#sizes)) |
+| `most-image-web-boot-<hash>.js`, `most-image-web-boot-<hash>_bg.wasm` | A small module (about 120 KB) that starts the app from its parts, with its wasm-bindgen glue |
+| `app/most-image-web-<hash>.part-aa`, `-ab`, … | The app's WebAssembly, gzipped and cut into parts of at most 20 MiB (see [Sizes](#sizes)) |
 | `app/parts.txt` | The parts, in order |
-| `app/photocraft-web.js` | The app's wasm-bindgen glue (generated, ES module) |
+| `app/most-image-web.js` | The app's wasm-bindgen glue (generated, ES module) |
 | `_headers`, `.htaccess` | Sample header rules for Netlify/Cloudflare Pages and Apache |
 | `fonts/` (optional) | Fonts loaded on demand, listed in `fonts/manifest.txt` (see [Fonts](#fonts)) |
 
@@ -25,9 +25,9 @@ There is no server-side code. Upload the folder's contents anywhere that serves 
 From the repository root (Docker is the only build prerequisite):
 
 ```sh
-docker build --load -t photocraft-web:local .
-docker run -d --name photocraft-web --restart unless-stopped \
-  -p 8080:8080 photocraft-web:local
+docker build --load -t most-image-web:local .
+docker run -d --name most-image-web --restart unless-stopped \
+  -p 8080:8080 most-image-web:local
 ```
 
 Open **http://localhost:8080/**. The multi-stage `Dockerfile` builds the existing Rust/Wasm
@@ -56,13 +56,13 @@ a builder with more memory, pass `--build-arg CARGO_PROFILE_WASM_RELEASE_LTO=fat
 For a public deployment, put an HTTPS reverse proxy or your hosting platform's TLS endpoint
 in front of container port 8080. With a reverse proxy on the same host, bind only loopback
 (`-p 127.0.0.1:8080:8080`); with a proxy container, connect both through a Docker network.
-HTTPS enables WebGPU and browser clipboard APIs. If hosting under `/photocraft/`, redirect
-`/photocraft` to `/photocraft/` and strip that prefix when proxying to the container. Relative
+HTTPS enables WebGPU and browser clipboard APIs. If hosting under `/most-image/`, redirect
+`/most-image` to `/most-image/` and strip that prefix when proxying to the container. Relative
 asset URLs then work without rebuilding. For example, in an existing HTTPS NGINX server:
 
 ```nginx
-location = /photocraft { return 301 /photocraft/; }
-location /photocraft/ {
+location = /most-image { return 301 /most-image/; }
+location /most-image/ {
     proxy_pass http://127.0.0.1:8080/;
 }
 ```
@@ -87,9 +87,9 @@ Measured on 2026-10-13 (0.8.2, `packaging/web/package.sh`):
 
 | File | Size |
 |---|---|
-| `app/photocraft-web-<hash>.part-aa` (the only part today) | 11,401,527 bytes (10.9 MiB) |
-| `app/photocraft-web.js` | about 170 KB (26 KB with gzip) |
-| `photocraft-web-boot-<hash>_bg.wasm` and `.js` | about 120 KB together |
+| `app/most-image-web-<hash>.part-aa` (the only part today) | 11,401,527 bytes (10.9 MiB) |
+| `app/most-image-web.js` | about 170 KB (26 KB with gzip) |
+| `most-image-web-boot-<hash>_bg.wasm` and `.js` | about 120 KB together |
 
 The app's WebAssembly is 25,019,043 bytes (23.9 MiB) before gzip.
 
@@ -111,8 +111,8 @@ pixel and file-decoding crates kept at speed) plus `wasm-opt -Oz`, and stores th
 
 All URLs in `index.html` are relative (`public_url = "./"` in `apps/photocraft-web/Trunk.toml`),
 so the site works at a domain root (`https://example.com/`), under a prefix
-(`https://example.com/tools/photocraft/`) and from a CDN bucket. The asset names carry a content
-hash, so they can be cached forever. `index.html`, `app/photocraft-web.js` and `app/parts.txt` keep
+(`https://example.com/tools/most-image/`) and from a CDN bucket. The asset names carry a content
+hash, so they can be cached forever. `index.html`, `app/most-image-web.js` and `app/parts.txt` keep
 their names and need revalidation.
 
 ## Required server settings
@@ -130,8 +130,8 @@ their names and need revalidation.
   the download, since the parts are compressed already; it shrinks the two `.js` files and the
   small boot module. You can also precompress and let the server send `Content-Encoding: br`.
 - **Caching:** `Cache-Control: public, max-age=31536000, immutable` on the files whose names
-  carry a hash (the parts and `photocraft-web-boot-<hash>.*`), and `no-cache` on `index.html`,
-  `app/photocraft-web.js` and `app/parts.txt`. The sample `_headers` and `.htaccess` do this.
+  carry a hash (the parts and `most-image-web-boot-<hash>.*`), and `no-cache` on `index.html`,
+  `app/most-image-web.js` and `app/parts.txt`. The sample `_headers` and `.htaccess` do this.
 - **HTTPS:** WebGPU (and the clipboard) only work in a secure context, which means `https://`
   or `http://localhost`. Over plain HTTP elsewhere, the app falls back to WebGL2.
 - **No special isolation headers:** Most Image doesn't use `SharedArrayBuffer`, so it doesn't
@@ -142,12 +142,12 @@ their names and need revalidation.
 nginx example:
 
 ```nginx
-location /photocraft/ {
+location /most-image/ {
     types { application/wasm wasm; text/javascript js; text/html html; }
     gzip on;
     gzip_types application/wasm text/javascript text/html;
     # The first matching line wins, so the files that keep their names come first.
-    location ~* (index\.html|app/photocraft-web\.js|app/parts\.txt)$ { add_header Cache-Control "no-cache"; }
+    location ~* (index\.html|app/most-image-web\.js|app/parts\.txt)$ { add_header Cache-Control "no-cache"; }
     location ~* (\.(wasm|js)|\.part-[a-z]+)$ { add_header Cache-Control "public, max-age=31536000, immutable"; }
 }
 ```
@@ -193,7 +193,7 @@ fetches them with `fetch()`, so a Content Security Policy needs them allowed by 
 
 ```html
 <iframe
-  src="https://example.com/photocraft/"
+  src="https://example.com/most-image/"
   title="Most Image image editor"
   style="width: 100%; height: 720px; border: 0;"
   allow="fullscreen; clipboard-read; clipboard-write"
@@ -223,6 +223,6 @@ Most Image renders with wgpu. It uses **WebGPU** when the browser has it and fal
 | `?webgl` | Force the WebGL2 backend (useful when a WebGPU driver misbehaves) |
 | `?cpu` | Force the CPU canvas path (slowest, most compatible) |
 
-For example: `<iframe src="https://example.com/photocraft/?webgl" ...>`.
+For example: `<iframe src="https://example.com/most-image/?webgl" ...>`.
 
 A browser with neither WebGPU nor WebGL2 gets a message in place of the app.

@@ -2,11 +2,11 @@
 # Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 # Build and package Most Image for Linux (<arch> is x86_64, aarch64 or riscv64):
 #
-#   $DIST/photocraft-<version>-linux-<arch>.AppImage  any distro with glibc >= the build host's
-#   $DIST/photocraft-<version>-linux-<arch>.AppImage.zsync  delta updates (needs zsyncmake)
-#   $DIST/photocraft-<version>-linux-<arch>.deb       Debian, Ubuntu, Mint, Pop!_OS, ...
-#   $DIST/photocraft-<version>-linux-<arch>.rpm       Fedora, openSUSE, RHEL, ...
-#   $DIST/photocraft-<version>-linux-<arch>.tar.gz    plain FHS-style tree (bin/, share/)
+#   $DIST/most-image-<version>-linux-<arch>.AppImage  any distro with glibc >= the build host's
+#   $DIST/most-image-<version>-linux-<arch>.AppImage.zsync  delta updates (needs zsyncmake)
+#   $DIST/most-image-<version>-linux-<arch>.deb       Debian, Ubuntu, Mint, Pop!_OS, ...
+#   $DIST/most-image-<version>-linux-<arch>.rpm       Fedora, openSUSE, RHEL, ...
+#   $DIST/most-image-<version>-linux-<arch>.tar.gz    plain FHS-style tree (bin/, share/)
 #
 # Usage: packaging/linux/package.sh [--skip-build] [--formats "appimage deb rpm tar"]
 #
@@ -49,7 +49,7 @@ BASENAME="most-image-$VERSION-linux-$ARCH"
 
 echo "==> Most Image $VERSION for Linux $ARCH ($FORMATS)"
 
-# The man-and-completions example writes photocraft-cli's man pages and shell completions below. It
+# The man-and-completions example writes most-image-cli's man pages and shell completions below. It
 # is built in its own cargo run: built with the binaries, its dev-dependencies' features would be
 # unified into them.
 if [[ "$SKIP_BUILD" = 0 ]]; then
@@ -67,9 +67,9 @@ STAGE="$WORK/root"
 rm -rf "$WORK"
 
 # ---- stage an FHS tree (shared by every format) -------------------------------------------------
-install -Dm755 "$BIN/photocraft" "$STAGE/usr/bin/photocraft"
-install -Dm755 "$BIN/photocraft-cli" "$STAGE/usr/bin/photocraft-cli"
-"${CROSS_COMPILE:-}strip" "$STAGE/usr/bin/photocraft" "$STAGE/usr/bin/photocraft-cli" 2>/dev/null || true
+install -Dm755 "$BIN/most-image" "$STAGE/usr/bin/most-image"
+install -Dm755 "$BIN/most-image-cli" "$STAGE/usr/bin/most-image-cli"
+"${CROSS_COMPILE:-}strip" "$STAGE/usr/bin/most-image" "$STAGE/usr/bin/most-image-cli" 2>/dev/null || true
 install -Dm644 "$HERE/$APP_ID.desktop" "$STAGE/usr/share/applications/$APP_ID.desktop"
 install -Dm644 "$HERE/$APP_ID.mime.xml" "$STAGE/usr/share/mime/packages/$APP_ID.xml"
 mkdir -p "$STAGE/usr/share/metainfo"
@@ -77,18 +77,18 @@ sed -e "s/@VERSION@/$VERSION/g" -e "s/@DATE@/$MOST_IMAGE_BUILD_DATE/g" \
   "$HERE/$APP_ID.metainfo.xml.in" >"$STAGE/usr/share/metainfo/$APP_ID.metainfo.xml"
 mkdir -p "$STAGE/usr/share/icons"
 cp -R "$ROOT/assets/app-icon/hicolor" "$STAGE/usr/share/icons/"
-mkdir -p "$STAGE/usr/share/doc/photocraft"
-copy_docs "$STAGE/usr/share/doc/photocraft"
-# photocraft-cli's man pages and shell completions, from its clap definition, written by the
+mkdir -p "$STAGE/usr/share/doc/most-image"
+copy_docs "$STAGE/usr/share/doc/most-image"
+# most-image-cli's man pages and shell completions, from its clap definition, written by the
 # example built above. A cross build runs it through $EMULATOR, like the --version check at the
 # end, and leaves them out without one, as a --skip-build run whose prebuilt binaries came without
 # the example does. zsh reads site-functions on Fedora and openSUSE; the deb also links the
 # completion into Debian's vendor-completions (nfpm.yaml).
 CLI_DOCS="$BIN/examples/man-and-completions"
 if [[ -n "${CROSS_TARGET:-}" ]] && [[ -z "${EMULATOR:-}" ]]; then
-  warn "no EMULATOR to run the $CROSS_TARGET build, so photocraft-cli's man pages and completions are left out"
+  warn "no EMULATOR to run the $CROSS_TARGET build, so most-image-cli's man pages and completions are left out"
 elif [[ ! -x "$CLI_DOCS" ]]; then
-  warn "$CLI_DOCS is not built, so photocraft-cli's man pages and completions are left out"
+  warn "$CLI_DOCS is not built, so most-image-cli's man pages and completions are left out"
 else
   if [[ -n "${CROSS_TARGET:-}" ]]; then
     "$EMULATOR" "$CLI_DOCS" "$WORK/cli-docs"
@@ -96,9 +96,9 @@ else
     "$CLI_DOCS" "$WORK/cli-docs"
   fi
   install -Dm644 -t "$STAGE/usr/share/man/man1" "$WORK"/cli-docs/*.1
-  install -Dm644 "$WORK/cli-docs/photocraft-cli.bash" "$STAGE/usr/share/bash-completion/completions/photocraft-cli"
+  install -Dm644 "$WORK/cli-docs/most-image-cli.bash" "$STAGE/usr/share/bash-completion/completions/most-image-cli"
   install -Dm644 "$WORK/cli-docs/_photocraft-cli" "$STAGE/usr/share/zsh/site-functions/_photocraft-cli"
-  install -Dm644 "$WORK/cli-docs/photocraft-cli.fish" "$STAGE/usr/share/fish/vendor_completions.d/photocraft-cli.fish"
+  install -Dm644 "$WORK/cli-docs/most-image-cli.fish" "$STAGE/usr/share/fish/vendor_completions.d/most-image-cli.fish"
 fi
 
 if command -v desktop-file-validate >/dev/null; then
@@ -139,7 +139,7 @@ if has appimage; then
   APPDIR="$WORK/Most Image.AppDir"
   cp -R "$STAGE" "$APPDIR"
   # Preserve the sctk-adwaita MIT notice in the packaged AppImage.
-  install -Dm644 "$ROOT/NOTICE" "$APPDIR/usr/share/doc/photocraft/NOTICE"
+  install -Dm644 "$ROOT/NOTICE" "$APPDIR/usr/share/doc/most-image/NOTICE"
   # AppRun is a script, not a symlink: it installs the .desktop entry and icons into
   # $XDG_DATA_HOME before launching, so Wayland compositors can resolve the window's
   # app_id to our icon instead of the generic Wayland logo (#593; opt-out env in the
@@ -192,7 +192,7 @@ if has appimage; then
   # next to each AppImage on GitHub Releases. `latest` is the newest published release that is
   # not a pre-release. A fork's builds point at its own releases through GITHUB_REPOSITORY.
   REPO="${GITHUB_REPOSITORY:-mapachstudio/most-image}"
-  UPDATE_INFO="gh-releases-zsync|${REPO%%/*}|${REPO#*/}|latest|photocraft-*-linux-$ARCH.AppImage.zsync"
+  UPDATE_INFO="gh-releases-zsync|${REPO%%/*}|${REPO#*/}|latest|most-image-*-linux-$ARCH.AppImage.zsync"
   # Extract-and-run: works without FUSE (containers, CI). The output embeds the static runtime,
   # so users don't need libfuse2 either. With zsyncmake on the host (CI installs the zsync
   # package) appimagetool also writes the .zsync, into its working directory, hence the cd.
@@ -207,11 +207,11 @@ if has appimage; then
 fi
 
 if [[ -z "${CROSS_TARGET:-}" ]]; then
-  "$STAGE/usr/bin/photocraft-cli" --version
+  "$STAGE/usr/bin/most-image-cli" --version
 elif [[ -n "${EMULATOR:-}" ]]; then
   # Set, so malloc_tuning::apply doesn't re-execute the CLI (#8743): under qemu-user that exec goes
   # to the host kernel, which can't run a $CROSS_ARCH binary, and glibc then hands it to /bin/sh.
-  MALLOC_TRIM_THRESHOLD_=131072 "$EMULATOR" "$STAGE/usr/bin/photocraft-cli" --version
+  MALLOC_TRIM_THRESHOLD_=131072 "$EMULATOR" "$STAGE/usr/bin/most-image-cli" --version
 fi
 echo "==> done"
 ls -lh "$DIST"

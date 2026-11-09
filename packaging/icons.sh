@@ -45,7 +45,7 @@ done
 
 # macOS .icns.
 if command -v iconutil >/dev/null; then
-  SET="$TMP/photocraft.iconset"
+  SET="$TMP/most-image.iconset"
   mkdir -p "$SET"
   for s in 16 32 128 256 512; do
     render "$MAC" "$s" "$SET/icon_${s}x${s}.png"

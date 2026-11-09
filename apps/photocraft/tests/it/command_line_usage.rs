@@ -70,7 +70,7 @@ fn help_prints_usage_and_exits_0() {
     for flag in ["--help", "-h"] {
         let Run { status, stdout, stderr } = run_photocraft(&[flag]);
         assert_eq!(status.code(), Some(0), "{flag} must exit 0, stderr: {stderr}");
-        assert!(stdout.contains("Usage: photocraft"), "{flag} stdout: {stdout}");
+        assert!(stdout.contains("Usage: most-image"), "{flag} stdout: {stdout}");
         for option in ["--safe-gpu", "--new-instance", "--control <PORT>", "--version", "`--`", "MOST_IMAGE_AUTOMATION_READ_ROOT", "MOST_IMAGE_NEW_INSTANCE"] {
             assert!(stdout.contains(option), "{flag} usage must list {option}: {stdout}");
         }
@@ -82,7 +82,7 @@ fn help_prints_usage_and_exits_0() {
 fn help_wins_over_later_arguments() {
     let Run { status, stdout, .. } = run_photocraft(&["--help", "picture.psd", "--safegpu"]);
     assert_eq!(status.code(), Some(0));
-    assert!(stdout.contains("Usage: photocraft"), "stdout: {stdout}");
+    assert!(stdout.contains("Usage: most-image"), "stdout: {stdout}");
 }
 
 #[test]
