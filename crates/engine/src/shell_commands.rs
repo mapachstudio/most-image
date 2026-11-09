@@ -91,11 +91,6 @@ pub const SHELL_COMMANDS: &[(&str, &str, &[&str], Option<&str>)] = &[
     ("window.theme.softLight", "Soft", &["Window", "Theme", "Light Theme"], None),
     ("window.theme.system", "Sync with system", &["Window", "Theme"], None),
     ("edit.search", "Search…", &["Edit"], Some("Cmd+F")),
-    ("help.discord", "Join the ArtCraft Discord…", &["Help"], None),
-    ("help.website", "Most Image Website", &["Help"], None),
-    ("help.artcraftWebsite", "ArtCraft Website", &["Help"], None),
-    ("help.github", "Most Image on GitHub", &["Help"], None),
-    ("help.reportIssue", "Report an Issue…", &["Help"], None),
     ("help.systemInfo", "System Info…", &["Help"], None),
     ("help.about", "About Most Image", &["Help"], None),
 ];

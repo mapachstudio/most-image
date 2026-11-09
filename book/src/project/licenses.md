@@ -8,6 +8,6 @@ Most Image source is dual-licensed under MIT or Apache-2.0 at the user's option.
 - [`NOTICE`](https://github.com/mapachstudio/most-image/blob/main/NOTICE)
 - [`ATTRIBUTION.md`](https://github.com/mapachstudio/most-image/blob/main/ATTRIBUTION.md)
 
-Bundled third-party assets retain their own licenses and attribution requirements. The ArtCraft name, wordmark, and logos in `docs/brand/` are subject to [`docs/brand/LICENSE-brand.txt`](https://github.com/mapachstudio/most-image/blob/main/docs/brand/LICENSE-brand.txt) and are not covered by the source-code license.
+Bundled third-party assets retain their own licenses and attribution requirements. **ArtCraft** and **PhotoCraft** are trademarks of the ArtCraft Team — not ours — and are not covered by this license. Their brand licence requires every modified version to remove them, and this one has: `docs/brand/` is gone and the application icon is our own drawing.
 
 This page summarizes repository locations and does not alter any ownership or license term.

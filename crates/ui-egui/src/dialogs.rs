@@ -806,9 +806,12 @@ fn about_tab_body(app: &mut PhotocraftApp, ui: &mut egui::Ui, tab: &str) {
             ui.label(crate::i18n::fmt(tl!("Version {version}"), &[("version", &photocraft_engine::build_info::long_version())]));
             ui.add_space(12.0);
             ui.vertical_centered(|ui| {
-                crate::links::discord_button(app, ui, 220.0);
-                ui.add_space(8.0);
-                crate::links::link_row(app, ui);
+                ui.label(
+                    egui::RichText::new(tl!(
+                        "Basado en PhotoCraft, del equipo ArtCraft y su comunidad, bajo Apache-2.0. Grupo MOST no esta asociado con el equipo ArtCraft, que no patrocina ni avala este producto.",
+                    ))
+                    .size(11.0),
+                );
             });
             ui.add_space(10.0);
             ui.weak("egui · wgpu · photocraft-engine");
