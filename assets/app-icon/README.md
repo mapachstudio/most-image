@@ -1,5 +1,4 @@
 <!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
-<!-- Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # Most Image app icon
 
 A **nine-tailed kitsune with a brow diamond**: an engraving portrait, seated, looking back at the

@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Layered TIFF (Photoshop layer data in tags 37724 / 34377): Document → TIFF → Document round
 //! trips in every mode and depth, equivalence with the PSD path, the flat fall-backs, files
 //! written by an independent implementation (psdtags, both byte orders), and malformed input.

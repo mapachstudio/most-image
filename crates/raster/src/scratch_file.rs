@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! The scratch file: where cold tiles go when pixel memory is over budget.
 //!
 //! - One file per configured directory, never visible after the process ends. Unix creates it

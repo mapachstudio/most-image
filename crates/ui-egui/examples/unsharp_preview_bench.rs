@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Synthetic existing preview workload, including proxy creation, command/history and CPU
 //! flattening. Excludes scheduling, egui frames, display conversion, GPU upload/presentation.
 use photocraft_color::{Color, ColorMode, SampleType};

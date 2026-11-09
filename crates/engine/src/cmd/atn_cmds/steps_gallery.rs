@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Photoshop's Filter Gallery steps (#10592): the `GEfc` event with the effect's id in `GEfk`
 //! and its settings, for all 47 effects. Each maps to its `filter.gallery.<effect>` command with
 //! the keys, limits and defaults Photoshop measures (`docs/atn.md`, Group A); a stack of several

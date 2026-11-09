@@ -1,5 +1,4 @@
 <!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
-<!-- Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # Context-menu parity contract
 
 > **Last reviewed:** 2026-10-18 · **Last updated:** 2026-10-21 · **Change:** minor (Crop tool menu on a pending crop, #6561; Zoom tool menu order, #6005; Type tool menu over committed type, #7324; earlier: Path Selection canvas menu, #1056; pasteboard row: the menu exists, #2462) · **Target:** Adobe Photoshop 2026

@@ -1,5 +1,4 @@
 <!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
-<!-- Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # Licenses
 
 Most Image source is dual-licensed under MIT or Apache-2.0 at the user's option. The authoritative terms are the repository files:

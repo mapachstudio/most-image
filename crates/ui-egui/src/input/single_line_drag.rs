@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Drag-selecting in a single-line text field follows only the pointer's x, as in Photoshop and
 //! native text fields: the pointer can drift above or below the field without the selection
 //! jumping to the start or the end of the text (#1946).

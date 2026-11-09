@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Photoshop Actions files (`.atn`): Load Actions (`actions.load`) and Save Actions
 //! (`actions.save`), plus the two step commands a Photoshop set needs: `actions.stopMessage`
 //! (Photoshop's Insert Stop) and `actions.photoshopStep` (a step Most Image has no command for

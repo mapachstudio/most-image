@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! `cargo xtask scorecard [--check]`: generate `docs/scorecard.md` (#221).
 //!
 //! Sources, all committed, so the output is deterministic and CI can check it:

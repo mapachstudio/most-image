@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! The monitor profile in the shell (#569): reads the displays and their profiles through the
 //! platform (`Services::read_displays`) at launch and again whenever they may have changed,
 //! picks the display each window is on (its canvas is then shown in that display's profile),

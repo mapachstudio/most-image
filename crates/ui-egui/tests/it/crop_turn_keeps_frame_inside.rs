@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Crop tool, default mode: turning the image keeps the frame inside the turned image (#10869).
 //!
 //! Measured in the reference application on an 800 × 500 document, turning by a drag outside the

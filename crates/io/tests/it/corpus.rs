@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Real-file corpora (feature `corpus`; run with `cargo xtask test-corpus`). The corpora are
 //! gitignored, never committed, and fetched at pinned commits and sha256-verified by
 //! `cargo xtask corpus --all` (pins: `xtask/src/corpus_pins.rs`). A missing corpus fails.

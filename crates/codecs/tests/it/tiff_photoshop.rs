@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Photoshop's private TIFF tags (34377 image resources, 37724 ImageSourceData) travel through
 //! `Metadata` as opaque bytes: written when present, read from either byte order and from
 //! BigTIFF, and never a panic or an allocation on malformed input.

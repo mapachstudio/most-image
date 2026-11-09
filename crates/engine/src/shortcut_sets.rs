@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Edit › Keyboard Shortcuts › Set: named shortcut sets, as in Photoshop. The bindings in use
 //! stay in [`Preferences::shortcuts`] / [`Preferences::alternate_shortcuts`] (what dispatch
 //! reads); a set is a saved copy of them, `Preferences::shortcut_sets` keyed by name, and

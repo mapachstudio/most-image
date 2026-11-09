@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-# Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 # Build and package Most Image for FreeBSD:
 #
 #   $DIST/photocraft-<version>-freebsd-<arch>.tar.gz   a /usr/local-style tree (arch x86_64 or aarch64):

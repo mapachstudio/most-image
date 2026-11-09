@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Vector data ⇄ PSD: path records (vector masks `vmsk`/`vsms`, saved paths 2000–2997, the
 //! work path 1025), live-shape origination (`vogk`), shape fill content (`vscg`) and shape
 //! strokes (`vstk`).

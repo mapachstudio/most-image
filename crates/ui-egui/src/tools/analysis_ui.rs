@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Image › Analysis and Notes in the shell: the Ruler, Count, Note and Color Sampler tools
 //! (eyedropper group), their canvas overlays and options bars, Window › Measurement Log and
 //! Window › Notes, and the Set Measurement Scale / Select Data Points / Place Scale Marker dialogs.

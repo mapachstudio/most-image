@@ -1,5 +1,4 @@
 <!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
-<!-- Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 ---
 title: Text moves when I start editing a PSD text layer
 description: In Most Image 0.7.0, a text layer from a Photoshop file can jump when you click it with the Type tool. Most Image 0.8.2 fixes the known causes; update.

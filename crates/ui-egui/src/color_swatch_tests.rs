@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Colour swatches open Most Image's Color Picker, not egui's compact popup (#2144: "use the same
 //! color picker throughout the app"): filter dialog colours, Preferences colours, the Note and
 //! Count tools' colours and an artboard's custom background. OK sets that colour (in sRGB, as

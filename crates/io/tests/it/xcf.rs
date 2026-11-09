@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! GIMP XCF files written by GIMP 3.2.6 itself (feature `corpus`; `cargo xtask test-corpus -p io`).
 //! They come from `corpus/gimp/` (`cargo xtask corpus --gimp`; pin `MOST_IMAGE_CORPUS_GIMP_COMMIT` in
 //! `xtask/src/corpus_pins.rs`, generator `tools/gimp-xcf/xcf_fixtures.py` in photocraft-corpus); a

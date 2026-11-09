@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Camera Raw's preview develop on the GPU (#6916). When every stage the settings use reads
 //! only its own pixel, the proxy develops in one wgpu pass (`photocraft_gpu::CameraRawDevelop`)
 //! on the canvas's device and is read back for the histogram, scopes and display conversion.

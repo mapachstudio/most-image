@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Timing: the example WebAssembly Invert plug-in vs the built-in Image › Adjustments › Invert,
 //! through the full command path, on a 6000 × 4000 (24 MP) layer.
 //! `cargo run --release -p photocraft-engine --example bench_plugin_invert [width] [height] [depth]`

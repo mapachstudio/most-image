@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Face detection (#3603): the faces in the document, with their box and five landmarks, from
 //! [`photocraft_algo::faces`]. Select › Color Range's Detect Faces and Face-Aware Liquify read
 //! faces through [`faces_in`]; `image.detectFaces` reports them to scripts and agents.

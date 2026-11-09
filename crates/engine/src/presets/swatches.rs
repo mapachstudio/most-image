@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Window › Swatches: named colours in groups (folders), as in Photoshop's Swatches panel.
 //!
 //! A swatch keeps its colour in the model it was made in: RGB, HSB, CMYK, Lab or grayscale,

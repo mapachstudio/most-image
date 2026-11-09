@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! The macOS menu bar: the same menus as the in-window bar ([`crate::menus::menu_items`]), laid
 //! out the way a Mac app's are and handed to a platform [`Backend`] (the desktop app's muda one).
 //!

@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Stroke latency trace (#1343): where each frame's time goes while a brush stroke is drawn, so
 //! a tester on any platform can report a per-stage breakdown instead of one input-to-pixel number.
 //!

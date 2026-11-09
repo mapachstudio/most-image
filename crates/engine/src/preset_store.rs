@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Persistent brush preset store: user and imported (`.abr`) brush presets survive a restart.
 //!
 //! Sampled tips would bloat the preferences document, so brush presets live in their own store,

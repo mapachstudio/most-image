@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::descriptors::{ang, color_desc, color_hex, enm, get_bool, get_enum, get_num, get_obj, long, pct, px};
 use super::tables::{blend_label, blend_ps, lookup, lookup_back};
 use super::{D, Descriptor, Map, Value, json};

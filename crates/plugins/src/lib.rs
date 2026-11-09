@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Sandboxed WebAssembly plug-ins for Most Image.
 //!
 //! A plug-in is a WebAssembly module that implements the Most Image plug-in ABI (v1, documented

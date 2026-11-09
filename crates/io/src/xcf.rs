@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! GIMP XCF (`.xcf`, `.xcf.gz`) read. Layout from the public specification
 //! (https://developer.gimp.org/core/standards/xcf/, versions 0 to 26): a header, image
 //! properties, then pointers to layer, channel and path structures; each drawable's pixels sit in

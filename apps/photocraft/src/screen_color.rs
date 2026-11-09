@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Desktop colour capture starts only on an explicit UI request. No snapshots are written to
 //! disk, transmitted or retained after a pick. Wayland delegates to its permission portal.
 use photocraft_ui_egui::screen_picker::{Capture, Pending, Service};

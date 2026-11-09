@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! #200: PSD export must write tagged blocks that re-parse strictly. Third-party files
 //! re-saved by Most Image had `soLD` data under the `PlLd` key, global blocks padded only
 //! to even, a layer info body not padded to 4 and, in PSB, `cinf`/`lnkE` read and written

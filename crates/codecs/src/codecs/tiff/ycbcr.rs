@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! YCbCr (PhotometricInterpretation 6) to RGB, after the `tiff` crate has decoded the samples.
 //!
 //! The crate decompresses JPEG data and upsamples subsampled chroma, but hands back the stored

@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Camera Raw's Shadows, Highlights, Clarity, Texture and Dehaze on raw files, applied while
 //! developing (in linear light, before the tone curve), and its adaptive black point.
 //!

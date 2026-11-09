@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! The desktop app's logger: `log::` records go to standard error and to a log file.
 //!
 //! Without a logger every `log::warn!`/`log::error!` in the workspace (GPU startup fallbacks, a

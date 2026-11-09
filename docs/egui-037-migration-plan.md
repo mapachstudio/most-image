@@ -1,5 +1,4 @@
 <!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
-<!-- Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # Most Image: egui 0.37 migration plan
 
 Status update (2026-10-25): local implementation includes main `b278ff72459cbf9754863365edd822ba2248aa07`, preserving its JPEG dependency, Affinity import and raster changes. All nine CI stages passed: 11,590 passing test executions, zero failed, 91 ignored across 93 summaries; the ignored panic hunt, strict lint and WASM compilation passed. The current-main integration received independent review. Native/browser GUI, native IME, PRIMARY, packaged WASM size, real-world 0.36 settings and paired application performance remain open. Publication requires separate explicit approval; human review and human merge are required.

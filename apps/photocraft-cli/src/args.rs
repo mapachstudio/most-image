@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! The command line, as clap types. Values are parsed into their types here, so a bad one is a
 //! usage error naming its flag (exit 2) and the handlers never see it (#7071). A flag a
 //! subcommand doesn't take is a usage error too, so a typo such as `--fromat` can't be silently

@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 use super::appearance::{canvas_style, sync_animations, sync_appearance, sync_display_scale, sync_tooltips};
 use super::startup::{load, presets_store, recovery, sync_rulers};
 use super::{DocId, HashMap, PhotocraftApp, Value, prefs};

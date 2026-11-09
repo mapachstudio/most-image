@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Camera Raw Filter descriptors observed in real PSD files (filter version 18.4, process 6).
 //! Verified develop controls are editable. Other processing versions
 //! or settings retain the entire filter through the existing opaque-filter path.

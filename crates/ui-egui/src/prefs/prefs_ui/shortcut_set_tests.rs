@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Edit › Keyboard Shortcuts › Set in the dialog: a new set saves the dialog's bindings, the
 //! dropdown switches sets, Save and Delete wait for OK, and Export / Summarize write the bindings
 //! as the dialog shows them.

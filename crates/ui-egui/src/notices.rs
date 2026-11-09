@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Non-blocking notices: a small stack of cards in the lower-right corner of the window for things
 //! the user should see but that must not interrupt work (import/export warnings such as "adjustment
 //! flattened", files that couldn't be opened). Notices live in [`UiState`](crate::UiState) so the

@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Patterns: the global `Patt` / `Pat2` / `Pat3` tagged blocks (8 / 16 / 32-bit documents) and
 //! standalone `.pat` files.
 //!

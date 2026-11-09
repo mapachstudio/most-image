@@ -1,5 +1,4 @@
 <!-- Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
-<!-- Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0. -->
 # Plug-ins: the WebAssembly plug-in API (ABI v1)
 
 Most Image does not host native Photoshop plug-ins (`.8BF`, CEP, UXP): that needs unsafe FFI into

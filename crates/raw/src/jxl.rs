@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! JPEG XL-compressed DNG tiles and strips (Adobe DNG Specification 1.7, Compression 52546).
 //!
 //! Each strip or tile holds one JPEG XL codestream (bare or in the ISO/IEC 18181-2 container)

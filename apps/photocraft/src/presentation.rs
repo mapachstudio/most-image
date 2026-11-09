@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Launch overrides for how frames reach the display, so testers can compare input-to-pixel
 //! latency without a rebuild (#1343): `MOST_IMAGE_PRESENT_MODE` (`fifo`, `autovsync`, or `novsync`,
 //! also spelled `immediate`, `mailbox` or `autonovsync`: no vsync, wgpu's Immediate → Mailbox → Fifo

@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Linux start-up check for the shared libraries winit and wgpu load at runtime (issue #201).
 //!
 //! The windowing (X11/Wayland, xkbcommon) and GPU (Vulkan, EGL) libraries aren't ELF `NEEDED`

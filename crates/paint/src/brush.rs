@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! The brush model: tip shape plus Photoshop-style dynamics sections, all plain serde data.
 //!
 //! Every section is optional (an `enabled` flag, or a neutral default), so a partial JSON object

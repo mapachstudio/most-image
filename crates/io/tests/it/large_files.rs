@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Large-file fixtures (#216, #5107), generated at test time by `photocraft_psd::fixtures`: a 20 MP
 //! layered PSD, a 150-layer layout, a PSD just under Photoshop's 2 GB cap and a 4.4 GB PSB. Each
 //! is opened through `photocraft_io`, checked (size, layers, masks, effects, merged pixels), saved

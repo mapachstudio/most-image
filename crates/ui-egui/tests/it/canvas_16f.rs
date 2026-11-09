@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! 16/32-bit documents get an `Rgba16Float` canvas texture (#46): smooth gradients keep more than
 //! 256 levels, 32-bit values above 1.0 survive for View › 32-bit Preview Options, and 8-bit
 //! documents keep their `Rgba8Unorm` texture byte for byte. Skips when there is no GPU adapter or

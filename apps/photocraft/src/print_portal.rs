@@ -1,5 +1,4 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-// Modificado por Grupo MOST para Most Image. Obra original: Most Image del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Printing through the XDG Print portal (`org.freedesktop.portal.Print`): the system print
 //! dialog, which a sandboxed app can reach without a CUPS socket. The engine prints over IPP
 //! when it can reach a print server (`photocraft-ipp`); this is its fallback when it cannot, and
