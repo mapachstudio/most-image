@@ -80,6 +80,24 @@ ahora son nuestros, y listaban archivos de `docs/brand/` que se
 eliminaron. Se han corregido esas filas. Las que describen obra ajena no se
 han tocado.
 
+### Enlaces e identidad en la interfaz
+
+- Se han retirado del programa los enlaces a getartcraft.com y a su
+  Discord: el botón de la barra superior, el panel de comunidad, los de la
+  pantalla de inicio, los del «Acerca de» y las entradas del menú Ayuda.
+  No se han sustituido por otros.
+- El «Acerca de» decía «Part of ArtCraft» y «Made by the ArtCraft team and
+  community». Ahora dice qué es esto y de dónde viene, con la atribución
+  que su licencia de marca pide.
+- `CompanyName` en los metadatos del ejecutable de Windows era «ArtCraft».
+- El instalador de Windows creaba la carpeta `ArtCraft` en el disco del
+  cliente; ahora `Grupo MOST`. La política que lo comprueba va al día.
+- El Flatpak pedía acceso de lectura a `xdg-data/ArtCraft/`.
+- Los paquetes de Linux listaban una dirección suya como mantenedor.
+- Los tipos MIME que se registran en el sistema.
+- `host_services.rs` buscaba el programa de imagen de la suite original en
+  `C:\Program Files\ArtCraft\…`. Ahora busca el nuestro, en nuestra carpeta.
+
 ### Lo que sigue sin tocarse
 
 Los nombres de los paquetes de Rust (`photocraft-*`) y las carpetas `apps/`,
