@@ -36,6 +36,25 @@ jobs:
           rustup target add aarch64-apple-darwin x86_64-apple-darwin
           rustc --version
 
+      # Sin caché, cada compilación parte de cero: 40 minutos para saber si
+      # un cambio de una línea compila. Se usa `actions/cache`, que es de
+      # GitHub, en vez de la acción de caché de Rust que todo el mundo
+      # emplea: una dependencia menos de un tercero en el camino que produce
+      # el binario que vendemos.
+      #
+      # La clave lleva el Cargo.lock: si cambia una dependencia, caché nueva.
+      # `restore-keys` deja reutilizar la anterior cuando solo cambia el
+      # código nuestro, que es el caso normal.
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry/index
+            ~/.cargo/registry/cache
+            ~/.cargo/git/db
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: ${{ runner.os }}-cargo-
+
       - name: Empaquetar
         run: packaging/macos/package.sh --arch "${{ inputs.arch || 'universal' }}"
 
