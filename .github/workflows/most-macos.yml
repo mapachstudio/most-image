@@ -25,7 +25,7 @@ jobs:
     runs-on: macos-15
     timeout-minutes: 120
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # Sin rust-toolchain.toml en el repositorio: se pide estable y los dos
       # objetivos de Apple, porque el empaquetado universal los junta con lipo.
@@ -52,7 +52,7 @@ jobs:
           done
           ls -la dist/release/
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: most-image-macos
           path: dist/release/*
