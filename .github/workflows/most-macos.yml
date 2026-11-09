@@ -1,0 +1,59 @@
+# Compila Most Studio para macOS y publica el instalador.
+#
+# Escrito por Grupo MOST. NO llama a workflows de terceros: ver
+# tools/flujo-macos.mjs en el repositorio de la suite para el porqué.
+#
+# No usa ningún secreto. La firma es ad-hoc, que sirve para comprobar que
+# compila y para probar el .dmg en esta misma máquina; Gatekeeper lo
+# rechazará en otros Macs hasta que se firme con la identidad de Apple.
+name: Most Image · macOS
+
+on:
+  workflow_dispatch:
+    inputs:
+      arch:
+        description: "universal, aarch64 o x86_64"
+        default: universal
+  push:
+    branches: [most]
+
+permissions:
+  contents: read
+
+jobs:
+  instalador:
+    runs-on: macos-15
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      # Sin rust-toolchain.toml en el repositorio: se pide estable y los dos
+      # objetivos de Apple, porque el empaquetado universal los junta con lipo.
+      - name: Rust
+        run: |
+          rustup toolchain install stable --profile minimal
+          rustup default stable
+          rustup target add aarch64-apple-darwin x86_64-apple-darwin
+          rustc --version
+
+      - name: Empaquetar
+        run: packaging/macos/package.sh --arch "${{ inputs.arch || 'universal' }}"
+
+      # Antes de publicar nada: que el .dmg no lleve la marca ajena en el
+      # nombre. Es la última línea de defensa del remarcado.
+      - name: Comprobar el nombre del instalador
+        run: |
+          shopt -s nullglob
+          for f in dist/release/*; do
+            case "$(basename "$f")" in
+              *photocraft*)
+                echo "::error::el artefacto conserva la marca original: $f"; exit 1 ;;
+            esac
+          done
+          ls -la dist/release/
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: most-image-macos
+          path: dist/release/*
+          if-no-files-found: error
