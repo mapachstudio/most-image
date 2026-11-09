@@ -1,6 +1,6 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
 //! Re-render oracle over the Photoshop corpus (`corpus/photoshop`): our own Photoshop-authored
-//! PSDs from https://github.com/storytold/photocraft-corpus, fetched at a pinned commit by
+//! PSDs from https://github.com/mapachstudio/most-image-corpus, fetched at a pinned commit by
 //! `cargo xtask corpus --all`. Feature `corpus` (run with `cargo xtask test-corpus`); a missing
 //! corpus fails.
 //!
