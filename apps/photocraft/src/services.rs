@@ -617,7 +617,7 @@ fn image_from_offers(offers: &[String], mut fetch: impl FnMut(&str) -> Option<Ve
 /// to).
 const MAX_CLIPBOARD_SVG_BYTES: u64 = photocraft_io::svg::MAX_INFLATED_BYTES;
 
-/// The pixels of a drawing copied as SVG markup (on macOS and Linux, VectorCraft's Copy leaves
+/// The pixels of a drawing copied as SVG markup (on macOS and Linux, Most Vector's Copy leaves
 /// only the markup, as text): one pixel per SVG unit, scaled down to the SVG import's pixel limit,
 /// as RGBA8. `None` for text that isn't SVG, markup longer than [`MAX_CLIPBOARD_SVG_BYTES`], and
 /// markup that doesn't parse.

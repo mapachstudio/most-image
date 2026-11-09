@@ -285,8 +285,8 @@ pub type ClipboardUnreadableFn = Box<dyn Fn() -> bool>;
 /// An editor selected by the user, never an executable supplied by document metadata.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum ExternalSvgEditor {
-    /// A known VectorCraft installation, found by the desktop shell.
-    VectorCraft,
+    /// A known Most Vector installation, found by the desktop shell.
+    Most Vector,
     /// A known Adobe Illustrator installation (offered where the shell can discover one).
     Illustrator,
     /// The absolute path the user chose with "Other application": an executable, or on macOS

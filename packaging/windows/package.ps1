@@ -5,7 +5,7 @@
 .DESCRIPTION
   Produces, in $env:DIST (default: dist/release):
     photocraft-<version>-windows-<arch>.msi            installer (WiX v5, per-user by default, per-machine optional)
-    photocraft-<version>-windows-<arch>-portable.zip   photocraft.exe + photocraft-cli.exe + portable.txt
+    photocraft-<version>-windows-<arch>-portable.zip   most-image.exe + photocraft-cli.exe + portable.txt
     photocraft-<version>-windows-<arch>-symbols.zip    photocraft.pdb + photocraft_cli.pdb (optional, for profilers)
 
   The binaries link the C runtime statically (+crt-static), so neither the MSI nor the portable
@@ -79,7 +79,7 @@ function Get-PeHeader([string] $Path) {
   return @{ Machine = [BitConverter]::ToUInt16($bytes, $pe + 4); Subsystem = [BitConverter]::ToUInt16($bytes, $pe + 0x5C) }
 }
 $Machine = switch ($Arch) { 'x64' { 0x8664 } 'x86' { 0x14C } 'arm64' { 0xAA64 } }
-foreach ($check in @(@('photocraft.exe', 2), @('photocraft-cli.exe', 3))) {
+foreach ($check in @(@('most-image.exe', 2), @('photocraft-cli.exe', 3))) {
   $h = Get-PeHeader (Join-Path $Bin $check[0])
   if ($h.Machine -ne $Machine) { throw "$($check[0]) is for machine 0x$('{0:X}' -f $h.Machine), expected 0x$('{0:X}' -f $Machine) ($Arch)" }
   if ($h.Subsystem -ne $check[1]) { throw "$($check[0]) has PE subsystem $($h.Subsystem), expected $($check[1])" }
@@ -88,9 +88,9 @@ foreach ($check in @(@('photocraft.exe', 2), @('photocraft-cli.exe', 3))) {
 $Stage = Join-Path $TargetDir "windows-package\$Arch"
 Remove-Item -Recurse -Force $Stage -ErrorAction SilentlyContinue
 New-Item -ItemType Directory -Force -Path $Stage | Out-Null
-Copy-Item (Join-Path $Bin 'photocraft.exe'), (Join-Path $Bin 'photocraft-cli.exe') $Stage
+Copy-Item (Join-Path $Bin 'most-image.exe'), (Join-Path $Bin 'photocraft-cli.exe') $Stage
 
-& (Join-Path $PSScriptRoot 'sign.ps1') (Join-Path $Stage 'photocraft.exe') (Join-Path $Stage 'photocraft-cli.exe')
+& (Join-Path $PSScriptRoot 'sign.ps1') (Join-Path $Stage 'most-image.exe') (Join-Path $Stage 'photocraft-cli.exe')
 
 # ---- font notices for the MSI ------------------------------------------------------------------
 # The portable ZIP already carries these notices; stage the complete files before MSI creation too.
@@ -183,20 +183,20 @@ if ($env:CRAFT_FONTS_DIR) {
     if (Test-Path $lic) { Copy-Item $lic (Join-Path $Portable "OFL-$($_.Name).txt") }
   }
 }
-# portable.txt beside photocraft.exe switches on portable mode: settings, presets and recovery
+# portable.txt beside most-image.exe switches on portable mode: settings, presets and recovery
 # files go to Most ImageData\ next to the exe instead of %APPDATA% (#228; see app_dirs.rs).
 Copy-Item (Join-Path $PSScriptRoot 'portable.txt') $Portable
 $Zip = Join-Path $Dist "most-image-$Version-windows-$Arch-portable.zip"
 Remove-Item -Force $Zip -ErrorAction SilentlyContinue
 # The archive holds the files themselves. `-Path <folder>` puts the folder *in* the archive, so
-# photocraft.exe came out one level down and portable mode needs portable.txt beside the exe
+# most-image.exe came out one level down and portable mode needs portable.txt beside the exe
 # wherever it is extracted (#7699); `<folder>\*` archives the contents, as windows7.ps1 does in
-# VectorCraft. Checked below, since nothing else reads the layout back.
+# Most Vector. Checked below, since nothing else reads the layout back.
 Compress-Archive -Path (Join-Path $Portable '*') -DestinationPath $Zip
 $Check = Join-Path $TargetDir 'windows-package\portable-zip-check'
 Remove-Item -Recurse -Force $Check -ErrorAction SilentlyContinue
 Expand-Archive -Path $Zip -DestinationPath $Check -Force
-foreach ($f in 'photocraft.exe', 'photocraft-cli.exe', 'portable.txt') {
+foreach ($f in 'most-image.exe', 'photocraft-cli.exe', 'portable.txt') {
   if (-not (Test-Path (Join-Path $Check $f))) { throw "the portable zip has no $f at its root: $Zip" }
 }
 Remove-Item -Recurse -Force $Check -ErrorAction SilentlyContinue

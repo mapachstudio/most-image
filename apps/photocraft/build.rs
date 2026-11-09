@@ -1,5 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-//! Windows only: embed the app icon and version info (VERSIONINFO) into `photocraft.exe`.
+//! Windows only: embed the app icon and version info (VERSIONINFO) into `most-image.exe`.
 //!
 //! On every other target this does nothing. A missing resource compiler is a warning, so a
 //! cross-compile from macOS or Linux still links, unless `MOST_IMAGE_REQUIRE_WINRES=1` (set by the
@@ -26,12 +26,12 @@ fn main() {
         .set("FileDescription", "Most Image image editor")
         .set("CompanyName", "Grupo MOST")
         .set("LegalCopyright", "Copyright (c) the PhotoCraft authors; modificaciones Copyright (c) 2026 Grupo MOST. MIT OR Apache-2.0.")
-        .set("OriginalFilename", "photocraft.exe")
+        .set("OriginalFilename", "most-image.exe")
         .set("InternalName", "photocraft");
     if let Err(e) = res.compile() {
         if std::env::var_os("MOST_IMAGE_REQUIRE_WINRES").is_some() {
             panic!("embedding Windows resources failed: {e}");
         }
-        println!("cargo:warning=photocraft.exe built without icon/version resources: {e}");
+        println!("cargo:warning=most-image.exe built without icon/version resources: {e}");
     }
 }

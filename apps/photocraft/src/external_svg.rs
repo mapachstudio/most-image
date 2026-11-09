@@ -34,17 +34,17 @@ mod native {
         // A Flatpak payload belongs to the caller's sandbox when executed directly. Let the
         // desktop launch the actual editor and grant it just this writable working file.
         #[cfg(target_os = "linux")]
-        let portal = matches!(&editor, ExternalSvgEditor::VectorCraft);
+        let portal = matches!(&editor, ExternalSvgEditor::Most Vector);
         #[cfg(not(target_os = "linux"))]
         let portal = false;
-        let chosen_vectorcraft = matches!(&editor, ExternalSvgEditor::VectorCraft);
+        let chosen_vectorcraft = matches!(&editor, ExternalSvgEditor::Most Vector);
         let chosen_bundle = matches!(&editor, ExternalSvgEditor::Program(path) if cfg!(target_os = "macos") && Path::new(path).extension().is_some_and(|ext| ext.eq_ignore_ascii_case("app")) && Path::new(path).is_dir());
         let executable = if portal && source.extension == "svg" { None } else { Some(resolve(editor)?) };
-        // Only VectorCraft's own working copy of an AI is regenerated (it opens foreign AI
+        // Only Most Vector's own working copy of an AI is regenerated (it opens foreign AI
         // read-only); Illustrator and other editors get the original bytes.
         let regenerate_ai = chosen_vectorcraft || executable.as_ref().is_some_and(|resolved| is_vectorcraft(resolved, chosen_bundle));
-        // Display conversion is always performed by VectorCraft's CLI, even when the user
-        // chooses a different interactive editor. A VectorCraft build with an adjacent CLI keeps
+        // Display conversion is always performed by Most Vector's CLI, even when the user
+        // chooses a different interactive editor. A Most Vector build with an adjacent CLI keeps
         // its matching CLI; for a macOS bundle that is the bundle's own `Contents/MacOS`.
         let converter = if source.extension == "svg" { None } else { Some(resolve_converter(executable.as_ref().map(|e| e.program.as_path()))?) };
         if source.bytes.is_empty() || source.bytes.len() > MAX_BYTES || !matches!(source.extension.as_str(), "svg" | "pdf" | "ai" | "eps") {
@@ -142,18 +142,18 @@ mod native {
         }
     }
 
-    /// Whether a chosen program is VectorCraft: a macOS bundle `resolve_program` identified by
-    /// its bundle id (it then runs the executable directly), a known VectorCraft installation,
-    /// or an executable named as VectorCraft is (`vectorcraft`/`vectorcraft.exe`, an AppImage
-    /// `vectorcraft-<version>-….AppImage`, the Flatpak launcher `ai.storyteller.vectorcraft`).
-    /// A neighbouring CLI alone doesn't make an editor VectorCraft.
+    /// Whether a chosen program is Most Vector: a macOS bundle `resolve_program` identified by
+    /// its bundle id (it then runs the executable directly), a known Most Vector installation,
+    /// or an executable named as Most Vector is (`vectorcraft`/`most-vector.exe`, an AppImage
+    /// `vectorcraft-<version>-….AppImage`, the Flatpak launcher `com.grupomostmexico.mostvector`).
+    /// A neighbouring CLI alone doesn't make an editor Most Vector.
     fn is_vectorcraft(resolved: &Resolved, chosen_bundle: bool) -> bool {
         resolved.bundle.is_none()
             && (chosen_bundle
                 || resolved.program.file_name().is_some_and(|name| {
                     let name = name.to_string_lossy().to_ascii_lowercase();
                     let stem = name.strip_suffix(".exe").unwrap_or(&name);
-                    stem == "vectorcraft" || stem == "ai.storyteller.vectorcraft" || (stem.starts_with("vectorcraft-") && !stem.starts_with("vectorcraft-cli"))
+                    stem == "vectorcraft" || stem == "com.grupomostmexico.mostvector" || (stem.starts_with("vectorcraft-") && !stem.starts_with("vectorcraft-cli"))
                 })
                 || vectorcraft_programs().contains(&resolved.program))
     }
@@ -166,7 +166,7 @@ mod native {
 
     /// The executable whose adjacent `vectorcraft-cli` converts AI/PDF/EPS previews. A selected
     /// build that carries its own CLI keeps it (for a macOS bundle, `Contents/MacOS` of that same
-    /// bundle). Otherwise the first known VectorCraft installation that has one is used; document
+    /// bundle). Otherwise the first known Most Vector installation that has one is used; document
     /// metadata never participates in discovery.
     fn resolve_converter(selected: Option<&Path>) -> Result<PathBuf, String> {
         if let Some(editor) = selected
@@ -177,10 +177,10 @@ mod native {
         vectorcraft_programs()
             .into_iter()
             .find(|program| has_adjacent_cli(program))
-            .ok_or_else(|| "AI/PDF/EPS editing also needs an installed VectorCraft CLI to validate display previews".into())
+            .ok_or_else(|| "AI/PDF/EPS editing also needs an installed Most Vector CLI to validate display previews".into())
     }
 
-    /// A known VectorCraft location: a bare executable, or a macOS application bundle.
+    /// A known Most Vector location: a bare executable, or a macOS application bundle.
     #[cfg(unix)]
     #[derive(Debug, PartialEq, Eq)]
     enum Install {
@@ -188,19 +188,19 @@ mod native {
         Bundle(PathBuf),
     }
 
-    /// Fixed VectorCraft locations in search order. On macOS the standard application folders
+    /// Fixed Most Vector locations in search order. On macOS the standard application folders
     /// come first; the Unix install prefixes apply everywhere. Nothing is searched recursively.
     #[cfg(unix)]
     fn vectorcraft_installs(home: Option<&Path>, macos: bool) -> Vec<Install> {
         let mut installs = vec![];
         if macos {
-            installs.push(Install::Bundle(PathBuf::from("/Applications/VectorCraft.app")));
+            installs.push(Install::Bundle(PathBuf::from("/Applications/Most Vector.app")));
             if let Some(home) = home {
-                installs.push(Install::Bundle(home.join("Applications/VectorCraft.app")));
+                installs.push(Install::Bundle(home.join("Applications/Most Vector.app")));
             }
         }
         if let Some(home) = home {
-            installs.push(Install::Executable(home.join(".local/share/flatpak/app/ai.storyteller.vectorcraft/current/active/files/bin/vectorcraft")));
+            installs.push(Install::Executable(home.join(".local/share/flatpak/app/com.grupomostmexico.mostvector/current/active/files/bin/vectorcraft")));
         }
         installs.push(Install::Executable(PathBuf::from("/usr/local/bin/vectorcraft")));
         installs.push(Install::Executable(PathBuf::from("/usr/bin/vectorcraft")));
@@ -210,7 +210,7 @@ mod native {
         installs
     }
 
-    /// Every valid known VectorCraft executable, in search order.
+    /// Every valid known Most Vector executable, in search order.
     #[cfg(unix)]
     fn vectorcraft_programs() -> Vec<PathBuf> {
         let home = std::env::var_os("HOME").map(PathBuf::from);
@@ -218,7 +218,7 @@ mod native {
             .into_iter()
             .filter_map(|install| match install {
                 Install::Executable(path) => validate_executable(&path).ok(),
-                // VectorCraft opens the files named on its command line and does not handle
+                // Most Vector opens the files named on its command line and does not handle
                 // macOS open-document events, so its bundle executable is run directly.
                 Install::Bundle(bundle) => bundle_executable(&bundle).ok().map(|(_, program)| program),
             })
@@ -230,11 +230,11 @@ mod native {
     fn resolve(editor: ExternalSvgEditor) -> Result<Resolved, String> {
         match editor {
             ExternalSvgEditor::Program(path) => resolve_program(Path::new(&path), cfg!(target_os = "macos")),
-            ExternalSvgEditor::VectorCraft => vectorcraft_programs()
+            ExternalSvgEditor::Most Vector => vectorcraft_programs()
                 .into_iter()
                 .next()
                 .map(Resolved::direct)
-                .ok_or_else(|| format!("VectorCraft was not found. Choose its executable with {OTHER_APPLICATION}")),
+                .ok_or_else(|| format!("Most Vector was not found. Choose its executable with {OTHER_APPLICATION}")),
             ExternalSvgEditor::Illustrator if cfg!(target_os = "macos") => newest_illustrator(Path::new("/Applications")),
             ExternalSvgEditor::Illustrator => Err(format!("Choose a local executable with {OTHER_APPLICATION}")),
         }
@@ -247,7 +247,7 @@ mod native {
     fn resolve_program(path: &Path, macos_bundles: bool) -> Result<Resolved, String> {
         if macos_bundles && path.extension().is_some_and(|ext| ext.eq_ignore_ascii_case("app")) && path.is_dir() {
             let (bundle, program, vectorcraft) = bundle_executable_and_identity(path)?;
-            // Unlike Cocoa editors, VectorCraft consumes file arguments, not LaunchServices
+            // Unlike Cocoa editors, Most Vector consumes file arguments, not LaunchServices
             // open-document events. Identify the app by its bundle id, not the presence of a
             // CLI beside an unrelated user-selected editor. SVG editing needs no CLI at all.
             return Ok(if vectorcraft { Resolved::direct(program) } else { Resolved { program, bundle: Some(bundle) } });
@@ -304,7 +304,7 @@ mod native {
         bundle_executable_and_identity(bundle).map(|(bundle, program, _)| (bundle, program))
     }
 
-    /// Validate the bundle and identify VectorCraft from its declared application identifier.
+    /// Validate the bundle and identify Most Vector from its declared application identifier.
     /// A neighbouring converter alone does not identify an arbitrary chosen editor.
     #[cfg(unix)]
     fn bundle_executable_and_identity(bundle: &Path) -> Result<(PathBuf, PathBuf, bool), String> {
@@ -339,7 +339,7 @@ mod native {
         if !directory.starts_with(&bundle) || program.parent() != Some(directory.as_path()) {
             return Err("The application's executable must be inside its bundle".into());
         }
-        let vectorcraft = bundle_string_property(&bytes, "CFBundleIdentifier")?.as_deref() == Some("ai.storyteller.vectorcraft");
+        let vectorcraft = bundle_string_property(&bytes, "CFBundleIdentifier")?.as_deref() == Some("com.grupomostmexico.mostvector");
         Ok((bundle, program, vectorcraft))
     }
 
@@ -417,20 +417,20 @@ mod native {
     fn resolve_editor(editor: ExternalSvgEditor) -> Result<PathBuf, String> {
         match editor {
             ExternalSvgEditor::Program(path) => validate_executable(Path::new(&path)),
-            ExternalSvgEditor::VectorCraft => {
+            ExternalSvgEditor::Most Vector => {
                 let mut candidates = vec![];
                 for variable in ["ProgramFiles", "ProgramFiles(x86)"] {
                     if let Some(root) = std::env::var_os(variable) {
-                        candidates.push(PathBuf::from(root).join("VectorCraft/vectorcraft.exe"));
+                        candidates.push(PathBuf::from(root).join("Most Vector/most-vector.exe"));
                     }
                 }
                 if let Some(root) = std::env::var_os("LOCALAPPDATA") {
-                    candidates.push(PathBuf::from(root).join("Programs/VectorCraft/vectorcraft.exe"));
+                    candidates.push(PathBuf::from(root).join("Programs/Most Vector/most-vector.exe"));
                 }
                 candidates
                     .into_iter()
                     .find_map(|path| validate_executable(&path).ok())
-                    .ok_or_else(|| format!("VectorCraft was not found. Choose its executable with {OTHER_APPLICATION}"))
+                    .ok_or_else(|| format!("Most Vector was not found. Choose its executable with {OTHER_APPLICATION}"))
             }
             ExternalSvgEditor::Illustrator => {
                 let mut candidates = vec![];
@@ -462,10 +462,10 @@ mod native {
         resolve_editor(editor).map(Resolved::direct)
     }
 
-    /// The known VectorCraft executable, if one is installed.
+    /// The known Most Vector executable, if one is installed.
     #[cfg(windows)]
     fn vectorcraft_programs() -> Vec<PathBuf> {
-        resolve_editor(ExternalSvgEditor::VectorCraft).ok().into_iter().collect()
+        resolve_editor(ExternalSvgEditor::Most Vector).ok().into_iter().collect()
     }
 
     /// Require an absolute `.exe` that is a regular file, not a link or reparse point, and
@@ -902,19 +902,19 @@ mod native {
     mod tests {
         use super::*;
 
-        /// Only VectorCraft gets a regenerated AI working copy: Illustrator, another program or a
+        /// Only Most Vector gets a regenerated AI working copy: Illustrator, another program or a
         /// bundle opened through LaunchServices gets the original.
         #[test]
         fn only_vectorcraft_editors_get_a_regenerated_ai() {
             let root = std::env::temp_dir();
             let program = |name: &str| Resolved::direct(root.join(name));
-            assert!(is_vectorcraft(&program(if cfg!(windows) { "vectorcraft.exe" } else { "vectorcraft" }), false));
+            assert!(is_vectorcraft(&program(if cfg!(windows) { "most-vector.exe" } else { "vectorcraft" }), false));
             assert!(!is_vectorcraft(&program(if cfg!(windows) { "Illustrator.exe" } else { "Illustrator" }), false));
             assert!(is_vectorcraft(&program("vectorcraft-1.2.0-linux-x86_64.AppImage"), false));
-            assert!(is_vectorcraft(&program("ai.storyteller.vectorcraft"), false));
+            assert!(is_vectorcraft(&program("com.grupomostmexico.mostvector"), false));
             assert!(!is_vectorcraft(&program(if cfg!(windows) { "vectorcraft-cli.exe" } else { "vectorcraft-cli" }), false));
-            assert!(!is_vectorcraft(&program("uninstall-vectorcraft.exe"), false));
-            assert!(is_vectorcraft(&program("Renamed"), true), "a bundle identified as VectorCraft runs directly");
+            assert!(!is_vectorcraft(&program("uninstall-most-vector.exe"), false));
+            assert!(is_vectorcraft(&program("Renamed"), true), "a bundle identified as Most Vector runs directly");
             let cocoa = Resolved { program: root.join("Editor"), bundle: Some(root.join("Editor.app")) };
             assert!(!is_vectorcraft(&cocoa, true));
         }
@@ -989,7 +989,7 @@ mod native {
             assert_eq!(command.get_args().collect::<Vec<_>>(), [file.as_os_str()]);
         }
 
-        /// A selected VectorCraft bundle must receive the watched file as argv, including
+        /// A selected Most Vector bundle must receive the watched file as argv, including
         /// SVG-only installations without a CLI. Other applications retain open-document
         /// events even if someone placed a vectorcraft-cli file beside their executable.
         #[cfg(unix)]
@@ -998,17 +998,17 @@ mod native {
             let directory = tempfile::tempdir().unwrap();
             for binary in [false, true] {
                 let mut info = plist::Dictionary::new();
-                info.insert("CFBundleExecutable".into(), plist::Value::String("VectorCraft".into()));
-                info.insert("CFBundleIdentifier".into(), plist::Value::String("ai.storyteller.vectorcraft".into()));
+                info.insert("CFBundleExecutable".into(), plist::Value::String("Most Vector".into()));
+                info.insert("CFBundleIdentifier".into(), plist::Value::String("com.grupomostmexico.mostvector".into()));
                 let mut bytes = Vec::new();
                 if binary {
                     plist::Value::Dictionary(info).to_writer_binary(&mut bytes).unwrap();
                 } else {
                     plist::Value::Dictionary(info).to_writer_xml(&mut bytes).unwrap();
                 }
-                let bundle = fake_bundle(directory.path(), if binary { "Renamed" } else { "VectorCraft" }, "VectorCraft", &bytes);
+                let bundle = fake_bundle(directory.path(), if binary { "Renamed" } else { "Most Vector" }, "Most Vector", &bytes);
                 let resolved = resolve_program(&bundle, true).unwrap();
-                assert!(resolved.bundle.is_none(), "VectorCraft must receive file arguments");
+                assert!(resolved.bundle.is_none(), "Most Vector must receive file arguments");
                 assert!(!has_adjacent_cli(&resolved.program), "SVG editing works without the converter");
                 let file = directory.path().join("Artwork.svg");
                 let command = resolved.command(&file);
@@ -1027,14 +1027,14 @@ mod native {
         #[test]
         fn macos_bundle_reads_binary_info_plists() {
             let mut info = plist::Dictionary::new();
-            info.insert("CFBundleExecutable".into(), plist::Value::String("VectorCraft".into()));
+            info.insert("CFBundleExecutable".into(), plist::Value::String("Most Vector".into()));
             let mut bytes = Vec::new();
             plist::Value::Dictionary(info).to_writer_binary(&mut bytes).unwrap();
             assert!(bytes.starts_with(b"bplist00"));
             let directory = tempfile::tempdir().unwrap();
-            let bundle = fake_bundle(directory.path(), "VectorCraft", "VectorCraft", &bytes);
+            let bundle = fake_bundle(directory.path(), "Most Vector", "Most Vector", &bytes);
             let (canonical, program) = bundle_executable(&bundle).unwrap();
-            assert_eq!(program, canonical.join("Contents/MacOS/VectorCraft"));
+            assert_eq!(program, canonical.join("Contents/MacOS/Most Vector"));
         }
 
         #[cfg(unix)]
@@ -1101,21 +1101,21 @@ mod native {
         fn macos_vectorcraft_discovery_checks_standard_application_folders_first() {
             let home = Path::new("/home/synthetic");
             let mac = vectorcraft_installs(Some(home), true);
-            assert_eq!(mac[0], Install::Bundle(PathBuf::from("/Applications/VectorCraft.app")));
-            assert_eq!(mac[1], Install::Bundle(home.join("Applications/VectorCraft.app")));
+            assert_eq!(mac[0], Install::Bundle(PathBuf::from("/Applications/Most Vector.app")));
+            assert_eq!(mac[1], Install::Bundle(home.join("Applications/Most Vector.app")));
             let other = vectorcraft_installs(Some(home), false);
             assert!(other.iter().all(|install| matches!(install, Install::Executable(_))), "no bundles outside macOS");
             assert_eq!(&mac[2..], other.as_slice(), "the Unix locations keep their order");
             assert_eq!(
                 other,
                 [
-                    Install::Executable(home.join(".local/share/flatpak/app/ai.storyteller.vectorcraft/current/active/files/bin/vectorcraft")),
+                    Install::Executable(home.join(".local/share/flatpak/app/com.grupomostmexico.mostvector/current/active/files/bin/vectorcraft")),
                     Install::Executable(PathBuf::from("/usr/local/bin/vectorcraft")),
                     Install::Executable(PathBuf::from("/usr/bin/vectorcraft")),
                     Install::Executable(home.join(".local/bin/vectorcraft")),
                 ]
             );
-            assert_eq!(vectorcraft_installs(None, true)[0], Install::Bundle(PathBuf::from("/Applications/VectorCraft.app")));
+            assert_eq!(vectorcraft_installs(None, true)[0], Install::Bundle(PathBuf::from("/Applications/Most Vector.app")));
         }
 
         #[cfg(unix)]
@@ -1123,7 +1123,7 @@ mod native {
         fn bundled_vectorcraft_cli_is_found_inside_the_same_bundle() {
             use std::os::unix::fs::PermissionsExt;
             let directory = tempfile::tempdir().unwrap();
-            let bundle = fake_bundle(directory.path(), "VectorCraft", "VectorCraft", &xml_info("VectorCraft"));
+            let bundle = fake_bundle(directory.path(), "Most Vector", "Most Vector", &xml_info("Most Vector"));
             let (_, program) = bundle_executable(&bundle).unwrap();
             assert!(!has_adjacent_cli(&program), "no CLI yet");
             // A CLI beside the bundle directory is not inside the bundle.

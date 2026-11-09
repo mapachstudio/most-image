@@ -121,7 +121,7 @@ name = "mac_menu_appkit"
 harness = false
 
 [build-dependencies]
-# Icon + VERSIONINFO for photocraft.exe; build.rs only uses it when targeting Windows.
+# Icon + VERSIONINFO for most-image.exe; build.rs only uses it when targeting Windows.
 winresource = "0.1"
 
 [dev-dependencies]

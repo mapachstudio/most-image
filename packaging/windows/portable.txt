@@ -1,6 +1,6 @@
 Most Image portable mode
 
-While this file sits next to photocraft.exe, Most Image keeps its preferences, brush presets,
+While this file sits next to most-image.exe, Most Image keeps its preferences, brush presets,
 crash-recovery autosaves and startup state in the Most ImageData folder beside it, and writes
 nothing to %APPDATA% or %LOCALAPPDATA%. Copy the whole folder to move Most Image with its settings.
 

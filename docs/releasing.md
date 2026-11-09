@@ -145,7 +145,7 @@ goes in `CARGO_TARGET_<TRIPLE>_RUSTFLAGS`, so host build scripts aren't affected
   script is a no-op, even if `MOST_IMAGE_REQUIRE_WINRES` is set, and the web build
   doesn't touch that crate. Both set ProductName to Most Image, CompanyName to
   Grupo MOST and the same copyright line. The GUI description is
-  "Most Image image editor" (`photocraft.exe`). The CLI description is
+  "Most Image image editor" (`most-image.exe`). The CLI description is
   "Most Image command-line interface", with OriginalFilename `photocraft-cli.exe`
   and InternalName `photocraft-cli`. Version strings are the Cargo package version,
   so a pre-release tag is kept; the numeric file and product versions are
@@ -156,10 +156,10 @@ goes in `CARGO_TARGET_<TRIPLE>_RUSTFLAGS`, so host build scripts aren't affected
 - Release builds use the GUI subsystem, so Start Menu launches don't open a console window.
   The CLI stays console subsystem 3 so its output reaches the terminal.
 - `most-image.wxs` (WiX v5) is a dual-scope package (Microsoft "Single Package Authoring"):
-  it installs per-user by default, without a UAC prompt, into `%LOCALAPPDATA%\Programs\ArtCraft\Most Image`
+  it installs per-user by default, without a UAC prompt, into `%LOCALAPPDATA%\Programs\Grupo MOST\Most Image`
   (Windows Installer redirects the ProgramFiles folder in a per-user install); the setup
   wizard's "Everyone on this computer" option, or `msiexec ... ALLUSERS=1`, installs per-machine into
-  `Program Files\ArtCraft\Most Image` (`Program Files (x86)` for the 32-bit build). It installs an advertised Start Menu shortcut associated with the
+  `Program Files\Grupo MOST\Most Image` (`Program Files (x86)` for the 32-bit build). It installs an advertised Start Menu shortcut associated with the
   `PhotocraftExe` file component. Most Image
   becomes the default app for `.pcraft` and is listed under "Open with" for PSD/PSB and image
   files (in a per-user install those registrations and the `InstallDir` record live under
@@ -184,7 +184,7 @@ goes in `CARGO_TARGET_<TRIPLE>_RUSTFLAGS`, so host build scripts aren't affected
   as the cached icon filename, and an extensionless filename can render as a blank document
   icon. `packaging/windows/check-icons.ps1` checks the references and extensions in CI;
   `package.ps1` also validates the built MSI with ICE50 before signing it.
-- **Portable zip:** it ships `packaging/windows/portable.txt` beside `photocraft.exe`. That
+- **Portable zip:** it ships `packaging/windows/portable.txt` beside `most-image.exe`. That
   marker (or a `Most Image.portable` file) switches on portable mode: preferences, presets,
   recovery autosaves and the GPU startup marker go to `Most ImageData\` next to the exe instead
   of `%APPDATA%\Photocraft`. If that folder isn't writable the app warns and uses `%APPDATA%`.

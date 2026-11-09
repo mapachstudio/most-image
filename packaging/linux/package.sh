@@ -44,7 +44,7 @@ case "$ARCH" in
   aarch64 | arm64) ARCH=aarch64; DEB_ARCH=arm64 ;;
   *) echo "unsupported architecture $ARCH" >&2; exit 2 ;;
 esac
-export MOST_IMAGE_MAINTAINER="${MOST_IMAGE_MAINTAINER:-Most Image maintainers <photocraft@storyteller.ai>}"
+export MOST_IMAGE_MAINTAINER="${MOST_IMAGE_MAINTAINER:-Most Image maintainers <soporte@grupomostmexico.com>}"
 BASENAME="most-image-$VERSION-linux-$ARCH"
 
 echo "==> Most Image $VERSION for Linux $ARCH ($FORMATS)"

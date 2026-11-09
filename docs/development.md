@@ -143,7 +143,7 @@ On Windows and Linux the first Most Image holds an exclusive lock on `instance.l
 
 On Linux, on a machine with several GPUs (say an eGPU, a discrete laptop GPU and an iGPU), `auto` takes the first discrete adapter the driver lists; choose another in Preferences › Performance › Advanced › GPU adapter (`performance.gpuAdapter`, Linux; a case-insensitive piece of the adapter's name, empty is automatic), or for one launch with `MOST_IMAGE_GPU_ADAPTER=nvidia`. An adapter that is missing or can't present to the window falls back to the automatic choice, with a note in System Info.
 
-On DX12 the shader compiler is FXC (`d3dcompiler_47.dll`, part of Windows), or a `dxcompiler.dll` placed beside `photocraft.exe`, loaded by its full path. wgpu's default looks `dxcompiler.dll` up by name, which reaches the current directory and `PATH` and loaded other programs' incompatible builds (#712).
+On DX12 the shader compiler is FXC (`d3dcompiler_47.dll`, part of Windows), or a `dxcompiler.dll` placed beside `most-image.exe`, loaded by its full path. wgpu's default looks `dxcompiler.dll` up by name, which reaches the current directory and `PATH` and loaded other programs' incompatible builds (#712).
 
 Handled windowing and app initialization errors clear this launch's startup marker, restoring any
 prior crash evidence. For example, a Linux launch without `DISPLAY` or `WAYLAND_DISPLAY` does not

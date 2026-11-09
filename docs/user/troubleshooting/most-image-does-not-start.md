@@ -25,11 +25,11 @@ On Windows, Most Image starts Intel graphics on DirectX 12. If Most Image closed
 
 If Most Image still closes on every start, force DirectX 12 from PowerShell:
 
-1. Open PowerShell in the folder that contains `photocraft.exe`.
+1. Open PowerShell in the folder that contains `most-image.exe`.
 2. Run these three lines:
 
         $env:WGPU_BACKEND = "dx12"
-        & .\photocraft.exe
+        & .\most-image.exe
         Remove-Item Env:WGPU_BACKEND
 
 The last line clears the setting so later launches use the default again. You need the first two lines each time you start Most Image this way. While `WGPU_BACKEND` is set, Most Image uses it and does not step down to a safer mode by itself ([issue 2320](https://github.com/mapachstudio/most-image/issues/2320)).

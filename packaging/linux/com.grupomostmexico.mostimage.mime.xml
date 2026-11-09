@@ -2,7 +2,7 @@
 <!-- shared-mime-info definitions for types the system database may not have.
      Installed to /usr/share/mime/packages/ (update-mime-database runs on install). -->
 <mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
-  <mime-type type="application/x-photocraft">
+  <mime-type type="application/x-most-image">
     <comment>Most Image document</comment>
     <icon name="com.grupomostmexico.mostimage"/>
     <glob pattern="*.pcraft"/>

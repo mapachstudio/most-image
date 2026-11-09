@@ -95,7 +95,7 @@
         <key>public.filename-extension</key>
         <array><string>pcraft</string></array>
         <key>public.mime-type</key>
-        <array><string>application/x-photocraft</string></array>
+        <array><string>application/x-most-image</string></array>
       </dict>
     </dict>
   </array>

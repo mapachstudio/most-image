@@ -103,7 +103,7 @@ Nikon's compression tables by black-box analysis of CC0 sample files (see their 
 * **Read-only.** Nothing is written in Affinity's format; export waits until someone can check
   written files in Affinity itself.
 
-The same reader is shared, as an independent copy, with VectorCraft's `vectorcraft-affinity`.
+The same reader is shared, as an independent copy, with Most Vector's `vectorcraft-affinity`.
 
 ## Validation
 
