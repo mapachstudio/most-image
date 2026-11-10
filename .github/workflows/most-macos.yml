@@ -97,10 +97,18 @@ jobs:
 
           # Y ninguna marca ajena en lo que se instala ni en la ventana del
           # instalador (el .DS_Store guarda un alias con el nombre del volumen).
+          #
+          # Saltando los avisos de copyright y la atribución, que Apache-2.0
+          # §4(c) obliga a CONSERVAR. Sin esa exclusión este mismo control
+          # bloqueaba todas las compilaciones por el NSHumanReadableCopyright
+          # del Info.plist: «Copyright © the PhotoCraft authors;
+          # modificaciones Copyright (c) 2026 Grupo MOST». Son dos
+          # obligaciones opuestas y es fácil cumplir una rompiendo la otra.
           for f in "$punto/.DS_Store" "$app/Contents/Info.plist"; do
             [[ -f "$f" ]] || continue
-            if LC_ALL=C grep -qa 'ArtCraft\|PhotoCraft' "$f"; then
-              echo "::error::marca ajena dentro de $(basename "$f")"
+            if LC_ALL=C grep -av -e 'Copyright' -e '©' -e 'Obra original' -e 'Based on' "$f" \
+               | LC_ALL=C grep -qa -e 'ArtCraft' -e 'PhotoCraft'; then
+              echo "::error::marca ajena dentro de $(basename "$f"), fuera de un aviso de copyright"
               hdiutil detach "$punto" -quiet; exit 1
             fi
           done
