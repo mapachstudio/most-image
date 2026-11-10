@@ -23,7 +23,7 @@ use serde_json::Value;
 
 /// photocraft-cli: headless Most Image
 #[derive(Parser)]
-#[command(name = "photocraft-cli", version = photocraft_engine::build_info::long_version_static(), arg_required_else_help = true)]
+#[command(name = "most-image-cli", version = photocraft_engine::build_info::long_version_static(), arg_required_else_help = true)]
 pub(crate) struct Cli {
     #[command(subcommand)]
     pub(crate) command: Command,
@@ -435,10 +435,10 @@ fn steps(m: &ArgMatches) -> Vec<Step> {
 /// stray.psd --help`): clap reports the mistake first.
 pub(crate) fn parse(args: &[OsString]) -> Result<Cli, clap::Error> {
     let mut cmd = Cli::command().mut_subcommands(|sub| sub.mut_args(blank_env_is_unset));
-    let argv = std::iter::once(OsString::from("photocraft-cli")).chain(args.iter().cloned());
+    let argv = std::iter::once(OsString::from("most-image-cli")).chain(args.iter().cloned());
     let matches = match cmd.try_get_matches_from_mut(argv) {
         Err(e) if args.iter().take_while(|a| *a != "--").any(|a| *a == "--help" || *a == "-h") => {
-            let help = [OsString::from("photocraft-cli"), args.first().cloned().unwrap_or_default(), OsString::from("--help")];
+            let help = [OsString::from("most-image-cli"), args.first().cloned().unwrap_or_default(), OsString::from("--help")];
             return Err(cmd.try_get_matches_from_mut(help).err().unwrap_or(e));
         }
         matches => matches.map_err(|e| name_env_vars(e, &cmd, args))?,

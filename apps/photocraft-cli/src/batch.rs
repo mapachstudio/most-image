@@ -61,7 +61,7 @@ pub(crate) fn batch(a: &BatchArgs, out: &mut dyn Write, err: &mut dyn Write) -> 
         return Err(CliError::OutIsIn(out_dir.to_path_buf()));
     }
     let inputs: Vec<photocraft_engine::file_cmds::BatchInput> = if a.recursive {
-        photocraft_engine::file_cmds::list_images_tree(&in_dir.to_string_lossy(), &out_dir.to_string_lossy(), "photocraft-cli batch")?
+        photocraft_engine::file_cmds::list_images_tree(&in_dir.to_string_lossy(), &out_dir.to_string_lossy(), "most-image-cli batch")?
             .into_iter()
             .filter(|input| is_input(Path::new(&input.path)))
             .collect()
@@ -219,7 +219,7 @@ mod batch_action_set_tests {
     /// failure inside the called action fails the file, and a self-call stops instead of looping.
     #[test]
     fn batch_plays_an_action_that_calls_another_action_of_its_set() {
-        let dir = std::env::temp_dir().join(format!("photocraft-cli-action-set-{}", std::process::id()));
+        let dir = std::env::temp_dir().join(format!("most-image-cli-action-set-{}", std::process::id()));
         let _ = std::fs::remove_dir_all(&dir);
         let path = |name: &str| dir.join(name).to_string_lossy().to_string();
         std::fs::create_dir_all(dir.join("in")).unwrap();
@@ -258,7 +258,7 @@ mod batch_action_set_tests {
     /// action, and unchecked steps stay unchecked once they are gone (#6860).
     #[test]
     fn batch_skips_save_and_view_steps_inside_an_action_set() {
-        let dir = std::env::temp_dir().join(format!("photocraft-cli-action-set-save-{}", std::process::id()));
+        let dir = std::env::temp_dir().join(format!("most-image-cli-action-set-save-{}", std::process::id()));
         let _ = std::fs::remove_dir_all(&dir);
         let path = |name: &str| dir.join(name).to_string_lossy().to_string();
         std::fs::create_dir_all(dir.join("in")).unwrap();

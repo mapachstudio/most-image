@@ -329,7 +329,7 @@ mod boot {
                     Ok(()) => return,
                     Err(e) => e,
                 };
-                web_sys::console::error_2(&JsValue::from_str("photocraft-web-boot: could not start Most Image:"), &error);
+                web_sys::console::error_2(&JsValue::from_str("most-image-web-boot: could not start Most Image:"), &error);
                 let Some(&wait) = RETRY_AFTER.get(attempt) else {
                     say("Most Image couldn't be downloaded. Check your connection, then try again: ", true);
                     return;
@@ -349,7 +349,7 @@ fn main() {
 
 #[cfg(not(target_arch = "wasm32"))]
 fn main() {
-    eprintln!("photocraft-web-boot only runs in the browser: packaging/web/package.sh builds it with `trunk build --release` in apps/photocraft-web-boot");
+    eprintln!("most-image-web-boot only runs in the browser: packaging/web/package.sh builds it with `trunk build --release` in apps/photocraft-web-boot");
 }
 
 #[cfg(test)]
@@ -432,7 +432,7 @@ mod tests {
     #[test]
     fn a_parts_list_gives_its_names_in_order() {
         let list = format!("{MARKER}\nphotocraft-web-0123abcd.part-aa\r\n\n  photocraft-web-0123abcd.part-ab  \n");
-        assert_eq!(parts(&list), Some(vec!["photocraft-web-0123abcd.part-aa".to_owned(), "photocraft-web-0123abcd.part-ab".to_owned()]));
+        assert_eq!(parts(&list), Some(vec!["most-image-web-0123abcd.part-aa".to_owned(), "most-image-web-0123abcd.part-ab".to_owned()]));
     }
 
     /// A host that answers a missing file with its home page must not have that page read as a
@@ -441,7 +441,7 @@ mod tests {
     fn a_web_page_is_not_a_parts_list() {
         assert_eq!(parts(include_str!("../index.html")), None);
         assert_eq!(parts(""), None);
-        assert_eq!(parts("photocraft-web.part-aa\n"), None, "no marker");
+        assert_eq!(parts("most-image-web.part-aa\n"), None, "no marker");
         assert_eq!(parts(&format!("{MARKER}\n")), None, "no parts");
         assert_eq!(parts("photocraft-parts 2\na.part-aa\n"), None, "a later layout this build doesn't know");
     }
@@ -462,7 +462,7 @@ mod tests {
         let trunk = |html: &str| html.lines().filter(|l| !l.contains("data-trunk")).collect::<Vec<_>>().join("\n");
         let (boot, app) = (include_str!("../index.html"), include_str!("../../photocraft-web/index.html"));
         assert_eq!(trunk(boot), trunk(app));
-        assert!(boot.contains(r#"data-bin="photocraft-web-boot""#) && boot.contains(r#"data-cargo-profile="wasm-release""#), "{boot}");
+        assert!(boot.contains(r#"data-bin="most-image-web-boot""#) && boot.contains(r#"data-cargo-profile="wasm-release""#), "{boot}");
         assert!(boot.contains(r#"id="photocraft_loading""#), "the element the failure message replaces");
     }
 }

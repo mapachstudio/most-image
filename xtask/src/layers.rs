@@ -277,7 +277,7 @@ mod tests {
             c("photocraft-doc", &[("photocraft-geom", Normal, true)]),
             c("photocraft-engine", &[("photocraft-doc", Normal, true), ("photocraft-testkit", Dev, true)]),
             c("photocraft-ui-egui", &[("photocraft-engine", Normal, true), ("egui", Normal, false)]),
-            c("photocraft-cli", &[("photocraft-ui-egui", Normal, true)]),
+            c("most-image-cli", &[("photocraft-ui-egui", Normal, true)]),
         ];
         assert!(check(&g).is_empty(), "{:?}", check(&g));
     }
@@ -373,7 +373,7 @@ mod tests {
 
     #[test]
     fn apps_and_xtask_exempt() {
-        for app in ["photocraft", "photocraft-cli", "photocraft-web", "photocraft-web-boot", "xtask"] {
+        for app in ["photocraft", "most-image-cli", "most-image-web", "most-image-web-boot", "xtask"] {
             assert!(check(&[c(app, &[("egui", Normal, false), ("photocraft-ui-egui", Normal, true)])]).is_empty());
         }
     }

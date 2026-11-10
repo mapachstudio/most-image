@@ -5,7 +5,7 @@
 //!
 //! "Scripts" are Most Image action scripts: JSON (`[[id, params], …]`, `{"steps": …}` or a
 //! droplet) or a plain-text list with one `command.id {json params}` per line (`#` comments).
-//! Droplets are JSON files (`.pcdroplet`) holding an action plus batch options; `photocraft-cli
+//! Droplets are JSON files (`.pcdroplet`) holding an action plus batch options; `most-image-cli
 //! droplet <file> <inputs…>` runs one, and on Unix a `.command` shim makes it
 //! double-clickable / drop-target-able from the shell.
 //!
@@ -630,7 +630,7 @@ pub fn specs() -> Vec<CommandSpec> {
             "file.automate.createDroplet",
             "Create Droplet…",
             &["File", "Automate"],
-            r##"{"path":str (.pcdroplet),"steps":[[id,params]…]?,"action":name|index|[steps]? (used only when steps is absent; named actions exclude disabled steps),"set":str? (with a named action: that set's action of the name),"name":str?,"output":folder?,"format":"same|png|jpg|…"?,"quality":0..12?,"shim":bool=true on Unix (writes <name>.command calling `photocraft-cli droplet`)} → {path, shim} (the actions its Play Action and Conditional steps call are saved in the droplet)"##,
+            r##"{"path":str (.pcdroplet),"steps":[[id,params]…]?,"action":name|index|[steps]? (used only when steps is absent; named actions exclude disabled steps),"set":str? (with a named action: that set's action of the name),"name":str?,"output":folder?,"format":"same|png|jpg|…"?,"quality":0..12?,"shim":bool=true on Unix (writes <name>.command calling `most-image-cli droplet`)} → {path, shim} (the actions its Play Action and Conditional steps call are saved in the droplet)"##,
             native,
             create_droplet
         ),

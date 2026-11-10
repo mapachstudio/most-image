@@ -1,5 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-//! Windows only: embed the app icon and version info (VERSIONINFO) into `photocraft-cli.exe`.
+//! Windows only: embed the app icon and version info (VERSIONINFO) into `most-image-cli.exe`.
 //!
 //! On every other target this does nothing, even when `MOST_IMAGE_REQUIRE_WINRES` is set. A
 //! missing resource compiler is a warning, so a cross-compile from macOS or Linux still links,
@@ -30,8 +30,8 @@ fn main() -> std::io::Result<()> {
         .set("FileDescription", "Most Image command-line interface")
         .set("CompanyName", "Grupo MOST")
         .set("LegalCopyright", "Copyright (c) the PhotoCraft authors; modificaciones Copyright (c) 2026 Grupo MOST. MIT OR Apache-2.0.")
-        .set("OriginalFilename", "photocraft-cli.exe")
-        .set("InternalName", "photocraft-cli");
+        .set("OriginalFilename", "most-image-cli.exe")
+        .set("InternalName", "most-image-cli");
     if let Err(err) = res.compile() {
         if std::env::var_os("MOST_IMAGE_REQUIRE_WINRES").is_some() {
             return Err(std::io::Error::other(format!(

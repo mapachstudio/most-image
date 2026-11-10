@@ -1,6 +1,6 @@
 //! Writes photocraft-cli's shell completions ([`clap_complete`]: bash, zsh, fish, elvish,
-//! PowerShell) and man pages ([`clap_mangen`]: `photocraft-cli.1` and one per subcommand, such as
-//! `photocraft-cli-convert.1`) into a directory. The Linux and FreeBSD packages ship them
+//! PowerShell) and man pages ([`clap_mangen`]: `most-image-cli.1` and one per subcommand, such as
+//! `most-image-cli-convert.1`) into a directory. The Linux and FreeBSD packages ship them
 //! (`packaging/linux/package.sh`, `packaging/freebsd/package.sh`):
 //!
 //! ```sh
@@ -33,9 +33,9 @@ fn generate(dir: &Path) -> std::io::Result<()> {
     std::fs::create_dir_all(dir)?;
     let mut cmd = photocraft_cli::command();
     for &shell in Shell::value_variants() {
-        clap_complete::generate_to(shell, &mut cmd, "photocraft-cli", dir)?;
+        clap_complete::generate_to(shell, &mut cmd, "most-image-cli", dir)?;
     }
     // A fresh command: `clap_complete::generate_to` built `cmd`, adding the `help` subcommand,
-    // which `clap_mangen` would otherwise give pages of its own (`photocraft-cli-help-convert.1`).
+    // which `clap_mangen` would otherwise give pages of its own (`most-image-cli-help-convert.1`).
     clap_mangen::generate_to(photocraft_cli::command(), dir)
 }

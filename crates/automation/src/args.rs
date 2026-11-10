@@ -1,5 +1,5 @@
 // Modificado por Grupo MOST para Most Image. Obra original: PhotoCraft del equipo ArtCraft (https://github.com/storytold/photocraft), Apache-2.0.
-//! The control and automation launch options, as clap types: `photocraft-cli mcp` and `serve`
+//! The control and automation launch options, as clap types: `most-image-cli mcp` and `serve`
 //! flatten them, and so does the desktop app (#7071), so each flag and its environment variable
 //! are declared once. A flag wins over its variable.
 //!
@@ -32,7 +32,7 @@ pub struct ControlArgs {
 
 /// The folders automation may touch. Without a root, that direction of access is denied. No
 /// variable stands in for them here: one exported for the desktop app must not widen headless
-/// `photocraft-cli` access (#1551); the desktop app adds its own.
+/// `most-image-cli` access (#1551); the desktop app adds its own.
 #[derive(Args)]
 pub struct AutomationArgs {
     /// The folder automation may read from (none without it)
@@ -50,7 +50,7 @@ impl AutomationArgs {
     }
 }
 
-/// A control port, for clap's `value_parser`: `photocraft --control`, `photocraft-cli serve --port`
+/// A control port, for clap's `value_parser`: `photocraft --control`, `most-image-cli serve --port`
 /// and MOST_IMAGE_CONTROL_PORT, which may carry spaces.
 pub fn control_port(s: &str) -> Result<u16, NotAPort> {
     s.trim().parse().map_err(|_| NotAPort)

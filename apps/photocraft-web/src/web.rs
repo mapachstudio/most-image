@@ -112,7 +112,7 @@ pub fn start() {
                     if let Some(rs) = cc.wgpu_render_state.clone()
                         && !force_cpu
                     {
-                        log::info!("photocraft-web: wgpu backend {:?}", rs.adapter.get_info().backend);
+                        log::info!("most-image-web: wgpu backend {:?}", rs.adapter.get_info().backend);
                         app.set_wgpu(rs);
                     }
                     let unsaved = Arc::new(AtomicBool::new(false));
@@ -297,7 +297,7 @@ fn load_font_manifest(served: Served, ctx: egui::Context) {
         for f in &fonts {
             files.entry(f.family.clone()).or_default().push((f.file.clone(), f.integrity.clone()));
         }
-        log::info!("photocraft-web: {} served font families", files.len());
+        log::info!("most-image-web: {} served font families", files.len());
         served.lock().unwrap_or_else(PoisonError::into_inner).files = files;
         // The families for the font menus, and the script fallbacks (the manifest's `scripts`).
         served_fonts::add_fonts(&fonts);

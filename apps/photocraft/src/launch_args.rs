@@ -7,7 +7,7 @@
 //! `--present-mode` or `--frame-latency`. A value never starts with `-` (write `--opt=-value`),
 //! except for negative numbers, and a file whose name starts with `-` goes after `--`.
 //!
-//! The control and automation flags are `photocraft-automation`'s, shared with `photocraft-cli`.
+//! The control and automation flags are `photocraft-automation`'s, shared with `most-image-cli`.
 //! Only the desktop app reads the automation roots from `MOST_IMAGE_AUTOMATION_*_ROOT` (#1551).
 
 use std::ffi::OsString;

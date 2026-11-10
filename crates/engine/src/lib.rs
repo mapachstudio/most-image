@@ -265,7 +265,7 @@ pub struct Session {
     /// Gate for every command the session runs, including the ones a command runs on its own
     /// behalf and `actions.play` steps. Untrusted sessions (MCP, the control channel) install
     /// the same check a top-level request sees. `None` runs everything, which is what a local
-    /// UI and `photocraft-cli run` do.
+    /// UI and `most-image-cli run` do.
     pub authorize: Option<fn(&str, &serde_json::Value) -> Result<()>>,
     /// A further route for File › Print when neither `lp` nor a CUPS server over IPP is
     /// reachable (the XDG Print portal in a Flatpak); see `print_cmds::Spooler`.

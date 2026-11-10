@@ -32,7 +32,7 @@ pub fn document(d: &DocState) -> Value {
 }
 
 /// [`document`] plus every text run and paragraph run, anti-aliasing and the full serialized
-/// layer-effect settings, for format round-trip checks (`photocraft-cli info --detail`).
+/// layer-effect settings, for format round-trip checks (`most-image-cli info --detail`).
 pub fn document_detail(d: &DocState) -> Value {
     document_with(d, true)
 }
@@ -84,7 +84,7 @@ pub fn layer(l: &Layer) -> Value {
 }
 
 /// [`layer`] plus every text run and paragraph run, anti-aliasing and the full serialized
-/// layer-effect settings, for format round-trip checks (`photocraft-cli info --detail`).
+/// layer-effect settings, for format round-trip checks (`most-image-cli info --detail`).
 pub fn layer_detail(l: &Layer) -> Value {
     layer_sel(l, &[], &smart_instances(std::slice::from_ref(l)), None, true)
 }
