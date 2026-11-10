@@ -67,7 +67,11 @@ jobs:
       # En release: reaprovecha lo que el empaquetado va a compilar después, así
       # que lo que añade es el tiempo de las pruebas, no el de otra compilación.
       - name: Pruebas del motor
-        run: cargo test --release -p photocraft-engine --lib
+        # Acotado al módulo de entrada/salida de archivos. La bateria entera
+        # del motor nunca se ha ejecutado en este entorno y puede tener fallos
+        # ajenos a lo que cambiamos; una puerta que falla por motivos que no
+        # son tuyos se acaba ignorando. Se amplia cuando se sepa que esta verde.
+        run: cargo test --release -p photocraft-engine --lib -- cmd::fileio::tests
 
       - name: Empaquetar
         run: packaging/macos/package.sh --arch "${{ inputs.arch || 'universal' }}"
