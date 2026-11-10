@@ -115,9 +115,10 @@ jobs:
           # Saltando los avisos de copyright y la atribución, que Apache-2.0
           # §4(c) obliga a CONSERVAR. Sin esa exclusión este mismo control
           # bloqueaba todas las compilaciones por el NSHumanReadableCopyright
-          # del Info.plist: «Copyright © the PhotoCraft authors;
-          # modificaciones Copyright (c) 2026 Grupo MOST». Son dos
-          # obligaciones opuestas y es fácil cumplir una rompiendo la otra.
+          # del Info.plist, que nombra a los autores originales como manda
+          # la licencia. Son dos obligaciones opuestas —quitar la marca como
+          # identidad, conservar la atribución— y es fácil cumplir una
+          # rompiendo la otra.
           for f in "$punto/.DS_Store" "$app/Contents/Info.plist"; do
             [[ -f "$f" ]] || continue
             if LC_ALL=C grep -av -e 'Copyright' -e '©' -e 'Obra original' -e 'Based on' "$f" \
