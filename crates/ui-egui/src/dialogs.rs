@@ -808,7 +808,7 @@ fn about_tab_body(app: &mut PhotocraftApp, ui: &mut egui::Ui, tab: &str) {
             ui.vertical_centered(|ui| {
                 ui.label(
                     egui::RichText::new(tl!(
-                        "Basado en PhotoCraft, del equipo ArtCraft y su comunidad, bajo Apache-2.0. Grupo MOST no esta asociado con el equipo ArtCraft, que no patrocina ni avala este producto."
+                        "Basado en PhotoCraft, del equipo ArtCraft y su comunidad, bajo Apache-2.0. Grupo MOST no está asociado con el equipo ArtCraft, que no patrocina ni avala este producto."
                     ))
                     .size(11.0),
                 );

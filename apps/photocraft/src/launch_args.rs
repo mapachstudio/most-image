@@ -306,7 +306,7 @@ mod tests {
     fn version_stops_parsing() {
         let e = parse_args(&["--version", "--control"]).err().unwrap();
         assert_eq!((e.kind(), e.exit_code()), (ErrorKind::DisplayVersion, 0));
-        assert_eq!(e.to_string(), format!("photocraft {}\n", photocraft_engine::build_info::long_version()));
+        assert_eq!(e.to_string(), format!("most-image {}\n", photocraft_engine::build_info::long_version()));
     }
 
     #[test]

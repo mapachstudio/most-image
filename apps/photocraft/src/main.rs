@@ -127,7 +127,7 @@ fn integrations(prefs_file: Option<&std::path::Path>) -> photocraft_engine::pref
 /// 1..=65535 is refused the same way.
 fn control_port_for(cli: Option<u16>, prefs: &photocraft_engine::prefs::Integrations) -> (Option<u16>, Option<String>) {
     if !prefs.allow_agent_control {
-        let warning = cli.map(|p| format!("photocraft: Preferences › Integrations › Allow Agent Control is off: not listening on port {p}\n"));
+        let warning = cli.map(|p| format!("most-image: Preferences › Integrations › Allow Agent Control is off: not listening on port {p}\n"));
         return (None, warning);
     }
     if let Some(port) = cli {
@@ -137,7 +137,7 @@ fn control_port_for(cli: Option<u16>, prefs: &photocraft_engine::prefs::Integrat
         0 => (None, None),
         p => match u16::try_from(p).ok().filter(|p| *p != 0) {
             Some(port) => (Some(port), None),
-            None => (None, Some(format!("photocraft: Preferences › Integrations › Control Port {p} is not a usable port: not listening\n"))),
+            None => (None, Some(format!("most-image: Preferences › Integrations › Control Port {p} is not a usable port: not listening\n"))),
         },
     }
 }
@@ -269,7 +269,7 @@ fn linux_display_session() -> linux_libs::DisplaySession {
         && std::env::var_os("DISPLAY").is_some_and(|d| !d.is_empty())
         && linux_libs::available(linux_libs::DisplaySession::X11)
     {
-        eprintln!("photocraft: opening the window through Xwayland (Preferences › Performance › Linux display server)");
+        eprintln!("most-image: opening the window through Xwayland (Preferences › Performance › Linux display server)");
         linux_libs::DisplaySession::X11
     } else {
         session
@@ -297,7 +297,7 @@ fn control_setup(
     let listener = match std::net::TcpListener::bind(("127.0.0.1", port)) {
         Ok(listener) => listener,
         Err(error) => {
-            eprintln!("photocraft: control server failed to bind 127.0.0.1:{port}: {error}");
+            eprintln!("most-image: control server failed to bind 127.0.0.1:{port}: {error}");
             std::process::exit(2);
         }
     };
@@ -305,21 +305,21 @@ fn control_setup(
     let token = match photocraft_automation::security::server_token(supplied.as_deref(), token_file.as_deref()) {
         Ok(token) => token,
         Err(e) => {
-            eprintln!("photocraft: cannot configure control authentication: {e}");
+            eprintln!("most-image: cannot configure control authentication: {e}");
             std::process::exit(2);
         }
     };
     if let Some(path) = token_file {
-        eprintln!("photocraft: control token file: {}", path.display());
+        eprintln!("most-image: control token file: {}", path.display());
     } else if supplied.is_none() {
-        eprintln!("photocraft: control token: {token}");
+        eprintln!("most-image: control token: {token}");
     } else {
-        eprintln!("photocraft: using supplied control token");
+        eprintln!("most-image: using supplied control token");
     }
     let workspace = match automation.workspace() {
         Ok(workspace) => workspace,
         Err(error) => {
-            eprintln!("photocraft: cannot configure automation workspace: {error}");
+            eprintln!("most-image: cannot configure automation workspace: {error}");
             std::process::exit(2);
         }
     };

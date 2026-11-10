@@ -52,7 +52,7 @@ pub fn current() -> &'static DataDir {
         let d = resolve(|k| std::env::var_os(k), exe.as_deref().and_then(Path::parent));
         if let Some(w) = &d.warning {
             log::warn!("{w}");
-            eprintln!("photocraft: {w}");
+            eprintln!("most-image: {w}");
         }
         log::info!("settings directory ({:?}): {:?}", d.mode, d.dir);
         d

@@ -70,7 +70,7 @@ pub fn display_session() -> DisplaySession {
     let pen = || std::fs::read_to_string("/proc/bus/input/devices").is_ok_and(|d| has_pen(&d));
     let x11_libs = || crate::linux_libs::available(DisplaySession::X11);
     if pen_needs_xwayland(session, var, pen, x11_libs) {
-        eprintln!("photocraft: pen found; opening the window through Xwayland, where the pen works (MOST_IMAGE_NATIVE_WAYLAND=1 keeps Wayland)");
+        eprintln!("most-image: pen found; opening the window through Xwayland, where the pen works (MOST_IMAGE_NATIVE_WAYLAND=1 keeps Wayland)");
         return DisplaySession::X11;
     }
     session

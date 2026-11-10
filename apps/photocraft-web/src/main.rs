@@ -38,7 +38,7 @@ fn main() {
 
 #[cfg(not(target_arch = "wasm32"))]
 fn main() {
-    eprintln!("photocraft-web only runs in the browser: build it with `trunk build --release` in apps/photocraft-web");
+    eprintln!("most-image-web only runs in the browser: build it with `trunk build --release` in apps/photocraft-web");
 }
 
 #[cfg(test)]
