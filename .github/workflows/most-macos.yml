@@ -71,6 +71,50 @@ jobs:
           done
           ls -la dist/release/
 
+      # Lo que se comprueba aquí es el PRODUCTO, no el código.
+      #
+      # Hoy aparecieron tres cosas que ninguna lectura del repositorio podía
+      # ver: el actualizador ofrecía instalar el binario del proyecto
+      # original encima del nuestro, el .app se distribuía sin la licencia
+      # dentro, y el fondo del instalador llevaba la marca ajena. Las tres se
+      # vieron abriendo el .dmg. Lo que se pueda automatizar de eso, se
+      # automatiza: el resto no vuelve a depender de que alguien se acuerde.
+      - name: Comprobar el instalador por dentro
+        run: |
+          set -euo pipefail
+          dmg=$(ls dist/release/*.dmg | head -1)
+          punto=$(mktemp -d)
+          hdiutil attach -nobrowse -readonly -mountpoint "$punto" "$dmg"
+          app=$(ls -d "$punto"/*.app)
+          echo "==> $(basename "$app")"
+
+          # Apache-2.0 §4: la licencia y el NOTICE viajan con la obra. Que
+          # estén en el repositorio no es que estén en lo que baja el cliente.
+          for f in NOTICE LICENSE-APACHE; do
+            [[ -f "$app/Contents/Resources/$f" ]] \
+              || { echo "::error::el .app se distribuye sin $f"; hdiutil detach "$punto" -quiet; exit 1; }
+          done
+
+          # Y ninguna marca ajena en lo que se instala ni en la ventana del
+          # instalador (el .DS_Store guarda un alias con el nombre del volumen).
+          for f in "$punto/.DS_Store" "$app/Contents/Info.plist"; do
+            [[ -f "$f" ]] || continue
+            if LC_ALL=C grep -qa 'ArtCraft\|PhotoCraft' "$f"; then
+              echo "::error::marca ajena dentro de $(basename "$f")"
+              hdiutil detach "$punto" -quiet; exit 1
+            fi
+          done
+
+          ls -la "$app/Contents/Resources/" | head -12
+          hdiutil detach "$punto" -quiet
+
+      # El verificador del propio repositorio, sobre los artefactos tal como
+      # se descargan. Sin credenciales de firma degrada a avisos, que es lo
+      # que corresponde a una compilación ad-hoc.
+      - name: Verificador del repositorio
+        if: ${{ hashFiles('packaging/macos/verify.sh') != '' }}
+        run: packaging/macos/verify.sh --arch "${{ inputs.arch || 'universal' }}"
+
       - uses: actions/upload-artifact@v4
         with:
           name: most-image-macos
