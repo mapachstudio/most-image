@@ -55,6 +55,20 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: ${{ runner.os }}-cargo-
 
+      # Las pruebas del motor, antes de empaquetar.
+      #
+      # Hasta aquí este flujo solo compilaba, así que un cambio podía romper el
+      # comportamiento sin que nada lo dijera: la compilación pasaba y el .dmg
+      # salía igual. El proyecto original tiene una batería grande (su puerta es
+      # `cargo xtask ci`), y correrla entera aquí costaría demasiado; la del
+      # motor es donde vive la lógica de documentos y es la que cubre lo que
+      # tocamos.
+      #
+      # En release: reaprovecha lo que el empaquetado va a compilar después, así
+      # que lo que añade es el tiempo de las pruebas, no el de otra compilación.
+      - name: Pruebas del motor
+        run: cargo test --release -p photocraft-engine --lib
+
       - name: Empaquetar
         run: packaging/macos/package.sh --arch "${{ inputs.arch || 'universal' }}"
 
