@@ -9,6 +9,15 @@ param([Parameter(Mandatory = $true)] [string] $MsiPath)
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 $policy = Get-Content -Raw -LiteralPath (Join-Path $PSScriptRoot 'install-policy.json') | ConvertFrom-Json
+function Get-LongDirName([string] $DefaultDir) {
+  # El `DefaultDir` de un MSI guarda `CORTO~1|Nombre Largo` cuando el nombre no
+  # cabe en 8.3, y solo el nombre a secas cuando sí cabe. `ArtCraft` cabía
+  # —ocho letras y sin espacio—, así que comparar la cadena cruda funcionaba.
+  # `Grupo MOST` lleva un espacio y no cabe, así que el MSI emite el par y la
+  # comparación cruda fallaba. El instalador estaba bien; la comprobación no.
+  if ($DefaultDir -match '\|') { return $DefaultDir.Split('|')[-1] }
+  return $DefaultDir
+}
 function Read-Rows($Database, [string] $Sql, [int] $Columns) {
   $view = $Database.OpenView($Sql)
   try {
@@ -55,7 +64,7 @@ try {
     if ($properties['UpgradeCode'].Trim('{}') -ne $policy.upgradeCode) { throw 'Launcher upgrade identity changed.' }
     $dirs = @{}
     foreach ($row in (Read-Rows $database 'SELECT `Directory`, `Directory_Parent`, `DefaultDir` FROM `Directory`' 3)) { $dirs[$row[0]] = @($row[1],$row[2]) }
-    if ($dirs['INSTALLFOLDER'][0] -ne 'CraftSuiteFolder' -or $dirs['CraftSuiteFolder'][1] -ne 'Grupo MOST' -or
+    if ($dirs['INSTALLFOLDER'][0] -ne 'CraftSuiteFolder' -or (Get-LongDirName $dirs['CraftSuiteFolder'][1]) -ne 'Grupo MOST' -or
         $dirs['CraftSuiteFolder'][0] -ne 'LocalProgramsFolder' -or $dirs['LocalProgramsFolder'][0] -ne 'LocalAppDataFolder') {
       throw 'Launcher new-install folder must be under the per-user Grupo MOST suite root.'
     }
@@ -88,7 +97,7 @@ try {
     $directories[$row[0]] = @($row[1], $row[2])
   }
   if ($directories['INSTALLFOLDER'][0] -ne 'CraftSuiteFolder' -or
-      $directories['CraftSuiteFolder'][1] -ne 'Grupo MOST') { throw 'Expected the app under the Grupo MOST suite folder.' }
+      (Get-LongDirName $directories['CraftSuiteFolder'][1]) -ne 'Grupo MOST') { throw 'Expected the app under the Grupo MOST suite folder.' }
   $programs = $directories['CraftSuiteFolder'][0]
   if ($programs -eq 'ProgramFiles6432Folder') { $programs = $directories[$programs][0] }
   if ($programs -notin 'ProgramFilesFolder', 'ProgramFiles64Folder') {
