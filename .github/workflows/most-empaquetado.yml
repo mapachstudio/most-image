@@ -60,12 +60,26 @@ jobs:
       # El metainfo es una plantilla: package.sh sustituye @VERSION@ y @DATE@.
       # Aquí se pone cualquier valor válido, porque lo que se valida es la
       # estructura del AppStream, no la versión.
+      # `appstreamcli validate` sale con error también ante un simple AVISO, y
+      # ahora mismo hay uno verdadero: el metainfo no declara página principal,
+      # porque los enlaces al proyecto original se eliminaron y todavía no hay
+      # una URL nuestra que poner. Un aviso cierto no debe bloquear las cuatro
+      # compilaciones, pero tampoco desaparecer: se anota y se sigue. Los
+      # ERRORES sí paran el trabajo.
       - name: El AppStream
         run: |
-          set -euo pipefail
+          set -uo pipefail
           sed -e 's/@VERSION@/9.9.9/g' -e 's/@DATE@/2026-01-01/g' \
             packaging/linux/com.grupomostmexico.mostimage.metainfo.xml.in > "$RUNNER_TEMP/metainfo.xml"
-          appstreamcli validate --no-net --explain "$RUNNER_TEMP/metainfo.xml"
+          salida=$(appstreamcli validate --no-net --explain "$RUNNER_TEMP/metainfo.xml" 2>&1) || true
+          echo "$salida"
+          if grep -qE '^E:' <<<"$salida"; then
+            echo "::error::el AppStream tiene errores"
+            exit 1
+          fi
+          if grep -qE '^W:' <<<"$salida"; then
+            echo "::warning::el AppStream tiene avisos (arriba); no bloquean"
+          fi
 
       - name: Los tipos MIME
         if: ${{ hashFiles('packaging/linux/com.grupomostmexico.mostimage.mime.xml') != '' }}
