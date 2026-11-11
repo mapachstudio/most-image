@@ -73,6 +73,9 @@ jobs:
         # son tuyos se acaba ignorando. Se amplia cuando se sepa que esta verde.
         run: cargo test --release -p photocraft-engine --lib -- cmd::fileio::tests
 
+      - name: La identidad que anunciamos por MCP
+        run: cargo test --release -p photocraft-automation --test it -- mcp::lists_expected_tools
+
       - name: Empaquetar
         run: packaging/macos/package.sh --arch "${{ inputs.arch || 'universal' }}"
 

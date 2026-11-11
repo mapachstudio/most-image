@@ -33,7 +33,11 @@ fn annotated(mut tool: Tool) -> Tool {
 impl ServerHandler for PhotocraftMcp {
     fn get_info(&self) -> ServerConfig {
         ServerConfig::new(ServerCapabilities::builder().enable_tools().enable_resources().build())
-            .with_server_info(Implementation::new("photocraft", env!("CARGO_PKG_VERSION")))
+            // `name` is the protocol identifier a client's configuration may key on, so it
+            // stays; `title` is what a client DISPLAYS. Most Vector, Most Interface and Most
+            // Anything all send both, and this was the only one of the four sending just the
+            // name — so every MCP client showed the original brand as this program's identity.
+            .with_server_info(Implementation::new("photocraft", env!("CARGO_PKG_VERSION")).with_title("Most Image"))
             .with_instructions(INSTRUCTIONS)
     }
 

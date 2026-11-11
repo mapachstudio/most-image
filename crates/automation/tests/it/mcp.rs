@@ -108,6 +108,9 @@ async fn lists_expected_tools() {
     }
     let info = client.peer_info().expect("server info");
     assert_eq!(info.server_info.as_ref().unwrap().name, "photocraft");
+    // What a client displays. Without it, clients fell back to `name` and showed the original
+    // brand as this program's identity.
+    assert_eq!(info.server_info.as_ref().unwrap().title.as_deref(), Some("Most Image"));
     assert!(info.instructions.as_ref().is_some_and(|i| i.contains("command_list")));
     client.cancel().await.unwrap();
 }
