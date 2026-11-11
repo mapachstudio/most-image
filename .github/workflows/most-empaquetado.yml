@@ -1,0 +1,154 @@
+# Valida el empaquetado de Most Image: segundos, sin compilar Rust.
+#
+# Escrito por Grupo MOST. NO llama a workflows de terceros: ver
+# tools/flujo-empaquetado.py en el repositorio de la suite para el porqué.
+#
+# Lo que esto caza no lo ve leer el código. El `Info.plist` de macOS declaraba
+# la extensión del tipo nativo con un guion —`most-vector`, que no existe—, así
+# que un documento nuestro al doble clic no abría el programa. Estaba en el
+# .app que se distribuye y solo se vio ejecutando las pruebas del empaquetado.
+# Linux y Windows traen los mismos metadatos y nunca se habían validado.
+#
+# No usa ningún secreto.
+name: Most Image · Empaquetado
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/**', 'packaging/**', 'assets/app-icon/**']
+  pull_request:
+    paths: ['.github/workflows/**', 'packaging/**', 'assets/app-icon/**']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: empaquetado-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  metadatos:
+    name: Metadatos de Linux y guiones de empaquetado
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      # `desktop-file-utils` trae desktop-file-validate y `appstream` trae
+      # appstreamcli: las dos que package.sh ejecuta solo si están.
+      - name: Herramientas de validación
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            desktop-file-utils appstream shellcheck python3-yaml
+
+      # Acotado a los errores (-S error), no a los avisos de estilo. La mayoría
+      # de estos guiones son de la obra original: una puerta que falla por
+      # avisos ajenos se acaba ignorando, y entonces no sirve para nada.
+      - name: Los guiones de empaquetado, sin errores
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          archivos=(packaging/*.sh packaging/linux/*.sh packaging/macos/*.sh packaging/freebsd/*.sh)
+          printf '%s\n' "${archivos[@]}"
+          shellcheck -S error "${archivos[@]}"
+
+      - name: La entrada de escritorio
+        run: desktop-file-validate packaging/linux/com.grupomostmexico.mostimage.desktop
+
+      # El metainfo es una plantilla: package.sh sustituye @VERSION@ y @DATE@.
+      # Aquí se pone cualquier valor válido, porque lo que se valida es la
+      # estructura del AppStream, no la versión.
+      - name: El AppStream
+        run: |
+          set -euo pipefail
+          sed -e 's/@VERSION@/9.9.9/g' -e 's/@DATE@/2026-01-01/g' \
+            packaging/linux/com.grupomostmexico.mostimage.metainfo.xml.in > "$RUNNER_TEMP/metainfo.xml"
+          appstreamcli validate --no-net --explain "$RUNNER_TEMP/metainfo.xml"
+
+      - name: Los tipos MIME
+        if: ${{ hashFiles('packaging/linux/com.grupomostmexico.mostimage.mime.xml') != '' }}
+        run: |
+          python3 -c "import xml.etree.ElementTree as E; E.parse('packaging/linux/com.grupomostmexico.mostimage.mime.xml')"
+          echo "globs declarados:"
+          grep -o 'glob pattern="[^"]*"' packaging/linux/com.grupomostmexico.mostimage.mime.xml
+
+      # La extensión que declara el empaquetado no puede llevar guion: el
+      # nombre del paquete es `most-vector`, la extensión es `mostvector`, y mi
+      # remarcado confundió las dos formas en dos programas de cuatro.
+      - name: Ninguna extensión declarada con guion
+        run: |
+          set -euo pipefail
+          malas=$(python3 - <<'PY'
+          import glob, re
+          malas = []
+          for ruta in glob.glob('packaging/macos/Info.plist.in'):
+              s = open(ruta, encoding='utf-8').read()
+              for clave in ('<key>public.filename-extension</key>', '<key>CFBundleTypeExtensions</key>'):
+                  for resto in s.split(clave)[1:]:
+                      arreglo = resto.split('</array>')[0]
+                      malas += [e for e in re.findall(r'<string>([^<]*)</string>', arreglo) if '-' in e]
+          for ruta in glob.glob('packaging/linux/*.mime.xml'):
+              s = open(ruta, encoding='utf-8').read()
+              malas += [e for e in re.findall(r'<glob pattern="\*\.([^"]+)"', s) if '-' in e]
+          print(' '.join(sorted(set(malas))))
+          PY
+          )
+          if [[ -n "$malas" ]]; then
+            echo "::error::extensión(es) declaradas con guion, que no existen: $malas"
+            exit 1
+          fi
+          echo "ninguna"
+
+      - name: La identidad de los paquetes
+        if: ${{ hashFiles('packaging/check-app-specific.sh') != '' }}
+        run: packaging/check-app-specific.sh
+
+  windows:
+    name: La política de instalación de Windows (sin compilar la aplicación)
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      # Que los .ps1 de empaquetado al menos se analicen. Usa el analizador de
+      # PowerShell, que ya viene: ninguna dependencia nueva.
+      - name: Los guiones de PowerShell se analizan
+        shell: pwsh
+        run: |
+          $errores = @()
+          Get-ChildItem packaging -Recurse -Filter *.ps1 | ForEach-Object {
+            $e = $null
+            [System.Management.Automation.Language.Parser]::ParseFile($_.FullName, [ref]$null, [ref]$e) | Out-Null
+            if ($e) { $errores += "$($_.Name): $($e[0].Message)" }
+            else { Write-Host "ok  $($_.Name)" }
+          }
+          if ($errores) { $errores | ForEach-Object { Write-Error $_ }; exit 1 }
+
+      # Compila el .msi y comprueba la política de instalación SIN instalar
+      # nada: usa la sesión segura de Windows Installer, así que no escribe
+      # archivos ni toca el registro. Este trabajo venía del `packaging-lint.yml`
+      # original: era trabajo propio del repositorio y no pasaba ningún secreto,
+      # pero se perdió al quitar el archivo porque OTRO de sus trabajos sí
+      # llamaba a los workflows compartidos de terceros.
+      - name: WiX, en la versión que la política fija
+        if: ${{ hashFiles('packaging/windows/install-policy.json') != '' }}
+        shell: pwsh
+        run: |
+          $tools = Join-Path $env:RUNNER_TEMP 'wix'
+          dotnet tool install --tool-path $tools wix --version 5.0.2
+          if ($LASTEXITCODE -ne 0) { throw 'WiX installation failed.' }
+          $tools >> $env:GITHUB_PATH
+          $policy = Get-Content -Raw -LiteralPath packaging/windows/install-policy.json | ConvertFrom-Json
+          foreach ($extension in @($policy.extensions)) {
+            & (Join-Path $tools 'wix.exe') extension add -g "WixToolset.$extension.wixext/5.0.2"
+            if ($LASTEXITCODE -ne 0) { throw "WiX extension $extension installation failed." }
+          }
+
+      - name: Los instaladores de prueba, que no se ejecutan
+        if: ${{ hashFiles('packaging/windows/test-install-policy.ps1') != '' }}
+        shell: pwsh
+        run: ./packaging/windows/test-install-policy.ps1 -OutputDirectory (Join-Path $env:RUNNER_TEMP 'policy-tests')
