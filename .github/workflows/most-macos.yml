@@ -15,7 +15,7 @@ on:
         description: "universal, aarch64 o x86_64"
         default: universal
   push:
-    branches: [most]
+    branches: [main]
 
 permissions:
   contents: read
