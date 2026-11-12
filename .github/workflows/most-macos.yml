@@ -25,7 +25,7 @@ jobs:
     runs-on: macos-15
     timeout-minutes: 120
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # Sin rust-toolchain.toml en el repositorio: se pide estable y los dos
       # objetivos de Apple, porque el empaquetado universal los junta con lipo.
@@ -45,7 +45,7 @@ jobs:
       # La clave lleva el Cargo.lock: si cambia una dependencia, caché nueva.
       # `restore-keys` deja reutilizar la anterior cuando solo cambia el
       # código nuestro, que es el caso normal.
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6
         with:
           path: |
             ~/.cargo/registry/index
@@ -145,7 +145,7 @@ jobs:
         if: ${{ hashFiles('packaging/macos/verify.sh') != '' }}
         run: packaging/macos/verify.sh --arch "${{ inputs.arch || 'universal' }}"
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: most-image-macos
           path: dist/release/*
